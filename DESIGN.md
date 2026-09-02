@@ -46,6 +46,10 @@ Authored single-stroke SVG set (1.5–1.75 stroke, rounded caps/joins, 24×24), 
 - `overused-font` (Inter): earned by the Apple-canon direction; see Type above.
 - `broken-image` ×3 (brand-logo `<img>` tags): false positive from the detector's static regex pass — `app.js` sets `img.src` from an embedded base64 logo constant at runtime (`document.querySelectorAll('.brand-logo').forEach(el=>el.src=LOGO)`); confirmed rendering correctly in live browser QA (nav, About badge, footer).
 
+## Logo
+
+The embedded badge logo (`LOGO` constant in `app.js`) is the shop's real, in-use logo — verified against the live Instagram profile photo (@skyphone.ca) on 2026-09-03, not a placeholder. An independent design-critique pass flagged it as visually inconsistent with the rest of the restrained/no-gradient system and recommended replacing it; the user was asked and explicitly chose to **keep the real logo as-is** rather than have a new mark fabricated without the shop owner's input. This is a closed decision — do not swap or "improve" the logo again without the user raising it.
+
 ## Verified
 
 Browser QA pass (desktop 1440px + simulated 390px mobile) covered: routing between all four pages, product filtering, add-to-cart/qty/remove, checkout modal, repair booking, FAQ accordion, contact form submit/clear, mobile hamburger menu, and full language switching (HE/AR/EN, RTL↔LTR) — no console errors on any flow.
