@@ -301,12 +301,50 @@ header.nav.scrolled{border-block-end-color:var(--line)}
 .empty{text-align:center; padding:80px 20px; color:var(--ink-soft)}
 .empty h3{color:var(--ink); font-size:23px; margin-block-end:10px; font-weight:650}
 
+/* ---------- product detail ---------- */
+.pdp-back{display:inline-flex; align-items:center; gap:6px; color:var(--ink-soft); font-weight:600; font-size:14px; cursor:pointer; margin-block:20px 8px}
+.pdp-back svg{width:14px;height:14px; transform:scaleX(-1)}
+[dir="rtl"] .pdp-back svg{transform:none}
+.pdp-back:hover{color:var(--ink)}
+.pdp-grid{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start; padding-block-end:16px}
+.pdp-gallery{aspect-ratio:1/1; border-radius:var(--radius-lg); background:
+  radial-gradient(60% 55% at 50% 78%, rgba(0,0,0,.07), transparent 72%), var(--bg-soft);
+  display:grid; place-items:center; padding:12%; position:sticky; top:calc(var(--nav-h) + 24px); overflow:hidden}
+.pdp-gallery svg{width:100%;height:100%}
+.pdp-gallery .pimg{width:82%;height:82%; object-fit:contain; filter:drop-shadow(0 24px 26px rgba(0,0,0,.16))}
+.pdp-gallery .pfb{display:none; place-items:center; width:100%; height:100%}
+.pdp-gallery .pfb.show{display:grid}
+.pdp-kind{color:var(--ink-faint); font-size:13px; font-weight:500}
+.pdp-name{font-size:clamp(28px,3.4vw,40px); margin-block-start:6px; letter-spacing:-.03em}
+.pdp-price{font-size:26px; font-weight:650; letter-spacing:-.01em; margin-block-start:16px}
+.pdp-desc{color:var(--ink-soft); margin-block-start:16px; font-size:16px; line-height:1.6; max-width:52ch}
+.pdp-section{margin-block-start:30px}
+.pdp-label{font-size:13px; font-weight:650; color:var(--ink); margin-block-end:12px; display:flex; gap:8px; align-items:center}
+.pdp-label .val{font-weight:500; color:var(--ink-soft)}
+.swatches{display:flex; gap:12px; flex-wrap:wrap}
+.swatch{width:36px;height:36px;border-radius:50%; border:0; cursor:pointer; position:relative; box-shadow:inset 0 0 0 1px var(--line-2); padding:0; transition:transform .15s var(--ease), box-shadow .15s var(--ease)}
+.swatch:hover{transform:scale(1.08)}
+.swatch.on{box-shadow:0 0 0 2px var(--bg), 0 0 0 4px var(--ink)}
+.pills{display:flex; gap:10px; flex-wrap:wrap}
+.pill-opt{padding:11px 18px; border-radius:var(--radius-sm); border:1px solid var(--line-2); background:transparent; color:var(--ink); cursor:pointer; font-family:inherit; font-weight:600; font-size:14px; transition:.15s var(--ease)}
+.pill-opt:hover{border-color:var(--ink)}
+.pill-opt.on{background:var(--ink); color:#fff; border-color:var(--ink)}
+.pdp-cta{display:flex; align-items:center; gap:16px; margin-block-start:34px}
+.pdp-cta .qty{flex:0 0 auto}
+.pdp-cta .btn{flex:1}
+.pdp-more{margin-block-start:var(--space-9)}
+
+@media (max-width:920px){
+  .pdp-grid{grid-template-columns:1fr; gap:28px}
+  .pdp-gallery{position:static; max-width:380px; margin-inline:auto; width:100%}
+}
+
 /* ---------- about ---------- */
 .ab-story{display:grid; grid-template-columns:1.15fr 1fr; gap:56px; align-items:center}
 .ab-story p{color:var(--ink-soft); font-size:17px; margin-block-start:14px}
 .ab-badge{aspect-ratio:1/1; border-radius:var(--radius-lg); background:var(--dark); display:grid; place-items:center; position:relative; overflow:hidden}
 .ab-badge::before{content:'';position:absolute; inset:0; background:radial-gradient(60% 60% at 50% 40%, var(--accent-glow), transparent 70%)}
-.ab-badge img{width:34%; border-radius:26%; position:relative; z-index:1}
+.ab-badge-logo{width:38%!important; height:auto!important; aspect-ratio:1/1; border-radius:26%; object-fit:cover; position:relative; z-index:1; box-shadow:var(--shadow-dark-md)}
 .stats{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:var(--radius-md); overflow:hidden; margin-block-start:28px}
 .stat{background:var(--bg); padding:22px 16px; text-align:center}
 .stat b{display:block; font-size:30px; font-weight:650; color:var(--ink); letter-spacing:-.02em}

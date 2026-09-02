@@ -32,6 +32,7 @@ Display scale: clamp(40px,7vw,88px) down to clamp(19px,2vw,23px), tracking -0.03
 - **Contact info**: single bordered panel with divided rows, not a grid of identical icon-cards.
 - **FAQ**: grid-template-rows accordion (not `max-height`, to avoid layout-thrash — see Known Issues Resolved below).
 - **Modal**: used only for checkout (an action that legitimately needs interruption to explain the payment placeholder).
+- **Product detail page** (`#p-product`): dedicated page per product, modeled on real e-commerce PDPs (referenced iDigital.co.il's layout at the user's request) — sticky gallery, color swatches, storage/size pills, quantity stepper, add-to-bag, and a "More in <category>" row. Colors and storage tiers use each device's real published options (e.g. actual Apple/Samsung color names and storage sizes), not fabricated shop-specific data. Deliberately does **not** copy iDigital's financing/installment breakdown, trade-in valuation, or "reserve in store" flow — Sky Phone doesn't offer those, and inventing them would misrepresent the shop.
 
 ## Icons
 

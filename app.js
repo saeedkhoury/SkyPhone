@@ -34,20 +34,57 @@ const IMG={
   macbook:'https://commons.wikimedia.org/wiki/Special:FilePath/Macbook%20Air%20M1%20Silver%20PNG.png?width=500'
 };
 const PRODUCTS=[
-  {id:1,name:'iPhone 15 Pro',cat:'phones',price:4290,icon:'phone',badge:'new',img:IMG.iphone},
-  {id:2,name:'Galaxy S24 Ultra',cat:'phones',price:4590,icon:'phone'},
-  {id:9,name:'iPhone 14',cat:'phones',price:2990,icon:'phone'},
-  {id:10,name:'Xiaomi 14',cat:'phones',price:2490,icon:'phone'},
-  {id:3,name:'iPad Air',cat:'tablets',price:2790,icon:'tablet'},
-  {id:11,name:'Galaxy Tab S9',cat:'tablets',price:2690,icon:'tablet'},
-  {id:4,name:'MacBook Air',cat:'computers',price:5490,icon:'laptop',badge:'new',img:IMG.macbook},
-  {id:12,name:'Dell XPS 13',cat:'computers',price:4990,icon:'laptop'},
-  {id:5,name:'Steam Deck',cat:'gaming',price:2490,icon:'console',badge:'hot',img:IMG.steamdeck},
-  {id:13,name:'PS5 DualSense',cat:'gaming',price:290,icon:'console'},
-  {id:7,name:'Gaming Headset Pro',cat:'gaming',price:490,icon:'headset',badge:'hot'},
-  {id:6,name:'Apple Watch S9',cat:'accessories',price:1890,icon:'watch'},
-  {id:8,name:'Galaxy Buds3',cat:'accessories',price:590,icon:'buds'},
-  {id:14,name:'Fast Charger 65W',cat:'accessories',price:120,icon:'charger'}
+  {id:1,name:'iPhone 15 Pro',cat:'phones',price:4290,icon:'phone',badge:'new',img:IMG.iphone,
+    colors:[{name:'Natural Titanium',hex:'#8a8479'},{name:'Blue Titanium',hex:'#3f4a56'},{name:'White Titanium',hex:'#f2efe9'},{name:'Black Titanium',hex:'#2b2a28'}],
+    storage:[{label:'128GB',delta:0},{label:'256GB',delta:400},{label:'512GB',delta:900}],
+    desc:{he:'iPhone 15 Pro עם שבב A17 Pro, מסך Super Retina XDR ומצלמה מקצועית — הדגם המבוקש ביותר אצלנו.',ar:'iPhone 15 Pro بشريحة A17 Pro وشاشة Super Retina XDR وكاميرا احترافية — الطراز الأكثر طلباً لدينا.',en:'iPhone 15 Pro with the A17 Pro chip, Super Retina XDR display and a pro camera system — our most requested model.'}},
+  {id:2,name:'Galaxy S24 Ultra',cat:'phones',price:4590,icon:'phone',
+    colors:[{name:'Titanium Black',hex:'#2b2b2e'},{name:'Titanium Gray',hex:'#8a8a8d'},{name:'Titanium Violet',hex:'#8a7ea3'},{name:'Titanium Yellow',hex:'#d8c98a'}],
+    storage:[{label:'256GB',delta:0},{label:'512GB',delta:450},{label:'1TB',delta:950}],
+    desc:{he:'Galaxy S24 Ultra עם מסך AMOLED ענק, עט S Pen מובנה ומצלמה בזום גבוה.',ar:'Galaxy S24 Ultra بشاشة AMOLED كبيرة، قلم S Pen مدمج وكاميرا بتقريب عالٍ.',en:'Galaxy S24 Ultra with a large AMOLED display, built-in S Pen and high-zoom camera.'}},
+  {id:9,name:'iPhone 14',cat:'phones',price:2990,icon:'phone',
+    colors:[{name:'Midnight',hex:'#1d1d1f'},{name:'Starlight',hex:'#f0e6d8'},{name:'Blue',hex:'#5f7a99'},{name:'(PRODUCT)RED',hex:'#a72032'}],
+    storage:[{label:'128GB',delta:0},{label:'256GB',delta:350},{label:'512GB',delta:800}],
+    desc:{he:'iPhone 14 — האמינות והביצועים של אפל במחיר נגיש יותר.',ar:'iPhone 14 — موثوقية وأداء آبل بسعر أكثر سهولة.',en:'iPhone 14 — Apple\'s reliability and performance at a more accessible price.'}},
+  {id:10,name:'Xiaomi 14',cat:'phones',price:2490,icon:'phone',
+    colors:[{name:'Black',hex:'#1c1c1e'},{name:'White',hex:'#eceae6'},{name:'Jade Green',hex:'#6f8a72'}],
+    storage:[{label:'256GB',delta:0},{label:'512GB',delta:300}],
+    desc:{he:'Xiaomi 14 — טלפון אנדרואיד רב עוצמה עם מצלמת Leica ותמורה מעולה למחיר.',ar:'Xiaomi 14 — هاتف أندرويد قوي بكاميرا Leica وقيمة ممتازة مقابل السعر.',en:'Xiaomi 14 — a powerful Android phone with a Leica camera and excellent value.'}},
+  {id:3,name:'iPad Air',cat:'tablets',price:2790,icon:'tablet',
+    colors:[{name:'Space Gray',hex:'#5b5c5f'},{name:'Starlight',hex:'#f0e6d8'},{name:'Blue',hex:'#7fa7c9'},{name:'Purple',hex:'#a99bc7'}],
+    storage:[{label:'128GB',delta:0},{label:'256GB',delta:350}],
+    desc:{he:'iPad Air עם שבב M1 — קליל, חזק ומושלם לעבודה, לימודים ובידור.',ar:'iPad Air بشريحة M1 — خفيف وقوي ومثالي للعمل والدراسة والترفيه.',en:'iPad Air with the M1 chip — light, powerful, and perfect for work, study and play.'}},
+  {id:11,name:'Galaxy Tab S9',cat:'tablets',price:2690,icon:'tablet',
+    colors:[{name:'Graphite',hex:'#3a3b3e'},{name:'Beige',hex:'#d9cdb8'}],
+    storage:[{label:'128GB',delta:0},{label:'256GB',delta:300}],
+    desc:{he:'Galaxy Tab S9 — מסך AMOLED, עמידות למים ועט S Pen כלול בקופסה.',ar:'Galaxy Tab S9 — شاشة AMOLED، مقاومة للماء وقلم S Pen ضمن العلبة.',en:'Galaxy Tab S9 — AMOLED display, water resistance, and an S Pen included in the box.'}},
+  {id:4,name:'MacBook Air',cat:'computers',price:5490,icon:'laptop',badge:'new',img:IMG.macbook,
+    colors:[{name:'Midnight',hex:'#33363d'},{name:'Starlight',hex:'#f0e6d8'},{name:'Space Gray',hex:'#5b5c5f'},{name:'Silver',hex:'#e5e5e5'}],
+    storage:[{label:'256GB SSD',delta:0},{label:'512GB SSD',delta:600}],
+    desc:{he:'MacBook Air עם שבב M2 — דק, שקט לחלוטין וסוללה שמחזיקה יום שלם.',ar:'MacBook Air بشريحة M2 — رفيع، صامت تماماً وبطارية تدوم يوماً كاملاً.',en:'MacBook Air with the M2 chip — thin, completely silent, and battery that lasts all day.'}},
+  {id:12,name:'Dell XPS 13',cat:'computers',price:4990,icon:'laptop',
+    colors:[{name:'Platinum Silver',hex:'#c9cbcd'},{name:'Graphite',hex:'#3a3b3e'}],
+    storage:[{label:'512GB SSD',delta:0},{label:'1TB SSD',delta:500}],
+    desc:{he:'Dell XPS 13 — מחשב Windows קומפקטי עם מסך InfinityEdge ובנייה מאלומיניום.',ar:'Dell XPS 13 — حاسوب Windows مدمج بشاشة InfinityEdge وهيكل ألومنيوم.',en:'Dell XPS 13 — a compact Windows laptop with an InfinityEdge display and aluminum build.'}},
+  {id:5,name:'Steam Deck',cat:'gaming',price:2490,icon:'console',badge:'hot',img:IMG.steamdeck,
+    storage:[{label:'256GB',delta:0},{label:'512GB',delta:450},{label:'1TB OLED',delta:1100}],
+    desc:{he:'Steam Deck — קונסולת גיימינג ניידת שמריצה את כל ספריית המשחקים שלך מכל מקום.',ar:'Steam Deck — جهاز ألعاب محمول يشغّل مكتبة ألعابك بالكامل من أي مكان.',en:'Steam Deck — a handheld gaming console that runs your whole library, anywhere.'}},
+  {id:13,name:'PS5 DualSense',cat:'gaming',price:290,icon:'console',
+    colors:[{name:'White',hex:'#eceae6'},{name:'Midnight Black',hex:'#1c1c1e'},{name:'Cosmic Red',hex:'#9c2b2b'},{name:'Starlight Blue',hex:'#5f7a99'}],
+    desc:{he:'בקר DualSense ל-PS5 עם משוב הפטי ומקשי טריגר אדפטיביים.',ar:'يد تحكم DualSense لجهاز PS5 مع استجابة لمسية ومفاتيح تحفيز تكيفية.',en:'DualSense controller for PS5 with haptic feedback and adaptive triggers.'}},
+  {id:7,name:'Gaming Headset Pro',cat:'gaming',price:490,icon:'headset',badge:'hot',
+    colors:[{name:'Black',hex:'#1c1c1e'},{name:'White',hex:'#eceae6'}],
+    desc:{he:'אוזניות גיימינג עם סאונד סראונד ומיקרופון לביטול רעשים.',ar:'سماعة ألعاب بصوت محيطي ومايكروفون لإلغاء الضوضاء.',en:'Gaming headset with surround sound and a noise-cancelling microphone.'}},
+  {id:6,name:'Apple Watch S9',cat:'accessories',price:1890,icon:'watch',
+    colors:[{name:'Midnight',hex:'#1d1d1f'},{name:'Starlight',hex:'#f0e6d8'},{name:'Silver',hex:'#e5e5e5'},{name:'(PRODUCT)RED',hex:'#a72032'}],
+    storage:[{label:'41mm',delta:0},{label:'45mm',delta:150}],
+    variant2Label:'size',
+    desc:{he:'Apple Watch Series 9 עם שבב S9, מסך בהיר יותר ומעקב בריאות מתקדם.',ar:'Apple Watch Series 9 بشريحة S9، شاشة أكثر سطوعاً وتتبع صحي متقدم.',en:'Apple Watch Series 9 with the S9 chip, a brighter display and advanced health tracking.'}},
+  {id:8,name:'Galaxy Buds3',cat:'accessories',price:590,icon:'buds',
+    colors:[{name:'Graphite',hex:'#3a3b3e'},{name:'White',hex:'#eceae6'},{name:'Silver',hex:'#c9cbcd'}],
+    desc:{he:'Galaxy Buds3 עם ביטול רעשים אקטיבי וסאונד עשיר.',ar:'Galaxy Buds3 بإلغاء ضوضاء نشط وصوت غني.',en:'Galaxy Buds3 with active noise cancellation and rich sound.'}},
+  {id:14,name:'Fast Charger 65W',cat:'accessories',price:120,icon:'charger',
+    desc:{he:'מטען מהיר 65W תואם לרוב הטלפונים והמחשבים הניידים.',ar:'شاحن سريع 65 واط متوافق مع معظم الهواتف وأجهزة الحاسوب المحمولة.',en:'65W fast charger, compatible with most phones and laptops.'}}
 ];
 const REPAIRS=[
   {id:'r1',ic:'screen',price:250},{id:'r2',ic:'battery',price:150},{id:'r3',ic:'tools',price:120},
@@ -69,6 +106,7 @@ const T={
   trust_ig_n:'+54.2K',trust_ig_l:'עוקבים באינסטגרם',trust_years_n:'+16',trust_years_l:'שנות ותק בכפר כנא',trust_lang_n:'3',trust_lang_l:'שפות שירות',
   pr_title:'כל המוצרים',pr_sub:'טלפונים, טאבלטים, מחשבים, גיימינג ואביזרים — במחירים הכי טובים.',
   filter_all:'הכל',cat_phones:'טלפונים',cat_tablets:'טאבלטים',cat_computers:'מחשבים',cat_gaming:'גיימינג',cat_accessories:'אביזרים',add:'הוספה',
+  pdp_back:'חזרה למוצרים',pdp_color:'צבע',pdp_storage:'נפח אחסון',pdp_size:'מידה',pdp_qty:'כמות',pdp_add:'הוספה לסל',pdp_more:'עוד ב',
   rp_title:'תיקונים',rp_sub:'מסך שבור, סוללה חלשה או תקלה במחשב? נטפל בזה — לרוב באותו יום.',
   step1_h:'שולחים בקשה',step1_p:'מספרים לנו מה המכשיר ומה התקלה, ומקבלים הצעת מחיר.',
   step2_h:'מתקנים',step2_p:'טכנאים מוסמכים, חלקים מקוריים ואחריות על כל תיקון.',
@@ -103,6 +141,7 @@ const T={
   trust_ig_n:'+54.2K',trust_ig_l:'متابع على إنستغرام',trust_years_n:'+16',trust_years_l:'سنة خبرة في كفركنا',trust_lang_n:'3',trust_lang_l:'لغات خدمة',
   pr_title:'كل المنتجات',pr_sub:'هواتف، أجهزة لوحية، حواسيب، ألعاب وملحقات — بأفضل الأسعار.',
   filter_all:'الكل',cat_phones:'هواتف',cat_tablets:'لوحية',cat_computers:'حواسيب',cat_gaming:'ألعاب',cat_accessories:'ملحقات',add:'أضف',
+  pdp_back:'العودة للمنتجات',pdp_color:'اللون',pdp_storage:'سعة التخزين',pdp_size:'المقاس',pdp_qty:'الكمية',pdp_add:'أضف إلى السلة',pdp_more:'المزيد في',
   rp_title:'الإصلاح',rp_sub:'شاشة مكسورة، بطارية ضعيفة أو عطل في الحاسوب؟ سنتكفّل بذلك — غالباً في نفس اليوم.',
   step1_h:'أرسل الطلب',step1_p:'أخبرنا بنوع الجهاز والعطل، واحصل على عرض سعر.',
   step2_h:'نُصلح',step2_p:'فنيّون معتمدون، قطع أصلية وضمان على كل إصلاح.',
@@ -137,6 +176,7 @@ const T={
   trust_ig_n:'+54.2K',trust_ig_l:'Instagram followers',trust_years_n:'+16',trust_years_l:'years serving Kafr Kanna',trust_lang_n:'3',trust_lang_l:'service languages',
   pr_title:'All products',pr_sub:'Phones, tablets, computers, gaming and accessories — at the best prices.',
   filter_all:'All',cat_phones:'Phones',cat_tablets:'Tablets',cat_computers:'Computers',cat_gaming:'Gaming',cat_accessories:'Accessories',add:'Add',
+  pdp_back:'Back to products',pdp_color:'Color',pdp_storage:'Storage',pdp_size:'Size',pdp_qty:'Quantity',pdp_add:'Add to bag',pdp_more:'More in',
   rp_title:'Repairs',rp_sub:'Cracked screen, weak battery or a PC fault? We’ll handle it — usually same day.',
   step1_h:'Send a request',step1_p:'Tell us the device and the fault, and get a quote.',
   step2_h:'We fix it',step2_p:'Certified techs, genuine parts and a warranty on every repair.',
@@ -234,7 +274,7 @@ function initHeroTilt(){
 function productCard(p,i){
   const tag=p.badge?`<span class="tag ${p.badge==='hot'?'hot':''}">${p.badge==='hot'?'HOT':T[lang].new}</span>`:'';
   const delay=Math.min(i||0,7)*.06;
-  return `<article class="pcard" data-reveal style="transition-delay:${delay}s">
+  return `<article class="pcard" data-pid="${p.id}" data-reveal style="transition-delay:${delay}s">
     <div class="pcard-media">${tag}${pmedia(p)}</div>
     <div class="pcard-body">
       <span class="pcard-kind">${catName(p.cat)}</span>
@@ -274,6 +314,58 @@ function renderProducts(){
   el.innerHTML=list.map(productCard).join('');
   initMotionFor(el);
 }
+
+/* ---------- product detail page ---------- */
+let pdpId=null, pdpColorIdx=0, pdpVariantIdx=0, pdpQty=1;
+function openProduct(id){
+  pdpId=Number(id);
+  const p=PRODUCTS.find(x=>x.id===pdpId);
+  if(!p) return;
+  pdpColorIdx=0; pdpVariantIdx=0; pdpQty=1;
+  go('product');
+  renderProductPage();
+}
+function pdpPrice(p){
+  const delta=p.storage?p.storage[pdpVariantIdx].delta:0;
+  return p.price+delta;
+}
+function renderProductPage(){
+  const p=PRODUCTS.find(x=>x.id===pdpId);
+  const box=document.getElementById('pdp-body');
+  if(!p){ box.innerHTML=''; return; }
+  const variantLabelKey='pdp_'+(p.variant2Label||'storage');
+  const colorsHtml=p.colors?`<div class="pdp-section"><div class="pdp-label">${T[lang].pdp_color} <span class="val">${p.colors[pdpColorIdx].name}</span></div>
+    <div class="swatches">${p.colors.map((c,i)=>`<button class="swatch ${i===pdpColorIdx?'on':''}" data-color-idx="${i}" style="background:${c.hex}" aria-label="${c.name}"></button>`).join('')}</div></div>`:'';
+  const storageHtml=p.storage?`<div class="pdp-section"><div class="pdp-label">${T[lang][variantLabelKey]}</div>
+    <div class="pills">${p.storage.map((s,i)=>`<button class="pill-opt ${i===pdpVariantIdx?'on':''}" data-variant-idx="${i}">${s.label}</button>`).join('')}</div></div>`:'';
+  const price=pdpPrice(p);
+  const related=PRODUCTS.filter(x=>x.cat===p.cat && x.id!==p.id).slice(0,4);
+  const relatedHtml=related.length?`<div class="pdp-more">
+    <div class="section-head" data-reveal><div><h2 class="h2">${T[lang].pdp_more} ${catName(p.cat)}</h2></div></div>
+    <div class="row">${related.map(productCard).join('')}</div></div>`:'';
+  box.innerHTML=`
+    <button class="pdp-back" data-route="products"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>${T[lang].pdp_back}</button>
+    <div class="pdp-grid">
+      <div class="pdp-gallery">${pmedia(p)}</div>
+      <div>
+        <div class="pdp-kind">${catName(p.cat)}</div>
+        <h1 class="pdp-name">${p.name}</h1>
+        <div class="pdp-price">₪${fmt(price)}</div>
+        ${p.desc?`<p class="pdp-desc">${p.desc[lang]}</p>`:''}
+        ${colorsHtml}
+        ${storageHtml}
+        <div class="pdp-section">
+          <div class="pdp-label">${T[lang].pdp_qty}</div>
+          <div class="qty"><button data-pdp-dec>−</button><span>${pdpQty}</span><button data-pdp-inc>+</button></div>
+        </div>
+        <div class="pdp-cta">
+          <button class="btn btn-primary" data-pdp-add>${T[lang].pdp_add}</button>
+        </div>
+      </div>
+    </div>
+    ${relatedHtml}`;
+  initMotionFor(box);
+}
 function renderSteps(){
   const el=document.getElementById('steps');
   el.innerHTML=[1,2,3].map(n=>`<div class="process-row" data-reveal style="transition-delay:${(n-1)*.08}s"><div class="process-n">0${n}</div><div class="process-body"><h3>${T[lang]['step'+n+'_h']}</h3><p>${T[lang]['step'+n+'_p']}</p></div></div>`).join('');
@@ -293,7 +385,12 @@ function renderFaq(){
   document.getElementById('faq').innerHTML=items;
 }
 function lookup(it){ return it.type==='product'?PRODUCTS.find(p=>p.id==it.id):REPAIRS.find(r=>r.id==it.id); }
-function itemName(it){ return it.type==='product'?lookup(it).name:T[lang]['rep_'+it.id]; }
+function unitPrice(it){ const o=lookup(it); return o.price+(it.delta||0); }
+function itemName(it){
+  const base=it.type==='product'?lookup(it).name:T[lang]['rep_'+it.id];
+  const bits=[it.color,it.variant].filter(Boolean);
+  return bits.length? base+' · '+bits.join(' · ') : base;
+}
 function bagCount(){ return Object.values(bag).reduce((s,i)=>s+i.qty,0); }
 function updateBagBadges(){
   const n=bagCount(); const c=document.getElementById('bagCount'); c.textContent=n; c.classList.toggle('show',n>0);
@@ -303,13 +400,12 @@ function renderBag(){
   const items=Object.values(bag), box=document.getElementById('bag-body');
   if(!items.length){ box.innerHTML=`<div class="empty"><h3>${T[lang].bag_empty_h}</h3><p>${T[lang].bag_empty_p}</p><br><button class="btn btn-primary" data-route="products">${T[lang].bag_empty_cta}</button></div>`; updateBagBadges(); return; }
   let total=0;
-  const rows=items.map(it=>{ const o=lookup(it); const price=o.price*it.qty; total+=price;
-    const key=it.type+':'+it.id;
+  const rows=items.map(it=>{ const o=lookup(it); const up=unitPrice(it); const price=up*it.qty; total+=price;
     return `<div class="bi"><div class="bi-media">${pmedia(it.type==='product'?o:{icon:REPAIRS.find(r=>r.id==it.id).ic})}</div>
       <div class="bi-info"><span class="bi-tag ${it.type}">${it.type==='product'?T[lang].tag_product:T[lang].tag_repair}</span>
-        <div class="bi-n">${itemName(it)}</div><div class="bi-p">₪${fmt(o.price)}</div>
-        <div class="qty"><button data-dec="${key}">−</button><span>${it.qty}</span><button data-inc="${key}">+</button></div></div>
-      <button class="bi-remove" data-remove="${key}">${T[lang].bag_remove}</button></div>`;}).join('');
+        <div class="bi-n">${itemName(it)}</div><div class="bi-p">₪${fmt(up)}</div>
+        <div class="qty"><button data-dec="${it.key}">−</button><span>${it.qty}</span><button data-inc="${it.key}">+</button></div></div>
+      <button class="bi-remove" data-remove="${it.key}">${T[lang].bag_remove}</button></div>`;}).join('');
   box.innerHTML=rows+`<div class="bag-summary">
       <div class="bag-line"><span>${T[lang].bag_subtotal}</span><span>₪${fmt(total)}</span></div>
       <div class="bag-line"><span>${T[lang].bag_ship}</span><span>${T[lang].bag_ship_v}</span></div>
@@ -317,7 +413,15 @@ function renderBag(){
       <button class="btn btn-primary" id="checkout">${T[lang].bag_checkout}</button></div>`;
   updateBagBadges();
 }
-function addItem(type,id){ const k=type+':'+id; bag[k]=bag[k]||{type,id,qty:0}; bag[k].qty++; updateBagBadges(); if(route==='bag')renderBag(); }
+function addItem(type,id,opts){
+  opts=opts||{};
+  const vKey=opts.color||opts.variant?':'+(opts.color||'')+'|'+(opts.variant||''):'';
+  const k=type+':'+id+vKey;
+  bag[k]=bag[k]||{type,id,qty:0,key:k,color:opts.color||null,variant:opts.variant||null,delta:opts.delta||0};
+  bag[k].qty+=opts.qty||1;
+  updateBagBadges();
+  if(route==='bag')renderBag();
+}
 
 function applyText(){
   document.querySelectorAll('[data-t]').forEach(el=>{const v=T[lang][el.getAttribute('data-t')]; if(v!==undefined) el.textContent=v;});
@@ -328,7 +432,7 @@ function toast(m){const t=document.getElementById('toast');t.textContent=m;t.cla
 function go(name){
   route=name;
   document.querySelectorAll('.page').forEach(p=>p.hidden = p.id!=='p-'+name);
-  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.toggle('active',a.dataset.route===name));
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.toggle('active',a.dataset.route===name||(name==='product'&&a.dataset.route==='products')));
   document.querySelector('.bag-btn').classList.toggle('active',name==='bag');
   if(name==='products'){renderChips();renderProducts();}
   if(name==='repairs'){renderSteps();renderRepairs();}
@@ -345,6 +449,7 @@ function setLang(l){
   if(route==='products'){renderChips();renderProducts();}
   if(route==='repairs'){renderSteps();renderRepairs();}
   if(route==='bag')renderBag();
+  if(route==='product')renderProductPage();
   updateBagBadges();
 }
 
@@ -361,6 +466,20 @@ document.addEventListener('click',e=>{
   const rm=e.target.closest('[data-remove]'); if(rm){delete bag[rm.dataset.remove];renderBag();return;}
   const chip=e.target.closest('[data-filter]'); if(chip){filter=chip.dataset.filter;renderChips();renderProducts();return;}
   const faq=e.target.closest('.faq-q'); if(faq){faq.parentElement.classList.toggle('open');return;}
+  const pcard=e.target.closest('.pcard[data-pid]'); if(pcard){openProduct(pcard.dataset.pid);return;}
+  const colorBtn=e.target.closest('[data-color-idx]'); if(colorBtn){pdpColorIdx=Number(colorBtn.dataset.colorIdx);renderProductPage();return;}
+  const variantBtn=e.target.closest('[data-variant-idx]'); if(variantBtn){pdpVariantIdx=Number(variantBtn.dataset.variantIdx);renderProductPage();return;}
+  if(e.target.closest('[data-pdp-inc]')){pdpQty++;renderProductPage();return;}
+  if(e.target.closest('[data-pdp-dec]')){pdpQty=Math.max(1,pdpQty-1);renderProductPage();return;}
+  if(e.target.closest('[data-pdp-add]')){
+    const p=PRODUCTS.find(x=>x.id===pdpId);
+    const color=p.colors?p.colors[pdpColorIdx].name:null;
+    const variant=p.storage?p.storage[pdpVariantIdx].label:null;
+    const delta=p.storage?p.storage[pdpVariantIdx].delta:0;
+    addItem('product',p.id,{color,variant,delta,qty:pdpQty});
+    toast(T[lang].added);
+    return;
+  }
   if(e.target.id==='checkout'){modal.classList.add('open');return;}
   if(e.target.id==='f-send'){toast(T[lang].form_sent);['f-name','f-contact','f-msg'].forEach(i=>document.getElementById(i).value='');return;}
 });
