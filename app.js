@@ -308,96 +308,6 @@ function initParticleField(el){
   el.addEventListener('pointerleave',()=>{ active=false; ensureRunning(); });
   frame();
 }
-/* Floating badge field: idle-drifting icon badges that get pushed away from
-   the cursor with spring physics, then glide back — referenced from
-   antigravity.google's hero, rebuilt with Sky Phone's own catalog/repair
-   icons instead of dev-tool icons, scattered in the hero's side margins so
-   they never collide with the headline/CTA/device. */
-function initFloatingBadges(el){
-  if(el.querySelector('.float-badges')) return;
-  const wrap=document.createElement('div');
-  wrap.className='float-badges';
-  el.insertBefore(wrap,el.firstChild);
-  const iconKeys=['phone','tablet','laptop','watch','console','headset','buds','charger'];
-  const repKeys=['screen','battery','tools','water'];
-  const navKeys=['speed','swap','truck'];
-  const pool=[...iconKeys.map(k=>ICON[k]),...repKeys.map(k=>REPICON[k]),...navKeys.map(k=>NAVICON[k])];
-  const COUNT=18;
-  let w=0,h=0;
-  /* Keep clear of the headline/lede/CTA block and the device silhouette;
-     scatter freely everywhere else across the full hero, not just the
-     side gutters. */
-  function pickAnchor(){
-    for(let tries=0;tries<24;tries++){
-      const x=.04+Math.random()*.92, y=.05+Math.random()*.9;
-      const inText = x>.20 && x<.80 && y>.06 && y<.42;
-      const inDevice = x>.32 && x<.68 && y>.46 && y<.98;
-      if(!inText && !inDevice) return{x,y};
-    }
-    return{x:.04+Math.random()*.14, y:.05+Math.random()*.9};
-  }
-  const badges=Array.from({length:COUNT},(_,i)=>{
-    const node=document.createElement('div');
-    node.className='badge-float';
-    node.innerHTML=pool[i%pool.length];
-    wrap.appendChild(node);
-    const anchor=pickAnchor();
-    return{
-      node,
-      pctX: anchor.x, pctY: anchor.y,
-      ax:0, ay:0, x:0, y:0, vx:0, vy:0, rot:0, vrot:0,
-      phase:Math.random()*Math.PI*2, freq:.35+Math.random()*.5,
-      ampX:7+Math.random()*9, ampY:7+Math.random()*9
-    };
-  });
-  function layout(){
-    w=el.clientWidth; h=el.clientHeight;
-    badges.forEach(b=>{ b.ax=b.pctX*w; b.ay=b.pctY*h; });
-  }
-  layout();
-  if('ResizeObserver' in window) new ResizeObserver(layout).observe(el);
-
-  let mouseX=-9999,mouseY=-9999,active=false;
-  const RADIUS=140, PUSH=46, STIFF=.08, DAMP=.85;
-  el.addEventListener('pointermove',e=>{
-    const r=el.getBoundingClientRect();
-    mouseX=e.clientX-r.left; mouseY=e.clientY-r.top; active=true;
-  });
-  el.addEventListener('pointerleave',()=>{ active=false; mouseX=-9999; mouseY=-9999; });
-
-  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(reduced){
-    badges.forEach(b=>{ b.node.style.transform=`translate(${b.ax}px,${b.ay}px)`; });
-    return;
-  }
-  function tick(t){
-    if(el.offsetParent===null){ requestAnimationFrame(tick); return; }
-    const sec=t/1000;
-    for(const b of badges){
-      const idleX=Math.sin(sec*b.freq+b.phase)*b.ampX;
-      const idleY=Math.cos(sec*b.freq*1.3+b.phase)*b.ampY;
-      let targetX=b.ax+idleX, targetY=b.ay+idleY, targetRot=0;
-      if(active){
-        const curAbsX=b.ax+b.x, curAbsY=b.ay+b.y;
-        const dx=curAbsX-mouseX, dy=curAbsY-mouseY;
-        const dist=Math.sqrt(dx*dx+dy*dy)||1;
-        if(dist<RADIUS){
-          const strength=1-dist/RADIUS;
-          targetX+= (dx/dist)*PUSH*strength;
-          targetY+= (dy/dist)*PUSH*strength;
-          targetRot = (dx/dist)*strength*18;
-        }
-      }
-      b.vx=(b.vx+(targetX-b.ax-b.x)*STIFF)*DAMP;
-      b.vy=(b.vy+(targetY-b.ay-b.y)*STIFF)*DAMP;
-      b.vrot=(b.vrot+(targetRot-b.rot)*STIFF)*DAMP;
-      b.x+=b.vx; b.y+=b.vy; b.rot+=b.vrot;
-      b.node.style.transform=`translate(${b.ax+b.x}px,${b.ay+b.y}px) rotate(${b.rot}deg)`;
-    }
-    requestAnimationFrame(tick);
-  }
-  requestAnimationFrame(tick);
-}
 function attachMagnetic(el){
   el.addEventListener('pointermove',e=>{
     const r=el.getBoundingClientRect();
@@ -411,9 +321,7 @@ function initMotionFor(root){
   if(revealObserver) root.querySelectorAll('[data-reveal]').forEach(el=>revealObserver.observe(el));
   if(counterObserver) root.querySelectorAll('[data-countup]').forEach(el=>counterObserver.observe(el));
   if(canHover){
-    root.querySelectorAll('.spot').forEach(el=>{
-      if(el.id==='hero') initFloatingBadges(el); else initParticleField(el);
-    });
+    root.querySelectorAll('.spot').forEach(initParticleField);
     root.querySelectorAll('.magnetic').forEach(attachMagnetic);
   }
 }
