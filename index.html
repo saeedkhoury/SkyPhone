@@ -12,6 +12,18 @@
 </head>
 <body>
 
+<div class="page-loader" id="pageLoader">
+  <div class="loader-inner">
+    <img class="brand-logo loader-logo" alt="Sky Phone">
+    <div class="loader-track"><div class="loader-fill" id="loaderFill"></div></div>
+    <div class="loader-num" id="loaderNum">0%</div>
+  </div>
+</div>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="noise-overlay"></div>
+
 <div class="promo-ribbon" id="promoRibbon">
   <div class="wrap promo-inner">
     <span data-t="promo_msg"></span>
@@ -40,7 +52,7 @@
       <div class="lang lang-bar">
         <button data-l="he" class="on">ע</button><button data-l="ar">ع</button><button data-l="en">EN</button>
       </div>
-      <button class="bag-btn" data-route="bag" aria-label="bag">
+      <button class="bag-btn" data-cart-open aria-label="bag">
         <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
         <span class="bag-count" id="bagCount">0</span>
       </button>
@@ -64,7 +76,7 @@
     <a data-route="foryou" data-t="nav_foryou"></a>
     <a data-route="products" data-t="nav_products"></a>
     <a data-route="repairs" data-t="nav_repairs"></a>
-    <a data-route="bag"><span data-t="nav_bag"></span><span class="mm-badge" id="mmBadge">0</span></a>
+    <a data-cart-open><span data-t="nav_bag"></span><span class="mm-badge" id="mmBadge">0</span></a>
     <a data-route="about" data-t="nav_about"></a>
   </nav>
 </div>
@@ -85,6 +97,7 @@
           <a class="btn btn-on-dark magnetic" data-route="repairs" data-t="fy_cta2"></a>
         </div>
         <div class="hero-stage" id="heroStage">
+          <div class="hero-device-wrap">
           <svg class="hero-device" id="heroDevice" width="240" height="410" viewBox="0 0 240 420" fill="none">
             <rect x="24" y="6" width="192" height="408" rx="38" fill="#111113" stroke="#2a2a2e" stroke-width="1.5"/>
             <rect x="34" y="16" width="172" height="388" rx="30" fill="#000"/>
@@ -97,6 +110,7 @@
             <rect x="66" y="256" width="76" height="8" rx="4" fill="#fff" opacity=".5"/>
             <defs><linearGradient id="scr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0d1220"/><stop offset="1" stop-color="#141a2b"/></linearGradient></defs>
           </svg>
+          </div>
         </div>
       </div>
     </div>
@@ -138,11 +152,11 @@
         <b data-countup="54200" data-suffix="+" data-format="k">0</b>
         <span data-t="trust_ig_l"></span>
       </div>
-      <div class="trust-item" data-reveal style="transition-delay:.08s">
+      <div class="trust-item" data-reveal style="animation-delay:.08s">
         <b data-countup="16" data-suffix="+">0</b>
         <span data-t="trust_years_l"></span>
       </div>
-      <div class="trust-item" data-reveal style="transition-delay:.16s">
+      <div class="trust-item" data-reveal style="animation-delay:.16s">
         <b data-countup="3">0</b>
         <span data-t="trust_lang_l"></span>
       </div>
@@ -221,14 +235,6 @@
   </div>
 </section>
 
-<!-- ==================== BAG ==================== -->
-<section class="page" id="p-bag" hidden>
-  <div class="wrap">
-    <div class="page-intro"><h1 class="h1" data-t="bag_title"></h1><p class="lede" data-t="bag_sub"></p></div>
-    <div class="bag-wrap" id="bag-body" style="padding-block-end:var(--space-9)"></div>
-  </div>
-</section>
-
 <!-- ==================== ABOUT & CONTACT ==================== -->
 <section class="page" id="p-about" hidden>
   <div class="wrap">
@@ -293,7 +299,7 @@
       </div>
       <div>
         <h4 data-t="foot_help"></h4>
-        <a data-route="repairs" data-t="nav_repairs"></a><a data-route="about" data-t="nav_about"></a><a data-route="bag" data-t="nav_bag"></a>
+        <a data-route="repairs" data-t="nav_repairs"></a><a data-route="about" data-t="nav_about"></a><a data-cart-open data-t="nav_bag"></a>
       </div>
       <div>
         <h4 data-t="ab_contact_h"></h4>
@@ -312,6 +318,17 @@
   </div>
 </div>
 <div class="toast" id="toast"></div>
+
+<div class="cart-backdrop" id="cartBackdrop"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+  <div class="cart-drawer-head">
+    <h2 class="h3" data-t="bag_title"></h2>
+    <button class="cart-close" id="cartClose" aria-label="close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+    </button>
+  </div>
+  <div class="bag-wrap" id="bag-body"></div>
+</aside>
 
 <a class="whatsapp-fab magnetic" href="https://wa.me/972527223916" target="_blank" rel="noopener" aria-label="WhatsApp">
   <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.02 3C9.4 3 4 8.4 4 15.02c0 2.23.6 4.32 1.66 6.12L4 29l8.06-1.63a11.94 11.94 0 0 0 3.96.68c6.62 0 12.02-5.4 12.02-12.03C28.04 8.4 22.64 3 16.02 3zm0 21.86c-1.87 0-3.62-.5-5.13-1.4l-.37-.22-4.78.97.98-4.66-.24-.38a9.83 9.83 0 0 1-1.5-5.15c0-5.44 4.42-9.87 9.86-9.87 5.45 0 9.87 4.43 9.87 9.87 0 5.44-4.42 9.84-8.87 9.84h.18zm5.4-7.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.66.15-.2.3-.76.96-.93 1.15-.17.2-.34.22-.64.08-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.48-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.14-.14.3-.34.45-.51.15-.17.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.66-1.6-.9-2.18-.24-.58-.48-.5-.66-.5h-.56c-.2 0-.53.07-.8.38-.28.3-1.05 1.03-1.05 2.5s1.08 2.9 1.23 3.1c.15.2 2.13 3.25 5.16 4.56.72.31 1.28.5 1.72.63.72.23 1.38.2 1.9.12.58-.09 1.75-.71 2-1.4.24-.68.24-1.27.17-1.4-.07-.13-.27-.2-.57-.36z"/></svg>

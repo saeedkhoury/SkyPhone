@@ -316,13 +316,40 @@ function attachMagnetic(el){
   });
   el.addEventListener('pointerleave',()=>{ el.style.transform=''; });
 }
+function attachTilt(el){
+  el.addEventListener('pointermove',e=>{
+    const r=el.getBoundingClientRect();
+    const px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
+    const rx=(py-.5)*-8, ry=(px-.5)*8;
+    el.style.transform=`perspective(700px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-3px)`;
+    el.style.setProperty('--mx',(px*100)+'%');
+    el.style.setProperty('--my',(py*100)+'%');
+  });
+  el.addEventListener('pointerleave',()=>{ el.style.transform=''; });
+}
+/* Text reveal: masks each tagged headline and slides its text up on
+   first appearance. The wrapper persists across language switches —
+   applyText() writes into .tr-inner instead of the element itself. */
+const textRevealObserver = 'IntersectionObserver' in window ? new IntersectionObserver(entries=>{
+  entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('tr-in'); textRevealObserver.unobserve(en.target); } });
+},{threshold:.4}) : null;
+function initTextReveal(root){
+  (root||document).querySelectorAll('[data-text-reveal]:not(.tr-ready)').forEach(el=>{
+    el.classList.add('tr-ready');
+    const text=el.textContent;
+    el.innerHTML=`<span class="tr-mask"><span class="tr-inner">${text}</span></span>`;
+    if(textRevealObserver) textRevealObserver.observe(el); else el.classList.add('tr-in');
+  });
+}
 function initMotionFor(root){
   if(!root) return;
   if(revealObserver) root.querySelectorAll('[data-reveal]').forEach(el=>revealObserver.observe(el));
   if(counterObserver) root.querySelectorAll('[data-countup]').forEach(el=>counterObserver.observe(el));
+  initTextReveal(root);
   if(canHover){
     root.querySelectorAll('.spot').forEach(initParticleField);
     root.querySelectorAll('.magnetic').forEach(attachMagnetic);
+    root.querySelectorAll('.pcard').forEach(attachTilt);
   }
 }
 function initHeroTilt(){
@@ -367,7 +394,7 @@ function initHeroCarousel(){
 function productCard(p,i){
   const tag=p.badge?`<span class="tag ${p.badge==='hot'?'hot':''}">${p.badge==='hot'?'HOT':T[lang].new}</span>`:'';
   const delay=Math.min(i||0,7)*.06;
-  return `<article class="pcard" data-pid="${p.id}" data-reveal style="transition-delay:${delay}s">
+  return `<article class="pcard" data-pid="${p.id}" data-reveal style="animation-delay:${delay}s">
     <div class="pcard-media">${tag}${pmedia(p)}</div>
     <div class="pcard-body">
       <span class="pcard-kind">${catName(p.cat)}</span>
@@ -388,11 +415,11 @@ function renderServices(){
       <div class="fic">${NAVICON.speed}</div>
       <h3>${T[lang].fy_s1_h}</h3><p>${T[lang].fy_s1_p}</p>
     </div>
-    <div class="feature-sm" data-reveal style="transition-delay:.1s">
+    <div class="feature-sm" data-reveal style="animation-delay:.1s">
       <div class="fic">${NAVICON.swap}</div>
       <h3>${T[lang].fy_s2_h}</h3><p>${T[lang].fy_s2_p}</p>
     </div>
-    <div class="feature-sm" data-reveal style="transition-delay:.2s">
+    <div class="feature-sm" data-reveal style="animation-delay:.2s">
       <div class="fic">${NAVICON.truck}</div>
       <h3>${T[lang].fy_s3_h}</h3><p>${T[lang].fy_s3_p}</p>
     </div>`;
@@ -498,14 +525,14 @@ function initStickyBarObserver(){
 }
 function renderSteps(){
   const el=document.getElementById('steps');
-  el.innerHTML=[1,2,3].map(n=>`<div class="process-row" data-reveal style="transition-delay:${(n-1)*.08}s"><div class="process-n">0${n}</div><div class="process-body"><h3>${T[lang]['step'+n+'_h']}</h3><p>${T[lang]['step'+n+'_p']}</p></div></div>`).join('');
+  el.innerHTML=[1,2,3].map(n=>`<div class="process-row" data-reveal style="animation-delay:${(n-1)*.08}s"><div class="process-n">0${n}</div><div class="process-body"><h3>${T[lang]['step'+n+'_h']}</h3><p>${T[lang]['step'+n+'_p']}</p></div></div>`).join('');
   initMotionFor(el);
 }
 function renderRepairs(){
   const el=document.getElementById('rlist');
   el.innerHTML=REPAIRS.map((r,i)=>{
     const ic=REPICON[r.ic]||ICON[r.ic]||REPICON.tools;
-    return `<div class="prow" data-reveal style="transition-delay:${Math.min(i,6)*.05}s"><div class="ric">${ic}</div>
+    return `<div class="prow" data-reveal style="animation-delay:${Math.min(i,6)*.05}s"><div class="ric">${ic}</div>
       <div class="rinfo"><div class="rn">${T[lang]['rep_'+r.id]}</div><div class="rp">${T[lang].rp_from} ₪${fmt(r.price)}</div></div>
       <button class="add" data-book="${r.id}" aria-label="${T[lang].rp_book}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button></div>`;}).join('');
   initMotionFor(el);
@@ -550,11 +577,15 @@ function addItem(type,id,opts){
   bag[k]=bag[k]||{type,id,qty:0,key:k,color:opts.color||null,variant:opts.variant||null,delta:opts.delta||0};
   bag[k].qty+=opts.qty||1;
   updateBagBadges();
-  if(route==='bag')renderBag();
+  if(document.getElementById('cartDrawer').classList.contains('open'))renderBag();
 }
 
 function applyText(){
-  document.querySelectorAll('[data-t]').forEach(el=>{const v=T[lang][el.getAttribute('data-t')]; if(v!==undefined) el.textContent=v;});
+  document.querySelectorAll('[data-t]').forEach(el=>{
+    const v=T[lang][el.getAttribute('data-t')]; if(v===undefined) return;
+    const inner=el.querySelector(':scope > .tr-mask > .tr-inner');
+    if(inner) inner.textContent=v; else el.textContent=v;
+  });
   document.querySelectorAll('[data-ph]').forEach(el=>{const v=T[lang][el.getAttribute('data-ph')]; if(v!==undefined) el.placeholder=v;});
 }
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),1900);}
@@ -563,10 +594,8 @@ function go(name){
   route=name;
   document.querySelectorAll('.page').forEach(p=>p.hidden = p.id!=='p-'+name);
   document.querySelectorAll('.nav-links a').forEach(a=>a.classList.toggle('active',a.dataset.route===name||(name==='product'&&a.dataset.route==='products')));
-  document.querySelector('.bag-btn').classList.toggle('active',name==='bag');
   if(name==='products'){renderChips();renderProducts();}
   if(name==='repairs'){renderSteps();renderRepairs();}
-  if(name==='bag')renderBag();
   if(name!=='product'){
     document.getElementById('pdpStickyBar').classList.remove('show');
     document.querySelector('.whatsapp-fab').classList.remove('raised');
@@ -583,9 +612,24 @@ function setLang(l){
   applyText(); renderArrivals(); renderServices(); renderCatRow(); renderFaq();
   if(route==='products'){renderChips();renderProducts();}
   if(route==='repairs'){renderSteps();renderRepairs();}
-  if(route==='bag')renderBag();
+  if(document.getElementById('cartDrawer').classList.contains('open'))renderBag();
   if(route==='product')renderProductPage();
   updateBagBadges();
+}
+function openCart(){
+  document.getElementById('cartDrawer').classList.add('open');
+  document.getElementById('cartBackdrop').classList.add('open');
+  document.getElementById('cartDrawer').setAttribute('aria-hidden','false');
+  document.body.classList.add('drawer-open');
+  mobileMenu.classList.remove('open');
+  mobileSearch.classList.remove('open');
+  renderBag();
+}
+function closeCart(){
+  document.getElementById('cartDrawer').classList.remove('open');
+  document.getElementById('cartBackdrop').classList.remove('open');
+  document.getElementById('cartDrawer').setAttribute('aria-hidden','true');
+  document.body.classList.remove('drawer-open');
 }
 
 /* events */
@@ -608,7 +652,10 @@ document.getElementById('searchToggle').addEventListener('click',()=>{
   inp.addEventListener('keydown',e=>{ if(e.key==='Enter') runSearch(inp.value); });
 });
 document.addEventListener('click',e=>{
-  const rt=e.target.closest('[data-route]'); if(rt){go(rt.dataset.route); return;}
+  const rt=e.target.closest('[data-route]'); if(rt){closeCart();go(rt.dataset.route); return;}
+  if(e.target.closest('[data-cart-open]')){openCart();return;}
+  if(e.target.closest('#cartClose')){closeCart();return;}
+  if(e.target.id==='cartBackdrop'){closeCart();return;}
   const add=e.target.closest('[data-add]'); if(add){addItem('product',add.dataset.add);toast(T[lang].added);return;}
   const bk=e.target.closest('[data-book]'); if(bk){addItem('repair',bk.dataset.book);toast(T[lang].added_rep);return;}
   const inc=e.target.closest('[data-inc]'); if(inc){bag[inc.dataset.inc].qty++;renderBag();return;}
@@ -631,20 +678,74 @@ document.addEventListener('click',e=>{
     toast(T[lang].added);
     return;
   }
-  if(e.target.id==='checkout'){modal.classList.add('open');return;}
+  if(e.target.id==='checkout'){closeCart();modal.classList.add('open');return;}
   if(e.target.id==='f-send'){toast(T[lang].form_sent);['f-name','f-contact','f-msg'].forEach(i=>document.getElementById(i).value='');return;}
 });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeCart(); });
 const modal=document.getElementById('modal');
 document.getElementById('modalClose').addEventListener('click',()=>modal.classList.remove('open'));
 modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('open');});
 const nav=document.getElementById('nav');
 addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>10||mobileMenu.classList.contains('open')));
 
+/* ---------- hero parallax ---------- */
+function initHeroParallax(){
+  const wrap=document.querySelector('.hero-device-wrap'), hero=document.getElementById('hero');
+  if(!wrap||!hero||matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  let ticking=false;
+  function update(){
+    const r=hero.getBoundingClientRect();
+    const progress=Math.min(1,Math.max(0,-r.top/(r.height||1)));
+    wrap.style.transform=`translateY(${progress*46}px)`;
+    ticking=false;
+  }
+  addEventListener('scroll',()=>{ if(!ticking){ requestAnimationFrame(update); ticking=true; } });
+}
+
+/* ---------- custom cursor ---------- */
+function initCursor(){
+  if(!canHover) return;
+  const dot=document.getElementById('cursorDot'), ring=document.getElementById('cursorRing');
+  if(!dot||!ring) return;
+  document.body.classList.add('cursor-on');
+  let rx=innerWidth/2, ry=innerHeight/2, tx=rx, ty=ry;
+  addEventListener('pointermove',e=>{
+    tx=e.clientX; ty=e.clientY;
+    dot.style.left=tx+'px'; dot.style.top=ty+'px';
+    const hoverable=e.target.closest('a,button,.pcard,[data-route],[data-cart-open]');
+    document.body.classList.toggle('cursor-hover',!!hoverable);
+  });
+  function frame(){
+    rx+=(tx-rx)*.18; ry+=(ty-ry)*.18;
+    ring.style.left=rx+'px'; ring.style.top=ry+'px';
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+
+/* ---------- page loader ---------- */
+function initPageLoader(){
+  const loader=document.getElementById('pageLoader'), fill=document.getElementById('loaderFill'), num=document.getElementById('loaderNum');
+  if(!loader) return;
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches){ loader.classList.add('done'); return; }
+  const start=performance.now(), dur=850;
+  function frame(t){
+    const p=Math.min(1,(t-start)/dur), eased=1-Math.pow(1-p,3);
+    fill.style.width=(eased*100)+'%'; num.textContent=Math.round(eased*100)+'%';
+    if(p<1) requestAnimationFrame(frame); else loader.classList.add('done');
+  }
+  requestAnimationFrame(frame);
+}
+
 /* init */
 document.querySelectorAll('.brand-logo').forEach(el=>el.src=LOGO);
+document.querySelectorAll('.h1,.h2,.display').forEach(el=>el.setAttribute('data-text-reveal',''));
 setLang('he');
 renderArrivals(); renderServices(); renderCatRow(); renderFaq();
 go('foryou');
 initHeroTilt();
 initHeroCarousel();
+initHeroParallax();
+initCursor();
+initPageLoader();
 initMotionFor(document);
