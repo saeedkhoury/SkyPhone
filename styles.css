@@ -1,7 +1,9 @@
 /* ==========================================================================
    Sky Phone — design tokens
-   Direction: Apple-Store Premium Retail (canon, user-selected)
-   Craft bar: apple.com / Apple Store app
+   Direction: premium e-commerce (structure referenced from iDigital.co.il
+   at the client's request), rebranded in Sky Phone's own real identity —
+   the accent gold is drawn from the shop's actual verified logo (gold
+   wordmark on black), not a copy of any reference site's brand color.
    ========================================================================== */
 :root{
   --bg:#ffffff;
@@ -20,11 +22,11 @@
   --dark-line:rgba(255,255,255,.12);
   --dark-line-2:rgba(255,255,255,.2);
 
-  --accent:#0068d6;
-  --accent-hover:#0054ab;
+  --accent:#b8862f;
+  --accent-hover:#8f6a25;
   --accent-ink:#ffffff;
-  --accent-tint:#eaf3fd;
-  --accent-glow:rgba(0,104,214,.35);
+  --accent-tint:#faf3e6;
+  --accent-glow:rgba(184,134,47,.35);
 
   --warn:#bf5b04;
   --ok:#0a7d3c;
@@ -49,6 +51,7 @@
 
   --ease:cubic-bezier(.16,1,.3,1);
   --nav-h:52px;
+  --ribbon-h:36px;
 }
 [lang="he"]{ --font-active:var(--font-he); }
 [lang="ar"]{ --font-active:var(--font-ar); }
@@ -118,6 +121,15 @@ img{max-width:100%; display:block}
 .trust-item b{display:block; font-size:clamp(22px,2.6vw,30px); font-weight:650; letter-spacing:-.02em; color:var(--ink); font-variant-numeric:tabular-nums}
 .trust-item span{color:var(--ink-soft); font-size:13px}
 
+.cat-row{display:flex; gap:30px; overflow-x:auto; padding-block:36px 8px; scrollbar-width:none; margin-inline:-4vw; padding-inline:4vw}
+.cat-row::-webkit-scrollbar{display:none}
+.cat-item{flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:10px; cursor:pointer; width:92px; text-align:center}
+.cat-circle{width:76px;height:76px;border-radius:50%; background:var(--bg-soft); display:grid; place-items:center; transition:transform .2s var(--ease), box-shadow .2s var(--ease); color:var(--ink)}
+.cat-circle svg{width:32px;height:32px}
+.cat-item:hover .cat-circle{transform:translateY(-3px); box-shadow:var(--shadow-md)}
+.cat-name{font-size:13px; font-weight:600; color:var(--ink)}
+.cat-price{font-size:12px; color:var(--ink-faint)}
+
 .page{animation:page-in .5s var(--ease) both}
 @keyframes page-in{from{opacity:0; transform:translateY(10px)}to{opacity:1; transform:none}}
 
@@ -144,21 +156,44 @@ img{max-width:100%; display:block}
 .btn-icon:hover{background:var(--bg-soft)}
 
 /* ---------- nav ---------- */
+.promo-ribbon{position:fixed; inset-block-start:0; inset-inline:0; z-index:71; height:var(--ribbon-h);
+  background:var(--dark); color:var(--dark-ink-soft); display:flex; align-items:center; overflow:hidden;
+  transition:transform .35s var(--ease), opacity .3s var(--ease)}
+.promo-ribbon.closed{transform:translateY(-100%); opacity:0; pointer-events:none}
+.promo-inner{display:flex; align-items:center; justify-content:center; width:100%; position:relative; font-size:13px; font-weight:500}
+.promo-close{position:absolute; inset-inline-end:0; background:none; border:0; color:var(--dark-ink-soft); cursor:pointer; padding:4px; display:grid; place-items:center}
+.promo-close:hover{color:#fff}
+.promo-close svg{width:14px;height:14px}
+
 header.nav{
-  position:fixed; inset-block-start:0; inset-inline:0; z-index:70; height:var(--nav-h);
+  position:fixed; inset-block-start:var(--ribbon-h); inset-inline:0; z-index:70; height:var(--nav-h);
   display:flex; align-items:center; background:rgba(255,255,255,.72);
   backdrop-filter:saturate(180%) blur(20px); -webkit-backdrop-filter:saturate(180%) blur(20px);
-  border-block-end:1px solid transparent; transition:border-color .3s, background .3s;
+  border-block-end:1px solid transparent; transition:border-color .3s, background .3s, top .35s var(--ease);
 }
 header.nav.scrolled{border-block-end-color:var(--line)}
-.nav-inner{display:flex; align-items:center; gap:28px; width:100%}
-.brand{display:flex; align-items:center; gap:8px; font-weight:650; font-size:16px; color:var(--ink); cursor:pointer; letter-spacing:-.01em}
+header.nav.ribbon-closed{inset-block-start:0}
+.mobile-menu,.mobile-search{transition:top .35s var(--ease)}
+.nav-inner{display:flex; align-items:center; gap:22px; width:100%}
+.brand{display:flex; align-items:center; gap:8px; font-weight:650; font-size:16px; color:var(--ink); cursor:pointer; letter-spacing:-.01em; flex:0 0 auto}
 .brand-logo{width:22px;height:22px;flex:0 0 auto;border-radius:6px}
-.nav-links{display:flex; gap:0; margin-inline-start:auto; font-weight:500; font-size:13px; color:var(--ink-soft)}
+.nav-links{display:flex; gap:0; font-weight:500; font-size:13px; color:var(--ink-soft); flex:0 0 auto}
 .nav-links a{cursor:pointer; transition:color .15s; padding:0 16px; position:relative}
 .nav-links a:hover{color:var(--ink)}
 .nav-links a.active{color:var(--ink)}
-.nav-tools{display:flex; align-items:center; gap:14px; margin-inline-start:14px}
+.nav-search{display:flex; align-items:center; gap:8px; background:var(--bg-soft); border-radius:var(--radius-pill); padding:8px 14px; flex:1 1 auto; max-width:340px; margin-inline-start:auto; color:var(--ink-faint); transition:box-shadow .2s}
+.nav-search:focus-within{box-shadow:0 0 0 2px var(--accent-tint), 0 0 0 1px var(--accent)}
+.nav-search svg{width:16px;height:16px; flex:0 0 auto}
+.nav-search input{border:0; background:none; outline:0; font-family:inherit; font-size:14px; color:var(--ink); width:100%}
+.nav-search input::placeholder{color:var(--ink-faint)}
+.icon-btn{width:36px;height:36px;border-radius:50%;border:0;background:transparent;display:none;place-items:center;cursor:pointer;color:var(--ink); flex:0 0 auto}
+.icon-btn:hover{background:var(--bg-soft)}
+.nav-tools{display:flex; align-items:center; gap:14px; margin-inline-start:14px; flex:0 0 auto}
+.mobile-search{display:none; position:fixed; inset-block-start:calc(var(--nav-h) + var(--ribbon-h)); inset-inline:0; z-index:66; background:rgba(255,255,255,.98); backdrop-filter:blur(20px); border-block-end:1px solid var(--line); padding:12px 6vw; align-items:center; gap:10px; color:var(--ink-faint)}
+.mobile-search.open{display:flex}
+body.ribbon-closed .mobile-search{inset-block-start:var(--nav-h)}
+.mobile-search svg{width:18px;height:18px;flex:0 0 auto}
+.mobile-search input{border:0;background:none;outline:0;font-family:inherit;font-size:16px;color:var(--ink);width:100%}
 .lang{display:flex; gap:1px; background:var(--bg-soft); border-radius:var(--radius-pill); padding:2px}
 .lang button{border:0; background:transparent; color:var(--ink-soft); font-family:inherit; font-weight:600; font-size:12px; padding:6px 11px; border-radius:var(--radius-pill); cursor:pointer; transition:background .15s,color .15s}
 .lang button.on{background:var(--ink); color:#fff}
@@ -169,7 +204,8 @@ header.nav.scrolled{border-block-end-color:var(--line)}
 .bag-count.show{display:grid}
 .menu-toggle{display:none; width:36px;height:36px;border-radius:50%;border:0; background:transparent; color:var(--ink); cursor:pointer}
 .menu-toggle:hover{background:var(--bg-soft)}
-.mobile-menu{display:none; position:fixed; inset-block-start:var(--nav-h); inset-inline:0; z-index:65; background:rgba(255,255,255,.98); backdrop-filter:blur(20px); border-block-end:1px solid var(--line); padding:8px 6vw 20px; transform:translateY(-10px); opacity:0; visibility:hidden; transition:opacity .28s var(--ease), transform .28s var(--ease), visibility .28s}
+.mobile-menu{display:none; position:fixed; inset-block-start:calc(var(--nav-h) + var(--ribbon-h)); inset-inline:0; z-index:65; background:rgba(255,255,255,.98); backdrop-filter:blur(20px); border-block-end:1px solid var(--line); padding:8px 6vw 20px; transform:translateY(-10px); opacity:0; visibility:hidden; transition:opacity .28s var(--ease), transform .28s var(--ease), visibility .28s, top .35s var(--ease)}
+body.ribbon-closed .mobile-menu{inset-block-start:var(--nav-h)}
 .mobile-menu.open{transform:none; opacity:1; visibility:visible}
 .mm-lang{display:flex; gap:4px; background:var(--bg-soft); border-radius:14px; padding:4px; margin-block:10px}
 .mm-lang button{flex:1; font-size:14px; padding:10px; border-radius:10px; color:var(--ink); border:0; background:transparent; font-weight:600; cursor:pointer}
@@ -181,7 +217,8 @@ header.nav.scrolled{border-block-end-color:var(--line)}
 .mm-badge.show{display:inline-block}
 
 /* ---------- page shell ---------- */
-.page{padding-block-start:var(--nav-h)}
+.page{padding-block-start:calc(var(--nav-h) + var(--ribbon-h))}
+body.ribbon-closed .page{padding-block-start:var(--nav-h)}
 .section{padding-block:var(--space-9)}
 .section-tight{padding-block:var(--space-7)}
 .section-dark{background:var(--dark); color:var(--dark-ink)}
@@ -204,6 +241,18 @@ header.nav.scrolled{border-block-end-color:var(--line)}
 .hero-stage{position:relative; z-index:2; margin-block-start:56px; display:grid; place-items:center; padding-block-end:0; perspective:900px}
 .hero-device{filter:drop-shadow(0 50px 60px rgba(0,0,0,.55)); animation:rise .9s var(--ease) both; transition:transform .25s var(--ease); transform-style:preserve-3d; will-change:transform}
 .hero-fade{position:relative; z-index:2; height:110px; margin-block-start:-110px; background:linear-gradient(180deg,transparent,var(--dark))}
+
+.hero-slide{display:none}
+.hero-slide.active{display:block; animation:hero-fade-in .6s var(--ease) both}
+@keyframes hero-fade-in{from{opacity:0; transform:translateY(8px)}to{opacity:1; transform:none}}
+.hero-arrow{position:absolute; top:44%; transform:translateY(-50%); z-index:5; width:42px;height:42px;border-radius:50%; background:rgba(255,255,255,.08); border:1px solid var(--dark-line-2); color:#fff; display:grid; place-items:center; cursor:pointer; backdrop-filter:blur(8px); transition:background .2s}
+.hero-arrow:hover{background:rgba(255,255,255,.18)}
+.hero-arrow svg{width:17px;height:17px}
+.hero-arrow.prev{left:16px}
+.hero-arrow.next{right:16px}
+.hero-dots{position:absolute; bottom:130px; inset-inline:0; z-index:5; display:flex; justify-content:center; gap:8px}
+.hero-dot{width:8px;height:8px;border-radius:50%; background:rgba(255,255,255,.35); border:0; padding:0; cursor:pointer; transform-origin:center; transition:background .2s, transform .2s var(--ease)}
+.hero-dot.active{background:#fff; transform:scaleX(2.75)}
 @keyframes rise{from{opacity:0; transform:translateY(26px) scale(.98)}to{opacity:1; transform:none}}
 @media (prefers-reduced-motion:reduce){.hero-device{animation:none}}
 
@@ -394,11 +443,28 @@ footer{background:var(--bg-soft); padding-block:56px 28px}
 .toast{position:fixed; inset-block-end:26px; inset-inline:0; margin-inline:auto; width:max-content; max-width:90vw; background:var(--ink); color:#fff; padding:13px 22px; border-radius:var(--radius-pill); font-weight:600; font-size:14px; z-index:130; opacity:0; transform:translateY(14px); transition:.3s var(--ease); pointer-events:none}
 .toast.show{opacity:1; transform:translateY(0)}
 
+.whatsapp-fab{position:fixed; bottom:24px; right:24px; z-index:95; width:56px;height:56px;border-radius:50%; background:#25d366; color:#fff; display:grid; place-items:center; box-shadow:0 10px 24px -6px rgba(37,211,102,.55); transition:box-shadow .2s var(--ease), bottom .3s var(--ease)}
+.whatsapp-fab:hover{box-shadow:0 16px 32px -6px rgba(37,211,102,.65)}
+.whatsapp-fab svg{width:28px;height:28px}
+.whatsapp-fab.raised{bottom:100px}
+@media (max-width:920px){.whatsapp-fab{width:50px;height:50px; bottom:18px; right:18px} .whatsapp-fab.raised{bottom:92px} .whatsapp-fab svg{width:24px;height:24px}}
+
+.pdp-stickybar{position:fixed; inset-inline:0; bottom:0; z-index:80; background:rgba(255,255,255,.9); backdrop-filter:blur(20px) saturate(180%); border-block-start:1px solid var(--line); transform:translateY(100%); transition:transform .3s var(--ease); padding-block:14px}
+.pdp-stickybar.show{transform:none}
+.pdp-stickybar-inner{display:flex; align-items:center; justify-content:space-between; gap:16px}
+.pdp-stickybar-info{display:flex; flex-direction:column; min-width:0}
+.pdp-stickybar-name{font-weight:600; font-size:14px; color:var(--ink); overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.pdp-stickybar-price{font-weight:650; font-size:15px; color:var(--ink)}
+.pdp-stickybar .btn{flex:0 0 auto; padding:12px 28px}
+@media (max-width:920px){.pdp-stickybar-name{display:none}}
+
 /* ---------- responsive ---------- */
 @media (max-width:920px){
-  .nav-links,.lang-bar{display:none}
+  .nav-links,.lang-bar,.nav-search{display:none}
   .menu-toggle{display:grid; place-items:center}
+  .icon-btn.search-toggle{display:grid}
   .mobile-menu{display:block}
+  .promo-inner{font-size:12px; padding-inline:8vw}
   .section{padding-block:var(--space-8)}
   .hero-inner{padding-block-start:76px}
   .hero-cta{flex-direction:column; align-items:center} .hero-cta .btn{width:100%; max-width:300px}

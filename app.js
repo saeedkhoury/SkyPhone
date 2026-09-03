@@ -107,6 +107,9 @@ const T={
   pr_title:'כל המוצרים',pr_sub:'טלפונים, טאבלטים, מחשבים, גיימינג ואביזרים — במחירים הכי טובים.',
   filter_all:'הכל',cat_phones:'טלפונים',cat_tablets:'טאבלטים',cat_computers:'מחשבים',cat_gaming:'גיימינג',cat_accessories:'אביזרים',add:'הוספה',
   pdp_back:'חזרה למוצרים',pdp_color:'צבע',pdp_storage:'נפח אחסון',pdp_size:'מידה',pdp_qty:'כמות',pdp_add:'הוספה לסל',pdp_more:'עוד ב',
+  search_ph:'חיפוש מוצרים...',search_empty_h:'לא נמצאו תוצאות',search_empty_p:'נסו חיפוש אחר או עיינו בכל המוצרים.',
+  promo_msg:'🛠️ תיקון באותו יום · כפר כנא · WhatsApp 052-722-3916',
+  cat_repairs:'תיקונים',cat_from:'החל מ־',
   rp_title:'תיקונים',rp_sub:'מסך שבור, סוללה חלשה או תקלה במחשב? נטפל בזה — לרוב באותו יום.',
   step1_h:'שולחים בקשה',step1_p:'מספרים לנו מה המכשיר ומה התקלה, ומקבלים הצעת מחיר.',
   step2_h:'מתקנים',step2_p:'טכנאים מוסמכים, חלקים מקוריים ואחריות על כל תיקון.',
@@ -142,6 +145,9 @@ const T={
   pr_title:'كل المنتجات',pr_sub:'هواتف، أجهزة لوحية، حواسيب، ألعاب وملحقات — بأفضل الأسعار.',
   filter_all:'الكل',cat_phones:'هواتف',cat_tablets:'لوحية',cat_computers:'حواسيب',cat_gaming:'ألعاب',cat_accessories:'ملحقات',add:'أضف',
   pdp_back:'العودة للمنتجات',pdp_color:'اللون',pdp_storage:'سعة التخزين',pdp_size:'المقاس',pdp_qty:'الكمية',pdp_add:'أضف إلى السلة',pdp_more:'المزيد في',
+  search_ph:'ابحث عن منتج...',search_empty_h:'لا توجد نتائج',search_empty_p:'جرّب بحثاً آخر أو تصفّح كل المنتجات.',
+  promo_msg:'🛠️ إصلاح بنفس اليوم · كفركنا · واتساب 052-722-3916',
+  cat_repairs:'الإصلاح',cat_from:'ابتداءً من',
   rp_title:'الإصلاح',rp_sub:'شاشة مكسورة، بطارية ضعيفة أو عطل في الحاسوب؟ سنتكفّل بذلك — غالباً في نفس اليوم.',
   step1_h:'أرسل الطلب',step1_p:'أخبرنا بنوع الجهاز والعطل، واحصل على عرض سعر.',
   step2_h:'نُصلح',step2_p:'فنيّون معتمدون، قطع أصلية وضمان على كل إصلاح.',
@@ -177,6 +183,9 @@ const T={
   pr_title:'All products',pr_sub:'Phones, tablets, computers, gaming and accessories — at the best prices.',
   filter_all:'All',cat_phones:'Phones',cat_tablets:'Tablets',cat_computers:'Computers',cat_gaming:'Gaming',cat_accessories:'Accessories',add:'Add',
   pdp_back:'Back to products',pdp_color:'Color',pdp_storage:'Storage',pdp_size:'Size',pdp_qty:'Quantity',pdp_add:'Add to bag',pdp_more:'More in',
+  search_ph:'Search products...',search_empty_h:'No results found',search_empty_p:'Try a different search or browse all products.',
+  promo_msg:'🛠️ Same-day repair · Kafr Kanna · WhatsApp 052-722-3916',
+  cat_repairs:'Repairs',cat_from:'From',
   rp_title:'Repairs',rp_sub:'Cracked screen, weak battery or a PC fault? We’ll handle it — usually same day.',
   step1_h:'Send a request',step1_p:'Tell us the device and the fault, and get a quote.',
   step2_h:'We fix it',step2_p:'Certified techs, genuine parts and a warranty on every repair.',
@@ -200,7 +209,7 @@ const T={
   added:'Added to bag',added_rep:'Repair added to bag',new:'New'}
 };
 
-let lang='he', route='foryou', filter='all';
+let lang='he', route='foryou', filter='all', searchQuery='';
 const bag={};
 const fmt=n=>n.toLocaleString('en-US');
 function pmedia(p){
@@ -271,6 +280,33 @@ function initHeroTilt(){
   stage.addEventListener('pointerleave',()=>{ device.style.transform=''; });
 }
 
+/* ---------- hero carousel ---------- */
+let heroSlide=0, heroTimer=null;
+const heroSlideCount=2;
+function goHeroSlide(n){
+  heroSlide=(n+heroSlideCount)%heroSlideCount;
+  document.querySelectorAll('.hero-slide').forEach(s=>s.classList.toggle('active',Number(s.dataset.slide)===heroSlide));
+  document.querySelectorAll('.hero-dot').forEach((d,i)=>d.classList.toggle('active',i===heroSlide));
+}
+function startHeroAutoplay(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  clearInterval(heroTimer);
+  heroTimer=setInterval(()=>goHeroSlide(heroSlide+1),6000);
+}
+function initHeroCarousel(){
+  const prev=document.getElementById('heroPrev'), next=document.getElementById('heroNext'), hero=document.getElementById('hero');
+  if(!prev||!next||!hero) return;
+  prev.addEventListener('click',()=>{goHeroSlide(heroSlide-1);startHeroAutoplay();});
+  next.addEventListener('click',()=>{goHeroSlide(heroSlide+1);startHeroAutoplay();});
+  document.getElementById('heroDots').addEventListener('click',e=>{
+    const d=e.target.closest('[data-slide-go]'); if(!d) return;
+    goHeroSlide(Number(d.dataset.slideGo)); startHeroAutoplay();
+  });
+  hero.addEventListener('pointerenter',()=>clearInterval(heroTimer));
+  hero.addEventListener('pointerleave',startHeroAutoplay);
+  startHeroAutoplay();
+}
+
 function productCard(p,i){
   const tag=p.badge?`<span class="tag ${p.badge==='hot'?'hot':''}">${p.badge==='hot'?'HOT':T[lang].new}</span>`:'';
   const delay=Math.min(i||0,7)*.06;
@@ -305,14 +341,33 @@ function renderServices(){
     </div>`;
   initMotionFor(document.getElementById('fy-services'));
 }
+function renderCatRow(){
+  const el=document.getElementById('catRow');
+  if(!el) return;
+  const catIcon={phones:ICON.phone,tablets:ICON.tablet,computers:ICON.laptop,gaming:ICON.console,accessories:ICON.watch};
+  const items=FILTERS.filter(f=>f!=='all').map(c=>{
+    const min=Math.min(...PRODUCTS.filter(p=>p.cat===c).map(p=>p.price));
+    return `<div class="cat-item" data-cat="${c}"><div class="cat-circle">${catIcon[c]}</div><div class="cat-name">${catName(c)}</div><div class="cat-price">${T[lang].cat_from} ₪${fmt(min)}</div></div>`;
+  }).join('');
+  const repMin=Math.min(...REPAIRS.map(r=>r.price));
+  const repItem=`<div class="cat-item" data-route="repairs"><div class="cat-circle">${REPICON.tools}</div><div class="cat-name">${T[lang].cat_repairs}</div><div class="cat-price">${T[lang].cat_from} ₪${fmt(repMin)}</div></div>`;
+  el.innerHTML=items+repItem;
+  initMotionFor(el);
+}
 function renderChips(){
   document.getElementById('chips').innerHTML=FILTERS.map(f=>`<button class="chip ${f===filter?'on':''}" data-filter="${f}">${catName(f)}</button>`).join('');
 }
 function renderProducts(){
-  const list=filter==='all'?PRODUCTS:PRODUCTS.filter(p=>p.cat===filter);
+  let list=filter==='all'?PRODUCTS:PRODUCTS.filter(p=>p.cat===filter);
+  if(searchQuery) list=list.filter(p=>p.name.toLowerCase().includes(searchQuery.toLowerCase()));
   const el=document.getElementById('grid');
-  el.innerHTML=list.map(productCard).join('');
+  el.innerHTML=list.length?list.map(productCard).join(''):`<div class="empty" style="grid-column:1/-1"><h3>${T[lang].search_empty_h}</h3><p>${T[lang].search_empty_p}</p></div>`;
   initMotionFor(el);
+}
+function runSearch(q){
+  searchQuery=q.trim(); filter='all';
+  document.getElementById('mobileSearch').classList.remove('open');
+  go('products');
 }
 
 /* ---------- product detail page ---------- */
@@ -359,12 +414,30 @@ function renderProductPage(){
           <div class="qty"><button data-pdp-dec>−</button><span>${pdpQty}</span><button data-pdp-inc>+</button></div>
         </div>
         <div class="pdp-cta">
-          <button class="btn btn-primary" data-pdp-add>${T[lang].pdp_add}</button>
+          <button class="btn btn-primary" data-pdp-add id="pdpMainCta">${T[lang].pdp_add}</button>
         </div>
       </div>
     </div>
     ${relatedHtml}`;
   initMotionFor(box);
+  document.getElementById('stickyName').textContent=p.name;
+  document.getElementById('stickyPrice').textContent='₪'+fmt(price);
+  initStickyBarObserver();
+}
+let stickyObserver=null;
+function initStickyBarObserver(){
+  if(stickyObserver) stickyObserver.disconnect();
+  const target=document.getElementById('pdpMainCta');
+  const bar=document.getElementById('pdpStickyBar');
+  const wa=document.querySelector('.whatsapp-fab');
+  if(!target) return;
+  stickyObserver=new IntersectionObserver(entries=>{
+    entries.forEach(en=>{
+      bar.classList.toggle('show',!en.isIntersecting && route==='product');
+      wa.classList.toggle('raised',!en.isIntersecting && route==='product');
+    });
+  },{threshold:0});
+  stickyObserver.observe(target);
 }
 function renderSteps(){
   const el=document.getElementById('steps');
@@ -437,7 +510,12 @@ function go(name){
   if(name==='products'){renderChips();renderProducts();}
   if(name==='repairs'){renderSteps();renderRepairs();}
   if(name==='bag')renderBag();
+  if(name!=='product'){
+    document.getElementById('pdpStickyBar').classList.remove('show');
+    document.querySelector('.whatsapp-fab').classList.remove('raised');
+  }
   mobileMenu.classList.remove('open');
+  mobileSearch.classList.remove('open');
   document.getElementById('nav').classList.toggle('scrolled',scrollY>10);
   window.scrollTo({top:0,behavior:'instant'});
 }
@@ -445,7 +523,7 @@ function go(name){
 function setLang(l){
   lang=l; document.documentElement.lang=l; document.documentElement.dir=T[l].dir;
   document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.l===l));
-  applyText(); renderArrivals(); renderServices(); renderFaq();
+  applyText(); renderArrivals(); renderServices(); renderCatRow(); renderFaq();
   if(route==='products'){renderChips();renderProducts();}
   if(route==='repairs'){renderSteps();renderRepairs();}
   if(route==='bag')renderBag();
@@ -457,6 +535,21 @@ function setLang(l){
 document.querySelectorAll('.lang').forEach(g=>g.addEventListener('click',e=>{const b=e.target.closest('[data-l]');if(b)setLang(b.dataset.l);}));
 const menuToggle=document.getElementById('menuToggle'),mobileMenu=document.getElementById('mobileMenu');
 menuToggle.addEventListener('click',()=>{const o=mobileMenu.classList.toggle('open');document.getElementById('nav').classList.toggle('scrolled',o||scrollY>10);});
+const promoRibbon=document.getElementById('promoRibbon');
+document.getElementById('promoClose').addEventListener('click',()=>{
+  promoRibbon.classList.add('closed');
+  document.getElementById('nav').classList.add('ribbon-closed');
+  document.body.classList.add('ribbon-closed');
+});
+const mobileSearch=document.getElementById('mobileSearch');
+document.getElementById('searchToggle').addEventListener('click',()=>{
+  mobileSearch.classList.toggle('open');
+  if(mobileSearch.classList.contains('open')) document.getElementById('searchInputMobile').focus();
+});
+['searchInput','searchInputMobile'].forEach(id=>{
+  const inp=document.getElementById(id);
+  inp.addEventListener('keydown',e=>{ if(e.key==='Enter') runSearch(inp.value); });
+});
 document.addEventListener('click',e=>{
   const rt=e.target.closest('[data-route]'); if(rt){go(rt.dataset.route); return;}
   const add=e.target.closest('[data-add]'); if(add){addItem('product',add.dataset.add);toast(T[lang].added);return;}
@@ -464,7 +557,8 @@ document.addEventListener('click',e=>{
   const inc=e.target.closest('[data-inc]'); if(inc){bag[inc.dataset.inc].qty++;renderBag();return;}
   const dec=e.target.closest('[data-dec]'); if(dec){const k=dec.dataset.dec;bag[k].qty--;if(bag[k].qty<=0)delete bag[k];renderBag();return;}
   const rm=e.target.closest('[data-remove]'); if(rm){delete bag[rm.dataset.remove];renderBag();return;}
-  const chip=e.target.closest('[data-filter]'); if(chip){filter=chip.dataset.filter;renderChips();renderProducts();return;}
+  const chip=e.target.closest('[data-filter]'); if(chip){filter=chip.dataset.filter;searchQuery='';renderChips();renderProducts();return;}
+  const catBtn=e.target.closest('[data-cat]'); if(catBtn){filter=catBtn.dataset.cat;searchQuery='';go('products');return;}
   const faq=e.target.closest('.faq-q'); if(faq){faq.parentElement.classList.toggle('open');return;}
   const pcard=e.target.closest('.pcard[data-pid]'); if(pcard){openProduct(pcard.dataset.pid);return;}
   const colorBtn=e.target.closest('[data-color-idx]'); if(colorBtn){pdpColorIdx=Number(colorBtn.dataset.colorIdx);renderProductPage();return;}
@@ -492,7 +586,8 @@ addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>10||mobile
 /* init */
 document.querySelectorAll('.brand-logo').forEach(el=>el.src=LOGO);
 setLang('he');
-renderArrivals(); renderServices(); renderFaq();
+renderArrivals(); renderServices(); renderCatRow(); renderFaq();
 go('foryou');
 initHeroTilt();
+initHeroCarousel();
 initMotionFor(document);

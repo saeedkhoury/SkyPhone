@@ -4,16 +4,16 @@
 
 ## Direction
 
-Apple-Store Premium Retail (canon, user-selected over two grounded alternatives — "Souq Signage" and "Circuit & Precision" — during the direction round). Craft bar: apple.com and the Apple Store app.
+Structural reference: iDigital.co.il, at the user's explicit request ("copy the design and web idea... to my store and my logo"). This is a **structural** reference, not a brand clone: the layout patterns (promo ribbon, header search, category icon row, hero carousel, PDP sticky buy bar, WhatsApp bubble) are adopted; iDigital's own teal brand color, financing/installment plans, trade-in valuation, and "reserve in store" flow are explicitly NOT copied — Sky Phone doesn't offer those, and iDigital's brand color belongs to iDigital, not to Sky Phone. Underlying layout craft (spacing, restraint, no gradient text, no decorative eyebrows, authored icon set) still follows the original Apple-Store-Premium-Retail craft floor.
 
-THESIS: restraint and space are the luxury signal — the old dark magenta/gold gradient theme (glare-tilt cards, eyebrow labels, gradient text) is replaced with a light, spacious, single-accent system; a dark surface is used only where Apple itself uses it (hero, feature spotlights, banners), never as the whole site.
+THESIS: a real e-commerce structure the client already trusts (because a competitor uses it), rebuilt in Sky Phone's own verified identity — same layout muscle memory as a big site, none of the fabricated services.
 
 ## Palette
 
-- `--bg` #ffffff / `--bg-soft` #f5f5f7 / `--bg-soft-2` #ececee — light grounds (Apple's classic off-white section tone)
+- `--bg` #ffffff / `--bg-soft` #f5f5f7 / `--bg-soft-2` #ececee — light grounds
 - `--ink` #1d1d1f / `--ink-soft` #6e6e73 / `--ink-faint` #8a8a8e — text
-- `--dark` #0a0a0c / `--dark-2` #161618 — full-bleed dark surfaces (hero, feature spotlight, gaming banner, footer-adjacent panels)
-- `--accent` #0068d6 (single accent, "sky" blue — doubles as literal brand reference and Apple-blue register) / `--accent-tint` #eaf3fd / `--accent-glow` for physical-light glows only, never decorative gradients
+- `--dark` #0a0a0c / `--dark-2` #161618 — full-bleed dark surfaces (hero, feature spotlight, gaming banner, promo ribbon)
+- `--accent` #b8862f — warm gold, drawn directly from the shop's real verified logo (gold wordmark on black), not from any reference site's brand color / `--accent-tint` #faf3e6 / `--accent-glow` for physical-light glows only, never decorative gradients
 - No gradient text anywhere. No colored borders. No eyebrows/kickers.
 
 ## Type
@@ -32,7 +32,12 @@ Display scale: clamp(40px,7vw,88px) down to clamp(19px,2vw,23px), tracking -0.03
 - **Contact info**: single bordered panel with divided rows, not a grid of identical icon-cards.
 - **FAQ**: grid-template-rows accordion (not `max-height`, to avoid layout-thrash — see Known Issues Resolved below).
 - **Modal**: used only for checkout (an action that legitimately needs interruption to explain the payment placeholder).
-- **Product detail page** (`#p-product`): dedicated page per product, modeled on real e-commerce PDPs (referenced iDigital.co.il's layout at the user's request) — sticky gallery, color swatches, storage/size pills, quantity stepper, add-to-bag, and a "More in <category>" row. Colors and storage tiers use each device's real published options (e.g. actual Apple/Samsung color names and storage sizes), not fabricated shop-specific data. Deliberately does **not** copy iDigital's financing/installment breakdown, trade-in valuation, or "reserve in store" flow — Sky Phone doesn't offer those, and inventing them would misrepresent the shop.
+- **Product detail page** (`#p-product`): dedicated page per product, modeled on real e-commerce PDPs (referenced iDigital.co.il's layout at the user's request) — sticky gallery, color swatches, storage/size pills, quantity stepper, add-to-bag, a "More in <category>" row, and a sticky bottom buy bar (price + Add to Bag, shown via IntersectionObserver once the main CTA scrolls out of view). Colors and storage tiers use each device's real published options (e.g. actual Apple/Samsung color names and storage sizes), not fabricated shop-specific data. Deliberately does **not** copy iDigital's financing/installment breakdown, trade-in valuation, "iDigital Care" warranty upsell, or "reserve in store" flow — Sky Phone doesn't offer those, and inventing them would misrepresent the shop.
+- **Promo ribbon** (`.promo-ribbon`): top bar with real info (same-day repair, WhatsApp number), dismissible; nav shifts up to fill the space when closed (`body.ribbon-closed`).
+- **Header search**: functional client-side product search (name substring match), desktop inline bar / mobile toggle-to-overlay, routes to Products with results (or a real empty state, not a silent no-op).
+- **Category icon row** (`.cat-row`): horizontal circles for each real category (Phones/Tablets/Computers/Gaming/Accessories/Repairs) with computed "from ₪X" starting prices, linking straight into a filtered Products view.
+- **Hero carousel**: 2 slides (brand message, repairs) with prev/next arrows + dots, 6s autoplay that pauses on hover and is skipped entirely under `prefers-reduced-motion`. The gaming banner further down the page is intentionally not duplicated as a 3rd slide.
+- **WhatsApp floating button**: fixed bottom-right, links to the shop's real WhatsApp number, rises above the PDP sticky bar when both are visible together.
 
 ## Icons
 
