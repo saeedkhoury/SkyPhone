@@ -351,7 +351,8 @@ body.ribbon-closed .page{padding-block-start:var(--nav-h)}
 .process-body p{color:var(--ink-soft); margin-block-start:6px; max-width:60ch}
 
 .plist{display:flex; flex-direction:column}
-.prow{display:flex; align-items:center; gap:16px; padding:18px 4px; border-block-end:1px solid var(--line)}
+.prow{display:flex; align-items:center; gap:16px; padding:18px 4px; border-block-end:1px solid var(--line); cursor:pointer; transition:background .15s}
+.prow:hover{background:var(--bg-soft)}
 .prow:first-child{border-block-start:1px solid var(--line)}
 .prow .ric{width:40px;height:40px;border-radius:11px; background:var(--bg-soft); display:grid; place-items:center; flex:0 0 auto; color:var(--ink)}
 .prow .ric svg{width:20px;height:20px}
@@ -482,6 +483,15 @@ footer{background:var(--bg-soft); padding-block:56px 28px}
 .modal.open .modal-card{transform:none}
 .modal-card .ok{width:56px;height:56px;border-radius:50%; background:var(--accent-tint); color:var(--accent); display:grid;place-items:center; margin:0 auto 18px}
 .modal-card h3{font-size:21px; color:var(--ink)} .modal-card p{color:var(--ink-soft); margin-block:12px 24px; font-size:15px}
+
+.repair-modal-card{position:relative; text-align:center}
+.repair-modal-x{position:absolute; inset-block-start:12px; inset-inline-end:12px}
+.repair-modal-ic{width:44px;height:44px; color:var(--accent); margin:0 auto 14px}
+.repair-modal-ic svg{width:100%;height:100%}
+.repair-modal-card h3{font-size:22px; margin-block-end:4px}
+.repair-modal-label{justify-content:center; margin-block-start:22px}
+.repair-modal-pills{justify-content:center}
+.repair-modal-price{font-size:28px; font-weight:650; letter-spacing:-.01em; color:var(--ink); margin-block:20px}
 .toast{position:fixed; inset-block-end:26px; inset-inline:0; margin-inline:auto; width:max-content; max-width:90vw; background:var(--ink); color:#fff; padding:13px 22px; border-radius:var(--radius-pill); font-weight:600; font-size:14px; z-index:130; opacity:0; transform:translateY(14px); transition:.3s var(--ease); pointer-events:none}
 .toast.show{opacity:1; transform:translateY(0)}
 
@@ -543,4 +553,16 @@ footer{background:var(--bg-soft); padding-block:56px 28px}
 }
 @media (hover:none){
   .cursor-dot,.cursor-ring{display:none}
+}
+
+/* Safari (incl. iOS) has a long-standing bug where backdrop-filter on a
+   position:fixed element can flicker or briefly disappear during scroll,
+   especially when scroll direction reverses. Drop the blur there and fall
+   back to a near-opaque background instead — cheaper for Safari to
+   composite, and it still reads the same. -webkit-touch-callout is a
+   Safari-only property, so this block only ever targets Safari/WebKit. */
+@supports (-webkit-touch-callout:none){
+  header.nav{background:rgba(255,255,255,.94); backdrop-filter:none; -webkit-backdrop-filter:none}
+  .mobile-menu,.mobile-search{background:rgba(255,255,255,.99); backdrop-filter:none; -webkit-backdrop-filter:none}
+  .pdp-stickybar{background:rgba(255,255,255,.97); backdrop-filter:none; -webkit-backdrop-filter:none}
 }

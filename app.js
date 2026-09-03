@@ -86,9 +86,20 @@ const PRODUCTS=[
   {id:14,name:'Fast Charger 65W',cat:'accessories',price:120,icon:'charger',
     desc:{he:'מטען מהיר 65W תואם לרוב הטלפונים והמחשבים הניידים.',ar:'شاحن سريع 65 واط متوافق مع معظم الهواتف وأجهزة الحاسوب المحمولة.',en:'65W fast charger, compatible with most phones and laptops.'}}
 ];
+const PHONE_REPAIR_DEVICES=[
+  {name:'Xiaomi 14',screen:250,battery:150,port:120,water:200},
+  {name:'iPhone 14',screen:380,battery:190,port:140,water:230},
+  {name:'Galaxy S24 Ultra',screen:480,battery:220,port:160,water:260},
+  {name:'iPhone 15 Pro',screen:620,battery:260,port:180,water:300}
+];
 const REPAIRS=[
-  {id:'r1',ic:'screen',price:250},{id:'r2',ic:'battery',price:150},{id:'r3',ic:'tools',price:120},
-  {id:'r4',ic:'water',price:200},{id:'r5',ic:'tools',price:100},{id:'r6',ic:'laptop',price:150},{id:'r7',ic:'console',price:180}
+  {id:'r1',ic:'screen',price:250,devices:PHONE_REPAIR_DEVICES.map(d=>({name:d.name,price:d.screen}))},
+  {id:'r2',ic:'battery',price:150,devices:PHONE_REPAIR_DEVICES.map(d=>({name:d.name,price:d.battery}))},
+  {id:'r3',ic:'tools',price:120,devices:PHONE_REPAIR_DEVICES.map(d=>({name:d.name,price:d.port}))},
+  {id:'r4',ic:'water',price:200,devices:PHONE_REPAIR_DEVICES.map(d=>({name:d.name,price:d.water}))},
+  {id:'r5',ic:'tools',price:100},
+  {id:'r6',ic:'laptop',price:150,devices:[{name:'Desktop PC',price:150},{name:'Dell XPS 13',price:200},{name:'MacBook Air',price:260}]},
+  {id:'r7',ic:'console',price:180,devices:[{name:'Nintendo Switch',price:180},{name:'Steam Deck',price:200},{name:'PlayStation 5',price:220},{name:'Xbox Series X',price:220}]}
 ];
 const FILTERS=['all','phones','tablets','computers','gaming','accessories'];
 
@@ -114,7 +125,7 @@ const T={
   step1_h:'שולחים בקשה',step1_p:'מספרים לנו מה המכשיר ומה התקלה, ומקבלים הצעת מחיר.',
   step2_h:'מתקנים',step2_p:'טכנאים מוסמכים, חלקים מקוריים ואחריות על כל תיקון.',
   step3_h:'מקבלים בחזרה',step3_p:'איסוף מהחנות או משלוח עד הבית — כמו חדש.',
-  rp_list_head:'תיקונים ומחירים',rp_list_sub:'מחיר התחלתי — נקבע סופית לאחר בדיקה.',rp_from:'החל מ־',rp_book:'הוספה לסל',rp_note:'המחירים לנוחותכם בלבד; המחיר הסופי נקבע לאחר בדיקת המכשיר.',
+  rp_list_head:'תיקונים ומחירים',rp_list_sub:'מחיר התחלתי — נקבע סופית לאחר בדיקה.',rp_from:'החל מ־',rp_book:'הוספה לסל',rp_note:'המחירים לנוחותכם בלבד; המחיר הסופי נקבע לאחר בדיקת המכשיר.',rp_pick_device:'בחרו מכשיר',
   rep_r1:'החלפת מסך',rep_r2:'החלפת סוללה',rep_r3:'תיקון שקע טעינה',rep_r4:'טיפול בנזקי מים',rep_r5:'שחזור תוכנה',rep_r6:'תיקון מחשב / לפטופ',rep_r7:'תיקון קונסולה',
   bag_title:'הסל שלי',bag_sub:'מוצרים, שירותים ותיקונים שבחרת.',bag_empty_h:'הסל ריק',bag_empty_p:'עדיין לא הוספת כלום. בואו נמצא לך משהו.',bag_empty_cta:'למוצרים',
   bag_subtotal:'סכום ביניים',bag_ship:'משלוח',bag_ship_v:'חינם',bag_total:'סה״כ',bag_checkout:'למעבר לתשלום',tag_product:'מוצר',tag_repair:'תיקון',bag_remove:'הסרה',
@@ -152,7 +163,7 @@ const T={
   step1_h:'أرسل الطلب',step1_p:'أخبرنا بنوع الجهاز والعطل، واحصل على عرض سعر.',
   step2_h:'نُصلح',step2_p:'فنيّون معتمدون، قطع أصلية وضمان على كل إصلاح.',
   step3_h:'استلم جهازك',step3_p:'استلام من المتجر أو توصيل للمنزل — وكأنه جديد.',
-  rp_list_head:'الإصلاحات والأسعار',rp_list_sub:'سعر ابتدائي — يُحدَّد نهائياً بعد الفحص.',rp_from:'ابتداءً من',rp_book:'أضف إلى السلة',rp_note:'الأسعار للاستدلال فقط؛ يُحدَّد السعر النهائي بعد فحص الجهاز.',
+  rp_list_head:'الإصلاحات والأسعار',rp_list_sub:'سعر ابتدائي — يُحدَّد نهائياً بعد الفحص.',rp_from:'ابتداءً من',rp_book:'أضف إلى السلة',rp_note:'الأسعار للاستدلال فقط؛ يُحدَّد السعر النهائي بعد فحص الجهاز.',rp_pick_device:'اختر الجهاز',
   rep_r1:'استبدال الشاشة',rep_r2:'استبدال البطارية',rep_r3:'إصلاح منفذ الشحن',rep_r4:'معالجة أضرار المياه',rep_r5:'استعادة البرمجيات',rep_r6:'إصلاح حاسوب / لابتوب',rep_r7:'إصلاح كونسول',
   bag_title:'سلّتي',bag_sub:'المنتجات والخدمات والإصلاحات التي اخترتها.',bag_empty_h:'السلّة فارغة',bag_empty_p:'لم تُضِف شيئاً بعد. لنجد لك ما يناسبك.',bag_empty_cta:'إلى المنتجات',
   bag_subtotal:'المجموع الفرعي',bag_ship:'التوصيل',bag_ship_v:'مجاني',bag_total:'الإجمالي',bag_checkout:'إتمام الشراء',tag_product:'منتج',tag_repair:'إصلاح',bag_remove:'إزالة',
@@ -190,7 +201,7 @@ const T={
   step1_h:'Send a request',step1_p:'Tell us the device and the fault, and get a quote.',
   step2_h:'We fix it',step2_p:'Certified techs, genuine parts and a warranty on every repair.',
   step3_h:'Get it back',step3_p:'Pick up in store or delivered home — good as new.',
-  rp_list_head:'Repairs & prices',rp_list_sub:'Starting price — finalised after inspection.',rp_from:'from',rp_book:'Add to Bag',rp_note:'Prices are indicative; the final price is set after we inspect the device.',
+  rp_list_head:'Repairs & prices',rp_list_sub:'Starting price — finalised after inspection.',rp_from:'from',rp_book:'Add to Bag',rp_note:'Prices are indicative; the final price is set after we inspect the device.',rp_pick_device:'Choose a device',
   rep_r1:'Screen replacement',rep_r2:'Battery replacement',rep_r3:'Charging port fix',rep_r4:'Water damage treatment',rep_r5:'Software restore',rep_r6:'Laptop / PC repair',rep_r7:'Console repair',
   bag_title:'My Bag',bag_sub:'Products, services and repairs you’ve chosen.',bag_empty_h:'Your bag is empty',bag_empty_p:'Nothing here yet. Let’s find you something.',bag_empty_cta:'Browse products',
   bag_subtotal:'Subtotal',bag_ship:'Delivery',bag_ship_v:'Free',bag_total:'Total',bag_checkout:'Checkout',tag_product:'Product',tag_repair:'Repair',bag_remove:'Remove',
@@ -532,10 +543,40 @@ function renderRepairs(){
   const el=document.getElementById('rlist');
   el.innerHTML=REPAIRS.map((r,i)=>{
     const ic=REPICON[r.ic]||ICON[r.ic]||REPICON.tools;
-    return `<div class="prow" data-reveal style="animation-delay:${Math.min(i,6)*.05}s"><div class="ric">${ic}</div>
-      <div class="rinfo"><div class="rn">${T[lang]['rep_'+r.id]}</div><div class="rp">${T[lang].rp_from} ₪${fmt(r.price)}</div></div>
+    const fromPrice=r.devices?Math.min(...r.devices.map(d=>d.price)):r.price;
+    return `<div class="prow" data-reveal style="animation-delay:${Math.min(i,6)*.05}s" data-repair-row="${r.id}"><div class="ric">${ic}</div>
+      <div class="rinfo"><div class="rn">${T[lang]['rep_'+r.id]}</div><div class="rp">${T[lang].rp_from} ₪${fmt(fromPrice)}</div></div>
       <button class="add" data-book="${r.id}" aria-label="${T[lang].rp_book}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button></div>`;}).join('');
   initMotionFor(el);
+}
+
+/* ---------- repair device picker ---------- */
+let repairModalId=null, repairDeviceIdx=0;
+function openRepairPicker(id){
+  const r=REPAIRS.find(x=>x.id===id);
+  if(!r) return;
+  if(!r.devices){ addItem('repair',id); toast(T[lang].added_rep); return; }
+  repairModalId=id; repairDeviceIdx=0;
+  renderRepairModal();
+  document.getElementById('repairModal').classList.add('open');
+}
+function renderRepairModal(){
+  const r=REPAIRS.find(x=>x.id===repairModalId);
+  if(!r) return;
+  const ic=REPICON[r.ic]||ICON[r.ic]||REPICON.tools;
+  document.getElementById('repairModalIcon').innerHTML=ic;
+  document.getElementById('repairModalTitle').textContent=T[lang]['rep_'+r.id];
+  document.getElementById('repairModalDevices').innerHTML=r.devices.map((d,i)=>
+    `<button class="pill-opt ${i===repairDeviceIdx?'on':''}" data-repair-device-idx="${i}">${d.name}</button>`).join('');
+  document.getElementById('repairModalPrice').textContent='₪'+fmt(r.devices[repairDeviceIdx].price);
+}
+function addRepairFromModal(){
+  const r=REPAIRS.find(x=>x.id===repairModalId);
+  if(!r) return;
+  const d=r.devices[repairDeviceIdx];
+  addItem('repair',r.id,{variant:d.name,delta:d.price-r.price});
+  toast(T[lang].added_rep);
+  document.getElementById('repairModal').classList.remove('open');
 }
 function renderFaq(){
   const items=[1,2,3,4].map(n=>`<div class="faq-item"><button class="faq-q">${T[lang]['faq'+n+'_q']}<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button><div class="faq-a"><div><p>${T[lang]['faq'+n+'_a']}</p></div></div></div>`).join('');
@@ -613,6 +654,7 @@ function setLang(l){
   if(route==='products'){renderChips();renderProducts();}
   if(route==='repairs'){renderSteps();renderRepairs();}
   if(document.getElementById('cartDrawer').classList.contains('open'))renderBag();
+  if(document.getElementById('repairModal').classList.contains('open'))renderRepairModal();
   if(route==='product')renderProductPage();
   updateBagBadges();
 }
@@ -657,7 +699,12 @@ document.addEventListener('click',e=>{
   if(e.target.closest('#cartClose')){closeCart();return;}
   if(e.target.id==='cartBackdrop'){closeCart();return;}
   const add=e.target.closest('[data-add]'); if(add){addItem('product',add.dataset.add);toast(T[lang].added);return;}
-  const bk=e.target.closest('[data-book]'); if(bk){addItem('repair',bk.dataset.book);toast(T[lang].added_rep);return;}
+  const bk=e.target.closest('[data-book]'); if(bk){openRepairPicker(bk.dataset.book);return;}
+  const rrow=e.target.closest('[data-repair-row]'); if(rrow){openRepairPicker(rrow.dataset.repairRow);return;}
+  const rdev=e.target.closest('[data-repair-device-idx]'); if(rdev){repairDeviceIdx=Number(rdev.dataset.repairDeviceIdx);renderRepairModal();return;}
+  if(e.target.closest('#repairModalAdd')){addRepairFromModal();return;}
+  if(e.target.closest('#repairModalClose')){document.getElementById('repairModal').classList.remove('open');return;}
+  if(e.target.id==='repairModal'){e.target.classList.remove('open');return;}
   const inc=e.target.closest('[data-inc]'); if(inc){bag[inc.dataset.inc].qty++;renderBag();return;}
   const dec=e.target.closest('[data-dec]'); if(dec){const k=dec.dataset.dec;bag[k].qty--;if(bag[k].qty<=0)delete bag[k];renderBag();return;}
   const rm=e.target.closest('[data-remove]'); if(rm){delete bag[rm.dataset.remove];renderBag();return;}
@@ -681,7 +728,7 @@ document.addEventListener('click',e=>{
   if(e.target.id==='checkout'){closeCart();modal.classList.add('open');return;}
   if(e.target.id==='f-send'){toast(T[lang].form_sent);['f-name','f-contact','f-msg'].forEach(i=>document.getElementById(i).value='');return;}
 });
-document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeCart(); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeCart(); document.getElementById('repairModal').classList.remove('open'); } });
 const modal=document.getElementById('modal');
 document.getElementById('modalClose').addEventListener('click',()=>modal.classList.remove('open'));
 modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('open');});
