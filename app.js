@@ -322,18 +322,29 @@ function initFloatingBadges(el){
   const repKeys=['screen','battery','tools','water'];
   const navKeys=['speed','swap','truck'];
   const pool=[...iconKeys.map(k=>ICON[k]),...repKeys.map(k=>REPICON[k]),...navKeys.map(k=>NAVICON[k])];
-  const COUNT=16;
+  const COUNT=18;
   let w=0,h=0;
+  /* Keep clear of the headline/lede/CTA block and the device silhouette;
+     scatter freely everywhere else across the full hero, not just the
+     side gutters. */
+  function pickAnchor(){
+    for(let tries=0;tries<24;tries++){
+      const x=.04+Math.random()*.92, y=.05+Math.random()*.9;
+      const inText = x>.20 && x<.80 && y>.06 && y<.42;
+      const inDevice = x>.32 && x<.68 && y>.46 && y<.98;
+      if(!inText && !inDevice) return{x,y};
+    }
+    return{x:.04+Math.random()*.14, y:.05+Math.random()*.9};
+  }
   const badges=Array.from({length:COUNT},(_,i)=>{
     const node=document.createElement('div');
     node.className='badge-float';
     node.innerHTML=pool[i%pool.length];
     wrap.appendChild(node);
-    const side=i%2===0?0:1;
+    const anchor=pickAnchor();
     return{
       node,
-      pctX: side===0 ? .03+Math.random()*.16 : .81+Math.random()*.16,
-      pctY: .06+Math.random()*.88,
+      pctX: anchor.x, pctY: anchor.y,
       ax:0, ay:0, x:0, y:0, vx:0, vy:0, rot:0, vrot:0,
       phase:Math.random()*Math.PI*2, freq:.35+Math.random()*.5,
       ampX:7+Math.random()*9, ampY:7+Math.random()*9
