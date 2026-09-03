@@ -242,14 +242,71 @@ function animateCount(el){
 const counterObserver = 'IntersectionObserver' in window ? new IntersectionObserver((entries)=>{
   entries.forEach(en=>{ if(en.isIntersecting){ animateCount(en.target); counterObserver.unobserve(en.target); } });
 },{threshold:.6}) : null;
-function attachSpot(el){
+/* Particle field: a canvas of small dash particles that ignite in the brand
+   gold as the cursor approaches, replacing the old static radial spotlight —
+   the "alive" reference is antigravity.google / gemini.google's cursor-lit
+   particle fields, reworked in Sky Phone's own single-accent palette. */
+function initParticleField(el){
+  if(el.querySelector('.particle-canvas')) return;
+  const canvas=document.createElement('canvas');
+  canvas.className='particle-canvas';
+  el.insertBefore(canvas,el.firstChild);
+  const ctx=canvas.getContext('2d');
+  const dpr=Math.min(window.devicePixelRatio||1,2);
+  let w=0,h=0,particles=[];
+  function seed(){
+    const count=Math.max(24,Math.min(70,Math.round((w*h)/9000)));
+    particles=Array.from({length:count},()=>({
+      x:Math.random()*w, y:Math.random()*h,
+      len:4+Math.random()*7, angle:Math.random()*Math.PI*2,
+      base:.08+Math.random()*.10, glow:0
+    }));
+  }
+  function resize(){
+    w=el.clientWidth; h=el.clientHeight;
+    canvas.width=w*dpr; canvas.height=h*dpr;
+    canvas.style.width=w+'px'; canvas.style.height=h+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    seed();
+  }
+  resize();
+  if('ResizeObserver' in window) new ResizeObserver(resize).observe(el);
+
+  let mouseX=-9999,mouseY=-9999,active=false,raf=null;
+  const RADIUS=230;
+  function frame(){
+    ctx.clearRect(0,0,w,h);
+    let glowing=false;
+    for(const p of particles){
+      const dx=p.x-mouseX, dy=p.y-mouseY, dist=Math.sqrt(dx*dx+dy*dy);
+      const target=(active && dist<RADIUS)?Math.pow(1-dist/RADIUS,1.4):0;
+      p.glow+=(target-p.glow)*.18;
+      if(p.glow>.008) glowing=true;
+      const alpha=p.base+p.glow*(1-p.base);
+      const scale=1+p.glow*1.8;
+      if(p.glow>0.03){
+        ctx.shadowColor='rgba(201,155,58,.9)';
+        ctx.shadowBlur=6*p.glow;
+        ctx.strokeStyle=`rgba(224,171,66,${alpha})`;
+      }else{
+        ctx.shadowBlur=0;
+        ctx.strokeStyle=`rgba(255,255,255,${alpha})`;
+      }
+      ctx.lineWidth=1+p.glow*1.6;
+      const hx=Math.cos(p.angle)*p.len*scale/2, hy=Math.sin(p.angle)*p.len*scale/2;
+      ctx.beginPath(); ctx.moveTo(p.x-hx,p.y-hy); ctx.lineTo(p.x+hx,p.y+hy); ctx.stroke();
+    }
+    ctx.shadowBlur=0;
+    raf=(active||glowing)?requestAnimationFrame(frame):null;
+  }
+  function ensureRunning(){ if(!raf) raf=requestAnimationFrame(frame); }
   el.addEventListener('pointermove',e=>{
     const r=el.getBoundingClientRect();
-    el.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');
-    el.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');
-    el.classList.add('spot-active');
+    mouseX=e.clientX-r.left; mouseY=e.clientY-r.top;
+    active=true; ensureRunning();
   });
-  el.addEventListener('pointerleave',()=>el.classList.remove('spot-active'));
+  el.addEventListener('pointerleave',()=>{ active=false; ensureRunning(); });
+  frame();
 }
 function attachMagnetic(el){
   el.addEventListener('pointermove',e=>{
@@ -264,7 +321,7 @@ function initMotionFor(root){
   if(revealObserver) root.querySelectorAll('[data-reveal]').forEach(el=>revealObserver.observe(el));
   if(counterObserver) root.querySelectorAll('[data-countup]').forEach(el=>counterObserver.observe(el));
   if(canHover){
-    root.querySelectorAll('.spot').forEach(attachSpot);
+    root.querySelectorAll('.spot').forEach(initParticleField);
     root.querySelectorAll('.magnetic').forEach(attachMagnetic);
   }
 }

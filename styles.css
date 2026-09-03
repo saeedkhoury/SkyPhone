@@ -103,13 +103,8 @@ img{max-width:100%; display:block}
    dark panels, magnetic = feedback on primary actions, reveal = list entrance for
    genuinely list-shaped content, sheen = state feedback on product cards. */
 .spot{position:relative; overflow:hidden}
-.spot::before{
-  content:''; position:absolute; inset:0; z-index:1; pointer-events:none; opacity:0;
-  background:radial-gradient(480px circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,.10), transparent 62%);
-  transition:opacity .4s var(--ease);
-}
-.spot.spot-active::before{opacity:1}
 .spot>*{position:relative; z-index:2}
+.particle-canvas{position:absolute; inset:0; z-index:1; pointer-events:none; display:block}
 
 .magnetic{transition:transform .25s var(--ease), background .2s var(--ease), box-shadow .2s var(--ease)}
 
