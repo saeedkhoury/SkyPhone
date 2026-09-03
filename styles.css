@@ -501,6 +501,7 @@ footer{background:var(--bg-soft); padding-block:56px 28px}
 
 /* ---------- responsive ---------- */
 @media (max-width:920px){
+  .nav-inner{justify-content:space-between}
   .nav-links,.lang-bar,.nav-search{display:none}
   .menu-toggle{display:grid; place-items:center}
   .icon-btn.search-toggle{display:grid}
