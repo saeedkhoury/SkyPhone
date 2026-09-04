@@ -28,33 +28,49 @@ const NAVICON={
   truck:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6.5" width="14" height="10.5" rx="1.6"/><path d="M15 10h4l3.5 3.5V17H15z"/><circle cx="6.5" cy="19" r="1.9"/><circle cx="18" cy="19" r="1.9"/></svg>',
 };
 
+/* Product imagery: real product photos/renders from Wikimedia Commons,
+   mirrored locally in /img so the demo never depends on the network or
+   hotlink rate limits. Sources (Commons file names):
+   iphone15pro.png = IPhone 15 Pro Vector.svg        iphone14.png = IPhone 14 vector.svg
+   s24ultra.png    = Samsung S24 Ultra Phone.png     xiaomi14.jpg = Xiaomi 14 (July 10, 2026).jpg
+   ipadair.jpg     = IPad Air 11-inch (M2) front side (20250525 154539).jpg
+   tabs9.png       = Samsung Galaxy Tab S9.png       macbook.png  = Macbook Air M1 Silver PNG.png
+   xps13.png       = Dell XPS 13 (2018).png          steamdeck.png= Steam Deck (front).png
+   dualsense.png   = Playstation DualSense Controller.png
+   headset.jpg     = Black brown headphones wired.jpg
+   watch9.jpg      = Apple Watch Series 7; January 2022 (01).jpg
+   buds.png        = Samsung Galaxy Buds2 (Docked).png
+   charger.jpg     = Lazos GaN Charger 30W L-AC-G30.jpg
+   pmedia() still falls back to the authored line icon if a file is missing. */
 const IMG={
-  iphone:'https://commons.wikimedia.org/wiki/Special:FilePath/IPhone%2015%20Pro%20Vector.svg?width=500',
-  steamdeck:'https://commons.wikimedia.org/wiki/Special:FilePath/Steam%20Deck%20%28front%29.png?width=500',
-  macbook:'https://commons.wikimedia.org/wiki/Special:FilePath/Macbook%20Air%20M1%20Silver%20PNG.png?width=500'
+  iphone15pro:'img/iphone15pro.png', s24ultra:'img/s24ultra.png', iphone14:'img/iphone14.png',
+  xiaomi14:'img/xiaomi14.jpg', ipadair:'img/ipadair.jpg', tabs9:'img/tabs9.png',
+  macbook:'img/macbook.png', xps13:'img/xps13.png', steamdeck:'img/steamdeck.png',
+  dualsense:'img/dualsense.png', headset:'img/headset.jpg', watch9:'img/watch9.jpg',
+  buds:'img/buds.png', charger:'img/charger.jpg'
 };
 const PRODUCTS=[
-  {id:1,name:'iPhone 15 Pro',cat:'phones',price:4290,icon:'phone',badge:'new',img:IMG.iphone,
+  {id:1,name:'iPhone 15 Pro',cat:'phones',price:4290,icon:'phone',badge:'new',img:IMG.iphone15pro,
     colors:[{name:'Natural Titanium',hex:'#8a8479'},{name:'Blue Titanium',hex:'#3f4a56'},{name:'White Titanium',hex:'#f2efe9'},{name:'Black Titanium',hex:'#2b2a28'}],
     storage:[{label:'128GB',delta:0},{label:'256GB',delta:400},{label:'512GB',delta:900}],
     desc:{he:'iPhone 15 Pro עם שבב A17 Pro, מסך Super Retina XDR ומצלמה מקצועית — הדגם המבוקש ביותר אצלנו.',ar:'iPhone 15 Pro بشريحة A17 Pro وشاشة Super Retina XDR وكاميرا احترافية — الطراز الأكثر طلباً لدينا.',en:'iPhone 15 Pro with the A17 Pro chip, Super Retina XDR display and a pro camera system — our most requested model.'}},
-  {id:2,name:'Galaxy S24 Ultra',cat:'phones',price:4590,icon:'phone',
+  {id:2,name:'Galaxy S24 Ultra',cat:'phones',price:4590,icon:'phone',img:IMG.s24ultra,
     colors:[{name:'Titanium Black',hex:'#2b2b2e'},{name:'Titanium Gray',hex:'#8a8a8d'},{name:'Titanium Violet',hex:'#8a7ea3'},{name:'Titanium Yellow',hex:'#d8c98a'}],
     storage:[{label:'256GB',delta:0},{label:'512GB',delta:450},{label:'1TB',delta:950}],
     desc:{he:'Galaxy S24 Ultra עם מסך AMOLED ענק, עט S Pen מובנה ומצלמה בזום גבוה.',ar:'Galaxy S24 Ultra بشاشة AMOLED كبيرة، قلم S Pen مدمج وكاميرا بتقريب عالٍ.',en:'Galaxy S24 Ultra with a large AMOLED display, built-in S Pen and high-zoom camera.'}},
-  {id:9,name:'iPhone 14',cat:'phones',price:2990,icon:'phone',
+  {id:9,name:'iPhone 14',cat:'phones',price:2990,icon:'phone',img:IMG.iphone14,
     colors:[{name:'Midnight',hex:'#1d1d1f'},{name:'Starlight',hex:'#f0e6d8'},{name:'Blue',hex:'#5f7a99'},{name:'(PRODUCT)RED',hex:'#a72032'}],
     storage:[{label:'128GB',delta:0},{label:'256GB',delta:350},{label:'512GB',delta:800}],
     desc:{he:'iPhone 14 — האמינות והביצועים של אפל במחיר נגיש יותר.',ar:'iPhone 14 — موثوقية وأداء آبل بسعر أكثر سهولة.',en:'iPhone 14 — Apple\'s reliability and performance at a more accessible price.'}},
-  {id:10,name:'Xiaomi 14',cat:'phones',price:2490,icon:'phone',
+  {id:10,name:'Xiaomi 14',cat:'phones',price:2490,icon:'phone',img:IMG.xiaomi14,
     colors:[{name:'Black',hex:'#1c1c1e'},{name:'White',hex:'#eceae6'},{name:'Jade Green',hex:'#6f8a72'}],
     storage:[{label:'256GB',delta:0},{label:'512GB',delta:300}],
     desc:{he:'Xiaomi 14 — טלפון אנדרואיד רב עוצמה עם מצלמת Leica ותמורה מעולה למחיר.',ar:'Xiaomi 14 — هاتف أندرويد قوي بكاميرا Leica وقيمة ممتازة مقابل السعر.',en:'Xiaomi 14 — a powerful Android phone with a Leica camera and excellent value.'}},
-  {id:3,name:'iPad Air',cat:'tablets',price:2790,icon:'tablet',
+  {id:3,name:'iPad Air',cat:'tablets',price:2790,icon:'tablet',img:IMG.ipadair,
     colors:[{name:'Space Gray',hex:'#5b5c5f'},{name:'Starlight',hex:'#f0e6d8'},{name:'Blue',hex:'#7fa7c9'},{name:'Purple',hex:'#a99bc7'}],
     storage:[{label:'128GB',delta:0},{label:'256GB',delta:350}],
     desc:{he:'iPad Air עם שבב M1 — קליל, חזק ומושלם לעבודה, לימודים ובידור.',ar:'iPad Air بشريحة M1 — خفيف وقوي ومثالي للعمل والدراسة والترفيه.',en:'iPad Air with the M1 chip — light, powerful, and perfect for work, study and play.'}},
-  {id:11,name:'Galaxy Tab S9',cat:'tablets',price:2690,icon:'tablet',
+  {id:11,name:'Galaxy Tab S9',cat:'tablets',price:2690,icon:'tablet',img:IMG.tabs9,
     colors:[{name:'Graphite',hex:'#3a3b3e'},{name:'Beige',hex:'#d9cdb8'}],
     storage:[{label:'128GB',delta:0},{label:'256GB',delta:300}],
     desc:{he:'Galaxy Tab S9 — מסך AMOLED, עמידות למים ועט S Pen כלול בקופסה.',ar:'Galaxy Tab S9 — شاشة AMOLED، مقاومة للماء وقلم S Pen ضمن العلبة.',en:'Galaxy Tab S9 — AMOLED display, water resistance, and an S Pen included in the box.'}},
@@ -62,28 +78,28 @@ const PRODUCTS=[
     colors:[{name:'Midnight',hex:'#33363d'},{name:'Starlight',hex:'#f0e6d8'},{name:'Space Gray',hex:'#5b5c5f'},{name:'Silver',hex:'#e5e5e5'}],
     storage:[{label:'256GB SSD',delta:0},{label:'512GB SSD',delta:600}],
     desc:{he:'MacBook Air עם שבב M2 — דק, שקט לחלוטין וסוללה שמחזיקה יום שלם.',ar:'MacBook Air بشريحة M2 — رفيع، صامت تماماً وبطارية تدوم يوماً كاملاً.',en:'MacBook Air with the M2 chip — thin, completely silent, and battery that lasts all day.'}},
-  {id:12,name:'Dell XPS 13',cat:'computers',price:4990,icon:'laptop',
+  {id:12,name:'Dell XPS 13',cat:'computers',price:4990,icon:'laptop',img:IMG.xps13,
     colors:[{name:'Platinum Silver',hex:'#c9cbcd'},{name:'Graphite',hex:'#3a3b3e'}],
     storage:[{label:'512GB SSD',delta:0},{label:'1TB SSD',delta:500}],
     desc:{he:'Dell XPS 13 — מחשב Windows קומפקטי עם מסך InfinityEdge ובנייה מאלומיניום.',ar:'Dell XPS 13 — حاسوب Windows مدمج بشاشة InfinityEdge وهيكل ألومنيوم.',en:'Dell XPS 13 — a compact Windows laptop with an InfinityEdge display and aluminum build.'}},
   {id:5,name:'Steam Deck',cat:'gaming',price:2490,icon:'console',badge:'hot',img:IMG.steamdeck,
     storage:[{label:'256GB',delta:0},{label:'512GB',delta:450},{label:'1TB OLED',delta:1100}],
     desc:{he:'Steam Deck — קונסולת גיימינג ניידת שמריצה את כל ספריית המשחקים שלך מכל מקום.',ar:'Steam Deck — جهاز ألعاب محمول يشغّل مكتبة ألعابك بالكامل من أي مكان.',en:'Steam Deck — a handheld gaming console that runs your whole library, anywhere.'}},
-  {id:13,name:'PS5 DualSense',cat:'gaming',price:290,icon:'console',
+  {id:13,name:'PS5 DualSense',cat:'gaming',price:290,icon:'console',img:IMG.dualsense,
     colors:[{name:'White',hex:'#eceae6'},{name:'Midnight Black',hex:'#1c1c1e'},{name:'Cosmic Red',hex:'#9c2b2b'},{name:'Starlight Blue',hex:'#5f7a99'}],
     desc:{he:'בקר DualSense ל-PS5 עם משוב הפטי ומקשי טריגר אדפטיביים.',ar:'يد تحكم DualSense لجهاز PS5 مع استجابة لمسية ومفاتيح تحفيز تكيفية.',en:'DualSense controller for PS5 with haptic feedback and adaptive triggers.'}},
-  {id:7,name:'Gaming Headset Pro',cat:'gaming',price:490,icon:'headset',badge:'hot',
+  {id:7,name:'Gaming Headset Pro',cat:'gaming',price:490,icon:'headset',badge:'hot',img:IMG.headset,
     colors:[{name:'Black',hex:'#1c1c1e'},{name:'White',hex:'#eceae6'}],
     desc:{he:'אוזניות גיימינג עם סאונד סראונד ומיקרופון לביטול רעשים.',ar:'سماعة ألعاب بصوت محيطي ومايكروفون لإلغاء الضوضاء.',en:'Gaming headset with surround sound and a noise-cancelling microphone.'}},
-  {id:6,name:'Apple Watch S9',cat:'accessories',price:1890,icon:'watch',
+  {id:6,name:'Apple Watch S9',cat:'accessories',price:1890,icon:'watch',img:IMG.watch9,
     colors:[{name:'Midnight',hex:'#1d1d1f'},{name:'Starlight',hex:'#f0e6d8'},{name:'Silver',hex:'#e5e5e5'},{name:'(PRODUCT)RED',hex:'#a72032'}],
     storage:[{label:'41mm',delta:0},{label:'45mm',delta:150}],
     variant2Label:'size',
     desc:{he:'Apple Watch Series 9 עם שבב S9, מסך בהיר יותר ומעקב בריאות מתקדם.',ar:'Apple Watch Series 9 بشريحة S9، شاشة أكثر سطوعاً وتتبع صحي متقدم.',en:'Apple Watch Series 9 with the S9 chip, a brighter display and advanced health tracking.'}},
-  {id:8,name:'Galaxy Buds3',cat:'accessories',price:590,icon:'buds',
+  {id:8,name:'Galaxy Buds3',cat:'accessories',price:590,icon:'buds',img:IMG.buds,
     colors:[{name:'Graphite',hex:'#3a3b3e'},{name:'White',hex:'#eceae6'},{name:'Silver',hex:'#c9cbcd'}],
     desc:{he:'Galaxy Buds3 עם ביטול רעשים אקטיבי וסאונד עשיר.',ar:'Galaxy Buds3 بإلغاء ضوضاء نشط وصوت غني.',en:'Galaxy Buds3 with active noise cancellation and rich sound.'}},
-  {id:14,name:'Fast Charger 65W',cat:'accessories',price:120,icon:'charger',
+  {id:14,name:'Fast Charger 65W',cat:'accessories',price:120,icon:'charger',img:IMG.charger,
     desc:{he:'מטען מהיר 65W תואם לרוב הטלפונים והמחשבים הניידים.',ar:'شاحن سريع 65 واط متوافق مع معظم الهواتف وأجهزة الحاسوب المحمولة.',en:'65W fast charger, compatible with most phones and laptops.'}}
 ];
 const PHONE_REPAIR_DEVICES=[
@@ -119,8 +135,17 @@ const T={
   filter_all:'הכל',cat_phones:'טלפונים',cat_tablets:'טאבלטים',cat_computers:'מחשבים',cat_gaming:'גיימינג',cat_accessories:'אביזרים',add:'הוספה',
   pdp_back:'חזרה למוצרים',pdp_color:'צבע',pdp_storage:'נפח אחסון',pdp_size:'מידה',pdp_qty:'כמות',pdp_add:'הוספה לסל',pdp_more:'עוד ב',
   search_ph:'חיפוש מוצרים...',search_empty_h:'לא נמצאו תוצאות',search_empty_p:'נסו חיפוש אחר או עיינו בכל המוצרים.',
-  promo_msg:'🛠️ תיקון באותו יום · כפר כנא · WhatsApp 052-722-3916',
-  cat_repairs:'תיקונים',cat_from:'החל מ־',
+   promo_msg:'🛠️ תיקון באותו יום · כפר כנא · WhatsApp 052-722-3916',
+   promo_msg2:'🔄 טרייד-אין: המכשיר הישן שלך שווה כסף',promo_msg3:'🚚 משלוח עד הבית לכל הארץ',
+   fy_hot_head:'מה חם עכשיו',fy_hot_sub:'הדגמים שהכי מבוקשים אצלנו.',
+   spot_iphone_sub:'שבב A17 Pro, מסך ProMotion וגוף טיטניום.',spot_iphone_price:'החל מ־₪4,290',
+   spot_deck_sub:'כל ספריית המשחקים שלך — ביד אחת, בכל מקום.',spot_deck_price:'החל מ־₪2,490',
+   cta_buy:'לרכישה',cta_details:'לפרטים נוספים',
+   fy_acc_head:'השלימו את הסטאפ',fy_acc_sub:'אביזרים מקוריים שמשדרגים כל מכשיר.',
+   fy_rep_head:'מסך שבור? סוללה חלשה?',fy_rep_sub:'המעבדה שלנו מתקנת הכל — לרוב באותו יום, בחלקים מקוריים ועם אחריות מלאה.',fy_rep_cta:'לתיאום תיקון',
+   fy_ig_head:'עוקבים באינסטגרם',fy_ig_sub:'מבצעים, הגעות חדשות ומה שחם בחנות — קודם כל שם.',fy_ig_cta:'עקבו אחרינו',
+   fy_brands_l:'מותגים שתמצאו אצלנו',
+   cat_repairs:'תיקונים',cat_from:'החל מ־',
   rp_title:'תיקונים',rp_sub:'מסך שבור, סוללה חלשה או תקלה במחשב? נטפל בזה — לרוב באותו יום.',
   step1_h:'שולחים בקשה',step1_p:'מספרים לנו מה המכשיר ומה התקלה, ומקבלים הצעת מחיר.',
   step2_h:'מתקנים',step2_p:'טכנאים מוסמכים, חלקים מקוריים ואחריות על כל תיקון.',
@@ -141,7 +166,24 @@ const T={
   faq4_q:'אתם קונים מכשירים ישנים?',faq4_a:'כן, יש לנו טרייד-אין — מביאים מכשיר ישן ומקבלים זיכוי לרכישה החדשה.',
   ab_form_h:'שלחו לנו הודעה',form_name:'שם מלא',form_contact:'טלפון או אימייל',form_msg:'איך נוכל לעזור?',form_send:'שליחה',form_sent:'תודה! זו גרסת הדגמה — ההודעה לא נשלחה בפועל.',
   foot_tag:'החנות שלך לטכנולוגיה, גיימינג ותיקונים.',foot_help:'עזרה',foot_est:'נוסד 2010',foot_demo:'אתר הדגמה',
-  added:'נוסף לסל',added_rep:'התיקון נוסף לסל',new:'חדש'},
+   added:'נוסף לסל',added_rep:'התיקון נוסף לסל',new:'חדש',
+   chat_title:'הצ׳אט של Sky Phone',chat_sub:'מענה מיידי · מחוברים עכשיו',chat_ph:'כתבו שאלה...',
+   chat_greet:'היי! 👋 אני העוזר הווירטואלי של Sky Phone.\nאפשר לשאול אותי על מחירים, תיקונים, שעות פתיחה, משלוחים ועוד.',
+   chat_chip_price:'מחירים',chat_chip_repair:'תיקונים',chat_chip_hours:'שעות פתיחה',chat_chip_delivery:'משלוחים',
+   chat_a_greet:'היי! במה אפשר לעזור? 🙂',
+   chat_a_hours:'אנחנו פתוחים א׳–ה׳ 10:00–20:00 ובו׳ 10:00–14:00. מחכים לכם!',
+   chat_a_where:'החנות נמצאת בכפר כנא, הרחוב הראשי (כביש ואדי אל-חאי׳). נשמח לראותך!',
+   chat_a_phone:'אפשר להתקשר או לשלוח וואטסאפ: 052-722-3916.',
+   chat_a_delivery:'כן! מזמינים אונליין ובוחרים משלוח עד הבית לכל הארץ או איסוף מהחנות. המשלוח חינם.',
+   chat_a_tradein:'בהחלט — מביאים את המכשיר הישן ומקבלים זיכוי לרכישה החדשה. ההערכה נעשית בחנות תוך דקות.',
+   chat_a_warranty:'כן — כל תיקון וכל מוצר מגיעים עם אחריות בכתב. אנחנו מאחורי מה שאנחנו מוכרים.',
+   chat_a_payment:'באתר ההדגמה התשלום הוא להמחשה בלבד. בחנות אפשר לשלם במזומן, בכרטיס אשראי וב-Bit.',
+   chat_a_repair_time:'רוב התיקונים מוכנים תוך 24 שעות — ולרוב באותו יום. תלוי בסוג התקלה ובזמינות החלקים.',
+   chat_a_human:'בשמחה! אפשר לדבר עם נציג בוואטסאפ או בטלפון: 052-722-3916.',
+   chat_a_fallback:'לא בטוח שהבנתי 🙂 נסו לשאול על מחיר של מוצר, תיקון, שעות פתיחה, משלוח או טרייד-אין — או כתבו לנו בוואטסאפ: 052-722-3916.',
+   chat_a_price_q:'איזה מוצר מעניין אתכם? כתבו את שם הדגם — למשל iPhone 15 Pro, Steam Deck או Galaxy Buds3.',
+   chat_a_found:'הנה מה שמצאתי:',chat_view:'צפה במוצר',
+   chat_a_repair_q:'איזה תיקון צריך? למשל: מסך, סוללה, שקע טעינה, נזקי מים, מחשב או קונסולה — ואפשר גם לציין את המכשיר.'},
  ar:{dir:'rtl',
   nav_foryou:'لك',nav_products:'المنتجات',nav_repairs:'الإصلاح',nav_bag:'السلة',nav_about:'من نحن والتواصل',
   fy_title:'تقنيتك، في السماء.',fy_lead:'منذ 2010 — وصل حديثاً، خدمات جديدة وأفضل العروض، كل ذلك في مكان واحد، مختار لك.',
@@ -157,8 +199,17 @@ const T={
   filter_all:'الكل',cat_phones:'هواتف',cat_tablets:'لوحية',cat_computers:'حواسيب',cat_gaming:'ألعاب',cat_accessories:'ملحقات',add:'أضف',
   pdp_back:'العودة للمنتجات',pdp_color:'اللون',pdp_storage:'سعة التخزين',pdp_size:'المقاس',pdp_qty:'الكمية',pdp_add:'أضف إلى السلة',pdp_more:'المزيد في',
   search_ph:'ابحث عن منتج...',search_empty_h:'لا توجد نتائج',search_empty_p:'جرّب بحثاً آخر أو تصفّح كل المنتجات.',
-  promo_msg:'🛠️ إصلاح بنفس اليوم · كفركنا · واتساب 052-722-3916',
-  cat_repairs:'الإصلاح',cat_from:'ابتداءً من',
+   promo_msg:'🛠️ إصلاح بنفس اليوم · كفركنا · واتساب 052-722-3916',
+   promo_msg2:'🔄 استبدال: جهازك القديم يساوي مالاً',promo_msg3:'🚚 توصيل للمنزل لكل البلاد',
+   fy_hot_head:'الأكثر طلباً الآن',fy_hot_sub:'الطرازان الأكثر طلباً لدينا.',
+   spot_iphone_sub:'شريحة A17 Pro وشاشة ProMotion وهيكل تيتانيوم.',spot_iphone_price:'ابتداءً من ₪4,290',
+   spot_deck_sub:'مكتبة ألعابك بالكامل — في يد واحدة، في أي مكان.',spot_deck_price:'ابتداءً من ₪2,490',
+   cta_buy:'للشراء',cta_details:'لمزيد من التفاصيل',
+   fy_acc_head:'أكملوا مجموعتكم',fy_acc_sub:'إكسسوارات أصلية تُطوّر أي جهاز.',
+   fy_rep_head:'شاشة مكسورة؟ بطارية ضعيفة؟',fy_rep_sub:'مختبرنا يصلح كل شيء — غالباً في نفس اليوم، بقطع أصلية وضمان كامل.',fy_rep_cta:'احجز إصلاحاً',
+   fy_ig_head:'متابع على إنستغرام',fy_ig_sub:'عروض، وصولات جديدة وكل ما هو حار في المتجر — هناك أولاً.',fy_ig_cta:'تابعونا',
+   fy_brands_l:'ماركات تجدونها لدينا',
+   cat_repairs:'الإصلاح',cat_from:'ابتداءً من',
   rp_title:'الإصلاح',rp_sub:'شاشة مكسورة، بطارية ضعيفة أو عطل في الحاسوب؟ سنتكفّل بذلك — غالباً في نفس اليوم.',
   step1_h:'أرسل الطلب',step1_p:'أخبرنا بنوع الجهاز والعطل، واحصل على عرض سعر.',
   step2_h:'نُصلح',step2_p:'فنيّون معتمدون، قطع أصلية وضمان على كل إصلاح.',
@@ -179,7 +230,24 @@ const T={
   faq4_q:'هل تشترون الأجهزة القديمة؟',faq4_a:'نعم، لدينا خدمة الاستبدال — أحضر جهازك القديم واحصل على خصم على الجديد.',
   ab_form_h:'أرسل لنا رسالة',form_name:'الاسم الكامل',form_contact:'هاتف أو بريد إلكتروني',form_msg:'كيف يمكننا المساعدة؟',form_send:'إرسال',form_sent:'شكراً! هذه نسخة تجريبية — لم تُرسَل الرسالة فعلياً.',
   foot_tag:'متجرك للتقنية والألعاب والإصلاح.',foot_help:'مساعدة',foot_est:'تأسّس 2010',foot_demo:'موقع تجريبي',
-  added:'أُضيف إلى السلّة',added_rep:'أُضيف الإصلاح إلى السلّة',new:'جديد'},
+   added:'أُضيف إلى السلّة',added_rep:'أُضيف الإصلاح إلى السلّة',new:'جديد',
+   chat_title:'محادثة Sky Phone',chat_sub:'رد فوري · متاحون الآن',chat_ph:'اكتب سؤالاً...',
+   chat_greet:'أهلاً! 👋 أنا المساعد الافتراضي لـ Sky Phone.\nاسألني عن الأسعار، الإصلاحات، ساعات العمل، التوصيل والمزيد.',
+   chat_chip_price:'أسعار',chat_chip_repair:'إصلاحات',chat_chip_hours:'ساعات العمل',chat_chip_delivery:'توصيل',
+   chat_a_greet:'أهلاً! كيف أقدر أساعدك؟ 🙂',
+   chat_a_hours:'نحن مفتوحون الأحد–الخميس 10:00–20:00 والجمعة 10:00–14:00. ننتظركم!',
+   chat_a_where:'المتجر في كفركنا، الشارع الرئيسي (طريق وادي الحاي). يسعدنا رؤيتك!',
+   chat_a_phone:'يمكنك الاتصال أو مراسلتنا واتساب: 052-722-3916.',
+   chat_a_delivery:'نعم! اطلب أونلاين واختر التوصيل للمنزل لكل البلاد أو الاستلام من المتجر. التوصيل مجاني.',
+   chat_a_tradein:'بالتأكيد — أحضر جهازك القديم واحصل على خصم على الجديد. التقييم يتم في المتجر خلال دقائق.',
+   chat_a_warranty:'نعم — كل إصلاح وكل منتج يأتي بضمان مكتوب. نحن خلف ما نبيع.',
+   chat_a_payment:'في الموقع التجريبي الدفع للعرض فقط. في المتجر يمكنك الدفع نقداً، ببطاقة الائتمان وبـ Bit.',
+   chat_a_repair_time:'معظم الإصلاحات جاهزة خلال 24 ساعة — وغالباً في نفس اليوم. حسب نوع العطل وتوفّر القطع.',
+   chat_a_human:'بكل سرور! تحدث مع مندوب عبر واتساب أو هاتفياً: 052-722-3916.',
+   chat_a_fallback:'لست متأكداً أنني فهمت 🙂 جرّب السؤال عن سعر منتج، إصلاح، ساعات العمل، التوصيل أو الاستبدال — أو راسلنا واتساب: 052-722-3916.',
+   chat_a_price_q:'أي منتج يهمّك؟ اكتب اسم الطراز — مثلاً iPhone 15 Pro أو Steam Deck أو Galaxy Buds3.',
+   chat_a_found:'إليك ما وجدت:',chat_view:'عرض المنتج',
+   chat_a_repair_q:'أي إصلاح تحتاج؟ مثلاً: شاشة، بطارية، منفذ شحن، أضرار مياه، حاسوب أو كونسول — ويمكنك ذكر الجهاز أيضاً.'},
  en:{dir:'ltr',
   nav_foryou:'For You',nav_products:'Products',nav_repairs:'Repairs',nav_bag:'Bag',nav_about:'About & Contact',
   fy_title:'Your tech, sky-high.',fy_lead:'Since 2010 — new arrivals, new services and the best deals, all in one place, picked for you.',
@@ -195,8 +263,17 @@ const T={
   filter_all:'All',cat_phones:'Phones',cat_tablets:'Tablets',cat_computers:'Computers',cat_gaming:'Gaming',cat_accessories:'Accessories',add:'Add',
   pdp_back:'Back to products',pdp_color:'Color',pdp_storage:'Storage',pdp_size:'Size',pdp_qty:'Quantity',pdp_add:'Add to bag',pdp_more:'More in',
   search_ph:'Search products...',search_empty_h:'No results found',search_empty_p:'Try a different search or browse all products.',
-  promo_msg:'🛠️ Same-day repair · Kafr Kanna · WhatsApp 052-722-3916',
-  cat_repairs:'Repairs',cat_from:'From',
+   promo_msg:'🛠️ Same-day repair · Kafr Kanna · WhatsApp 052-722-3916',
+   promo_msg2:'🔄 Trade-in: your old device is worth money',promo_msg3:'🚚 Home delivery, nationwide',
+   fy_hot_head:'Hot right now',fy_hot_sub:'Our most wanted models.',
+   spot_iphone_sub:'A17 Pro chip, ProMotion display and a titanium body.',spot_iphone_price:'From ₪4,290',
+   spot_deck_sub:'Your entire game library — in one hand, anywhere.',spot_deck_price:'From ₪2,490',
+   cta_buy:'Buy',cta_details:'Learn more',
+   fy_acc_head:'Complete your setup',fy_acc_sub:'Genuine accessories that upgrade any device.',
+   fy_rep_head:'Cracked screen? Weak battery?',fy_rep_sub:'Our lab fixes it all — usually the same day, with genuine parts and a full warranty.',fy_rep_cta:'Book a repair',
+   fy_ig_head:'followers on Instagram',fy_ig_sub:'Deals, new arrivals and what’s hot in the shop — there first.',fy_ig_cta:'Follow us',
+   fy_brands_l:'Brands you’ll find here',
+   cat_repairs:'Repairs',cat_from:'From',
   rp_title:'Repairs',rp_sub:'Cracked screen, weak battery or a PC fault? We’ll handle it — usually same day.',
   step1_h:'Send a request',step1_p:'Tell us the device and the fault, and get a quote.',
   step2_h:'We fix it',step2_p:'Certified techs, genuine parts and a warranty on every repair.',
@@ -217,7 +294,24 @@ const T={
   faq4_q:'Do you buy old devices?',faq4_a:'Yes, we offer trade-in — bring your old device and get credit toward a new purchase.',
   ab_form_h:'Send us a message',form_name:'Full name',form_contact:'Phone or email',form_msg:'How can we help?',form_send:'Send',form_sent:'Thanks! This is a demo — the message wasn’t actually sent.',
   foot_tag:'Your store for tech, gaming and repairs.',foot_help:'Help',foot_est:'Est. 2010',foot_demo:'Demo site',
-  added:'Added to bag',added_rep:'Repair added to bag',new:'New'}
+   added:'Added to bag',added_rep:'Repair added to bag',new:'New',
+   chat_title:'Sky Phone chat',chat_sub:'Instant replies · Online now',chat_ph:'Type a question...',
+   chat_greet:'Hi! 👋 I’m the Sky Phone virtual assistant.\nAsk me about prices, repairs, opening hours, delivery and more.',
+   chat_chip_price:'Prices',chat_chip_repair:'Repairs',chat_chip_hours:'Opening hours',chat_chip_delivery:'Delivery',
+   chat_a_greet:'Hi! How can I help? 🙂',
+   chat_a_hours:'We’re open Sun–Thu 10:00–20:00 and Fri 10:00–14:00. See you!',
+   chat_a_where:'The shop is in Kafr Kanna, Main Street (Wadi al-Hai road). Come say hi!',
+   chat_a_phone:'Call or WhatsApp us: 052-722-3916.',
+   chat_a_delivery:'Yes! Order online and choose home delivery nationwide or in-store pickup. Delivery is free.',
+   chat_a_tradein:'Absolutely — bring your old device and get credit toward the new one. Valuation takes minutes in store.',
+   chat_a_warranty:'Yes — every repair and every product comes with a written warranty. We stand behind what we sell.',
+   chat_a_payment:'On this demo site checkout is illustrative. In store you can pay by cash, credit card or Bit.',
+   chat_a_repair_time:'Most repairs are ready within 24 hours — often the same day. Depends on the fault and parts availability.',
+   chat_a_human:'Happy to help! Talk to a human on WhatsApp or by phone: 052-722-3916.',
+   chat_a_fallback:'Not sure I got that 🙂 Try asking about a product price, a repair, opening hours, delivery or trade-in — or message us on WhatsApp: 052-722-3916.',
+   chat_a_price_q:'Which product interests you? Type the model name — e.g. iPhone 15 Pro, Steam Deck or Galaxy Buds3.',
+   chat_a_found:'Here’s what I found:',chat_view:'View product',
+   chat_a_repair_q:'Which repair do you need? For example: screen, battery, charging port, water damage, computer or console — you can name the device too.'}
 };
 
 let lang='he', route='foryou', filter='all', searchQuery='';
@@ -239,13 +333,13 @@ const canHover = matchMedia('(hover:hover) and (pointer:fine)').matches && !matc
 const revealObserver = 'IntersectionObserver' in window ? new IntersectionObserver((entries)=>{
   entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in-view'); revealObserver.unobserve(en.target); } });
 },{threshold:.15,rootMargin:'0px 0px -8% 0px'}) : null;
-function fmtCount(n,format){ return format==='k' ? (n/1000).toFixed(1)+'K' : Math.round(n).toLocaleString('en-US'); }
+function fmtCount(n,format,dec){ if(format==='k') return (n/1000).toFixed(1)+'K'; if(dec) return n.toFixed(dec); return Math.round(n).toLocaleString('en-US'); }
 function animateCount(el){
-  const target=parseFloat(el.dataset.countup), suffix=el.dataset.suffix||'', format=el.dataset.format||'';
+  const target=parseFloat(el.dataset.countup), suffix=el.dataset.suffix||'', format=el.dataset.format||'', dec=el.dataset.decimals||'';
   const start=performance.now(), dur=1200;
   function frame(t){
     const p=Math.min(1,(t-start)/dur), eased=1-Math.pow(1-p,3);
-    el.textContent=fmtCount(target*eased,format)+suffix;
+    el.textContent=fmtCount(target*eased,format,dec)+suffix;
     if(p<1) requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
@@ -319,6 +413,18 @@ function initParticleField(el){
   el.addEventListener('pointerleave',()=>{ active=false; ensureRunning(); });
   frame();
 }
+/* Reveal/rise keyframes use fill-mode 'both', and a filled CSS animation
+   overrides inline styles forever — which silently killed pointer-driven tilt
+   on .pcard and #heroDevice. Swap the animating class for a static end-state
+   class the moment the entrance animation finishes. */
+document.addEventListener('animationend',e=>{
+  const el=e.target;
+  if(e.animationName==='reveal-up' && el.classList.contains('in-view')){
+    el.classList.remove('in-view'); el.classList.add('revealed');
+  }
+  if(e.animationName==='rise' && el.id==='heroDevice') el.classList.add('risen');
+});
+
 function attachMagnetic(el){
   el.addEventListener('pointermove',e=>{
     const r=el.getBoundingClientRect();
@@ -337,6 +443,17 @@ function attachTilt(el){
     el.style.setProperty('--my',(py*100)+'%');
   });
   el.addEventListener('pointerleave',()=>{ el.style.transform=''; });
+}
+/* spotlight-tile media parallax: the product image drifts toward the pointer
+   while the particle field handles the background — depth without 3D tilt. */
+function attachTileParallax(tile){
+  const img=tile.querySelector('.tile-parallax'); if(!img) return;
+  tile.addEventListener('pointermove',e=>{
+    const r=tile.getBoundingClientRect();
+    const px=(e.clientX-r.left)/r.width-.5, py=(e.clientY-r.top)/r.height-.5;
+    img.style.transform=`translate(${px*16}px, ${py*12}px) scale(1.04)`;
+  });
+  tile.addEventListener('pointerleave',()=>{ img.style.transform=''; });
 }
 /* Text reveal: masks each tagged headline and slides its text up on
    first appearance. The wrapper persists across language switches —
@@ -361,6 +478,7 @@ function initMotionFor(root){
     root.querySelectorAll('.spot').forEach(initParticleField);
     root.querySelectorAll('.magnetic').forEach(attachMagnetic);
     root.querySelectorAll('.pcard').forEach(attachTilt);
+    root.querySelectorAll('.spot-tile').forEach(attachTileParallax);
   }
 }
 function initHeroTilt(){
@@ -419,6 +537,7 @@ function renderArrivals(){
   const el=document.getElementById('fy-arrivals');
   el.innerHTML=list.map(productCard).join('');
   initMotionFor(el);
+  refreshRowArrows();
 }
 function renderServices(){
   document.getElementById('fy-services').innerHTML=`
@@ -448,6 +567,37 @@ function renderCatRow(){
   const repItem=`<div class="cat-item" data-route="repairs"><div class="cat-circle">${REPICON.tools}</div><div class="cat-name">${T[lang].cat_repairs}</div><div class="cat-price">${T[lang].cat_from} ₪${fmt(repMin)}</div></div>`;
   el.innerHTML=items+repItem;
   initMotionFor(el);
+}
+/* accessories strip: hand-picked add-on products */
+function renderAccessories(){
+  const el=document.getElementById('fy-acc-row'); if(!el) return;
+  const picks=[6,8,13,14].map(id=>PRODUCTS.find(p=>p.id===id)).filter(Boolean);
+  el.innerHTML=picks.map(productCard).join('');
+  initMotionFor(el);
+  refreshRowArrows();
+}
+/* repair spotlight chips: live "from" prices from the repairs data */
+function renderRepairSpot(){
+  const el=document.getElementById('repChips'); if(!el) return;
+  const picks=['r1','r2','r6'].map(id=>REPAIRS.find(r=>r.id===id)).filter(Boolean);
+  el.innerHTML=picks.map(r=>{
+    const from=r.devices?Math.min(...r.devices.map(d=>d.price)):r.price;
+    return `<span class="rep-chip" data-repair-row="${r.id}">${T[lang]['rep_'+r.id]} · <b>${T[lang].rp_from} ₪${fmt(from)}</b></span>`;
+  }).join('');
+}
+
+/* ---------- promo ribbon rotation ----------
+   Cycles the shop's real messages (same-day repair / trade-in / delivery),
+   iDigital-style. Skipped under prefers-reduced-motion. */
+const PROMO_KEYS=['promo_msg','promo_msg2','promo_msg3'];
+let promoIdx=0;
+function initPromoRotation(){
+  const el=document.querySelector('#promoRibbon [data-t="promo_msg"]');
+  if(!el||matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  setInterval(()=>{
+    el.classList.add('fade');
+    setTimeout(()=>{ promoIdx=(promoIdx+1)%PROMO_KEYS.length; el.textContent=T[lang][PROMO_KEYS[promoIdx]]; el.classList.remove('fade'); },300);
+  },5200);
 }
 function renderChips(){
   document.getElementById('chips').innerHTML=FILTERS.map(f=>`<button class="chip ${f===filter?'on':''}" data-filter="${f}">${catName(f)}</button>`).join('');
@@ -518,6 +668,7 @@ function renderProductPage(){
   document.getElementById('stickyName').textContent=p.name;
   document.getElementById('stickyPrice').textContent='₪'+fmt(price);
   initStickyBarObserver();
+  attachPdpZoom();
 }
 let stickyObserver=null;
 function initStickyBarObserver(){
@@ -525,11 +676,14 @@ function initStickyBarObserver(){
   const target=document.getElementById('pdpMainCta');
   const bar=document.getElementById('pdpStickyBar');
   const wa=document.querySelector('.whatsapp-fab');
+  const cf=document.getElementById('chatFab');
   if(!target) return;
   stickyObserver=new IntersectionObserver(entries=>{
     entries.forEach(en=>{
-      bar.classList.toggle('show',!en.isIntersecting && route==='product');
-      wa.classList.toggle('raised',!en.isIntersecting && route==='product');
+      const raise=!en.isIntersecting && route==='product';
+      bar.classList.toggle('show',raise);
+      wa.classList.toggle('raised',raise);
+      if(cf) cf.classList.toggle('raised',raise);
     });
   },{threshold:0});
   stickyObserver.observe(target);
@@ -574,6 +728,7 @@ function addRepairFromModal(){
   const r=REPAIRS.find(x=>x.id===repairModalId);
   if(!r) return;
   const d=r.devices[repairDeviceIdx];
+  flyToBag(document.getElementById('repairModalAdd'),pmedia({icon:r.ic}));
   addItem('repair',r.id,{variant:d.name,delta:d.price-r.price});
   toast(T[lang].added_rep);
   document.getElementById('repairModal').classList.remove('open');
@@ -598,8 +753,8 @@ function renderBag(){
   const items=Object.values(bag), box=document.getElementById('bag-body');
   if(!items.length){ box.innerHTML=`<div class="empty"><h3>${T[lang].bag_empty_h}</h3><p>${T[lang].bag_empty_p}</p><br><button class="btn btn-primary" data-route="products">${T[lang].bag_empty_cta}</button></div>`; updateBagBadges(); return; }
   let total=0;
-  const rows=items.map(it=>{ const o=lookup(it); const up=unitPrice(it); const price=up*it.qty; total+=price;
-    return `<div class="bi"><div class="bi-media">${pmedia(it.type==='product'?o:{icon:REPAIRS.find(r=>r.id==it.id).ic})}</div>
+  const rows=items.map((it,i)=>{ const o=lookup(it); const up=unitPrice(it); const price=up*it.qty; total+=price;
+    return `<div class="bi" style="animation-delay:${Math.min(i,8)*45}ms"><div class="bi-media">${pmedia(it.type==='product'?o:{icon:REPAIRS.find(r=>r.id==it.id).ic})}</div>
       <div class="bi-info"><span class="bi-tag ${it.type}">${it.type==='product'?T[lang].tag_product:T[lang].tag_repair}</span>
         <div class="bi-n">${itemName(it)}</div><div class="bi-p">₪${fmt(up)}</div>
         <div class="qty"><button data-dec="${it.key}">−</button><span>${it.qty}</span><button data-inc="${it.key}">+</button></div></div>
@@ -621,6 +776,34 @@ function addItem(type,id,opts){
   if(document.getElementById('cartDrawer').classList.contains('open'))renderBag();
 }
 
+/* ---------- fly-to-bag ----------
+   The added item's thumbnail arcs from the button that added it into the nav
+   bag icon, then the badge pops — the tactile "it landed in my cart" feedback
+   every big store has. */
+function popBag(){
+  const b=document.querySelector('.bag-btn'); if(!b) return;
+  b.classList.remove('pop'); void b.offsetWidth; b.classList.add('pop');
+}
+function flyToBag(fromEl,mediaHtml){
+  popBag();
+  if(!fromEl||!mediaHtml||matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  const bagBtn=document.querySelector('.bag-btn'); if(!bagBtn||!bagBtn.offsetParent) return;
+  const from=fromEl.getBoundingClientRect(), to=bagBtn.getBoundingClientRect();
+  const dot=document.createElement('div');
+  dot.className='fly-dot';
+  dot.innerHTML=mediaHtml;
+  const sx=from.left+from.width/2-22, sy=from.top+from.height/2-22;
+  const dx=to.left+to.width/2-22-sx, dy=to.top+to.height/2-22-sy;
+  dot.style.left=sx+'px'; dot.style.top=sy+'px';
+  document.body.appendChild(dot);
+  const anim=dot.animate([
+    {transform:'translate(0,0) scale(1)',opacity:1},
+    {transform:`translate(${dx*.5}px,${dy*.5-70}px) scale(.72)`,opacity:1,offset:.55},
+    {transform:`translate(${dx}px,${dy}px) scale(.22)`,opacity:.85}
+  ],{duration:620,easing:'cubic-bezier(.3,.7,.4,1)'});
+  anim.onfinish=()=>dot.remove();
+}
+
 function applyText(){
   document.querySelectorAll('[data-t]').forEach(el=>{
     const v=T[lang][el.getAttribute('data-t')]; if(v===undefined) return;
@@ -640,9 +823,12 @@ function go(name){
   if(name!=='product'){
     document.getElementById('pdpStickyBar').classList.remove('show');
     document.querySelector('.whatsapp-fab').classList.remove('raised');
+    document.getElementById('chatFab').classList.remove('raised');
   }
   mobileMenu.classList.remove('open');
   mobileSearch.classList.remove('open');
+  closeSuggest();
+  positionNavInk();
   document.getElementById('nav').classList.toggle('scrolled',scrollY>10);
   window.scrollTo({top:0,behavior:'instant'});
 }
@@ -650,13 +836,17 @@ function go(name){
 function setLang(l){
   lang=l; document.documentElement.lang=l; document.documentElement.dir=T[l].dir;
   document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.l===l));
-  applyText(); renderArrivals(); renderServices(); renderCatRow(); renderFaq();
+  closeSuggest();
+  promoIdx=0;
+  applyText(); renderArrivals(); renderServices(); renderCatRow(); renderAccessories(); renderRepairSpot(); renderFaq();
   if(route==='products'){renderChips();renderProducts();}
   if(route==='repairs'){renderSteps();renderRepairs();}
   if(document.getElementById('cartDrawer').classList.contains('open'))renderBag();
   if(document.getElementById('repairModal').classList.contains('open'))renderRepairModal();
   if(route==='product')renderProductPage();
+  renderChatChips();
   updateBagBadges();
+  positionNavInk();
 }
 function openCart(){
   document.getElementById('cartDrawer').classList.add('open');
@@ -665,6 +855,7 @@ function openCart(){
   document.body.classList.add('drawer-open');
   mobileMenu.classList.remove('open');
   mobileSearch.classList.remove('open');
+  closeChat();
   renderBag();
 }
 function closeCart(){
@@ -689,16 +880,59 @@ document.getElementById('searchToggle').addEventListener('click',()=>{
   mobileSearch.classList.toggle('open');
   if(mobileSearch.classList.contains('open')) document.getElementById('searchInputMobile').focus();
 });
-['searchInput','searchInputMobile'].forEach(id=>{
-  const inp=document.getElementById(id);
-  inp.addEventListener('keydown',e=>{ if(e.key==='Enter') runSearch(inp.value); });
-});
+
+/* ---------- live search suggestions ----------
+   Big-store search behaviour: results appear as you type, arrow keys walk the
+   list, Enter opens the highlighted product (or runs a full search), Escape
+   and blur dismiss. Works in the desktop bar and the mobile overlay. */
+function initSearchSuggest(inputId,suggId){
+  const inp=document.getElementById(inputId), box=document.getElementById(suggId);
+  if(!inp||!box) return;
+  let items=[], active=-1;
+  function close(){ box.classList.remove('open'); box.innerHTML=''; items=[]; active=-1; }
+  function render(){
+    const q=inp.value.trim().toLowerCase();
+    if(!q){ close(); return; }
+    items=PRODUCTS.filter(p=>p.name.toLowerCase().includes(q)).slice(0,6);
+    active=-1;
+    box.innerHTML=items.length
+      ? items.map((p,i)=>`<div class="sugg-row" data-sugg="${p.id}">
+          <div class="sugg-thumb">${pmedia(p)}</div>
+          <div class="sugg-info"><div class="sugg-name">${p.name}</div><div class="sugg-cat">${catName(p.cat)}</div></div>
+          <div class="sugg-price">₪${fmt(p.price)}</div></div>`).join('')
+      : `<div class="sugg-empty">${T[lang].search_empty_h}</div>`;
+    box.classList.add('open');
+  }
+  inp.addEventListener('input',render);
+  inp.addEventListener('keydown',e=>{
+    if(e.key==='ArrowDown'||e.key==='ArrowUp'){
+      if(!box.classList.contains('open')||!items.length) return;
+      e.preventDefault();
+      active = e.key==='ArrowDown' ? Math.min(items.length-1,active+1) : Math.max(0,active-1);
+      box.querySelectorAll('.sugg-row').forEach((r,i)=>r.classList.toggle('active',i===active));
+    }else if(e.key==='Enter'){
+      if(active>=0 && items[active]){ const id=items[active].id; close(); inp.value=''; inp.blur(); openProduct(id); }
+      else { close(); runSearch(inp.value); }
+    }else if(e.key==='Escape'){ close(); inp.blur(); }
+  });
+  /* pointerdown (not click) so the row is chosen before input blur dismisses the list */
+  box.addEventListener('pointerdown',e=>{
+    const r=e.target.closest('[data-sugg]'); if(!r) return;
+    e.preventDefault(); const id=r.dataset.sugg; close(); inp.value=''; openProduct(id);
+  });
+  inp.addEventListener('blur',()=>setTimeout(close,150));
+}
+function closeSuggest(){ document.querySelectorAll('.search-sugg.open').forEach(b=>{b.classList.remove('open'); b.innerHTML='';}); }
 document.addEventListener('click',e=>{
   const rt=e.target.closest('[data-route]'); if(rt){closeCart();go(rt.dataset.route); return;}
   if(e.target.closest('[data-cart-open]')){openCart();return;}
   if(e.target.closest('#cartClose')){closeCart();return;}
   if(e.target.id==='cartBackdrop'){closeCart();return;}
-  const add=e.target.closest('[data-add]'); if(add){addItem('product',add.dataset.add);toast(T[lang].added);return;}
+  const add=e.target.closest('[data-add]'); if(add){
+    const p=PRODUCTS.find(x=>x.id==add.dataset.add);
+    flyToBag(add,p?pmedia(p):'');
+    addItem('product',add.dataset.add);toast(T[lang].added);return;
+  }
   const bk=e.target.closest('[data-book]'); if(bk){openRepairPicker(bk.dataset.book);return;}
   const rrow=e.target.closest('[data-repair-row]'); if(rrow){openRepairPicker(rrow.dataset.repairRow);return;}
   const rdev=e.target.closest('[data-repair-device-idx]'); if(rdev){repairDeviceIdx=Number(rdev.dataset.repairDeviceIdx);renderRepairModal();return;}
@@ -709,7 +943,9 @@ document.addEventListener('click',e=>{
   const dec=e.target.closest('[data-dec]'); if(dec){const k=dec.dataset.dec;bag[k].qty--;if(bag[k].qty<=0)delete bag[k];renderBag();return;}
   const rm=e.target.closest('[data-remove]'); if(rm){delete bag[rm.dataset.remove];renderBag();return;}
   const chip=e.target.closest('[data-filter]'); if(chip){filter=chip.dataset.filter;searchQuery='';renderChips();renderProducts();return;}
+  if(e.target.closest('#accSeeAll')){filter='accessories';searchQuery='';go('products');return;}
   const catBtn=e.target.closest('[data-cat]'); if(catBtn){filter=catBtn.dataset.cat;searchQuery='';go('products');return;}
+  const spotTile=e.target.closest('[data-spot-pid]'); if(spotTile){openProduct(spotTile.dataset.spotPid);return;}
   const faq=e.target.closest('.faq-q'); if(faq){faq.parentElement.classList.toggle('open');return;}
   const pcard=e.target.closest('.pcard[data-pid]'); if(pcard){openProduct(pcard.dataset.pid);return;}
   const colorBtn=e.target.closest('[data-color-idx]'); if(colorBtn){pdpColorIdx=Number(colorBtn.dataset.colorIdx);renderProductPage();return;}
@@ -721,6 +957,7 @@ document.addEventListener('click',e=>{
     const color=p.colors?p.colors[pdpColorIdx].name:null;
     const variant=p.storage?p.storage[pdpVariantIdx].label:null;
     const delta=p.storage?p.storage[pdpVariantIdx].delta:0;
+    flyToBag(e.target.closest('[data-pdp-add]'),pmedia(p));
     addItem('product',p.id,{color,variant,delta,qty:pdpQty});
     toast(T[lang].added);
     return;
@@ -728,7 +965,7 @@ document.addEventListener('click',e=>{
   if(e.target.id==='checkout'){closeCart();modal.classList.add('open');return;}
   if(e.target.id==='f-send'){toast(T[lang].form_sent);['f-name','f-contact','f-msg'].forEach(i=>document.getElementById(i).value='');return;}
 });
-document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeCart(); document.getElementById('repairModal').classList.remove('open'); } });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeCart(); closeChat(); document.getElementById('repairModal').classList.remove('open'); } });
 const modal=document.getElementById('modal');
 document.getElementById('modalClose').addEventListener('click',()=>modal.classList.remove('open'));
 modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('open');});
@@ -746,7 +983,228 @@ function initHeroParallax(){
     wrap.style.transform=`translateY(${progress*46}px)`;
     ticking=false;
   }
-  addEventListener('scroll',()=>{ if(!ticking){ requestAnimationFrame(update); ticking=true; } });
+  addEventListener('scroll',()=>{ if(!ticking){ requestAnimationFrame(update); ticking=true; } },{passive:true});
+}
+
+/* ---------- scroll progress hairline ---------- */
+function initScrollProgress(){
+  const fill=document.getElementById('scrollProgressFill');
+  if(!fill) return;
+  let tick=false;
+  function upd(){
+    const max=document.documentElement.scrollHeight-innerHeight;
+    fill.style.transform=`scaleX(${max>0?Math.min(1,scrollY/max):0})`;
+    tick=false;
+  }
+  addEventListener('scroll',()=>{ if(!tick){ requestAnimationFrame(upd); tick=true; } },{passive:true});
+  addEventListener('resize',upd);
+  upd();
+}
+
+/* ---------- nav sliding active indicator ---------- */
+function positionNavInk(){
+  const ink=document.getElementById('navInk'); if(!ink) return;
+  const act=document.querySelector('.nav-links a.active');
+  if(!act){ ink.classList.remove('show'); return; }
+  ink.style.transform=`translateX(${act.offsetLeft}px) scaleX(${act.offsetWidth/100})`;
+  ink.classList.add('show');
+}
+addEventListener('resize',positionNavInk);
+if(document.fonts&&document.fonts.ready) document.fonts.ready.then(positionNavInk);
+
+/* ---------- row scroll arrows ---------- */
+const rowArrowRefresh=[];
+function initRowArrows(){
+  document.querySelectorAll('.row-wrap').forEach(wrap=>{
+    const row=wrap.querySelector('.row'); if(!row) return;
+    const prev=wrap.querySelector('[data-row-prev]'), next=wrap.querySelector('[data-row-next]');
+    if(!prev||!next) return;
+    const rtl=()=>document.documentElement.dir==='rtl';
+    function scroll(d){ const amt=Math.min(row.clientWidth*.85,560); row.scrollBy({left:rtl()?-d*amt:d*amt,behavior:'smooth'}); }
+    prev.addEventListener('click',()=>scroll(-1));
+    next.addEventListener('click',()=>scroll(1));
+    function edges(){
+      const max=row.scrollWidth-row.clientWidth-4;
+      const sl=Math.abs(row.scrollLeft); /* Chrome/Safari report RTL scrollLeft as negative — abs() covers both models */
+      prev.classList.toggle('at-end',sl<4);
+      next.classList.toggle('at-end',sl>max);
+    }
+    row.addEventListener('scroll',()=>requestAnimationFrame(edges),{passive:true});
+    if('ResizeObserver' in window) new ResizeObserver(edges).observe(row);
+    rowArrowRefresh.push(edges);
+    edges();
+  });
+}
+function refreshRowArrows(){ rowArrowRefresh.forEach(f=>f()); }
+
+/* ---------- PDP gallery pointer zoom ---------- */
+function attachPdpZoom(){
+  if(!canHover) return;
+  const g=document.querySelector('.pdp-gallery'); if(!g) return;
+  const inner=g.querySelector('.pimg')||g.querySelector('svg'); if(!inner) return;
+  g.addEventListener('pointermove',e=>{
+    const r=g.getBoundingClientRect();
+    inner.style.transformOrigin=`${((e.clientX-r.left)/r.width*100).toFixed(1)}% ${((e.clientY-r.top)/r.height*100).toFixed(1)}%`;
+    inner.style.transform='scale(1.35)';
+  });
+  g.addEventListener('pointerleave',()=>{ inner.style.transform=''; });
+}
+
+/* ---------- support chatbot ----------
+   Rule-based assistant that answers from the site's real data (PRODUCTS,
+   REPAIRS, PHONE_REPAIR_DEVICES, verified shop details) — nothing is faked:
+   a price answer always reflects the same catalog the store page shows. */
+const CHAT_INTENTS=[
+  {id:'hours',   kw:['שעות','פתוח','פתיחה','סגור','מתי אתם','סהעות','סגורים','ساعات','مفتوح','مفتوحين','دوام','متى','تفتحون','تغلقون','hours','open','close','when are you']},
+  {id:'where',   kw:['כתובת','נמצא','איפה','מיקום','להגיע','عنوان','وين','أين','مكان','الموقع','تواجد','where','address','location','located']},
+  {id:'phone',   kw:['טלפון','להתקשר','נייד','مספר','هاتف','اتصال','رقم','اتصل','phone','call','number','contact']},
+  {id:'delivery',kw:['משלוח','מביאים','שילוח','توصيل','توصيل','delivery','shipping','deliver','ship']},
+  {id:'tradein', kw:['טרייד','החלפה ישנה','מכשיר ישן','استبدال','تبديل','قديم','بدل','trade','old device']},
+  {id:'warranty',kw:['אחריות','ضمان','كفالة','warranty','guarantee']},
+  {id:'payment', kw:['תשלום','אשראי','ביט','bit','מזומן','دفع','بطاقة','نقد','نقداً','payment','pay','card','cash']},
+  {id:'repair_time',kw:['כמה זמן','משך','זמן תיקון','كم يستغرق','كم المدة','مدة','كم ياخذ','how long','how much time','duration']},
+  {id:'human',   kw:['נציג','אדם','בן אדם','موظف','بني ادم','حدد','انسان','شخص','human','agent','person','someone']},
+  {id:'greet',   kw:['שלום','היי','הי ','בוקר טוב','ערב טוב','מה נשמע','مرحبا','اهلا','أهلا','هاي','صباح','مساء','hello','hi ','hey','good morning','good evening']},
+];
+const CHAT_REP_KW={
+  r1:['מסך','שבור','מקולקל','screen','display','شاشة','مكسورة'],
+  r2:['סוללה','battery','بطارية','بطاريه'],
+  r3:['טעינה','שקע','מטען לא','port','charging','charger not','شحن','منفذ','الشاحن'],
+  r4:['מים','רטוב','רטיבות','water','wet','ماء','مياه','مبلول'],
+  r5:['תוכנה','שחזור','וירוס','software','restore','virus','برمجيات','سوفتوير','فيروس'],
+  r6:['מחשב','לפטופ','נייד','laptop','computer','pc','macbook','xps','حاسوب','لابتوب','كمبيوتر'],
+  r7:['קונסולה','פלייסטיישן','אקסבוקס','console','playstation','ps5','xbox','بلايستيشن','اكسبوكس','كونسول']
+};
+const CHAT_DEV_ALIAS={'iphone 15':'iPhone 15 Pro','אייפון 15':'iPhone 15 Pro','ايفون 15':'iPhone 15 Pro',
+  'iphone 14':'iPhone 14','אייפון 14':'iPhone 14','ايفون 14':'iPhone 14',
+  's24':'Galaxy S24 Ultra','גלקסי s24':'Galaxy S24 Ultra','جالكسي s24':'Galaxy S24 Ultra','سامسونج s24':'Galaxy S24 Ultra',
+  'xiaomi':'Xiaomi 14','שיאומי':'Xiaomi 14','شاومي':'Xiaomi 14'};
+function chatAnswer(msg){
+  const m=' '+msg.toLowerCase().trim()+' ';
+  const has=arr=>arr.some(k=>m.includes(k.toLowerCase()));
+  /* 1) repairs first — "כמה עולה מסך לאייפון 14" is a repair question, not a product one */
+  let repId=null;
+  for(const id in CHAT_REP_KW){ if(has(CHAT_REP_KW[id])){ repId=id; break; } }
+  if(repId){
+    const r=REPAIRS.find(x=>x.id===repId);
+    let devName=null;
+    for(const alias in CHAT_DEV_ALIAS){ if(m.includes(alias)){ devName=CHAT_DEV_ALIAS[alias]; break; } }
+    if(r.devices && devName){
+      const d=r.devices.find(x=>x.name===devName);
+      if(d) return {text:`${T[lang]['rep_'+r.id]} · ${d.name}: ₪${fmt(d.price)}`, repairId:r.id};
+    }
+    const from=r.devices?Math.min(...r.devices.map(d=>d.price)):r.price;
+    return {text:`${T[lang]['rep_'+r.id]} — ${T[lang].rp_from} ₪${fmt(from)}. ${T[lang].rp_note}`, repairId:r.id};
+  }
+  /* 2) exact catalog name */
+  const prod=PRODUCTS.find(p=>m.includes(p.name.toLowerCase()));
+  if(prod) return {product:prod};
+  /* 3) brand/keyword clusters — latin tokens only, so Hebrew/Arabic aliases
+        can never collapse into an always-true empty-string match */
+  const clusters=[['iphone','אייפון','אפל','ايفون','ابل'],['samsung','galaxy','סמסונג','גלקסי','سامسونج','جالكسي','s24'],['xiaomi','שיאומי','شاومي'],
+    ['ipad','אייפד','טאבלט','ايباد','تابلت','tablet'],['macbook','מקבוק','mac'],['dell','xps','דל'],
+    ['steam deck','סטים','ستيم'],['dualsense','ps5','פלייסטיישן','بلايستيشن','בקר','controller','יד تحكم'],
+    ['headset','אוזניות גיימינג','سماعة رأس'],['watch','שעון','ساعة ذكية'],['buds','אוזניות','سماعات','אירפודס','airpods'],['charger','מטען','شاحن']];
+  for(const c of clusters){
+    if(!has(c)) continue;
+    const latinKeys=c.map(k=>k.replace(/[^\x20-\x7E]/g,'').trim().toLowerCase()).filter(k=>k.length>1);
+    const hits=PRODUCTS.filter(p=>{
+      const n=p.name.toLowerCase();
+      return latinKeys.some(k=>n.includes(k) || k.split(/\s+/).some(w=>w.length>2 && n.includes(w)));
+    });
+    if(hits.length) return {products:hits.slice(0,4)};
+    return {text:T[lang].chat_a_price_q};
+  }
+  /* 4) generic price / repair questions */
+  if(has(['תיקון','תיקונים','מעבדה','لإصلاح','إصلاح','تصليح','اصلاح','repair','fix','broken','fix my'])) return {text:T[lang].chat_a_repair_q};
+  if(has(['מחיר','עולה','כמה','כמה עולה','בכמה','سعر','بكم','كم سعر','اسعار','أسعار','price','cost','how much'])) return {text:T[lang].chat_a_price_q};
+  /* 5) shop-info intents */
+  for(const it of CHAT_INTENTS){ if(has(it.kw)) return {text:T[lang]['chat_a_'+it.id]}; }
+  return {text:T[lang].chat_a_fallback};
+}
+
+/* ---------- chat UI ---------- */
+let chatBooted=false;
+function chatEl(id){return document.getElementById(id);}
+function chatScroll(){const b=chatEl('chatBody'); b.scrollTop=b.scrollHeight;}
+function addMsg(text,who,link){
+  const b=chatEl('chatBody');
+  const div=document.createElement('div');
+  div.className='msg '+who;
+  div.textContent=text;
+  if(link){
+    const a=document.createElement('button');
+    a.className='msg-link'; a.textContent=link.label;
+    a.addEventListener('click',link.onClick);
+    div.appendChild(document.createElement('br'));
+    div.appendChild(a);
+  }
+  b.appendChild(div); chatScroll();
+}
+function botSay(ans){
+  const b=chatEl('chatBody');
+  const tp=document.createElement('div');
+  tp.className='msg bot typing'; tp.innerHTML='<i></i><i></i><i></i>';
+  b.appendChild(tp); chatScroll();
+  setTimeout(()=>{
+    tp.remove();
+    if(ans.products){
+      addMsg(T[lang].chat_a_found,'bot');
+      ans.products.forEach(p=>{
+        const hasV=p.storage&&p.storage.length>1;
+        addMsg(`${p.name} — ${hasV?T[lang].cat_from+' ':''}₪${fmt(p.price)}`,'bot',
+          {label:T[lang].chat_view, onClick:()=>{ closeChat(); openProduct(p.id); }});
+      });
+      return;
+    }
+    if(ans.product){
+      const p=ans.product, hasV=p.storage&&p.storage.length>1;
+      addMsg(`${p.name} — ${hasV?T[lang].cat_from+' ':''}₪${fmt(p.price)}.`,'bot',
+        {label:T[lang].chat_view, onClick:()=>{ closeChat(); openProduct(p.id); }});
+      return;
+    }
+    if(ans.repairId){
+      addMsg(ans.text,'bot',{label:T[lang].rp_book, onClick:()=>{ closeChat(); openRepairPicker(ans.repairId); }});
+      return;
+    }
+    addMsg(ans.text,'bot');
+  },550+Math.random()*450);
+}
+function sendChat(text){
+  const inp=chatEl('chatInput');
+  const q=(text!==undefined?text:inp.value).trim();
+  if(!q) return;
+  addMsg(q,'user');
+  inp.value='';
+  botSay(chatAnswer(q));
+}
+function renderChatChips(){
+  const box=chatEl('chatChips');
+  box.innerHTML=['chat_chip_price','chat_chip_repair','chat_chip_hours','chat_chip_delivery']
+    .map(k=>`<button class="chat-chip" data-chat-q="${T[lang][k]}">${T[lang][k]}</button>`).join('');
+}
+function openChat(){
+  chatEl('chatPanel').classList.add('open');
+  chatEl('chatPanel').setAttribute('aria-hidden','false');
+  chatEl('chatDot').classList.add('off');
+  if(!chatBooted){ chatBooted=true; setTimeout(()=>botSay({text:T[lang].chat_greet}),350); }
+  setTimeout(()=>chatEl('chatInput').focus(),320);
+}
+function closeChat(){
+  chatEl('chatPanel').classList.remove('open');
+  chatEl('chatPanel').setAttribute('aria-hidden','true');
+}
+function initChat(){
+  chatEl('chatFab').addEventListener('click',()=>{
+    chatEl('chatPanel').classList.contains('open')?closeChat():openChat();
+  });
+  chatEl('chatClose').addEventListener('click',closeChat);
+  chatEl('chatSend').addEventListener('click',()=>sendChat());
+  chatEl('chatInput').addEventListener('keydown',e=>{ if(e.key==='Enter') sendChat(); });
+  chatEl('chatChips').addEventListener('click',e=>{
+    const c=e.target.closest('[data-chat-q]'); if(c) sendChat(c.dataset.chatQ);
+  });
+  renderChatChips();
 }
 
 /* ---------- custom cursor ---------- */
@@ -786,13 +1244,22 @@ function initPageLoader(){
 
 /* init */
 document.querySelectorAll('.brand-logo').forEach(el=>el.src=LOGO);
+const fav=document.getElementById('favicon'); if(fav) fav.href=LOGO;
 document.querySelectorAll('.h1,.h2,.display').forEach(el=>el.setAttribute('data-text-reveal',''));
 setLang('he');
-renderArrivals(); renderServices(); renderCatRow(); renderFaq();
+renderArrivals(); renderServices(); renderCatRow(); renderAccessories(); renderRepairSpot(); renderFaq();
 go('foryou');
 initHeroTilt();
 initHeroCarousel();
 initHeroParallax();
 initCursor();
 initPageLoader();
+initScrollProgress();
+initPromoRotation();
+initSearchSuggest('searchInput','searchSugg');
+initSearchSuggest('searchInputMobile','searchSuggMobile');
+initChat();
+initRowArrows();
 initMotionFor(document);
+positionNavInk();
+setTimeout(positionNavInk,600);
