@@ -707,6 +707,36 @@ input,textarea{caret-color:var(--accent)}
 .promo-inner>span{transition:opacity .28s var(--ease), transform .28s var(--ease)}
 .promo-inner>span.fade{opacity:0; transform:translateY(6px)}
 
+/* ---------- 3D scroll showcase (iPhone 15 Pro story) ----------
+   Sticky scene: the phone rotates in 3D as you scroll through 240vh;
+   spec chips float in at staggered depths. Falls back to a plain stacked
+   section on small screens and under prefers-reduced-motion. */
+.showcase{position:relative; height:240vh; margin-block:var(--space-7) 0}
+.showcase-sticky{position:sticky; top:calc(var(--nav-h) + var(--ribbon-h)); height:calc(100vh - var(--nav-h) - var(--ribbon-h)); display:flex; flex-direction:column; align-items:center; justify-content:center; overflow:hidden}
+body.ribbon-closed .showcase-sticky{top:var(--nav-h); height:calc(100vh - var(--nav-h))}
+.showcase-head{text-align:center; margin-block-end:12px; position:relative; z-index:2}
+.showcase-head p{color:var(--ink-soft); margin-block-start:8px}
+.showcase-scene{position:relative; perspective:1300px; display:grid; place-items:center; flex:1; width:100%}
+.showcase-phone{transform-style:preserve-3d; will-change:transform; cursor:pointer}
+.showcase-phone img{height:min(46vh,440px); width:auto; filter:drop-shadow(0 50px 60px rgba(0,0,0,.35)); display:block}
+.show-chip{position:absolute; z-index:3; background:rgba(255,255,255,.88); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border:1px solid var(--line); border-radius:var(--radius-md); padding:14px 20px; box-shadow:var(--shadow-md); opacity:0; transform:translateY(26px) scale(.94); transition:opacity .5s var(--ease), transform .5s var(--ease); max-width:230px}
+.show-chip b{display:block; font-size:17px; letter-spacing:-.01em; color:var(--ink)}
+.show-chip span{font-size:13px; color:var(--ink-soft); display:block; margin-block-start:3px}
+.show-chip.on{opacity:1; transform:none}
+.show-chip[data-chip="0"]{top:6%; inset-inline-start:12%}
+.show-chip[data-chip="1"]{top:44%; inset-inline-end:10%}
+.show-chip[data-chip="2"]{bottom:8%; inset-inline-start:14%}
+@supports (-webkit-touch-callout:none){
+  .show-chip{background:rgba(255,255,255,.96); backdrop-filter:none; -webkit-backdrop-filter:none}
+}
+@media (max-width:920px),(prefers-reduced-motion:reduce){
+  .showcase{height:auto; margin-block:var(--space-7) 0}
+  .showcase-sticky{position:static; height:auto; padding-block:var(--space-5); overflow:visible}
+  .showcase-phone img{height:300px}
+  .show-chip{position:static; opacity:1; transform:none; margin-block-start:10px; max-width:none}
+  .showcase-scene{display:flex; flex-direction:column; gap:10px}
+}
+
 /* chips/pills press feedback */
 .chip:active,.pill-opt:active,.cat-item:active .cat-circle{transform:scale(.96)}
 .cat-item .cat-circle{transition:transform .2s var(--ease), box-shadow .2s var(--ease)}

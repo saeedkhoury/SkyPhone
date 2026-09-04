@@ -145,6 +145,8 @@ const T={
    fy_rep_head:'מסך שבור? סוללה חלשה?',fy_rep_sub:'המעבדה שלנו מתקנת הכל — לרוב באותו יום, בחלקים מקוריים ועם אחריות מלאה.',fy_rep_cta:'לתיאום תיקון',
    fy_ig_head:'עוקבים באינסטגרם',fy_ig_sub:'מבצעים, הגעות חדשות ומה שחם בחנות — קודם כל שם.',fy_ig_cta:'עקבו אחרינו',
    fy_brands_l:'מותגים שתמצאו אצלנו',
+   fy_show_t:'iPhone 15 Pro',fy_show_sub:'כל הפרטים, מכל זווית. גללו.',
+   show_c1:'השבב הכי חזק ששמנו בטלפון',show_c2:'מסך חלק להפליא ב־120Hz',show_c3:'גוף טיטניום קל וחזק',
    cat_repairs:'תיקונים',cat_from:'החל מ־',
   rp_title:'תיקונים',rp_sub:'מסך שבור, סוללה חלשה או תקלה במחשב? נטפל בזה — לרוב באותו יום.',
   step1_h:'שולחים בקשה',step1_p:'מספרים לנו מה המכשיר ומה התקלה, ומקבלים הצעת מחיר.',
@@ -209,6 +211,8 @@ const T={
    fy_rep_head:'شاشة مكسورة؟ بطارية ضعيفة؟',fy_rep_sub:'مختبرنا يصلح كل شيء — غالباً في نفس اليوم، بقطع أصلية وضمان كامل.',fy_rep_cta:'احجز إصلاحاً',
    fy_ig_head:'متابع على إنستغرام',fy_ig_sub:'عروض، وصولات جديدة وكل ما هو حار في المتجر — هناك أولاً.',fy_ig_cta:'تابعونا',
    fy_brands_l:'ماركات تجدونها لدينا',
+   fy_show_t:'iPhone 15 Pro',fy_show_sub:'كل التفاصيل، من كل زاوية. تابعوا التمرير.',
+   show_c1:'أقوى شريحة وضعناها في هاتف',show_c2:'شاشة فائقة السلاسة بمعدل 120Hz',show_c3:'هيكل تيتانيوم خفيف وقوي',
    cat_repairs:'الإصلاح',cat_from:'ابتداءً من',
   rp_title:'الإصلاح',rp_sub:'شاشة مكسورة، بطارية ضعيفة أو عطل في الحاسوب؟ سنتكفّل بذلك — غالباً في نفس اليوم.',
   step1_h:'أرسل الطلب',step1_p:'أخبرنا بنوع الجهاز والعطل، واحصل على عرض سعر.',
@@ -273,6 +277,8 @@ const T={
    fy_rep_head:'Cracked screen? Weak battery?',fy_rep_sub:'Our lab fixes it all — usually the same day, with genuine parts and a full warranty.',fy_rep_cta:'Book a repair',
    fy_ig_head:'followers on Instagram',fy_ig_sub:'Deals, new arrivals and what’s hot in the shop — there first.',fy_ig_cta:'Follow us',
    fy_brands_l:'Brands you’ll find here',
+   fy_show_t:'iPhone 15 Pro',fy_show_sub:'Every detail, from every angle. Keep scrolling.',
+   show_c1:'The mightiest chip we’ve put in a phone',show_c2:'A buttery-smooth 120Hz display',show_c3:'A light, strong titanium body',
    cat_repairs:'Repairs',cat_from:'From',
   rp_title:'Repairs',rp_sub:'Cracked screen, weak battery or a PC fault? We’ll handle it — usually same day.',
   step1_h:'Send a request',step1_p:'Tell us the device and the fault, and get a quote.',
@@ -972,6 +978,36 @@ modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('o
 const nav=document.getElementById('nav');
 addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>10||mobileMenu.classList.contains('open')));
 
+/* ---------- 3D scroll showcase ----------
+   Sticky scene: the phone sweeps rotateY from -26° to +26° as the section
+   scrolls past, with spec chips floating in at staggered thresholds.
+   Static stacked fallback on small screens / reduced-motion (CSS owns that). */
+function initShowcase(){
+  const sec=document.getElementById('showcase'), phone=document.getElementById('showcasePhone');
+  if(!sec||!phone) return;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const mq=matchMedia('(max-width:920px)');
+  if(mq.matches) return;
+  const chips=[...sec.querySelectorAll('.show-chip')];
+  const thresholds=[0.18,0.45,0.72];
+  let tick=false;
+  function upd(){
+    tick=false;
+    if(mq.matches){ phone.style.transform=''; chips.forEach(c=>c.classList.remove('on')); return; }
+    const r=sec.getBoundingClientRect();
+    const total=r.height-innerHeight;
+    const p=Math.min(1,Math.max(0,-r.top/Math.max(1,total)));
+    const ry=-26+p*52;
+    const rx=6-Math.sin(p*Math.PI)*9;
+    const s=.92+Math.sin(p*Math.PI)*.1;
+    phone.style.transform=`rotateY(${ry}deg) rotateX(${rx}deg) scale(${s})`;
+    chips.forEach((c,i)=>c.classList.toggle('on',p>=thresholds[i]));
+  }
+  addEventListener('scroll',()=>{ if(!tick){ requestAnimationFrame(upd); tick=true; } },{passive:true});
+  addEventListener('resize',upd);
+  upd();
+}
+
 /* ---------- hero parallax ---------- */
 function initHeroParallax(){
   const wrap=document.querySelector('.hero-device-wrap'), hero=document.getElementById('hero');
@@ -1252,6 +1288,7 @@ go('foryou');
 initHeroTilt();
 initHeroCarousel();
 initHeroParallax();
+initShowcase();
 initCursor();
 initPageLoader();
 initScrollProgress();
