@@ -22,6 +22,13 @@ const REPICON={
   water:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5s6 6.7 6 11a6 6 0 0 1-12 0c0-4.3 6-11 6-11Z"/><path d="M9.5 14.5a2.5 2.5 0 0 0 2.5 2.5"/></svg>',
   tools:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a3.5 3.5 0 0 1-4.6 4.6L4.5 16.5a1.7 1.7 0 0 0 2.4 2.4l5.6-5.6a3.5 3.5 0 0 1 4.6-4.6l-2.4 2.4-1.7-1.7z"/></svg>',
 };
+const PLAYICON='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>';
+const SOCIALICON={
+  facebook:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12a12 12 0 1 0-13.87 11.85v-8.38H7.08V12h3.05V9.36c0-3 1.79-4.67 4.53-4.67 1.31 0 2.68.24 2.68.24v2.95h-1.5c-1.49 0-1.96.93-1.96 1.87V12h3.33l-.53 3.47h-2.8v8.38A12 12 0 0 0 24 12z"/></svg>',
+};
+const BRANDICON={
+  apple:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.7 12.7c0-3 2.5-4.5 2.6-4.6-1.4-2.1-3.6-2.4-4.4-2.4-1.9-.2-3.6 1.1-4.6 1.1-1 0-2.4-1.1-4-1-2 0-3.9 1.2-4.9 3-2.1 3.7-.5 9.1 1.5 12.1 1 1.5 2.2 3.1 3.7 3 1.5-.1 2.1-1 3.9-1s2.4 1 4 .9c1.6 0 2.7-1.5 3.7-3 .8-1.2 1.2-2.2 1.5-3.2-.1-.1-3-1.2-3-4.9zM14 3.5c.8-1 1.4-2.4 1.2-3.8-1.2.1-2.6.8-3.5 1.8-.7.8-1.4 2.2-1.2 3.6 1.3.1 2.7-.7 3.5-1.6z"/></svg>',
+};
 const NAVICON={
   speed:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>',
   swap:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6l3 3M21 12a9 9 0 0 1-15 6l-3-3"/><path d="M21 3v6h-6M3 21v-6h6"/></svg>',
@@ -50,15 +57,15 @@ const IMG={
   buds:'img/buds.png', charger:'img/charger.jpg'
 };
 const PRODUCTS=[
-  {id:1,name:'iPhone 15 Pro',cat:'phones',price:4290,icon:'phone',badge:'new',img:IMG.iphone15pro,
+  {id:1,name:'iPhone 15 Pro',cat:'phones',price:4290,icon:'phone',badge:'new',img:IMG.iphone15pro,brand:'apple',
     colors:[{name:'Natural Titanium',hex:'#8a8479'},{name:'Blue Titanium',hex:'#3f4a56'},{name:'White Titanium',hex:'#f2efe9'},{name:'Black Titanium',hex:'#2b2a28'}],
     storage:[{label:'128GB',delta:0},{label:'256GB',delta:400},{label:'512GB',delta:900}],
     desc:{he:'iPhone 15 Pro עם שבב A17 Pro, מסך Super Retina XDR ומצלמה מקצועית — הדגם המבוקש ביותר אצלנו.',ar:'iPhone 15 Pro بشريحة A17 Pro وشاشة Super Retina XDR وكاميرا احترافية — الطراز الأكثر طلباً لدينا.',en:'iPhone 15 Pro with the A17 Pro chip, Super Retina XDR display and a pro camera system — our most requested model.'}},
-  {id:2,name:'Galaxy S24 Ultra',cat:'phones',price:4590,icon:'phone',img:IMG.s24ultra,
+  {id:2,name:'Galaxy S24 Ultra',cat:'phones',price:4590,icon:'phone',img:IMG.s24ultra,brand:'samsung',
     colors:[{name:'Titanium Black',hex:'#2b2b2e'},{name:'Titanium Gray',hex:'#8a8a8d'},{name:'Titanium Violet',hex:'#8a7ea3'},{name:'Titanium Yellow',hex:'#d8c98a'}],
     storage:[{label:'256GB',delta:0},{label:'512GB',delta:450},{label:'1TB',delta:950}],
     desc:{he:'Galaxy S24 Ultra עם מסך AMOLED ענק, עט S Pen מובנה ומצלמה בזום גבוה.',ar:'Galaxy S24 Ultra بشاشة AMOLED كبيرة، قلم S Pen مدمج وكاميرا بتقريب عالٍ.',en:'Galaxy S24 Ultra with a large AMOLED display, built-in S Pen and high-zoom camera.'}},
-  {id:9,name:'iPhone 14',cat:'phones',price:2990,icon:'phone',img:IMG.iphone14,
+  {id:9,name:'iPhone 14',cat:'phones',price:2990,icon:'phone',img:IMG.iphone14,brand:'apple',
     colors:[{name:'Midnight',hex:'#1d1d1f'},{name:'Starlight',hex:'#f0e6d8'},{name:'Blue',hex:'#5f7a99'},{name:'(PRODUCT)RED',hex:'#a72032'}],
     storage:[{label:'128GB',delta:0},{label:'256GB',delta:350},{label:'512GB',delta:800}],
     desc:{he:'iPhone 14 — האמינות והביצועים של אפל במחיר נגיש יותר.',ar:'iPhone 14 — موثوقية وأداء آبل بسعر أكثر سهولة.',en:'iPhone 14 — Apple\'s reliability and performance at a more accessible price.'}},
@@ -66,15 +73,15 @@ const PRODUCTS=[
     colors:[{name:'Black',hex:'#1c1c1e'},{name:'White',hex:'#eceae6'},{name:'Jade Green',hex:'#6f8a72'}],
     storage:[{label:'256GB',delta:0},{label:'512GB',delta:300}],
     desc:{he:'Xiaomi 14 — טלפון אנדרואיד רב עוצמה עם מצלמת Leica ותמורה מעולה למחיר.',ar:'Xiaomi 14 — هاتف أندرويد قوي بكاميرا Leica وقيمة ممتازة مقابل السعر.',en:'Xiaomi 14 — a powerful Android phone with a Leica camera and excellent value.'}},
-  {id:3,name:'iPad Air',cat:'tablets',price:2790,icon:'tablet',img:IMG.ipadair,
+  {id:3,name:'iPad Air',cat:'tablets',price:2790,icon:'tablet',img:IMG.ipadair,brand:'apple',
     colors:[{name:'Space Gray',hex:'#5b5c5f'},{name:'Starlight',hex:'#f0e6d8'},{name:'Blue',hex:'#7fa7c9'},{name:'Purple',hex:'#a99bc7'}],
     storage:[{label:'128GB',delta:0},{label:'256GB',delta:350}],
     desc:{he:'iPad Air עם שבב M1 — קליל, חזק ומושלם לעבודה, לימודים ובידור.',ar:'iPad Air بشريحة M1 — خفيف وقوي ومثالي للعمل والدراسة والترفيه.',en:'iPad Air with the M1 chip — light, powerful, and perfect for work, study and play.'}},
-  {id:11,name:'Galaxy Tab S9',cat:'tablets',price:2690,icon:'tablet',img:IMG.tabs9,
+  {id:11,name:'Galaxy Tab S9',cat:'tablets',price:2690,icon:'tablet',img:IMG.tabs9,brand:'samsung',
     colors:[{name:'Graphite',hex:'#3a3b3e'},{name:'Beige',hex:'#d9cdb8'}],
     storage:[{label:'128GB',delta:0},{label:'256GB',delta:300}],
     desc:{he:'Galaxy Tab S9 — מסך AMOLED, עמידות למים ועט S Pen כלול בקופסה.',ar:'Galaxy Tab S9 — شاشة AMOLED، مقاومة للماء وقلم S Pen ضمن العلبة.',en:'Galaxy Tab S9 — AMOLED display, water resistance, and an S Pen included in the box.'}},
-  {id:4,name:'MacBook Air',cat:'computers',price:5490,icon:'laptop',badge:'new',img:IMG.macbook,
+  {id:4,name:'MacBook Air',cat:'computers',price:5490,icon:'laptop',badge:'new',img:IMG.macbook,brand:'apple',
     colors:[{name:'Midnight',hex:'#33363d'},{name:'Starlight',hex:'#f0e6d8'},{name:'Space Gray',hex:'#5b5c5f'},{name:'Silver',hex:'#e5e5e5'}],
     storage:[{label:'256GB SSD',delta:0},{label:'512GB SSD',delta:600}],
     desc:{he:'MacBook Air עם שבב M2 — דק, שקט לחלוטין וסוללה שמחזיקה יום שלם.',ar:'MacBook Air بشريحة M2 — رفيع، صامت تماماً وبطارية تدوم يوماً كاملاً.',en:'MacBook Air with the M2 chip — thin, completely silent, and battery that lasts all day.'}},
@@ -91,12 +98,12 @@ const PRODUCTS=[
   {id:7,name:'Gaming Headset Pro',cat:'gaming',price:490,icon:'headset',badge:'hot',img:IMG.headset,
     colors:[{name:'Black',hex:'#1c1c1e'},{name:'White',hex:'#eceae6'}],
     desc:{he:'אוזניות גיימינג עם סאונד סראונד ומיקרופון לביטול רעשים.',ar:'سماعة ألعاب بصوت محيطي ومايكروفون لإلغاء الضوضاء.',en:'Gaming headset with surround sound and a noise-cancelling microphone.'}},
-  {id:6,name:'Apple Watch S9',cat:'accessories',price:1890,icon:'watch',img:IMG.watch9,
+  {id:6,name:'Apple Watch S9',cat:'accessories',price:1890,icon:'watch',img:IMG.watch9,brand:'apple',
     colors:[{name:'Midnight',hex:'#1d1d1f'},{name:'Starlight',hex:'#f0e6d8'},{name:'Silver',hex:'#e5e5e5'},{name:'(PRODUCT)RED',hex:'#a72032'}],
     storage:[{label:'41mm',delta:0},{label:'45mm',delta:150}],
     variant2Label:'size',
     desc:{he:'Apple Watch Series 9 עם שבב S9, מסך בהיר יותר ומעקב בריאות מתקדם.',ar:'Apple Watch Series 9 بشريحة S9، شاشة أكثر سطوعاً وتتبع صحي متقدم.',en:'Apple Watch Series 9 with the S9 chip, a brighter display and advanced health tracking.'}},
-  {id:8,name:'Galaxy Buds3',cat:'accessories',price:590,icon:'buds',img:IMG.buds,
+  {id:8,name:'Galaxy Buds3',cat:'accessories',price:590,icon:'buds',img:IMG.buds,brand:'samsung',
     colors:[{name:'Graphite',hex:'#3a3b3e'},{name:'White',hex:'#eceae6'},{name:'Silver',hex:'#c9cbcd'}],
     desc:{he:'Galaxy Buds3 עם ביטול רעשים אקטיבי וסאונד עשיר.',ar:'Galaxy Buds3 بإلغاء ضوضاء نشط وصوت غني.',en:'Galaxy Buds3 with active noise cancellation and rich sound.'}},
   {id:14,name:'Fast Charger 65W',cat:'accessories',price:120,icon:'charger',img:IMG.charger,
@@ -118,6 +125,16 @@ const REPAIRS=[
   {id:'r7',ic:'console',price:180,devices:[{name:'Nintendo Switch',price:180},{name:'Steam Deck',price:200},{name:'PlayStation 5',price:220},{name:'Xbox Series X',price:220}]}
 ];
 const FILTERS=['all','phones','tablets','computers','gaming','accessories'];
+/* Reels: real videos the shop posts on its own Facebook page, embedded via
+   Facebook's public video plugin (no login/API key needed for public posts).
+   To add a new one later, add a line here with the post's share URL —
+   this is a static site with no backend, so "adding a reel" means editing
+   this file, not a live dashboard. */
+const REELS=[
+  {url:'https://www.facebook.com/share/r/1BqtCrkVgA/'},
+  {url:'https://www.facebook.com/share/r/1C2jLRdifM/'},
+  {url:'https://www.facebook.com/share/r/18EkPorBZN/'}
+];
 
 const T={
  he:{dir:'rtl',
@@ -145,6 +162,10 @@ const T={
    fy_rep_head:'מסך שבור? סוללה חלשה?',fy_rep_sub:'המעבדה שלנו מתקנת הכל — לרוב באותו יום, בחלקים מקוריים ועם אחריות מלאה.',fy_rep_cta:'לתיאום תיקון',
    fy_ig_head:'עוקבים באינסטגרם',fy_ig_sub:'מבצעים, הגעות חדשות ומה שחם בחנות — קודם כל שם.',fy_ig_cta:'עקבו אחרינו',
    fy_brands_l:'מותגים שתמצאו אצלנו',
+   soon_badge:'בקרוב',ad_i18_sub:'iPhone 18 Pro / Pro Max / Ultra מגיעים בקרוב ל-Sky Phone.',ad_i18_cta:'עדכנו אותי בוואטסאפ',
+   reels_head:'עוד מאיתנו ברשתות',reels_sub:'רגעים אמיתיים מהחנות — ישר מהפייסבוק שלנו.',reel_watch:'צפייה בפייסבוק',
+   apple_head:'עולם ה-Apple אצלנו',apple_sub:'אייפון, אייפד, מק ואפל ווטש — הכל מקורי ובאחריות מלאה.',
+   samsung_head:'עולם ה-Samsung אצלנו',samsung_sub:'גלקסי, טאבים ואוזניות — המבחר המלא של סמסונג.',
    fy_show_t:'iPhone 15 Pro',fy_show_sub:'כל הפרטים, מכל זווית. גללו.',
    show_c1:'השבב הכי חזק ששמנו בטלפון',show_c2:'מסך חלק להפליא ב־120Hz',show_c3:'גוף טיטניום קל וחזק',
    cat_repairs:'תיקונים',cat_from:'החל מ־',
@@ -211,6 +232,10 @@ const T={
    fy_rep_head:'شاشة مكسورة؟ بطارية ضعيفة؟',fy_rep_sub:'مختبرنا يصلح كل شيء — غالباً في نفس اليوم، بقطع أصلية وضمان كامل.',fy_rep_cta:'احجز إصلاحاً',
    fy_ig_head:'متابع على إنستغرام',fy_ig_sub:'عروض، وصولات جديدة وكل ما هو حار في المتجر — هناك أولاً.',fy_ig_cta:'تابعونا',
    fy_brands_l:'ماركات تجدونها لدينا',
+   soon_badge:'قريباً',ad_i18_sub:'iPhone 18 Pro / Pro Max / Ultra قريباً في Sky Phone.',ad_i18_cta:'أعلمني عبر واتساب',
+   reels_head:'المزيد منّا على السوشال ميديا',reels_sub:'لحظات حقيقية من المتجر — مباشرة من فيسبوك.',reel_watch:'مشاهدة على فيسبوك',
+   apple_head:'عالم Apple لدينا',apple_sub:'آيفون، آيباد، ماك وآبل ووتش — كله أصلي وبضمان كامل.',
+   samsung_head:'عالم Samsung لدينا',samsung_sub:'غالاكسي، أجهزة لوحية وسماعات — التشكيلة الكاملة من سامسونج.',
    fy_show_t:'iPhone 15 Pro',fy_show_sub:'كل التفاصيل، من كل زاوية. تابعوا التمرير.',
    show_c1:'أقوى شريحة وضعناها في هاتف',show_c2:'شاشة فائقة السلاسة بمعدل 120Hz',show_c3:'هيكل تيتانيوم خفيف وقوي',
    cat_repairs:'الإصلاح',cat_from:'ابتداءً من',
@@ -277,6 +302,10 @@ const T={
    fy_rep_head:'Cracked screen? Weak battery?',fy_rep_sub:'Our lab fixes it all — usually the same day, with genuine parts and a full warranty.',fy_rep_cta:'Book a repair',
    fy_ig_head:'followers on Instagram',fy_ig_sub:'Deals, new arrivals and what’s hot in the shop — there first.',fy_ig_cta:'Follow us',
    fy_brands_l:'Brands you’ll find here',
+   soon_badge:'Coming soon',ad_i18_sub:'iPhone 18 Pro / Pro Max / Ultra are coming soon to Sky Phone.',ad_i18_cta:'Notify me on WhatsApp',
+   reels_head:'More from us on social',reels_sub:'Real moments from the shop — straight from our Facebook.',reel_watch:'Watch on Facebook',
+   apple_head:'The Apple world, here',apple_sub:'iPhone, iPad, Mac and Apple Watch — all genuine, full warranty.',
+   samsung_head:'The Samsung world, here',samsung_sub:'Galaxy phones, tablets and earbuds — the full Samsung lineup.',
    fy_show_t:'iPhone 15 Pro',fy_show_sub:'Every detail, from every angle. Keep scrolling.',
    show_c1:'The mightiest chip we’ve put in a phone',show_c2:'A buttery-smooth 120Hz display',show_c3:'A light, strong titanium body',
    cat_repairs:'Repairs',cat_from:'From',
@@ -501,7 +530,7 @@ function initHeroTilt(){
 
 /* ---------- hero carousel ---------- */
 let heroSlide=0, heroTimer=null;
-const heroSlideCount=2;
+const heroSlideCount=3;
 function goHeroSlide(n){
   heroSlide=(n+heroSlideCount)%heroSlideCount;
   document.querySelectorAll('.hero-slide').forEach(s=>s.classList.toggle('active',Number(s.dataset.slide)===heroSlide));
@@ -580,6 +609,28 @@ function renderAccessories(){
   const picks=[6,8,13,14].map(id=>PRODUCTS.find(p=>p.id===id)).filter(Boolean);
   el.innerHTML=picks.map(productCard).join('');
   initMotionFor(el);
+  refreshRowArrows();
+}
+/* brand showcase rows: Apple / Samsung, pulled straight from the real catalog */
+function renderBrandRow(brand,elId){
+  const el=document.getElementById(elId); if(!el) return;
+  const picks=PRODUCTS.filter(p=>p.brand===brand);
+  el.innerHTML=picks.map(productCard).join('');
+  initMotionFor(el);
+  refreshRowArrows();
+}
+/* reels row: real videos the shop posts on Facebook. Facebook's iframe
+   embed plugin (plugins/video.php) doesn't resolve these /share/r/ reel
+   links — verified in QA, it returns "post no longer available" even
+   though the posts are live — so rather than ship a broken-looking
+   embed, each card is a reliable link-out with a play affordance. */
+function renderReels(){
+  const el=document.getElementById('reelsRow'); if(!el) return;
+  el.innerHTML=REELS.map((r,i)=>`<a class="reel-card" href="${r.url}" target="_blank" rel="noopener">
+      <span class="reel-play">${PLAYICON}</span>
+      <span class="reel-num">Reel ${i+1}</span>
+      <span class="reel-caption">${SOCIALICON.facebook}<span>${T[lang].reel_watch}</span></span>
+    </a>`).join('');
   refreshRowArrows();
 }
 /* repair spotlight chips: live "from" prices from the repairs data */
@@ -845,6 +896,7 @@ function setLang(l){
   closeSuggest();
   promoIdx=0;
   applyText(); renderArrivals(); renderServices(); renderCatRow(); renderAccessories(); renderRepairSpot(); renderFaq();
+  renderBrandRow('apple','fy-apple-row'); renderBrandRow('samsung','fy-samsung-row'); renderReels();
   if(route==='products'){renderChips();renderProducts();}
   if(route==='repairs'){renderSteps();renderRepairs();}
   if(document.getElementById('cartDrawer').classList.contains('open'))renderBag();
@@ -950,6 +1002,7 @@ document.addEventListener('click',e=>{
   const rm=e.target.closest('[data-remove]'); if(rm){delete bag[rm.dataset.remove];renderBag();return;}
   const chip=e.target.closest('[data-filter]'); if(chip){filter=chip.dataset.filter;searchQuery='';renderChips();renderProducts();return;}
   if(e.target.closest('#accSeeAll')){filter='accessories';searchQuery='';go('products');return;}
+  if(e.target.closest('#appleSeeAll')||e.target.closest('#samsungSeeAll')){filter='all';searchQuery='';go('products');return;}
   const catBtn=e.target.closest('[data-cat]'); if(catBtn){filter=catBtn.dataset.cat;searchQuery='';go('products');return;}
   const spotTile=e.target.closest('[data-spot-pid]'); if(spotTile){openProduct(spotTile.dataset.spotPid);return;}
   const faq=e.target.closest('.faq-q'); if(faq){faq.parentElement.classList.toggle('open');return;}
@@ -1284,6 +1337,7 @@ const fav=document.getElementById('favicon'); if(fav) fav.href=LOGO;
 document.querySelectorAll('.h1,.h2,.display').forEach(el=>el.setAttribute('data-text-reveal',''));
 setLang('he');
 renderArrivals(); renderServices(); renderCatRow(); renderAccessories(); renderRepairSpot(); renderFaq();
+renderBrandRow('apple','fy-apple-row'); renderBrandRow('samsung','fy-samsung-row'); renderReels();
 go('foryou');
 initHeroTilt();
 initHeroCarousel();
