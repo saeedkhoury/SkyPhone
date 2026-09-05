@@ -22,10 +22,6 @@ const REPICON={
   water:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5s6 6.7 6 11a6 6 0 0 1-12 0c0-4.3 6-11 6-11Z"/><path d="M9.5 14.5a2.5 2.5 0 0 0 2.5 2.5"/></svg>',
   tools:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a3.5 3.5 0 0 1-4.6 4.6L4.5 16.5a1.7 1.7 0 0 0 2.4 2.4l5.6-5.6a3.5 3.5 0 0 1 4.6-4.6l-2.4 2.4-1.7-1.7z"/></svg>',
 };
-const PLAYICON='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>';
-const SOCIALICON={
-  facebook:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12a12 12 0 1 0-13.87 11.85v-8.38H7.08V12h3.05V9.36c0-3 1.79-4.67 4.53-4.67 1.31 0 2.68.24 2.68.24v2.95h-1.5c-1.49 0-1.96.93-1.96 1.87V12h3.33l-.53 3.47h-2.8v8.38A12 12 0 0 0 24 12z"/></svg>',
-};
 const BRANDICON={
   apple:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.7 12.7c0-3 2.5-4.5 2.6-4.6-1.4-2.1-3.6-2.4-4.4-2.4-1.9-.2-3.6 1.1-4.6 1.1-1 0-2.4-1.1-4-1-2 0-3.9 1.2-4.9 3-2.1 3.7-.5 9.1 1.5 12.1 1 1.5 2.2 3.1 3.7 3 1.5-.1 2.1-1 3.9-1s2.4 1 4 .9c1.6 0 2.7-1.5 3.7-3 .8-1.2 1.2-2.2 1.5-3.2-.1-.1-3-1.2-3-4.9zM14 3.5c.8-1 1.4-2.4 1.2-3.8-1.2.1-2.6.8-3.5 1.8-.7.8-1.4 2.2-1.2 3.6 1.3.1 2.7-.7 3.5-1.6z"/></svg>',
 };
@@ -56,49 +52,59 @@ const IMG={
   dualsense:'img/dualsense.png', headset:'img/headset.jpg', watch9:'img/watch9.jpg',
   buds:'img/buds.png', charger:'img/charger.jpg'
 };
+/* Second angle/photo per product, sourced from Wikimedia Commons (2026-09-06).
+   A few SKUs only have one accurate photo available (Gaming Headset Pro,
+   Galaxy Buds3, base Galaxy S25, Galaxy Watch7, base iPad) — left single
+   rather than force a mismatched substitute image. */
+const IMG2={
+  iphone15pro:'img/iphone15pro-2.jpg', s24ultra:'img/s24ultra-2.jpg', iphone14:'img/iphone14-2.jpg',
+  xiaomi14:'img/xiaomi14-2.jpg', ipadair:'img/ipadair-2.jpg', tabs9:'img/tabs9-2.jpg',
+  macbook:'img/macbook-2.jpg', xps13:'img/xps13-2.png', steamdeck:'img/steamdeck-2.jpg',
+  dualsense:'img/dualsense-2.png', watch9:'img/watch9-2.jpg', charger:'img/charger-2.jpg'
+};
 const PRODUCTS=[
-  {id:1,name:'iPhone 15 Pro',cat:'phones',price:4290,icon:'phone',badge:'new',img:IMG.iphone15pro,brand:'apple',
+  {id:1,name:'iPhone 15 Pro',cat:'phones',price:4290,icon:'phone',badge:'new',img:IMG.iphone15pro,imgs:[IMG.iphone15pro,IMG2.iphone15pro],brand:'apple',
     colors:[{name:'Natural Titanium',hex:'#8a8479'},{name:'Blue Titanium',hex:'#3f4a56'},{name:'White Titanium',hex:'#f2efe9'},{name:'Black Titanium',hex:'#2b2a28'}],
     storage:[{label:'128GB',delta:0},{label:'256GB',delta:400},{label:'512GB',delta:900}],
     desc:{he:'iPhone 15 Pro עם שבב A17 Pro, מסך Super Retina XDR ומצלמה מקצועית — הדגם המבוקש ביותר אצלנו.',ar:'iPhone 15 Pro بشريحة A17 Pro وشاشة Super Retina XDR وكاميرا احترافية — الطراز الأكثر طلباً لدينا.',en:'iPhone 15 Pro with the A17 Pro chip, Super Retina XDR display and a pro camera system — our most requested model.'}},
-  {id:2,name:'Galaxy S24 Ultra',cat:'phones',price:4590,icon:'phone',img:IMG.s24ultra,brand:'samsung',
+  {id:2,name:'Galaxy S24 Ultra',cat:'phones',price:4590,icon:'phone',img:IMG.s24ultra,imgs:[IMG.s24ultra,IMG2.s24ultra],brand:'samsung',
     colors:[{name:'Titanium Black',hex:'#2b2b2e'},{name:'Titanium Gray',hex:'#8a8a8d'},{name:'Titanium Violet',hex:'#8a7ea3'},{name:'Titanium Yellow',hex:'#d8c98a'}],
     storage:[{label:'256GB',delta:0},{label:'512GB',delta:450},{label:'1TB',delta:950}],
     desc:{he:'Galaxy S24 Ultra עם מסך AMOLED ענק, עט S Pen מובנה ומצלמה בזום גבוה.',ar:'Galaxy S24 Ultra بشاشة AMOLED كبيرة، قلم S Pen مدمج وكاميرا بتقريب عالٍ.',en:'Galaxy S24 Ultra with a large AMOLED display, built-in S Pen and high-zoom camera.'}},
-  {id:9,name:'iPhone 14',cat:'phones',price:2990,icon:'phone',img:IMG.iphone14,brand:'apple',
+  {id:9,name:'iPhone 14',cat:'phones',price:2990,icon:'phone',img:IMG.iphone14,imgs:[IMG.iphone14,IMG2.iphone14],brand:'apple',
     colors:[{name:'Midnight',hex:'#1d1d1f'},{name:'Starlight',hex:'#f0e6d8'},{name:'Blue',hex:'#5f7a99'},{name:'(PRODUCT)RED',hex:'#a72032'}],
     storage:[{label:'128GB',delta:0},{label:'256GB',delta:350},{label:'512GB',delta:800}],
     desc:{he:'iPhone 14 — האמינות והביצועים של אפל במחיר נגיש יותר.',ar:'iPhone 14 — موثوقية وأداء آبل بسعر أكثر سهولة.',en:'iPhone 14 — Apple\'s reliability and performance at a more accessible price.'}},
-  {id:10,name:'Xiaomi 14',cat:'phones',price:2490,icon:'phone',img:IMG.xiaomi14,brand:'xiaomi',
+  {id:10,name:'Xiaomi 14',cat:'phones',price:2490,icon:'phone',img:IMG.xiaomi14,imgs:[IMG.xiaomi14,IMG2.xiaomi14],brand:'xiaomi',
     colors:[{name:'Black',hex:'#1c1c1e'},{name:'White',hex:'#eceae6'},{name:'Jade Green',hex:'#6f8a72'}],
     storage:[{label:'256GB',delta:0},{label:'512GB',delta:300}],
     desc:{he:'Xiaomi 14 — טלפון אנדרואיד רב עוצמה עם מצלמת Leica ותמורה מעולה למחיר.',ar:'Xiaomi 14 — هاتف أندرويد قوي بكاميرا Leica وقيمة ممتازة مقابل السعر.',en:'Xiaomi 14 — a powerful Android phone with a Leica camera and excellent value.'}},
-  {id:3,name:'iPad Air',cat:'tablets',price:2790,icon:'tablet',img:IMG.ipadair,brand:'apple',
+  {id:3,name:'iPad Air',cat:'tablets',price:2790,icon:'tablet',img:IMG.ipadair,imgs:[IMG.ipadair,IMG2.ipadair],brand:'apple',
     colors:[{name:'Space Gray',hex:'#5b5c5f'},{name:'Starlight',hex:'#f0e6d8'},{name:'Blue',hex:'#7fa7c9'},{name:'Purple',hex:'#a99bc7'}],
     storage:[{label:'128GB',delta:0},{label:'256GB',delta:350}],
     desc:{he:'iPad Air עם שבב M1 — קליל, חזק ומושלם לעבודה, לימודים ובידור.',ar:'iPad Air بشريحة M1 — خفيف وقوي ومثالي للعمل والدراسة والترفيه.',en:'iPad Air with the M1 chip — light, powerful, and perfect for work, study and play.'}},
-  {id:11,name:'Galaxy Tab S9',cat:'tablets',price:2690,icon:'tablet',img:IMG.tabs9,brand:'samsung',
+  {id:11,name:'Galaxy Tab S9',cat:'tablets',price:2690,icon:'tablet',img:IMG.tabs9,imgs:[IMG.tabs9,IMG2.tabs9],brand:'samsung',
     colors:[{name:'Graphite',hex:'#3a3b3e'},{name:'Beige',hex:'#d9cdb8'}],
     storage:[{label:'128GB',delta:0},{label:'256GB',delta:300}],
     desc:{he:'Galaxy Tab S9 — מסך AMOLED, עמידות למים ועט S Pen כלול בקופסה.',ar:'Galaxy Tab S9 — شاشة AMOLED، مقاومة للماء وقلم S Pen ضمن العلبة.',en:'Galaxy Tab S9 — AMOLED display, water resistance, and an S Pen included in the box.'}},
-  {id:4,name:'MacBook Air',cat:'computers',price:5490,icon:'laptop',badge:'new',img:IMG.macbook,brand:'apple',
+  {id:4,name:'MacBook Air',cat:'computers',price:5490,icon:'laptop',badge:'new',img:IMG.macbook,imgs:[IMG.macbook,IMG2.macbook],brand:'apple',
     colors:[{name:'Midnight',hex:'#33363d'},{name:'Starlight',hex:'#f0e6d8'},{name:'Space Gray',hex:'#5b5c5f'},{name:'Silver',hex:'#e5e5e5'}],
     storage:[{label:'256GB SSD',delta:0},{label:'512GB SSD',delta:600}],
     desc:{he:'MacBook Air עם שבב M2 — דק, שקט לחלוטין וסוללה שמחזיקה יום שלם.',ar:'MacBook Air بشريحة M2 — رفيع، صامت تماماً وبطارية تدوم يوماً كاملاً.',en:'MacBook Air with the M2 chip — thin, completely silent, and battery that lasts all day.'}},
-  {id:12,name:'Dell XPS 13',cat:'computers',price:4990,icon:'laptop',img:IMG.xps13,brand:'dell',
+  {id:12,name:'Dell XPS 13',cat:'computers',price:4990,icon:'laptop',img:IMG.xps13,imgs:[IMG.xps13,IMG2.xps13],brand:'dell',
     colors:[{name:'Platinum Silver',hex:'#c9cbcd'},{name:'Graphite',hex:'#3a3b3e'}],
     storage:[{label:'512GB SSD',delta:0},{label:'1TB SSD',delta:500}],
     desc:{he:'Dell XPS 13 — מחשב Windows קומפקטי עם מסך InfinityEdge ובנייה מאלומיניום.',ar:'Dell XPS 13 — حاسوب Windows مدمج بشاشة InfinityEdge وهيكل ألومنيوم.',en:'Dell XPS 13 — a compact Windows laptop with an InfinityEdge display and aluminum build.'}},
-  {id:5,name:'Steam Deck',cat:'gaming',price:2490,icon:'console',badge:'hot',img:IMG.steamdeck,
+  {id:5,name:'Steam Deck',cat:'gaming',price:2490,icon:'console',badge:'hot',img:IMG.steamdeck,imgs:[IMG.steamdeck,IMG2.steamdeck],
     storage:[{label:'256GB',delta:0},{label:'512GB',delta:450},{label:'1TB OLED',delta:1100}],
     desc:{he:'Steam Deck — קונסולת גיימינג ניידת שמריצה את כל ספריית המשחקים שלך מכל מקום.',ar:'Steam Deck — جهاز ألعاب محمول يشغّل مكتبة ألعابك بالكامل من أي مكان.',en:'Steam Deck — a handheld gaming console that runs your whole library, anywhere.'}},
-  {id:13,name:'PS5 DualSense',cat:'gaming',price:290,icon:'console',img:IMG.dualsense,brand:'sony',
+  {id:13,name:'PS5 DualSense',cat:'gaming',price:290,icon:'console',img:IMG.dualsense,imgs:[IMG.dualsense,IMG2.dualsense],brand:'sony',
     colors:[{name:'White',hex:'#eceae6'},{name:'Midnight Black',hex:'#1c1c1e'},{name:'Cosmic Red',hex:'#9c2b2b'},{name:'Starlight Blue',hex:'#5f7a99'}],
     desc:{he:'בקר DualSense ל-PS5 עם משוב הפטי ומקשי טריגר אדפטיביים.',ar:'يد تحكم DualSense لجهاز PS5 مع استجابة لمسية ومفاتيح تحفيز تكيفية.',en:'DualSense controller for PS5 with haptic feedback and adaptive triggers.'}},
   {id:7,name:'Gaming Headset Pro',cat:'gaming',price:490,icon:'headset',badge:'hot',img:IMG.headset,
     colors:[{name:'Black',hex:'#1c1c1e'},{name:'White',hex:'#eceae6'}],
     desc:{he:'אוזניות גיימינג עם סאונד סראונד ומיקרופון לביטול רעשים.',ar:'سماعة ألعاب بصوت محيطي ومايكروفون لإلغاء الضوضاء.',en:'Gaming headset with surround sound and a noise-cancelling microphone.'}},
-  {id:6,name:'Apple Watch S9',cat:'accessories',price:1890,icon:'watch',img:IMG.watch9,brand:'apple',
+  {id:6,name:'Apple Watch S9',cat:'accessories',price:1890,icon:'watch',img:IMG.watch9,imgs:[IMG.watch9,IMG2.watch9],brand:'apple',
     colors:[{name:'Midnight',hex:'#1d1d1f'},{name:'Starlight',hex:'#f0e6d8'},{name:'Silver',hex:'#e5e5e5'},{name:'(PRODUCT)RED',hex:'#a72032'}],
     storage:[{label:'41mm',delta:0},{label:'45mm',delta:150}],
     variant2Label:'size',
@@ -106,59 +112,59 @@ const PRODUCTS=[
   {id:8,name:'Galaxy Buds3',cat:'accessories',price:590,icon:'buds',img:IMG.buds,brand:'samsung',
     colors:[{name:'Graphite',hex:'#3a3b3e'},{name:'White',hex:'#eceae6'},{name:'Silver',hex:'#c9cbcd'}],
     desc:{he:'Galaxy Buds3 עם ביטול רעשים אקטיבי וסאונד עשיר.',ar:'Galaxy Buds3 بإلغاء ضوضاء نشط وصوت غني.',en:'Galaxy Buds3 with active noise cancellation and rich sound.'}},
-  {id:14,name:'Fast Charger 65W',cat:'accessories',price:120,icon:'charger',img:IMG.charger,
+  {id:14,name:'Fast Charger 65W',cat:'accessories',price:120,icon:'charger',img:IMG.charger,imgs:[IMG.charger,IMG2.charger],
     desc:{he:'מטען מהיר 65W תואם לרוב הטלפונים והמחשבים הניידים.',ar:'شاحن سريع 65 واط متوافق مع معظم الهواتف وأجهزة الحاسوب المحمولة.',en:'65W fast charger, compatible with most phones and laptops.'}},
   /* Current Apple and Samsung lineups (2026-09-06 addition, at the client's
-     request to carry every current model, not just a curated few). No local
-     photos exist yet for these specific models, so they use the authored
-     icon fallback (pmedia() already handles that gracefully — see the
-     comment above IMG) until real photos are supplied. */
-  {id:15,name:'iPhone 17',cat:'phones',price:3690,icon:'phone',badge:'new',brand:'apple',
+     request to carry every current model, not just a curated few). Photos
+     sourced from Wikimedia Commons and mirrored in img/ (2026-09-06). A few
+     have only one accurate photo (no genuine second angle found on Commons):
+     iPad, Galaxy S25, Galaxy Watch7. */
+  {id:15,name:'iPhone 17',cat:'phones',price:3690,icon:'phone',badge:'new',img:'img/iphone17-1.png',imgs:['img/iphone17-1.png','img/iphone17-2.jpg'],brand:'apple',
     colors:[{name:'Black',hex:'#1c1c1e'},{name:'White',hex:'#f0e6d8'},{name:'Lavender',hex:'#c9c2d9'},{name:'Sage',hex:'#a9b79a'},{name:'Mist Blue',hex:'#a9c0cf'}],
     storage:[{label:'256GB',delta:0},{label:'512GB',delta:450}],
     desc:{he:'iPhone 17 עם שבב A19, מסך ProMotion 120Hz וגוף אלומיניום קל.',ar:'iPhone 17 بشريحة A19 وشاشة ProMotion 120Hz وهيكل ألومنيوم خفيف.',en:'iPhone 17 with the A19 chip, a 120Hz ProMotion display and a light aluminum body.'}},
-  {id:16,name:'iPhone 17 Pro',cat:'phones',price:4990,icon:'phone',badge:'new',brand:'apple',
+  {id:16,name:'iPhone 17 Pro',cat:'phones',price:4990,icon:'phone',badge:'new',img:'img/iphone17pro-1.png',imgs:['img/iphone17pro-1.png','img/iphone17pro-2.jpg'],brand:'apple',
     colors:[{name:'Deep Blue',hex:'#22334a'},{name:'Silver',hex:'#e5e5e5'},{name:'Cosmic Orange',hex:'#a3552b'}],
     storage:[{label:'256GB',delta:0},{label:'512GB',delta:450},{label:'1TB',delta:950}],
     desc:{he:'iPhone 17 Pro עם שבב A19 Pro, מצלמת Pro Fusion 48MP ועיצוב יוניבודי.',ar:'iPhone 17 Pro بشريحة A19 Pro وكاميرا Pro Fusion 48MP وتصميم Unibody.',en:'iPhone 17 Pro with the A19 Pro chip, a 48MP Pro Fusion camera and a unibody design.'}},
-  {id:17,name:'iPhone 17 Pro Max',cat:'phones',price:5490,icon:'phone',badge:'new',brand:'apple',
+  {id:17,name:'iPhone 17 Pro Max',cat:'phones',price:5490,icon:'phone',badge:'new',img:'img/iphone17promax-1.png',imgs:['img/iphone17promax-1.png','img/iphone17promax-2.jpg'],brand:'apple',
     colors:[{name:'Deep Blue',hex:'#22334a'},{name:'Silver',hex:'#e5e5e5'},{name:'Cosmic Orange',hex:'#a3552b'}],
     storage:[{label:'256GB',delta:0},{label:'512GB',delta:450},{label:'1TB',delta:950},{label:'2TB',delta:1900}],
     desc:{he:'iPhone 17 Pro Max — המסך הכי גדול, הסוללה הכי חזקה, אותו שבב A19 Pro.',ar:'iPhone 17 Pro Max — أكبر شاشة وأقوى بطارية، بنفس شريحة A19 Pro.',en:'iPhone 17 Pro Max — the biggest screen and battery, the same A19 Pro chip.'}},
-  {id:18,name:'MacBook Pro 14"',cat:'computers',price:8990,icon:'laptop',brand:'apple',
+  {id:18,name:'MacBook Pro 14"',cat:'computers',price:8990,icon:'laptop',img:'img/macbookpro-1.jpg',imgs:['img/macbookpro-1.jpg','img/macbookpro-2.jpg'],brand:'apple',
     colors:[{name:'Space Black',hex:'#2b2b2b'},{name:'Silver',hex:'#e5e5e5'}],
     storage:[{label:'512GB SSD',delta:0},{label:'1TB SSD',delta:700}],
     desc:{he:'MacBook Pro 14 אינץ׳ עם שבב M4 ומסך Liquid Retina XDR — לעבודה מקצועית.',ar:'MacBook Pro 14 إنش بشريحة M4 وشاشة Liquid Retina XDR — للعمل الاحترافي.',en:'14" MacBook Pro with the M4 chip and a Liquid Retina XDR display — for pro workflows.'}},
-  {id:19,name:'iPad Pro',cat:'tablets',price:4290,icon:'tablet',brand:'apple',
+  {id:19,name:'iPad Pro',cat:'tablets',price:4290,icon:'tablet',img:'img/ipadpro-1.jpg',imgs:['img/ipadpro-1.jpg','img/ipadpro-2.jpg'],brand:'apple',
     colors:[{name:'Space Black',hex:'#2b2b2b'},{name:'Silver',hex:'#e5e5e5'}],
     storage:[{label:'256GB',delta:0},{label:'512GB',delta:500},{label:'1TB',delta:1200}],
     desc:{he:'iPad Pro עם שבב M4 ומסך Ultra Retina XDR — הטאבלט הכי חזק של אפל.',ar:'iPad Pro بشريحة M4 وشاشة Ultra Retina XDR — أقوى جهاز لوحي من آبل.',en:'iPad Pro with the M4 chip and an Ultra Retina XDR display — Apple\'s most powerful tablet.'}},
-  {id:20,name:'iPad',cat:'tablets',price:1690,icon:'tablet',brand:'apple',
+  {id:20,name:'iPad',cat:'tablets',price:1690,icon:'tablet',img:'img/ipadbase-1.png',brand:'apple',
     colors:[{name:'Blue',hex:'#7fa7c9'},{name:'Pink',hex:'#e3b8c4'},{name:'Silver',hex:'#e5e5e5'},{name:'Yellow',hex:'#e8d27a'}],
     storage:[{label:'128GB',delta:0},{label:'256GB',delta:300}],
     desc:{he:'iPad — הכי משתלם, מושלם לגלישה, לימודים ובידור יומיומי.',ar:'iPad — الأكثر قيمة مقابل السعر، مثالي للتصفح والدراسة والترفيه اليومي.',en:'iPad — the best value, perfect for everyday browsing, study and play.'}},
-  {id:21,name:'Apple Watch Ultra 2',cat:'accessories',price:3390,icon:'watch',brand:'apple',
+  {id:21,name:'Apple Watch Ultra 2',cat:'accessories',price:3390,icon:'watch',img:'img/watchultra2-1.jpg',imgs:['img/watchultra2-1.jpg','img/watchultra2-2.jpg'],brand:'apple',
     colors:[{name:'Natural Titanium',hex:'#8a8479'},{name:'Black Titanium',hex:'#2b2a28'}],
     storage:[{label:'49mm',delta:0}],
     desc:{he:'Apple Watch Ultra 2 — עמיד, עם GPS מדויק וסוללה שמחזיקה ימים.',ar:'Apple Watch Ultra 2 — متين، مع GPS دقيق وبطارية تدوم أياماً.',en:'Apple Watch Ultra 2 — rugged, with precise GPS and multi-day battery life.'}},
-  {id:22,name:'AirPods Pro 2',cat:'accessories',price:990,icon:'buds',brand:'apple',
+  {id:22,name:'AirPods Pro 2',cat:'accessories',price:990,icon:'buds',img:'img/airpodspro2-1.jpg',imgs:['img/airpodspro2-1.jpg','img/airpodspro2-2.jpg'],brand:'apple',
     desc:{he:'AirPods Pro 2 עם ביטול רעשים אקטיבי ואודיו מרחבי מותאם אישית.',ar:'AirPods Pro 2 بإلغاء ضوضاء نشط وصوت مكاني مخصص.',en:'AirPods Pro 2 with active noise cancellation and personalized spatial audio.'}},
-  {id:23,name:'AirPods 4',cat:'accessories',price:590,icon:'buds',brand:'apple',
+  {id:23,name:'AirPods 4',cat:'accessories',price:590,icon:'buds',img:'img/airpods4-1.jpg',imgs:['img/airpods4-1.jpg','img/airpods4-2.jpg'],brand:'apple',
     desc:{he:'AirPods 4 — עיצוב חדש, סאונד עשיר יותר וסוללה משופרת.',ar:'AirPods 4 — تصميم جديد، صوت أغنى وبطارية محسّنة.',en:'AirPods 4 — a new design, richer sound and improved battery life.'}},
-  {id:24,name:'Galaxy S25 Ultra',cat:'phones',price:5190,icon:'phone',badge:'new',brand:'samsung',
+  {id:24,name:'Galaxy S25 Ultra',cat:'phones',price:5190,icon:'phone',badge:'new',img:'img/s25ultra-1.jpg',imgs:['img/s25ultra-1.jpg','img/s25ultra-2.jpg'],brand:'samsung',
     colors:[{name:'Titanium Black',hex:'#2b2b2e'},{name:'Titanium Gray',hex:'#8a8a8d'},{name:'Titanium Blue',hex:'#4a5a72'}],
     storage:[{label:'256GB',delta:0},{label:'512GB',delta:450},{label:'1TB',delta:950}],
     desc:{he:'Galaxy S25 Ultra עם בינה מלאכותית מתקדמת, עט S Pen ומצלמה בזום גבוה.',ar:'Galaxy S25 Ultra بذكاء اصطناعي متقدم وقلم S Pen وكاميرا بتقريب عالٍ.',en:'Galaxy S25 Ultra with advanced on-device AI, the built-in S Pen and a high-zoom camera.'}},
-  {id:25,name:'Galaxy S25',cat:'phones',price:3590,icon:'phone',badge:'new',brand:'samsung',
+  {id:25,name:'Galaxy S25',cat:'phones',price:3590,icon:'phone',badge:'new',img:'img/s25-1.png',brand:'samsung',
     colors:[{name:'Navy',hex:'#22334a'},{name:'Silver Shadow',hex:'#c9cbcd'},{name:'Mint',hex:'#a9c9ba'}],
     storage:[{label:'128GB',delta:0},{label:'256GB',delta:350}],
     desc:{he:'Galaxy S25 — קומפקטי וחזק, עם מסך Dynamic AMOLED וביצועים מעולים.',ar:'Galaxy S25 — مدمج وقوي، بشاشة Dynamic AMOLED وأداء ممتاز.',en:'Galaxy S25 — compact and powerful, with a Dynamic AMOLED display and excellent performance.'}},
-  {id:26,name:'Galaxy Watch7',cat:'accessories',price:1490,icon:'watch',brand:'samsung',
+  {id:26,name:'Galaxy Watch7',cat:'accessories',price:1490,icon:'watch',img:'img/watch7-1.jpg',brand:'samsung',
     colors:[{name:'Green',hex:'#4a6a52'},{name:'Cream',hex:'#e8dfc8'},{name:'Silver',hex:'#c9cbcd'}],
     storage:[{label:'40mm',delta:0},{label:'44mm',delta:150}],
     variant2Label:'size',
     desc:{he:'Galaxy Watch7 עם מעקב בריאות מתקדם וסוללה שמחזיקה ימים.',ar:'Galaxy Watch7 بتتبع صحي متقدم وبطارية تدوم أياماً.',en:'Galaxy Watch7 with advanced health tracking and multi-day battery life.'}},
-  {id:27,name:'PlayStation 5',cat:'gaming',price:2190,icon:'console',badge:'new',brand:'sony',
+  {id:27,name:'PlayStation 5',cat:'gaming',price:2190,icon:'console',badge:'new',img:'img/ps5-1.png',imgs:['img/ps5-1.png','img/ps5-2.png'],brand:'sony',
     colors:[{name:'White',hex:'#eceae6'}],
     storage:[{label:'Digital Edition',delta:0},{label:'Disc Edition',delta:300}],
     desc:{he:'PlayStation 5 עם משחקים ב-4K וזמני טעינה כמעט מיידיים.',ar:'PlayStation 5 بألعاب 4K وأوقات تحميل شبه فورية.',en:'PlayStation 5 with 4K gaming and near-instant load times.'}}
@@ -185,9 +191,10 @@ const FILTERS=['all','phones','tablets','computers','gaming','accessories'];
    this is a static site with no backend, so "adding a reel" means editing
    this file, not a live dashboard. */
 const REELS=[
-  {url:'https://www.facebook.com/share/r/1BqtCrkVgA/'},
-  {url:'https://www.facebook.com/share/r/1C2jLRdifM/'},
-  {url:'https://www.facebook.com/share/r/18EkPorBZN/'}
+  {src:'video/reel1.mp4'},
+  {src:'video/reel2.mp4'},
+  {src:'video/reel3.mp4'},
+  {src:'video/reel4.mp4'}
 ];
 
 const T={
@@ -204,7 +211,7 @@ const T={
   trust_ig_n:'+54.2K',trust_ig_l:'עוקבים באינסטגרם',trust_years_n:'+16',trust_years_l:'שנות ותק בכפר כנא',trust_lang_n:'3',trust_lang_l:'שפות שירות',
   pr_title:'כל המוצרים',pr_sub:'טלפונים, טאבלטים, מחשבים, גיימינג ואביזרים — במחירים הכי טובים.',
   filter_all:'הכל',cat_phones:'טלפונים',cat_tablets:'טאבלטים',cat_computers:'מחשבים',cat_gaming:'גיימינג',cat_accessories:'אביזרים',add:'הוספה',
-  filter_category:'קטגוריה',filter_brand:'מותג',filter_price:'מחיר',filter_price_none:'ברירת מחדל',filter_price_asc:'מהזול ליקר',filter_price_desc:'מהיקר לזול',filter_results:'{n} מוצרים',
+  filter_category:'קטגוריה',filter_brand:'מותג',filter_color:'צבע',filter_storage:'נפח אחסון',filter_price:'מחיר',filter_price_none:'ברירת מחדל',filter_price_asc:'מהזול ליקר',filter_price_desc:'מהיקר לזול',filter_results:'{n} מוצרים',
   pdp_back:'חזרה למוצרים',pdp_color:'צבע',pdp_storage:'נפח אחסון',pdp_size:'מידה',pdp_qty:'כמות',pdp_add:'הוספה לסל',pdp_more:'עוד ב',
   search_ph:'חיפוש מוצרים...',search_empty_h:'לא נמצאו תוצאות',search_empty_p:'נסו חיפוש אחר או עיינו בכל המוצרים.',
    promo_msg:'🛠️ תיקון באותו יום · כפר כנא · WhatsApp 052-722-3916',
@@ -275,7 +282,7 @@ const T={
   trust_ig_n:'+54.2K',trust_ig_l:'متابع على إنستغرام',trust_years_n:'+16',trust_years_l:'سنة خبرة في كفركنا',trust_lang_n:'3',trust_lang_l:'لغات خدمة',
   pr_title:'كل المنتجات',pr_sub:'هواتف، أجهزة لوحية، حواسيب، ألعاب وملحقات — بأفضل الأسعار.',
   filter_all:'الكل',cat_phones:'هواتف',cat_tablets:'لوحية',cat_computers:'حواسيب',cat_gaming:'ألعاب',cat_accessories:'ملحقات',add:'أضف',
-  filter_category:'الفئة',filter_brand:'الماركة',filter_price:'السعر',filter_price_none:'الافتراضي',filter_price_asc:'من الأرخص للأغلى',filter_price_desc:'من الأغلى للأرخص',filter_results:'{n} منتجات',
+  filter_category:'الفئة',filter_brand:'الماركة',filter_color:'اللون',filter_storage:'سعة التخزين',filter_price:'السعر',filter_price_none:'الافتراضي',filter_price_asc:'من الأرخص للأغلى',filter_price_desc:'من الأغلى للأرخص',filter_results:'{n} منتجات',
   pdp_back:'العودة للمنتجات',pdp_color:'اللون',pdp_storage:'سعة التخزين',pdp_size:'المقاس',pdp_qty:'الكمية',pdp_add:'أضف إلى السلة',pdp_more:'المزيد في',
   search_ph:'ابحث عن منتج...',search_empty_h:'لا توجد نتائج',search_empty_p:'جرّب بحثاً آخر أو تصفّح كل المنتجات.',
    promo_msg:'🛠️ إصلاح بنفس اليوم · كفركنا · واتساب 052-722-3916',
@@ -346,7 +353,7 @@ const T={
   trust_ig_n:'+54.2K',trust_ig_l:'Instagram followers',trust_years_n:'+16',trust_years_l:'years serving Kafr Kanna',trust_lang_n:'3',trust_lang_l:'service languages',
   pr_title:'All products',pr_sub:'Phones, tablets, computers, gaming and accessories — at the best prices.',
   filter_all:'All',cat_phones:'Phones',cat_tablets:'Tablets',cat_computers:'Computers',cat_gaming:'Gaming',cat_accessories:'Accessories',add:'Add',
-  filter_category:'Category',filter_brand:'Brand',filter_price:'Price',filter_price_none:'Default',filter_price_asc:'Price: low to high',filter_price_desc:'Price: high to low',filter_results:'{n} products',
+  filter_category:'Category',filter_brand:'Brand',filter_color:'Color',filter_storage:'Storage',filter_price:'Price',filter_price_none:'Default',filter_price_asc:'Price: low to high',filter_price_desc:'Price: high to low',filter_results:'{n} products',
   pdp_back:'Back to products',pdp_color:'Color',pdp_storage:'Storage',pdp_size:'Size',pdp_qty:'Quantity',pdp_add:'Add to bag',pdp_more:'More in',
   search_ph:'Search products...',search_empty_h:'No results found',search_empty_p:'Try a different search or browse all products.',
    promo_msg:'🛠️ Same-day repair · Kafr Kanna · WhatsApp 052-722-3916',
@@ -406,7 +413,7 @@ const T={
    chat_a_repair_q:'Which repair do you need? For example: screen, battery, charging port, water damage, computer or console — you can name the device too.'}
 };
 
-let lang='he', route='foryou', filter='all', searchQuery='', brandFilter='all', priceSort='';
+let lang='he', route='foryou', filter='all', searchQuery='', brandFilter='all', priceSort='', colorFilter='all', storageFilter='all';
 const BRAND_LABEL={apple:'Apple',samsung:'Samsung',xiaomi:'Xiaomi',dell:'Dell',sony:'Sony'};
 const bag={};
 const fmt=n=>n.toLocaleString('en-US');
@@ -688,11 +695,9 @@ function renderGamingHighlights(){
    embed, each card is a reliable link-out with a play affordance. */
 function renderReels(){
   const el=document.getElementById('reelsRow'); if(!el) return;
-  el.innerHTML=REELS.map((r,i)=>`<a class="reel-card" href="${r.url}" target="_blank" rel="noopener">
-      <span class="reel-play">${PLAYICON}</span>
-      <span class="reel-num">Reel ${i+1}</span>
-      <span class="reel-caption">${SOCIALICON.facebook}<span>${T[lang].reel_watch}</span></span>
-    </a>`).join('');
+  el.innerHTML=REELS.map((r,i)=>`<div class="reel-card">
+      <video class="reel-video" src="${r.src}" controls playsinline preload="metadata"></video>
+    </div>`).join('');
   refreshRowArrows();
 }
 /* repair spotlight chips: live "from" prices from the repairs data */
@@ -724,7 +729,8 @@ function renderChips(){
   const catList=document.getElementById('filterCatList');
   if(catList) catList.innerHTML=FILTERS.map(f=>`<button class="filter-row ${f===filter?'on':''}" data-filter="${f}">${catName(f)}</button>`).join('');
   renderBrandFilterUI();
-  renderPriceFilterUI();
+  renderVariantFilterUI();
+  const sortSel=document.getElementById('sortSelect'); if(sortSel) sortSel.value=priceSort;
 }
 /* brand filter: a circular row under the category chips (scoped to brands
    actually present in the active category) plus a matching list in the
@@ -749,14 +755,43 @@ function renderBrandFilterUI(){
     }).join('');
   }
 }
-function renderPriceFilterUI(){
-  const list=document.getElementById('filterPriceList'); if(!list) return;
-  const opts=[{k:'',t:T[lang].filter_price_none},{k:'asc',t:T[lang].filter_price_asc},{k:'desc',t:T[lang].filter_price_desc}];
-  list.innerHTML=opts.map(o=>`<button class="filter-row ${o.k===priceSort?'on':''}" data-price-sort="${o.k}">${o.t}</button>`).join('');
+/* color/storage filters: real facets pulled from each product's own
+   colors[]/storage[] arrays — scoped to the active category+brand so the
+   list never offers a color/size nothing in view actually has. */
+function scopedForVariants(){
+  let list=filter==='all'?PRODUCTS:PRODUCTS.filter(p=>p.cat===filter);
+  if(brandFilter!=='all') list=list.filter(p=>p.brand===brandFilter);
+  return list;
+}
+function colorHexIn(list,name){
+  for(const p of list){ if(p.colors){ const f=p.colors.find(c=>c.name===name); if(f) return f.hex; } }
+  return '#ccc';
+}
+function renderVariantFilterUI(){
+  const scoped=scopedForVariants();
+  const colorList=document.getElementById('filterColorList');
+  if(colorList){
+    const colors=[...new Set(scoped.flatMap(p=>p.colors?p.colors.map(c=>c.name):[]))];
+    colorList.innerHTML=['all',...colors].map(c=>{
+      const label=c==='all'?T[lang].filter_all:c;
+      const swatch=c==='all'?'':`<span class="filter-swatch" style="background:${colorHexIn(scoped,c)}"></span>`;
+      return `<button class="filter-row filter-row-swatch ${c===colorFilter?'on':''}" data-color-filter="${c}">${swatch}<span>${label}</span></button>`;
+    }).join('');
+  }
+  const storageList=document.getElementById('filterStorageList');
+  if(storageList){
+    const storages=[...new Set(scoped.flatMap(p=>p.storage?p.storage.map(s=>s.label):[]))];
+    storageList.innerHTML=['all',...storages].map(s=>{
+      const label=s==='all'?T[lang].filter_all:s;
+      return `<button class="filter-row ${s===storageFilter?'on':''}" data-storage-filter="${s}">${label}</button>`;
+    }).join('');
+  }
 }
 function renderProducts(){
   let list=filter==='all'?PRODUCTS:PRODUCTS.filter(p=>p.cat===filter);
   if(brandFilter!=='all') list=list.filter(p=>p.brand===brandFilter);
+  if(colorFilter!=='all') list=list.filter(p=>p.colors&&p.colors.some(c=>c.name===colorFilter));
+  if(storageFilter!=='all') list=list.filter(p=>p.storage&&p.storage.some(s=>s.label===storageFilter));
   if(searchQuery) list=list.filter(p=>p.name.toLowerCase().includes(searchQuery.toLowerCase()));
   if(priceSort==='asc') list=[...list].sort((a,b)=>a.price-b.price);
   if(priceSort==='desc') list=[...list].sort((a,b)=>b.price-a.price);
@@ -766,7 +801,7 @@ function renderProducts(){
   initMotionFor(el);
 }
 function runSearch(q){
-  searchQuery=q.trim(); filter='all'; brandFilter='all';
+  searchQuery=q.trim(); filter='all'; brandFilter='all'; colorFilter='all'; storageFilter='all';
   document.getElementById('mobileSearch').classList.remove('open');
   go('products');
 }
@@ -1054,6 +1089,7 @@ document.getElementById('searchToggle').addEventListener('click',()=>{
   mobileSearch.classList.toggle('open');
   if(mobileSearch.classList.contains('open')) document.getElementById('searchInputMobile').focus();
 });
+document.getElementById('sortSelect').addEventListener('change',e=>{ priceSort=e.target.value; renderProducts(); });
 
 /* ---------- live search suggestions ----------
    Big-store search behaviour: results appear as you type, arrow keys walk the
@@ -1118,13 +1154,14 @@ document.addEventListener('click',e=>{
   const rm=e.target.closest('[data-remove]'); if(rm){delete bag[rm.dataset.remove];renderBag();return;}
   const giftBox=e.target.closest('[data-gift]'); if(giftBox){bag[giftBox.dataset.gift].gift=giftBox.checked;renderBag();return;}
   if(e.target.closest('#viewFullCart')){closeCart();go('bag');return;}
-  const chip=e.target.closest('[data-filter]'); if(chip){filter=chip.dataset.filter;searchQuery='';renderChips();renderProducts();return;}
-  const brandChip=e.target.closest('[data-brand-filter]'); if(brandChip){brandFilter=brandChip.dataset.brandFilter;renderChips();renderProducts();return;}
-  const priceChip=e.target.closest('[data-price-sort]'); if(priceChip){priceSort=priceChip.dataset.priceSort;renderChips();renderProducts();return;}
+  const chip=e.target.closest('[data-filter]'); if(chip){filter=chip.dataset.filter;searchQuery='';colorFilter='all';storageFilter='all';renderChips();renderProducts();return;}
+  const brandChip=e.target.closest('[data-brand-filter]'); if(brandChip){brandFilter=brandChip.dataset.brandFilter;colorFilter='all';storageFilter='all';renderChips();renderProducts();return;}
+  const colorChip=e.target.closest('[data-color-filter]'); if(colorChip){colorFilter=colorChip.dataset.colorFilter;renderVariantFilterUI();renderProducts();return;}
+  const storageChip=e.target.closest('[data-storage-filter]'); if(storageChip){storageFilter=storageChip.dataset.storageFilter;renderVariantFilterUI();renderProducts();return;}
   const filterToggle=e.target.closest('[data-filter-toggle]'); if(filterToggle){filterToggle.closest('.filter-group').classList.toggle('collapsed');return;}
-  if(e.target.closest('#appleSeeAll')){filter='all';brandFilter='apple';searchQuery='';go('products');return;}
-  if(e.target.closest('#samsungSeeAll')){filter='all';brandFilter='samsung';searchQuery='';go('products');return;}
-  const catBtn=e.target.closest('[data-cat]'); if(catBtn){filter=catBtn.dataset.cat;brandFilter='all';searchQuery='';go('products');return;}
+  if(e.target.closest('#appleSeeAll')){filter='all';brandFilter='apple';colorFilter='all';storageFilter='all';searchQuery='';go('products');return;}
+  if(e.target.closest('#samsungSeeAll')){filter='all';brandFilter='samsung';colorFilter='all';storageFilter='all';searchQuery='';go('products');return;}
+  const catBtn=e.target.closest('[data-cat]'); if(catBtn){filter=catBtn.dataset.cat;brandFilter='all';colorFilter='all';storageFilter='all';searchQuery='';go('products');return;}
   const spotTile=e.target.closest('[data-spot-pid]'); if(spotTile){openProduct(spotTile.dataset.spotPid);return;}
   const faq=e.target.closest('.faq-q'); if(faq){faq.parentElement.classList.toggle('open');return;}
   const pcard=e.target.closest('.pcard[data-pid]'); if(pcard){openProduct(pcard.dataset.pid);return;}
