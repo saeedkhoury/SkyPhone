@@ -69,7 +69,7 @@ const PRODUCTS=[
     colors:[{name:'Midnight',hex:'#1d1d1f'},{name:'Starlight',hex:'#f0e6d8'},{name:'Blue',hex:'#5f7a99'},{name:'(PRODUCT)RED',hex:'#a72032'}],
     storage:[{label:'128GB',delta:0},{label:'256GB',delta:350},{label:'512GB',delta:800}],
     desc:{he:'iPhone 14 — האמינות והביצועים של אפל במחיר נגיש יותר.',ar:'iPhone 14 — موثوقية وأداء آبل بسعر أكثر سهولة.',en:'iPhone 14 — Apple\'s reliability and performance at a more accessible price.'}},
-  {id:10,name:'Xiaomi 14',cat:'phones',price:2490,icon:'phone',img:IMG.xiaomi14,
+  {id:10,name:'Xiaomi 14',cat:'phones',price:2490,icon:'phone',img:IMG.xiaomi14,brand:'xiaomi',
     colors:[{name:'Black',hex:'#1c1c1e'},{name:'White',hex:'#eceae6'},{name:'Jade Green',hex:'#6f8a72'}],
     storage:[{label:'256GB',delta:0},{label:'512GB',delta:300}],
     desc:{he:'Xiaomi 14 — טלפון אנדרואיד רב עוצמה עם מצלמת Leica ותמורה מעולה למחיר.',ar:'Xiaomi 14 — هاتف أندرويد قوي بكاميرا Leica وقيمة ممتازة مقابل السعر.',en:'Xiaomi 14 — a powerful Android phone with a Leica camera and excellent value.'}},
@@ -85,14 +85,14 @@ const PRODUCTS=[
     colors:[{name:'Midnight',hex:'#33363d'},{name:'Starlight',hex:'#f0e6d8'},{name:'Space Gray',hex:'#5b5c5f'},{name:'Silver',hex:'#e5e5e5'}],
     storage:[{label:'256GB SSD',delta:0},{label:'512GB SSD',delta:600}],
     desc:{he:'MacBook Air עם שבב M2 — דק, שקט לחלוטין וסוללה שמחזיקה יום שלם.',ar:'MacBook Air بشريحة M2 — رفيع، صامت تماماً وبطارية تدوم يوماً كاملاً.',en:'MacBook Air with the M2 chip — thin, completely silent, and battery that lasts all day.'}},
-  {id:12,name:'Dell XPS 13',cat:'computers',price:4990,icon:'laptop',img:IMG.xps13,
+  {id:12,name:'Dell XPS 13',cat:'computers',price:4990,icon:'laptop',img:IMG.xps13,brand:'dell',
     colors:[{name:'Platinum Silver',hex:'#c9cbcd'},{name:'Graphite',hex:'#3a3b3e'}],
     storage:[{label:'512GB SSD',delta:0},{label:'1TB SSD',delta:500}],
     desc:{he:'Dell XPS 13 — מחשב Windows קומפקטי עם מסך InfinityEdge ובנייה מאלומיניום.',ar:'Dell XPS 13 — حاسوب Windows مدمج بشاشة InfinityEdge وهيكل ألومنيوم.',en:'Dell XPS 13 — a compact Windows laptop with an InfinityEdge display and aluminum build.'}},
   {id:5,name:'Steam Deck',cat:'gaming',price:2490,icon:'console',badge:'hot',img:IMG.steamdeck,
     storage:[{label:'256GB',delta:0},{label:'512GB',delta:450},{label:'1TB OLED',delta:1100}],
     desc:{he:'Steam Deck — קונסולת גיימינג ניידת שמריצה את כל ספריית המשחקים שלך מכל מקום.',ar:'Steam Deck — جهاز ألعاب محمول يشغّل مكتبة ألعابك بالكامل من أي مكان.',en:'Steam Deck — a handheld gaming console that runs your whole library, anywhere.'}},
-  {id:13,name:'PS5 DualSense',cat:'gaming',price:290,icon:'console',img:IMG.dualsense,
+  {id:13,name:'PS5 DualSense',cat:'gaming',price:290,icon:'console',img:IMG.dualsense,brand:'sony',
     colors:[{name:'White',hex:'#eceae6'},{name:'Midnight Black',hex:'#1c1c1e'},{name:'Cosmic Red',hex:'#9c2b2b'},{name:'Starlight Blue',hex:'#5f7a99'}],
     desc:{he:'בקר DualSense ל-PS5 עם משוב הפטי ומקשי טריגר אדפטיביים.',ar:'يد تحكم DualSense لجهاز PS5 مع استجابة لمسية ومفاتيح تحفيز تكيفية.',en:'DualSense controller for PS5 with haptic feedback and adaptive triggers.'}},
   {id:7,name:'Gaming Headset Pro',cat:'gaming',price:490,icon:'headset',badge:'hot',img:IMG.headset,
@@ -157,7 +157,11 @@ const PRODUCTS=[
     colors:[{name:'Green',hex:'#4a6a52'},{name:'Cream',hex:'#e8dfc8'},{name:'Silver',hex:'#c9cbcd'}],
     storage:[{label:'40mm',delta:0},{label:'44mm',delta:150}],
     variant2Label:'size',
-    desc:{he:'Galaxy Watch7 עם מעקב בריאות מתקדם וסוללה שמחזיקה ימים.',ar:'Galaxy Watch7 بتتبع صحي متقدم وبطارية تدوم أياماً.',en:'Galaxy Watch7 with advanced health tracking and multi-day battery life.'}}
+    desc:{he:'Galaxy Watch7 עם מעקב בריאות מתקדם וסוללה שמחזיקה ימים.',ar:'Galaxy Watch7 بتتبع صحي متقدم وبطارية تدوم أياماً.',en:'Galaxy Watch7 with advanced health tracking and multi-day battery life.'}},
+  {id:27,name:'PlayStation 5',cat:'gaming',price:2190,icon:'console',badge:'new',brand:'sony',
+    colors:[{name:'White',hex:'#eceae6'}],
+    storage:[{label:'Digital Edition',delta:0},{label:'Disc Edition',delta:300}],
+    desc:{he:'PlayStation 5 עם משחקים ב-4K וזמני טעינה כמעט מיידיים.',ar:'PlayStation 5 بألعاب 4K وأوقات تحميل شبه فورية.',en:'PlayStation 5 with 4K gaming and near-instant load times.'}}
 ];
 const PHONE_REPAIR_DEVICES=[
   {name:'Xiaomi 14',screen:250,battery:150,port:120,water:200},
@@ -200,6 +204,7 @@ const T={
   trust_ig_n:'+54.2K',trust_ig_l:'עוקבים באינסטגרם',trust_years_n:'+16',trust_years_l:'שנות ותק בכפר כנא',trust_lang_n:'3',trust_lang_l:'שפות שירות',
   pr_title:'כל המוצרים',pr_sub:'טלפונים, טאבלטים, מחשבים, גיימינג ואביזרים — במחירים הכי טובים.',
   filter_all:'הכל',cat_phones:'טלפונים',cat_tablets:'טאבלטים',cat_computers:'מחשבים',cat_gaming:'גיימינג',cat_accessories:'אביזרים',add:'הוספה',
+  filter_category:'קטגוריה',filter_brand:'מותג',filter_price:'מחיר',filter_price_none:'ברירת מחדל',filter_price_asc:'מהזול ליקר',filter_price_desc:'מהיקר לזול',filter_results:'{n} מוצרים',
   pdp_back:'חזרה למוצרים',pdp_color:'צבע',pdp_storage:'נפח אחסון',pdp_size:'מידה',pdp_qty:'כמות',pdp_add:'הוספה לסל',pdp_more:'עוד ב',
   search_ph:'חיפוש מוצרים...',search_empty_h:'לא נמצאו תוצאות',search_empty_p:'נסו חיפוש אחר או עיינו בכל המוצרים.',
    promo_msg:'🛠️ תיקון באותו יום · כפר כנא · WhatsApp 052-722-3916',
@@ -212,7 +217,7 @@ const T={
    fy_rep_head:'מסך שבור? סוללה חלשה?',fy_rep_sub:'המעבדה שלנו מתקנת הכל — לרוב באותו יום, בחלקים מקוריים ועם אחריות מלאה.',fy_rep_cta:'לתיאום תיקון',
    fy_ig_head:'עוקבים באינסטגרם',fy_ig_sub:'מבצעים, הגעות חדשות ומה שחם בחנות — קודם כל שם.',fy_ig_cta:'עקבו אחרינו',
    fy_brands_l:'מותגים שתמצאו אצלנו',
-   soon_badge:'בקרוב',ad_i18_sub:'iPhone 18 Pro / Pro Max / Ultra מגיעים בקרוב ל-Sky Phone.',ad_i18_cta:'עדכנו אותי בוואטסאפ',
+   soon_badge:'בקרוב',ad_i18_sub:'iPhone 18 Pro / Pro Max / Ultra מגיעים בקרוב ל-Sky Phone.',ad_i18_cta:'עדכנו אותי בוואטסאפ',gta_cta:'עדכנו אותי כשמגיע',fy_gaming_head:'עולם הגיימינג אצלנו',fy_gaming_sub:'קונסולות ומשחקים — כולל מה שמגיע בקרוב.',
    reels_head:'עוד מאיתנו ברשתות',reels_sub:'רגעים אמיתיים מהחנות — ישר מהפייסבוק שלנו.',reel_watch:'צפייה בפייסבוק',
    apple_head:'עולם ה-Apple אצלנו',apple_sub:'אייפון, אייפד, מק ואפל ווטש — הכל מקורי ובאחריות מלאה.',
    samsung_head:'עולם ה-Samsung אצלנו',samsung_sub:'גלקסי, טאבים ואוזניות — המבחר המלא של סמסונג.',
@@ -226,7 +231,7 @@ const T={
   rp_list_head:'תיקונים ומחירים',rp_list_sub:'מחיר התחלתי — נקבע סופית לאחר בדיקה.',rp_from:'החל מ־',rp_book:'הוספה לסל',rp_note:'המחירים לנוחותכם בלבד; המחיר הסופי נקבע לאחר בדיקת המכשיר.',rp_pick_device:'בחרו מכשיר',
   rep_r1:'החלפת מסך',rep_r2:'החלפת סוללה',rep_r3:'תיקון שקע טעינה',rep_r4:'טיפול בנזקי מים',rep_r5:'שחזור תוכנה',rep_r6:'תיקון מחשב / לפטופ',rep_r7:'תיקון קונסולה',
   bag_title:'הסל שלי',bag_sub:'מוצרים, שירותים ותיקונים שבחרת.',bag_empty_h:'הסל ריק',bag_empty_p:'עדיין לא הוספת כלום. בואו נמצא לך משהו.',bag_empty_cta:'למוצרים',
-  bag_subtotal:'סכום ביניים',bag_ship:'משלוח',bag_ship_v:'חינם',bag_total:'סה״כ',bag_checkout:'למעבר לתשלום',tag_product:'מוצר',tag_repair:'תיקון',bag_remove:'הסרה',
+  bag_subtotal:'סכום ביניים',bag_ship:'משלוח',bag_ship_v:'חינם',bag_total:'סה״כ',bag_checkout:'למעבר לתשלום',tag_product:'מוצר',tag_repair:'תיקון',bag_remove:'הסרה',bag_gift_label:'עטיפת מתנה',bag_view_full:'לצפייה בסל בעמוד מלא',
   modal_title:'כמעט שם!',modal_body:'זו גרסת הדגמה — בגרסה החיה כאן מתחבר תשלום מאובטח (אשראי / Bit / PayPal).',modal_close:'הבנתי',
   ab_title:'עלינו ויצירת קשר',ab_lead:'הכל על Sky Phone — וכל דרך ליצור איתנו קשר.',
   ab_story_h:'הסיפור שלנו',ab_story_p1:'Sky Phone פועלת מאז 2010 — חנות שכונתית שהפכה לכתובת לטלפונים, מחשבים, גיימינג ותיקונים.',ab_story_p2:'אנחנו מאמינים בשירות אישי, חלקים מקוריים ואחריות מלאה — בעברית, בערבית ובאנגלית.',
@@ -270,6 +275,7 @@ const T={
   trust_ig_n:'+54.2K',trust_ig_l:'متابع على إنستغرام',trust_years_n:'+16',trust_years_l:'سنة خبرة في كفركنا',trust_lang_n:'3',trust_lang_l:'لغات خدمة',
   pr_title:'كل المنتجات',pr_sub:'هواتف، أجهزة لوحية، حواسيب، ألعاب وملحقات — بأفضل الأسعار.',
   filter_all:'الكل',cat_phones:'هواتف',cat_tablets:'لوحية',cat_computers:'حواسيب',cat_gaming:'ألعاب',cat_accessories:'ملحقات',add:'أضف',
+  filter_category:'الفئة',filter_brand:'الماركة',filter_price:'السعر',filter_price_none:'الافتراضي',filter_price_asc:'من الأرخص للأغلى',filter_price_desc:'من الأغلى للأرخص',filter_results:'{n} منتجات',
   pdp_back:'العودة للمنتجات',pdp_color:'اللون',pdp_storage:'سعة التخزين',pdp_size:'المقاس',pdp_qty:'الكمية',pdp_add:'أضف إلى السلة',pdp_more:'المزيد في',
   search_ph:'ابحث عن منتج...',search_empty_h:'لا توجد نتائج',search_empty_p:'جرّب بحثاً آخر أو تصفّح كل المنتجات.',
    promo_msg:'🛠️ إصلاح بنفس اليوم · كفركنا · واتساب 052-722-3916',
@@ -282,7 +288,7 @@ const T={
    fy_rep_head:'شاشة مكسورة؟ بطارية ضعيفة؟',fy_rep_sub:'مختبرنا يصلح كل شيء — غالباً في نفس اليوم، بقطع أصلية وضمان كامل.',fy_rep_cta:'احجز إصلاحاً',
    fy_ig_head:'متابع على إنستغرام',fy_ig_sub:'عروض، وصولات جديدة وكل ما هو حار في المتجر — هناك أولاً.',fy_ig_cta:'تابعونا',
    fy_brands_l:'ماركات تجدونها لدينا',
-   soon_badge:'قريباً',ad_i18_sub:'iPhone 18 Pro / Pro Max / Ultra قريباً في Sky Phone.',ad_i18_cta:'أعلمني عبر واتساب',
+   soon_badge:'قريباً',ad_i18_sub:'iPhone 18 Pro / Pro Max / Ultra قريباً في Sky Phone.',ad_i18_cta:'أعلمني عبر واتساب',gta_cta:'أعلمني عند الوصول',fy_gaming_head:'عالم الألعاب لدينا',fy_gaming_sub:'أجهزة ألعاب وعناوين — بما فيها ما هو قادم قريباً.',
    reels_head:'المزيد منّا على السوشال ميديا',reels_sub:'لحظات حقيقية من المتجر — مباشرة من فيسبوك.',reel_watch:'مشاهدة على فيسبوك',
    apple_head:'عالم Apple لدينا',apple_sub:'آيفون، آيباد، ماك وآبل ووتش — كله أصلي وبضمان كامل.',
    samsung_head:'عالم Samsung لدينا',samsung_sub:'غالاكسي، أجهزة لوحية وسماعات — التشكيلة الكاملة من سامسونج.',
@@ -296,7 +302,7 @@ const T={
   rp_list_head:'الإصلاحات والأسعار',rp_list_sub:'سعر ابتدائي — يُحدَّد نهائياً بعد الفحص.',rp_from:'ابتداءً من',rp_book:'أضف إلى السلة',rp_note:'الأسعار للاستدلال فقط؛ يُحدَّد السعر النهائي بعد فحص الجهاز.',rp_pick_device:'اختر الجهاز',
   rep_r1:'استبدال الشاشة',rep_r2:'استبدال البطارية',rep_r3:'إصلاح منفذ الشحن',rep_r4:'معالجة أضرار المياه',rep_r5:'استعادة البرمجيات',rep_r6:'إصلاح حاسوب / لابتوب',rep_r7:'إصلاح كونسول',
   bag_title:'سلّتي',bag_sub:'المنتجات والخدمات والإصلاحات التي اخترتها.',bag_empty_h:'السلّة فارغة',bag_empty_p:'لم تُضِف شيئاً بعد. لنجد لك ما يناسبك.',bag_empty_cta:'إلى المنتجات',
-  bag_subtotal:'المجموع الفرعي',bag_ship:'التوصيل',bag_ship_v:'مجاني',bag_total:'الإجمالي',bag_checkout:'إتمام الشراء',tag_product:'منتج',tag_repair:'إصلاح',bag_remove:'إزالة',
+  bag_subtotal:'المجموع الفرعي',bag_ship:'التوصيل',bag_ship_v:'مجاني',bag_total:'الإجمالي',bag_checkout:'إتمام الشراء',tag_product:'منتج',tag_repair:'إصلاح',bag_remove:'إزالة',bag_gift_label:'تغليف هدية',bag_view_full:'عرض السلة في صفحة كاملة',
   modal_title:'اقتربت!',modal_body:'هذه نسخة تجريبية — في النسخة الحيّة يتم ربط دفع آمن (بطاقة / Bit / PayPal).',modal_close:'حسناً',
   ab_title:'من نحن والتواصل',ab_lead:'كل شيء عن Sky Phone — وكل طرق التواصل معنا.',
   ab_story_h:'قصّتنا',ab_story_p1:'تعمل Sky Phone منذ 2010 — متجر الحي الذي أصبح وجهةً للهواتف والحواسيب والألعاب والإصلاح.',ab_story_p2:'نؤمن بالخدمة الشخصية والقطع الأصلية والضمان الكامل — بالعبرية والعربية والإنجليزية.',
@@ -340,6 +346,7 @@ const T={
   trust_ig_n:'+54.2K',trust_ig_l:'Instagram followers',trust_years_n:'+16',trust_years_l:'years serving Kafr Kanna',trust_lang_n:'3',trust_lang_l:'service languages',
   pr_title:'All products',pr_sub:'Phones, tablets, computers, gaming and accessories — at the best prices.',
   filter_all:'All',cat_phones:'Phones',cat_tablets:'Tablets',cat_computers:'Computers',cat_gaming:'Gaming',cat_accessories:'Accessories',add:'Add',
+  filter_category:'Category',filter_brand:'Brand',filter_price:'Price',filter_price_none:'Default',filter_price_asc:'Price: low to high',filter_price_desc:'Price: high to low',filter_results:'{n} products',
   pdp_back:'Back to products',pdp_color:'Color',pdp_storage:'Storage',pdp_size:'Size',pdp_qty:'Quantity',pdp_add:'Add to bag',pdp_more:'More in',
   search_ph:'Search products...',search_empty_h:'No results found',search_empty_p:'Try a different search or browse all products.',
    promo_msg:'🛠️ Same-day repair · Kafr Kanna · WhatsApp 052-722-3916',
@@ -352,7 +359,7 @@ const T={
    fy_rep_head:'Cracked screen? Weak battery?',fy_rep_sub:'Our lab fixes it all — usually the same day, with genuine parts and a full warranty.',fy_rep_cta:'Book a repair',
    fy_ig_head:'followers on Instagram',fy_ig_sub:'Deals, new arrivals and what’s hot in the shop — there first.',fy_ig_cta:'Follow us',
    fy_brands_l:'Brands you’ll find here',
-   soon_badge:'Coming soon',ad_i18_sub:'iPhone 18 Pro / Pro Max / Ultra are coming soon to Sky Phone.',ad_i18_cta:'Notify me on WhatsApp',
+   soon_badge:'Coming soon',ad_i18_sub:'iPhone 18 Pro / Pro Max / Ultra are coming soon to Sky Phone.',ad_i18_cta:'Notify me on WhatsApp',gta_cta:'Notify me when it arrives',fy_gaming_head:'The gaming world, here',fy_gaming_sub:'Consoles and titles — including what\'s coming soon.',
    reels_head:'More from us on social',reels_sub:'Real moments from the shop — straight from our Facebook.',reel_watch:'Watch on Facebook',
    apple_head:'The Apple world, here',apple_sub:'iPhone, iPad, Mac and Apple Watch — all genuine, full warranty.',
    samsung_head:'The Samsung world, here',samsung_sub:'Galaxy phones, tablets and earbuds — the full Samsung lineup.',
@@ -366,7 +373,7 @@ const T={
   rp_list_head:'Repairs & prices',rp_list_sub:'Starting price — finalised after inspection.',rp_from:'from',rp_book:'Add to Bag',rp_note:'Prices are indicative; the final price is set after we inspect the device.',rp_pick_device:'Choose a device',
   rep_r1:'Screen replacement',rep_r2:'Battery replacement',rep_r3:'Charging port fix',rep_r4:'Water damage treatment',rep_r5:'Software restore',rep_r6:'Laptop / PC repair',rep_r7:'Console repair',
   bag_title:'My Bag',bag_sub:'Products, services and repairs you’ve chosen.',bag_empty_h:'Your bag is empty',bag_empty_p:'Nothing here yet. Let’s find you something.',bag_empty_cta:'Browse products',
-  bag_subtotal:'Subtotal',bag_ship:'Delivery',bag_ship_v:'Free',bag_total:'Total',bag_checkout:'Checkout',tag_product:'Product',tag_repair:'Repair',bag_remove:'Remove',
+  bag_subtotal:'Subtotal',bag_ship:'Delivery',bag_ship_v:'Free',bag_total:'Total',bag_checkout:'Checkout',tag_product:'Product',tag_repair:'Repair',bag_remove:'Remove',bag_gift_label:'Gift wrap',bag_view_full:'View full-page cart',
   modal_title:'Almost there!',modal_body:'This is a demo — the live version connects secure payment here (card / Bit / PayPal).',modal_close:'Got it',
   ab_title:'About & Contact',ab_lead:'Everything about Sky Phone — and every way to reach us.',
   ab_story_h:'Our story',ab_story_p1:'Sky Phone has been running since 2010 — a neighbourhood shop that grew into the place for phones, computers, gaming and repairs.',ab_story_p2:'We believe in personal service, genuine parts and a full warranty — in Hebrew, Arabic and English.',
@@ -399,13 +406,23 @@ const T={
    chat_a_repair_q:'Which repair do you need? For example: screen, battery, charging port, water damage, computer or console — you can name the device too.'}
 };
 
-let lang='he', route='foryou', filter='all', searchQuery='';
+let lang='he', route='foryou', filter='all', searchQuery='', brandFilter='all', priceSort='';
+const BRAND_LABEL={apple:'Apple',samsung:'Samsung',xiaomi:'Xiaomi',dell:'Dell',sony:'Sony'};
 const bag={};
 const fmt=n=>n.toLocaleString('en-US');
 function pmedia(p){
   const svg=ICON[p.icon]||REPICON[p.icon]||REPICON.tools;
   if(!p.img) return svg;
   return `<span class="pfb">${svg}</span><img class="pimg" src="${p.img}" alt="${p.name||''}" loading="lazy" onerror="var f=this.previousElementSibling; if(f) f.classList.add('show'); this.remove();">`;
+}
+/* PDP gallery: supports multiple real photos per product via an optional
+   `imgs` array (falls back to the single `img` field, then the icon) —
+   built so real photos can be dropped in later without any code change. */
+function pdpImages(p){ return (p.imgs&&p.imgs.length)?p.imgs:(p.img?[p.img]:[]); }
+function pmediaSrc(p,src){
+  const svg=ICON[p.icon]||REPICON[p.icon]||REPICON.tools;
+  if(!src) return svg;
+  return `<span class="pfb">${svg}</span><img class="pimg" src="${src}" alt="${p.name||''}" loading="lazy" onerror="var f=this.previousElementSibling; if(f) f.classList.add('show'); this.remove();">`;
 }
 function catName(c){return c==='all'?T[lang].filter_all:T[lang]['cat_'+c];}
 
@@ -638,6 +655,32 @@ function renderHighlights(ids,elId){
     </a>`).join('');
   initMotionFor(el);
 }
+/* gaming highlights: real consoles plus one honest "coming soon" teaser
+   (GTA VI isn't a product we sell — it's not linked to a PDP, just a real
+   release visitors ask about, same treatment as the iPhone 18 slide). */
+function renderGamingHighlights(){
+  const el=document.getElementById('gamingHighlights'); if(!el) return;
+  const tints=['var(--bg-soft)','var(--accent-tint)','var(--bg-soft-2)'];
+  const picks=[27,5].map(id=>PRODUCTS.find(p=>p.id===id)).filter(Boolean);
+  let html=picks.map((p,i)=>`<a class="highlight-card" data-spot-pid="${p.id}" data-reveal style="background:${tints[i%tints.length]}; animation-delay:${i*.08}s">
+      <div class="highlight-text">
+        <span class="highlight-kind">${catName(p.cat)}</span>
+        <h3 class="highlight-title">${p.name}</h3>
+        <div class="highlight-price">${T[lang].cat_from} ₪${fmt(p.price)}</div>
+      </div>
+      <div class="highlight-media">${pmedia(p)}</div>
+    </a>`).join('');
+  html+=`<a class="highlight-card highlight-card-soon" href="https://wa.me/972527223916?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%A9%D7%AA%D7%A2%D7%93%D7%9B%D7%A0%D7%95%20%D7%90%D7%95%D7%AA%D7%99%20%D7%9B%D7%A9%D7%94-GTA%20VI%20%D7%9E%D7%92%D7%99%D7%A2" target="_blank" rel="noopener" data-reveal style="background:var(--dark); animation-delay:.16s">
+      <div class="highlight-text">
+        <span class="highlight-kind ad-badge" style="margin:0">${T[lang].soon_badge}</span>
+        <h3 class="highlight-title" style="color:#fff">GTA VI</h3>
+        <div class="highlight-cta-text">${T[lang].gta_cta}</div>
+      </div>
+      <div class="highlight-media" style="color:var(--dark-ink-soft)">${ICON.console}</div>
+    </a>`;
+  el.innerHTML=html;
+  initMotionFor(el);
+}
 /* reels row: real videos the shop posts on Facebook. Facebook's iframe
    embed plugin (plugins/video.php) doesn't resolve these /share/r/ reel
    links — verified in QA, it returns "post no longer available" even
@@ -675,29 +718,66 @@ function initPromoRotation(){
     setTimeout(()=>{ promoIdx=(promoIdx+1)%PROMO_KEYS.length; el.textContent=T[lang][PROMO_KEYS[promoIdx]]; el.classList.remove('fade'); },300);
   },5200);
 }
+function brandsInCatalog(){ return [...new Set(PRODUCTS.map(p=>p.brand).filter(Boolean))]; }
 function renderChips(){
   document.getElementById('chips').innerHTML=FILTERS.map(f=>`<button class="chip ${f===filter?'on':''}" data-filter="${f}">${catName(f)}</button>`).join('');
+  const catList=document.getElementById('filterCatList');
+  if(catList) catList.innerHTML=FILTERS.map(f=>`<button class="filter-row ${f===filter?'on':''}" data-filter="${f}">${catName(f)}</button>`).join('');
+  renderBrandFilterUI();
+  renderPriceFilterUI();
+}
+/* brand filter: a circular row under the category chips (scoped to brands
+   actually present in the active category) plus a matching list in the
+   sidebar — both drive the same `brandFilter` state. */
+function renderBrandFilterUI(){
+  const inCat=filter==='all'?PRODUCTS:PRODUCTS.filter(p=>p.cat===filter);
+  const brandsHere=[...new Set(inCat.map(p=>p.brand).filter(Boolean))];
+  const circleRow=document.getElementById('brandCircleRow');
+  if(circleRow){
+    circleRow.innerHTML=brandsHere.length?['all',...brandsHere].map(b=>{
+      const mark=b==='all'?`<span class="brand-circle-letter">${T[lang].filter_all}</span>`:(b==='apple'?BRANDICON.apple:`<span class="brand-circle-letter">${(BRAND_LABEL[b]||b)[0]}</span>`);
+      const label=b==='all'?T[lang].filter_all:(BRAND_LABEL[b]||b);
+      return `<button class="brand-circle-item ${b===brandFilter?'on':''}" data-brand-filter="${b}"><span class="brand-circle-mark">${mark}</span><span class="brand-circle-label">${label}</span></button>`;
+    }).join(''):'';
+  }
+  const list=document.getElementById('filterBrandList');
+  if(list){
+    const brands=brandsInCatalog();
+    list.innerHTML=['all',...brands].map(b=>{
+      const label=b==='all'?T[lang].filter_all:(BRAND_LABEL[b]||b);
+      return `<button class="filter-row ${b===brandFilter?'on':''}" data-brand-filter="${b}">${label}</button>`;
+    }).join('');
+  }
+}
+function renderPriceFilterUI(){
+  const list=document.getElementById('filterPriceList'); if(!list) return;
+  const opts=[{k:'',t:T[lang].filter_price_none},{k:'asc',t:T[lang].filter_price_asc},{k:'desc',t:T[lang].filter_price_desc}];
+  list.innerHTML=opts.map(o=>`<button class="filter-row ${o.k===priceSort?'on':''}" data-price-sort="${o.k}">${o.t}</button>`).join('');
 }
 function renderProducts(){
   let list=filter==='all'?PRODUCTS:PRODUCTS.filter(p=>p.cat===filter);
+  if(brandFilter!=='all') list=list.filter(p=>p.brand===brandFilter);
   if(searchQuery) list=list.filter(p=>p.name.toLowerCase().includes(searchQuery.toLowerCase()));
+  if(priceSort==='asc') list=[...list].sort((a,b)=>a.price-b.price);
+  if(priceSort==='desc') list=[...list].sort((a,b)=>b.price-a.price);
   const el=document.getElementById('grid');
   el.innerHTML=list.length?list.map(productCard).join(''):`<div class="empty" style="grid-column:1/-1"><h3>${T[lang].search_empty_h}</h3><p>${T[lang].search_empty_p}</p></div>`;
+  const count=document.getElementById('productsCount'); if(count) count.textContent=T[lang].filter_results.replace('{n}',list.length);
   initMotionFor(el);
 }
 function runSearch(q){
-  searchQuery=q.trim(); filter='all';
+  searchQuery=q.trim(); filter='all'; brandFilter='all';
   document.getElementById('mobileSearch').classList.remove('open');
   go('products');
 }
 
 /* ---------- product detail page ---------- */
-let pdpId=null, pdpColorIdx=0, pdpVariantIdx=0, pdpQty=1;
+let pdpId=null, pdpColorIdx=0, pdpVariantIdx=0, pdpQty=1, pdpImgIdx=0;
 function openProduct(id){
   pdpId=Number(id);
   const p=PRODUCTS.find(x=>x.id===pdpId);
   if(!p) return;
-  pdpColorIdx=0; pdpVariantIdx=0; pdpQty=1;
+  pdpColorIdx=0; pdpVariantIdx=0; pdpQty=1; pdpImgIdx=0;
   go('product');
   renderProductPage();
 }
@@ -719,10 +799,17 @@ function renderProductPage(){
   const relatedHtml=related.length?`<div class="pdp-more">
     <div class="section-head" data-reveal><div><h2 class="h2">${T[lang].pdp_more} ${catName(p.cat)}</h2></div></div>
     <div class="row">${related.map(productCard).join('')}</div></div>`:'';
+  const imgs=pdpImages(p);
+  if(pdpImgIdx>=imgs.length) pdpImgIdx=0;
+  const galleryMain=imgs.length?pmediaSrc(p,imgs[pdpImgIdx]):pmedia(p);
+  const thumbsHtml=imgs.length>1?`<div class="pdp-thumbs">${imgs.map((src,i)=>`<button class="pdp-thumb ${i===pdpImgIdx?'on':''}" data-pdp-img-idx="${i}"><img src="${src}" alt=""></button>`).join('')}</div>`:'';
   box.innerHTML=`
     <button class="pdp-back" data-route="products"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>${T[lang].pdp_back}</button>
     <div class="pdp-grid">
-      <div class="pdp-gallery">${pmedia(p)}</div>
+      <div class="pdp-gallery-wrap">
+        <div class="pdp-gallery">${galleryMain}</div>
+        ${thumbsHtml}
+      </div>
       <div>
         <div class="pdp-kind">${catName(p.cat)}</div>
         <h1 class="pdp-name">${p.name}</h1>
@@ -825,22 +912,31 @@ function updateBagBadges(){
   const n=bagCount(); const c=document.getElementById('bagCount'); c.textContent=n; c.classList.toggle('show',n>0);
   const m=document.getElementById('mmBadge'); m.textContent=n; m.classList.toggle('show',n>0);
 }
+const GIFT_WRAP_PRICE=15;
 function renderBag(){
-  const items=Object.values(bag), box=document.getElementById('bag-body');
-  if(!items.length){ box.innerHTML=`<div class="empty"><h3>${T[lang].bag_empty_h}</h3><p>${T[lang].bag_empty_p}</p><br><button class="btn btn-primary" data-route="products">${T[lang].bag_empty_cta}</button></div>`; updateBagBadges(); return; }
+  ['bag-body','bag-page-body'].forEach(id=>{
+    const box=document.getElementById(id);
+    if(box) renderBagInto(box);
+  });
+  updateBagBadges();
+}
+function renderBagInto(box){
+  const items=Object.values(bag);
+  if(!items.length){ box.innerHTML=`<div class="empty"><h3>${T[lang].bag_empty_h}</h3><p>${T[lang].bag_empty_p}</p><br><button class="btn btn-primary" data-route="products">${T[lang].bag_empty_cta}</button></div>`; return; }
   let total=0;
-  const rows=items.map((it,i)=>{ const o=lookup(it); const up=unitPrice(it); const price=up*it.qty; total+=price;
+  const rows=items.map((it,i)=>{ const o=lookup(it); const up=unitPrice(it); total+=up*it.qty+(it.gift?GIFT_WRAP_PRICE:0);
+    const giftRow=it.type==='product'?`<label class="bi-gift"><input type="checkbox" data-gift="${it.key}" ${it.gift?'checked':''}><span>${T[lang].bag_gift_label}</span><b>+₪${fmt(GIFT_WRAP_PRICE)}</b></label>`:'';
     return `<div class="bi" style="animation-delay:${Math.min(i,8)*45}ms"><div class="bi-media">${pmedia(it.type==='product'?o:{icon:REPAIRS.find(r=>r.id==it.id).ic})}</div>
       <div class="bi-info"><span class="bi-tag ${it.type}">${it.type==='product'?T[lang].tag_product:T[lang].tag_repair}</span>
         <div class="bi-n">${itemName(it)}</div><div class="bi-p">₪${fmt(up)}</div>
-        <div class="qty"><button data-dec="${it.key}">−</button><span>${it.qty}</span><button data-inc="${it.key}">+</button></div></div>
+        <div class="qty"><button data-dec="${it.key}">−</button><span>${it.qty}</span><button data-inc="${it.key}">+</button></div>
+        ${giftRow}</div>
       <button class="bi-remove" data-remove="${it.key}">${T[lang].bag_remove}</button></div>`;}).join('');
   box.innerHTML=rows+`<div class="bag-summary">
       <div class="bag-line"><span>${T[lang].bag_subtotal}</span><span>₪${fmt(total)}</span></div>
       <div class="bag-line"><span>${T[lang].bag_ship}</span><span>${T[lang].bag_ship_v}</span></div>
       <div class="bag-total"><span>${T[lang].bag_total}</span><span>₪${fmt(total)}</span></div>
       <button class="btn btn-primary" id="checkout">${T[lang].bag_checkout}</button></div>`;
-  updateBagBadges();
 }
 function addItem(type,id,opts){
   opts=opts||{};
@@ -849,7 +945,7 @@ function addItem(type,id,opts){
   bag[k]=bag[k]||{type,id,qty:0,key:k,color:opts.color||null,variant:opts.variant||null,delta:opts.delta||0};
   bag[k].qty+=opts.qty||1;
   updateBagBadges();
-  if(document.getElementById('cartDrawer').classList.contains('open'))renderBag();
+  if(route==='bag'||document.getElementById('cartDrawer').classList.contains('open'))renderBag();
 }
 
 /* ---------- fly-to-bag ----------
@@ -896,6 +992,7 @@ function go(name){
   document.querySelectorAll('.nav-links a').forEach(a=>a.classList.toggle('active',a.dataset.route===name||(name==='product'&&a.dataset.route==='products')));
   if(name==='products'){renderChips();renderProducts();}
   if(name==='repairs'){renderSteps();renderRepairs();}
+  if(name==='bag')renderBag();
   if(name!=='product'){
     document.getElementById('pdpStickyBar').classList.remove('show');
     document.querySelector('.whatsapp-fab').classList.remove('raised');
@@ -915,10 +1012,10 @@ function setLang(l){
   closeSuggest();
   promoIdx=0;
   applyText(); renderServices(); renderRepairSpot(); renderFaq();
-  renderHighlights([17,18,19],'appleHighlights'); renderHighlights([24,11,26],'samsungHighlights'); renderReels();
+  renderHighlights([17,18,19,20,22,21],'appleHighlights'); renderHighlights([24,11,26,8],'samsungHighlights'); renderGamingHighlights(); renderReels();
   if(route==='products'){renderChips();renderProducts();}
   if(route==='repairs'){renderSteps();renderRepairs();}
-  if(document.getElementById('cartDrawer').classList.contains('open'))renderBag();
+  if(route==='bag'||document.getElementById('cartDrawer').classList.contains('open'))renderBag();
   if(document.getElementById('repairModal').classList.contains('open'))renderRepairModal();
   if(route==='product')renderProductPage();
   renderChatChips();
@@ -1019,12 +1116,19 @@ document.addEventListener('click',e=>{
   const inc=e.target.closest('[data-inc]'); if(inc){bag[inc.dataset.inc].qty++;renderBag();return;}
   const dec=e.target.closest('[data-dec]'); if(dec){const k=dec.dataset.dec;bag[k].qty--;if(bag[k].qty<=0)delete bag[k];renderBag();return;}
   const rm=e.target.closest('[data-remove]'); if(rm){delete bag[rm.dataset.remove];renderBag();return;}
+  const giftBox=e.target.closest('[data-gift]'); if(giftBox){bag[giftBox.dataset.gift].gift=giftBox.checked;renderBag();return;}
+  if(e.target.closest('#viewFullCart')){closeCart();go('bag');return;}
   const chip=e.target.closest('[data-filter]'); if(chip){filter=chip.dataset.filter;searchQuery='';renderChips();renderProducts();return;}
-  if(e.target.closest('#appleSeeAll')||e.target.closest('#samsungSeeAll')){filter='all';searchQuery='';go('products');return;}
-  const catBtn=e.target.closest('[data-cat]'); if(catBtn){filter=catBtn.dataset.cat;searchQuery='';go('products');return;}
+  const brandChip=e.target.closest('[data-brand-filter]'); if(brandChip){brandFilter=brandChip.dataset.brandFilter;renderChips();renderProducts();return;}
+  const priceChip=e.target.closest('[data-price-sort]'); if(priceChip){priceSort=priceChip.dataset.priceSort;renderChips();renderProducts();return;}
+  const filterToggle=e.target.closest('[data-filter-toggle]'); if(filterToggle){filterToggle.closest('.filter-group').classList.toggle('collapsed');return;}
+  if(e.target.closest('#appleSeeAll')){filter='all';brandFilter='apple';searchQuery='';go('products');return;}
+  if(e.target.closest('#samsungSeeAll')){filter='all';brandFilter='samsung';searchQuery='';go('products');return;}
+  const catBtn=e.target.closest('[data-cat]'); if(catBtn){filter=catBtn.dataset.cat;brandFilter='all';searchQuery='';go('products');return;}
   const spotTile=e.target.closest('[data-spot-pid]'); if(spotTile){openProduct(spotTile.dataset.spotPid);return;}
   const faq=e.target.closest('.faq-q'); if(faq){faq.parentElement.classList.toggle('open');return;}
   const pcard=e.target.closest('.pcard[data-pid]'); if(pcard){openProduct(pcard.dataset.pid);return;}
+  const imgBtn=e.target.closest('[data-pdp-img-idx]'); if(imgBtn){pdpImgIdx=Number(imgBtn.dataset.pdpImgIdx);renderProductPage();return;}
   const colorBtn=e.target.closest('[data-color-idx]'); if(colorBtn){pdpColorIdx=Number(colorBtn.dataset.colorIdx);renderProductPage();return;}
   const variantBtn=e.target.closest('[data-variant-idx]'); if(variantBtn){pdpVariantIdx=Number(variantBtn.dataset.variantIdx);renderProductPage();return;}
   if(e.target.closest('[data-pdp-inc]')){pdpQty++;renderProductPage();return;}
@@ -1329,7 +1433,7 @@ const fav=document.getElementById('favicon'); if(fav) fav.href=LOGO;
 document.querySelectorAll('.h1,.h2,.display').forEach(el=>el.setAttribute('data-text-reveal',''));
 setLang('he');
 renderServices(); renderRepairSpot(); renderFaq();
-renderHighlights([17,18,19],'appleHighlights'); renderHighlights([24,11,26],'samsungHighlights'); renderReels();
+renderHighlights([17,18,19,20,22,21],'appleHighlights'); renderHighlights([24,11,26,8],'samsungHighlights'); renderGamingHighlights(); renderReels();
 go('foryou');
 initHeroTilt();
 initHeroCarousel();
