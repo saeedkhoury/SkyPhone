@@ -107,7 +107,57 @@ const PRODUCTS=[
     colors:[{name:'Graphite',hex:'#3a3b3e'},{name:'White',hex:'#eceae6'},{name:'Silver',hex:'#c9cbcd'}],
     desc:{he:'Galaxy Buds3 עם ביטול רעשים אקטיבי וסאונד עשיר.',ar:'Galaxy Buds3 بإلغاء ضوضاء نشط وصوت غني.',en:'Galaxy Buds3 with active noise cancellation and rich sound.'}},
   {id:14,name:'Fast Charger 65W',cat:'accessories',price:120,icon:'charger',img:IMG.charger,
-    desc:{he:'מטען מהיר 65W תואם לרוב הטלפונים והמחשבים הניידים.',ar:'شاحن سريع 65 واط متوافق مع معظم الهواتف وأجهزة الحاسوب المحمولة.',en:'65W fast charger, compatible with most phones and laptops.'}}
+    desc:{he:'מטען מהיר 65W תואם לרוב הטלפונים והמחשבים הניידים.',ar:'شاحن سريع 65 واط متوافق مع معظم الهواتف وأجهزة الحاسوب المحمولة.',en:'65W fast charger, compatible with most phones and laptops.'}},
+  /* Current Apple and Samsung lineups (2026-09-06 addition, at the client's
+     request to carry every current model, not just a curated few). No local
+     photos exist yet for these specific models, so they use the authored
+     icon fallback (pmedia() already handles that gracefully — see the
+     comment above IMG) until real photos are supplied. */
+  {id:15,name:'iPhone 17',cat:'phones',price:3690,icon:'phone',badge:'new',brand:'apple',
+    colors:[{name:'Black',hex:'#1c1c1e'},{name:'White',hex:'#f0e6d8'},{name:'Lavender',hex:'#c9c2d9'},{name:'Sage',hex:'#a9b79a'},{name:'Mist Blue',hex:'#a9c0cf'}],
+    storage:[{label:'256GB',delta:0},{label:'512GB',delta:450}],
+    desc:{he:'iPhone 17 עם שבב A19, מסך ProMotion 120Hz וגוף אלומיניום קל.',ar:'iPhone 17 بشريحة A19 وشاشة ProMotion 120Hz وهيكل ألومنيوم خفيف.',en:'iPhone 17 with the A19 chip, a 120Hz ProMotion display and a light aluminum body.'}},
+  {id:16,name:'iPhone 17 Pro',cat:'phones',price:4990,icon:'phone',badge:'new',brand:'apple',
+    colors:[{name:'Deep Blue',hex:'#22334a'},{name:'Silver',hex:'#e5e5e5'},{name:'Cosmic Orange',hex:'#a3552b'}],
+    storage:[{label:'256GB',delta:0},{label:'512GB',delta:450},{label:'1TB',delta:950}],
+    desc:{he:'iPhone 17 Pro עם שבב A19 Pro, מצלמת Pro Fusion 48MP ועיצוב יוניבודי.',ar:'iPhone 17 Pro بشريحة A19 Pro وكاميرا Pro Fusion 48MP وتصميم Unibody.',en:'iPhone 17 Pro with the A19 Pro chip, a 48MP Pro Fusion camera and a unibody design.'}},
+  {id:17,name:'iPhone 17 Pro Max',cat:'phones',price:5490,icon:'phone',badge:'new',brand:'apple',
+    colors:[{name:'Deep Blue',hex:'#22334a'},{name:'Silver',hex:'#e5e5e5'},{name:'Cosmic Orange',hex:'#a3552b'}],
+    storage:[{label:'256GB',delta:0},{label:'512GB',delta:450},{label:'1TB',delta:950},{label:'2TB',delta:1900}],
+    desc:{he:'iPhone 17 Pro Max — המסך הכי גדול, הסוללה הכי חזקה, אותו שבב A19 Pro.',ar:'iPhone 17 Pro Max — أكبر شاشة وأقوى بطارية، بنفس شريحة A19 Pro.',en:'iPhone 17 Pro Max — the biggest screen and battery, the same A19 Pro chip.'}},
+  {id:18,name:'MacBook Pro 14"',cat:'computers',price:8990,icon:'laptop',brand:'apple',
+    colors:[{name:'Space Black',hex:'#2b2b2b'},{name:'Silver',hex:'#e5e5e5'}],
+    storage:[{label:'512GB SSD',delta:0},{label:'1TB SSD',delta:700}],
+    desc:{he:'MacBook Pro 14 אינץ׳ עם שבב M4 ומסך Liquid Retina XDR — לעבודה מקצועית.',ar:'MacBook Pro 14 إنش بشريحة M4 وشاشة Liquid Retina XDR — للعمل الاحترافي.',en:'14" MacBook Pro with the M4 chip and a Liquid Retina XDR display — for pro workflows.'}},
+  {id:19,name:'iPad Pro',cat:'tablets',price:4290,icon:'tablet',brand:'apple',
+    colors:[{name:'Space Black',hex:'#2b2b2b'},{name:'Silver',hex:'#e5e5e5'}],
+    storage:[{label:'256GB',delta:0},{label:'512GB',delta:500},{label:'1TB',delta:1200}],
+    desc:{he:'iPad Pro עם שבב M4 ומסך Ultra Retina XDR — הטאבלט הכי חזק של אפל.',ar:'iPad Pro بشريحة M4 وشاشة Ultra Retina XDR — أقوى جهاز لوحي من آبل.',en:'iPad Pro with the M4 chip and an Ultra Retina XDR display — Apple\'s most powerful tablet.'}},
+  {id:20,name:'iPad',cat:'tablets',price:1690,icon:'tablet',brand:'apple',
+    colors:[{name:'Blue',hex:'#7fa7c9'},{name:'Pink',hex:'#e3b8c4'},{name:'Silver',hex:'#e5e5e5'},{name:'Yellow',hex:'#e8d27a'}],
+    storage:[{label:'128GB',delta:0},{label:'256GB',delta:300}],
+    desc:{he:'iPad — הכי משתלם, מושלם לגלישה, לימודים ובידור יומיומי.',ar:'iPad — الأكثر قيمة مقابل السعر، مثالي للتصفح والدراسة والترفيه اليومي.',en:'iPad — the best value, perfect for everyday browsing, study and play.'}},
+  {id:21,name:'Apple Watch Ultra 2',cat:'accessories',price:3390,icon:'watch',brand:'apple',
+    colors:[{name:'Natural Titanium',hex:'#8a8479'},{name:'Black Titanium',hex:'#2b2a28'}],
+    storage:[{label:'49mm',delta:0}],
+    desc:{he:'Apple Watch Ultra 2 — עמיד, עם GPS מדויק וסוללה שמחזיקה ימים.',ar:'Apple Watch Ultra 2 — متين، مع GPS دقيق وبطارية تدوم أياماً.',en:'Apple Watch Ultra 2 — rugged, with precise GPS and multi-day battery life.'}},
+  {id:22,name:'AirPods Pro 2',cat:'accessories',price:990,icon:'buds',brand:'apple',
+    desc:{he:'AirPods Pro 2 עם ביטול רעשים אקטיבי ואודיו מרחבי מותאם אישית.',ar:'AirPods Pro 2 بإلغاء ضوضاء نشط وصوت مكاني مخصص.',en:'AirPods Pro 2 with active noise cancellation and personalized spatial audio.'}},
+  {id:23,name:'AirPods 4',cat:'accessories',price:590,icon:'buds',brand:'apple',
+    desc:{he:'AirPods 4 — עיצוב חדש, סאונד עשיר יותר וסוללה משופרת.',ar:'AirPods 4 — تصميم جديد، صوت أغنى وبطارية محسّنة.',en:'AirPods 4 — a new design, richer sound and improved battery life.'}},
+  {id:24,name:'Galaxy S25 Ultra',cat:'phones',price:5190,icon:'phone',badge:'new',brand:'samsung',
+    colors:[{name:'Titanium Black',hex:'#2b2b2e'},{name:'Titanium Gray',hex:'#8a8a8d'},{name:'Titanium Blue',hex:'#4a5a72'}],
+    storage:[{label:'256GB',delta:0},{label:'512GB',delta:450},{label:'1TB',delta:950}],
+    desc:{he:'Galaxy S25 Ultra עם בינה מלאכותית מתקדמת, עט S Pen ומצלמה בזום גבוה.',ar:'Galaxy S25 Ultra بذكاء اصطناعي متقدم وقلم S Pen وكاميرا بتقريب عالٍ.',en:'Galaxy S25 Ultra with advanced on-device AI, the built-in S Pen and a high-zoom camera.'}},
+  {id:25,name:'Galaxy S25',cat:'phones',price:3590,icon:'phone',badge:'new',brand:'samsung',
+    colors:[{name:'Navy',hex:'#22334a'},{name:'Silver Shadow',hex:'#c9cbcd'},{name:'Mint',hex:'#a9c9ba'}],
+    storage:[{label:'128GB',delta:0},{label:'256GB',delta:350}],
+    desc:{he:'Galaxy S25 — קומפקטי וחזק, עם מסך Dynamic AMOLED וביצועים מעולים.',ar:'Galaxy S25 — مدمج وقوي، بشاشة Dynamic AMOLED وأداء ممتاز.',en:'Galaxy S25 — compact and powerful, with a Dynamic AMOLED display and excellent performance.'}},
+  {id:26,name:'Galaxy Watch7',cat:'accessories',price:1490,icon:'watch',brand:'samsung',
+    colors:[{name:'Green',hex:'#4a6a52'},{name:'Cream',hex:'#e8dfc8'},{name:'Silver',hex:'#c9cbcd'}],
+    storage:[{label:'40mm',delta:0},{label:'44mm',delta:150}],
+    variant2Label:'size',
+    desc:{he:'Galaxy Watch7 עם מעקב בריאות מתקדם וסוללה שמחזיקה ימים.',ar:'Galaxy Watch7 بتتبع صحي متقدم وبطارية تدوم أياماً.',en:'Galaxy Watch7 with advanced health tracking and multi-day battery life.'}}
 ];
 const PHONE_REPAIR_DEVICES=[
   {name:'Xiaomi 14',screen:250,battery:150,port:120,water:200},
@@ -479,17 +529,6 @@ function attachTilt(el){
   });
   el.addEventListener('pointerleave',()=>{ el.style.transform=''; });
 }
-/* spotlight-tile media parallax: the product image drifts toward the pointer
-   while the particle field handles the background — depth without 3D tilt. */
-function attachTileParallax(tile){
-  const img=tile.querySelector('.tile-parallax'); if(!img) return;
-  tile.addEventListener('pointermove',e=>{
-    const r=tile.getBoundingClientRect();
-    const px=(e.clientX-r.left)/r.width-.5, py=(e.clientY-r.top)/r.height-.5;
-    img.style.transform=`translate(${px*16}px, ${py*12}px) scale(1.04)`;
-  });
-  tile.addEventListener('pointerleave',()=>{ img.style.transform=''; });
-}
 /* Text reveal: masks each tagged headline and slides its text up on
    first appearance. The wrapper persists across language switches —
    applyText() writes into .tr-inner instead of the element itself. */
@@ -513,7 +552,6 @@ function initMotionFor(root){
     root.querySelectorAll('.spot').forEach(initParticleField);
     root.querySelectorAll('.magnetic').forEach(attachMagnetic);
     root.querySelectorAll('.pcard').forEach(attachTilt);
-    root.querySelectorAll('.spot-tile').forEach(attachTileParallax);
   }
 }
 function initHeroTilt(){
@@ -567,13 +605,6 @@ function productCard(p,i){
         <button class="add" data-add="${p.id}" aria-label="${T[lang].add}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button></div>
     </div></article>`;
 }
-function renderArrivals(){
-  const list=PRODUCTS.filter(p=>p.badge).concat(PRODUCTS.filter(p=>!p.badge)).slice(0,6);
-  const el=document.getElementById('fy-arrivals');
-  el.innerHTML=list.map(productCard).join('');
-  initMotionFor(el);
-  refreshRowArrows();
-}
 function renderServices(){
   document.getElementById('fy-services').innerHTML=`
     <div class="feature-lg spot" data-reveal>
@@ -590,34 +621,22 @@ function renderServices(){
     </div>`;
   initMotionFor(document.getElementById('fy-services'));
 }
-function renderCatRow(){
-  const el=document.getElementById('catRow');
-  if(!el) return;
-  const catIcon={phones:ICON.phone,tablets:ICON.tablet,computers:ICON.laptop,gaming:ICON.console,accessories:ICON.watch};
-  const items=FILTERS.filter(f=>f!=='all').map(c=>{
-    const min=Math.min(...PRODUCTS.filter(p=>p.cat===c).map(p=>p.price));
-    return `<div class="cat-item" data-cat="${c}"><div class="cat-circle">${catIcon[c]}</div><div class="cat-name">${catName(c)}</div><div class="cat-price">${T[lang].cat_from} ₪${fmt(min)}</div></div>`;
-  }).join('');
-  const repMin=Math.min(...REPAIRS.map(r=>r.price));
-  const repItem=`<div class="cat-item" data-route="repairs"><div class="cat-circle">${REPICON.tools}</div><div class="cat-name">${T[lang].cat_repairs}</div><div class="cat-price">${T[lang].cat_from} ₪${fmt(repMin)}</div></div>`;
-  el.innerHTML=items+repItem;
-  initMotionFor(el);
-}
-/* accessories strip: hand-picked add-on products */
-function renderAccessories(){
-  const el=document.getElementById('fy-acc-row'); if(!el) return;
-  const picks=[6,8,13,14].map(id=>PRODUCTS.find(p=>p.id===id)).filter(Boolean);
-  el.innerHTML=picks.map(productCard).join('');
-  initMotionFor(el);
-  refreshRowArrows();
-}
-/* brand showcase rows: Apple / Samsung, pulled straight from the real catalog */
-function renderBrandRow(brand,elId){
+/* brand highlights: a few real flagship products per brand, each card a
+   direct link into its own PDP (istoreil.co.il/iplace.co.il pattern) —
+   replaces the old scattered arrivals/accessories/category rows. */
+function renderHighlights(ids,elId){
   const el=document.getElementById(elId); if(!el) return;
-  const picks=PRODUCTS.filter(p=>p.brand===brand);
-  el.innerHTML=picks.map(productCard).join('');
+  const tints=['var(--bg-soft)','var(--accent-tint)','var(--bg-soft-2)'];
+  const picks=ids.map(id=>PRODUCTS.find(p=>p.id===id)).filter(Boolean);
+  el.innerHTML=picks.map((p,i)=>`<a class="highlight-card" data-spot-pid="${p.id}" data-reveal style="background:${tints[i%tints.length]}; animation-delay:${i*.08}s">
+      <div class="highlight-text">
+        <span class="highlight-kind">${catName(p.cat)}</span>
+        <h3 class="highlight-title">${p.name}</h3>
+        <div class="highlight-price">${T[lang].cat_from} ₪${fmt(p.price)}</div>
+      </div>
+      <div class="highlight-media">${pmedia(p)}</div>
+    </a>`).join('');
   initMotionFor(el);
-  refreshRowArrows();
 }
 /* reels row: real videos the shop posts on Facebook. Facebook's iframe
    embed plugin (plugins/video.php) doesn't resolve these /share/r/ reel
@@ -895,8 +914,8 @@ function setLang(l){
   document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.l===l));
   closeSuggest();
   promoIdx=0;
-  applyText(); renderArrivals(); renderServices(); renderCatRow(); renderAccessories(); renderRepairSpot(); renderFaq();
-  renderBrandRow('apple','fy-apple-row'); renderBrandRow('samsung','fy-samsung-row'); renderReels();
+  applyText(); renderServices(); renderRepairSpot(); renderFaq();
+  renderHighlights([17,18,19],'appleHighlights'); renderHighlights([24,11,26],'samsungHighlights'); renderReels();
   if(route==='products'){renderChips();renderProducts();}
   if(route==='repairs'){renderSteps();renderRepairs();}
   if(document.getElementById('cartDrawer').classList.contains('open'))renderBag();
@@ -1001,7 +1020,6 @@ document.addEventListener('click',e=>{
   const dec=e.target.closest('[data-dec]'); if(dec){const k=dec.dataset.dec;bag[k].qty--;if(bag[k].qty<=0)delete bag[k];renderBag();return;}
   const rm=e.target.closest('[data-remove]'); if(rm){delete bag[rm.dataset.remove];renderBag();return;}
   const chip=e.target.closest('[data-filter]'); if(chip){filter=chip.dataset.filter;searchQuery='';renderChips();renderProducts();return;}
-  if(e.target.closest('#accSeeAll')){filter='accessories';searchQuery='';go('products');return;}
   if(e.target.closest('#appleSeeAll')||e.target.closest('#samsungSeeAll')){filter='all';searchQuery='';go('products');return;}
   const catBtn=e.target.closest('[data-cat]'); if(catBtn){filter=catBtn.dataset.cat;searchQuery='';go('products');return;}
   const spotTile=e.target.closest('[data-spot-pid]'); if(spotTile){openProduct(spotTile.dataset.spotPid);return;}
@@ -1035,32 +1053,6 @@ addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>10||mobile
    Sticky scene: the phone sweeps rotateY from -26° to +26° as the section
    scrolls past, with spec chips floating in at staggered thresholds.
    Static stacked fallback on small screens / reduced-motion (CSS owns that). */
-function initShowcase(){
-  const sec=document.getElementById('showcase'), phone=document.getElementById('showcasePhone');
-  if(!sec||!phone) return;
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const mq=matchMedia('(max-width:920px)');
-  if(mq.matches) return;
-  const chips=[...sec.querySelectorAll('.show-chip')];
-  const thresholds=[0.18,0.45,0.72];
-  let tick=false;
-  function upd(){
-    tick=false;
-    if(mq.matches){ phone.style.transform=''; chips.forEach(c=>c.classList.remove('on')); return; }
-    const r=sec.getBoundingClientRect();
-    const total=r.height-innerHeight;
-    const p=Math.min(1,Math.max(0,-r.top/Math.max(1,total)));
-    const ry=-26+p*52;
-    const rx=6-Math.sin(p*Math.PI)*9;
-    const s=.92+Math.sin(p*Math.PI)*.1;
-    phone.style.transform=`rotateY(${ry}deg) rotateX(${rx}deg) scale(${s})`;
-    chips.forEach((c,i)=>c.classList.toggle('on',p>=thresholds[i]));
-  }
-  addEventListener('scroll',()=>{ if(!tick){ requestAnimationFrame(upd); tick=true; } },{passive:true});
-  addEventListener('resize',upd);
-  upd();
-}
-
 /* ---------- hero parallax ---------- */
 function initHeroParallax(){
   const wrap=document.querySelector('.hero-device-wrap'), hero=document.getElementById('hero');
@@ -1336,13 +1328,12 @@ document.querySelectorAll('.brand-logo').forEach(el=>el.src=LOGO);
 const fav=document.getElementById('favicon'); if(fav) fav.href=LOGO;
 document.querySelectorAll('.h1,.h2,.display').forEach(el=>el.setAttribute('data-text-reveal',''));
 setLang('he');
-renderArrivals(); renderServices(); renderCatRow(); renderAccessories(); renderRepairSpot(); renderFaq();
-renderBrandRow('apple','fy-apple-row'); renderBrandRow('samsung','fy-samsung-row'); renderReels();
+renderServices(); renderRepairSpot(); renderFaq();
+renderHighlights([17,18,19],'appleHighlights'); renderHighlights([24,11,26],'samsungHighlights'); renderReels();
 go('foryou');
 initHeroTilt();
 initHeroCarousel();
 initHeroParallax();
-initShowcase();
 initCursor();
 initPageLoader();
 initScrollProgress();
