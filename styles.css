@@ -13,8 +13,8 @@
   --bg-soft:#f5f5f7;
   --bg-soft-2:#ececee;
   --ink:#1d1d1f;
-  --ink-soft:#6e6e73;
-  --ink-faint:#8a8a8e;
+  --ink-soft:#6a6a6f;    /* 4.50:1 on --bg-soft-2 */
+  --ink-faint:#6b6b6e;   /* was #8a8a8e (3.44:1) — now 4.50:1 even on --bg-soft-2 */
   --line:rgba(0,0,0,.08);
   --line-2:rgba(0,0,0,.14);
 
@@ -25,14 +25,18 @@
   --dark-line:rgba(255,255,255,.12);
   --dark-line-2:rgba(255,255,255,.2);
 
-  --accent:#b8862f;
-  --accent-hover:#8f6a25;
+  --accent:#b8862f;      /* decorative + on dark grounds (6.11:1 on --dark) */
+  --accent-strong:#896523; /* gold AS TEXT or behind white text on light grounds:
+                              4.51:1 on --bg-soft-2, 5.32:1 on --bg */
+  --accent-hover:#7a5a1f;
   --accent-ink:#ffffff;
   --accent-tint:#faf3e6;
   --accent-glow:rgba(184,134,47,.35);
 
   --warn:#bf5b04;
   --ok:#0a7d3c;
+  --err:#c0392b;        /* 5.44:1 on --bg, 4.99:1 on the error panel */
+  --err-bg:#fdf3f2;
 
   --radius-sm:12px;
   --radius-md:18px;
@@ -89,6 +93,15 @@ button{font-family:inherit}
 [hidden]{display:none!important}
 ::selection{background:var(--accent); color:#fff}
 :focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:6px}
+/* WCAG 2.2 "Focus Not Obscured": the nav and promo ribbon are fixed, so without
+   this an anchor/skip jump parks the focused element underneath them. */
+html{scroll-padding-block-start:calc(var(--nav-h) + var(--ribbon-h) + 12px)}
+#main:focus{outline:none}
+.skip-link{position:fixed; inset-block-start:8px; inset-inline-start:8px; z-index:200;
+  background:var(--ink); color:#fff; padding:12px 20px; border-radius:var(--radius-pill);
+  font-weight:650; font-size:14px; text-decoration:none;
+  transform:translateY(-160%); transition:transform .18s var(--ease)}
+.skip-link:focus{transform:translateY(0)}
 img{max-width:100%; display:block}
 
 .wrap{width:min(1120px,90vw); margin-inline:auto}
@@ -164,17 +177,17 @@ body.cursor-on, body.cursor-on a, body.cursor-on button, body.cursor-on .pcard, 
   border-color .2s var(--ease), transform .2s var(--ease), box-shadow .2s var(--ease);
 }
 .btn:active{transform:scale(.97)}
-.btn-primary{background:var(--accent); color:#fff; position:relative; overflow:hidden}
+.btn-primary{background:var(--accent-strong); color:#fff; position:relative; overflow:hidden}
 .btn-primary::after{content:''; position:absolute; inset:0; pointer-events:none; background:linear-gradient(115deg, transparent 35%, rgba(255,255,255,.28) 50%, transparent 65%); transform:translateX(-130%); transition:transform .6s var(--ease)}
 .btn-primary:hover::after{transform:translateX(130%)}
 [dir="rtl"] .btn-primary::after{transform:translateX(130%)}
 [dir="rtl"] .btn-primary:hover::after{transform:translateX(-130%)}
 .btn-primary:hover{background:var(--accent-hover)}
-.btn-secondary{background:transparent; color:var(--accent); border-color:var(--line-2); padding-inline:22px}
+.btn-secondary{background:transparent; color:var(--accent-strong); border-color:var(--line-2); padding-inline:22px}
 .btn-secondary:hover{border-color:var(--accent); background:var(--accent-tint)}
 .btn-on-dark{background:rgba(255,255,255,.14); color:#fff; border-color:rgba(255,255,255,.28); backdrop-filter:blur(20px) saturate(160%)}
 .btn-on-dark:hover{background:rgba(255,255,255,.22)}
-.btn-link{background:none; border:0; color:var(--accent); font-weight:600; padding:0; display:inline-flex; align-items:center; gap:4px; cursor:pointer}
+.btn-link{background:none; border:0; color:var(--accent-strong); font-weight:600; padding:0; display:inline-flex; align-items:center; gap:4px; cursor:pointer}
 .btn-link .chev{width:9px;height:9px; transition:transform .2s var(--ease)}
 .btn-link:hover .chev{transform:translateX(3px)}
 [dir="rtl"] .btn-link:hover .chev{transform:translateX(-3px) scaleX(-1)}
@@ -189,7 +202,7 @@ body.cursor-on, body.cursor-on a, body.cursor-on button, body.cursor-on .pcard, 
   -webkit-transform:translateZ(0); will-change:transform}
 .promo-ribbon.closed{transform:translateY(-100%); opacity:0; pointer-events:none}
 .promo-inner{display:flex; align-items:center; justify-content:center; width:100%; position:relative; font-size:13px; font-weight:500}
-.promo-close{position:absolute; inset-inline-end:0; background:none; border:0; color:var(--dark-ink-soft); cursor:pointer; padding:4px; display:grid; place-items:center}
+.promo-close{position:absolute; inset-inline-end:0; background:none; border:0; color:var(--dark-ink-soft); cursor:pointer; padding:4px; display:grid; place-items:center; min-width:24px; min-height:24px}
 .promo-close:hover{color:#fff}
 .promo-close svg{width:14px;height:14px}
 
@@ -409,7 +422,12 @@ body.ribbon-closed .page{padding-block-start:var(--nav-h)}
 
 .hero-dots{position:absolute; bottom:26px; inset-inline:0; z-index:6; display:flex; justify-content:center; gap:8px}
 .hero-dot{width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,.35); border:0; padding:0;
-  cursor:pointer; transform-origin:center; transition:background .2s, transform .25s var(--ease)}
+  cursor:pointer; transform-origin:center; transition:background .2s, transform .25s var(--ease);
+  position:relative}
+/* the dot stays 8px visually; this gives it the 24px pointer target WCAG 2.2 AA
+   asks for without opening a gap in the row or changing the design */
+.hero-dot::before{content:''; position:absolute; inset:50% auto auto 50%;
+  width:24px; height:24px; transform:translate(-50%,-50%)}
 .hero-dot.active{background:#fff; transform:scaleX(2.75)}
 #hero.on-light .hero-dot{background:rgba(0,0,0,.2)}
 #hero.on-light .hero-dot.active{background:var(--ink)}
@@ -462,7 +480,7 @@ body.ribbon-closed .page{padding-block-start:var(--nav-h)}
 .pcard-media .pfb.show{display:grid}
 .pcard:hover .pcard-media svg,.pcard:hover .pcard-media .pimg{transform:scale(1.045)}
 .tag{position:absolute; inset-block-start:12px; inset-inline-start:12px; z-index:3; background:var(--ink); color:#fff; font-size:11px; font-weight:600; letter-spacing:.01em; padding:5px 10px; border-radius:999px}
-.tag.hot{background:var(--accent)}
+.tag.hot{background:var(--accent-strong)}
 .pcard-body{padding:18px 16px 20px; display:flex; flex-direction:column; gap:3px}
 .pcard-kind{font-size:12px; color:var(--ink-faint); font-weight:500}
 .pcard-name{font-weight:600; font-size:16px; color:var(--ink)}
@@ -531,7 +549,7 @@ body.ribbon-closed .page{padding-block-start:var(--nav-h)}
 .brand-circle-mark svg{width:24px;height:24px}
 .brand-circle-letter{font-size:16px; font-weight:700}
 .brand-circle-item:hover .brand-circle-mark{transform:translateY(-2px); box-shadow:var(--shadow-md)}
-.brand-circle-item.on .brand-circle-mark{border-color:var(--accent); background:var(--accent-tint); color:var(--accent)}
+.brand-circle-item.on .brand-circle-mark{border-color:var(--accent); background:var(--accent-tint); color:var(--accent-strong)}
 .brand-circle-label{font-size:12px; font-weight:600; color:var(--ink-soft)}
 .brand-circle-item.on .brand-circle-label{color:var(--ink)}
 
@@ -595,7 +613,7 @@ body.drawer-open{overflow:hidden}
 .bi-media svg{width:58%;height:58%} .bi-media .pimg{width:80%;height:80%;object-fit:contain} .bi-media .pfb{position:absolute;inset:16%;display:none;place-items:center} .bi-media .pfb.show{display:grid}
 .bi-info{flex:1}
 .bi-tag{display:inline-block; font-size:10px; font-weight:700; letter-spacing:.03em; text-transform:uppercase; padding:3px 9px; border-radius:999px; margin-block-end:6px}
-.bi-tag.product{background:var(--accent-tint); color:var(--accent)}
+.bi-tag.product{background:var(--accent-tint); color:var(--accent-strong)}
 .bi-tag.repair{background:var(--bg-soft); color:var(--ink-soft)}
 .bi-n{font-weight:600; color:var(--ink); font-size:16px} .bi-p{color:var(--ink-soft); font-weight:500; margin-block-start:2px; font-size:14px}
 .qty{display:inline-flex; align-items:center; gap:12px; margin-block-start:10px; border:1px solid var(--line-2); border-radius:var(--radius-pill); padding:4px 12px}
@@ -741,7 +759,18 @@ body.drawer-open{overflow:hidden}
 .faq-a>div{overflow:hidden}
 .faq-a>div>p{padding-block-end:22px; margin:0}
 
-.form{display:grid; gap:12px; max-width:560px}
+.form{display:grid; gap:18px; max-width:560px}
+.field{display:grid; gap:7px}
+.field label{font-size:13px; font-weight:650; color:var(--ink)}
+.field-err{font-size:13px; color:var(--err); min-height:0}
+.field-err:empty{display:none}
+.form input.invalid,.form textarea.invalid{border-color:var(--err); background:var(--bg)}
+.form-errors{border:1px solid var(--err); border-inline-start-width:4px;
+  border-radius:var(--radius-sm); padding:16px 18px; background:var(--err-bg)}
+.form-errors h3{font-size:15px; font-weight:700; color:var(--err); margin-block-end:8px}
+.form-errors ul{margin:0; padding-inline-start:18px; display:grid; gap:6px}
+.form-errors li{font-size:14px}
+.form-errors a{color:var(--err); text-decoration:underline}
 .form input,.form textarea{background:var(--bg-soft); border:1px solid transparent; border-radius:var(--radius-sm); padding:15px 16px; color:var(--ink); font-family:inherit; font-size:15px; transition:border-color .15s, background .15s}
 .form textarea{min-height:120px; resize:vertical}
 .form input:focus,.form textarea:focus{outline:0; border-color:var(--accent); background:var(--bg)}
@@ -760,7 +789,7 @@ footer{background:var(--bg-soft); padding-block:56px 28px}
 .modal.open{opacity:1; visibility:visible}
 .modal-card{background:var(--bg); border-radius:var(--radius-lg); padding:40px; width:min(420px,92vw); text-align:center; transform:scale(.95) translateY(6px); transition:transform .25s var(--ease); box-shadow:var(--shadow-lg)}
 .modal.open .modal-card{transform:none}
-.modal-card .ok{width:56px;height:56px;border-radius:50%; background:var(--accent-tint); color:var(--accent); display:grid;place-items:center; margin:0 auto 18px}
+.modal-card .ok{width:56px;height:56px;border-radius:50%; background:var(--accent-tint); color:var(--accent-strong); display:grid;place-items:center; margin:0 auto 18px}
 .modal-card h3{font-size:21px; color:var(--ink)} .modal-card p{color:var(--ink-soft); margin-block:12px 24px; font-size:15px}
 
 .repair-modal-card{position:relative; text-align:center}
@@ -802,7 +831,7 @@ footer{background:var(--bg-soft); padding-block:56px 28px}
 .msg{max-width:84%; padding:10px 14px; border-radius:18px; font-size:14px; line-height:1.55; animation:msg-in .28s var(--ease) both; overflow-wrap:break-word}
 .msg.bot{background:var(--bg-soft); color:var(--ink); align-self:flex-start; border-start-start-radius:6px}
 .msg.user{background:var(--accent); color:#fff; align-self:flex-end; border-start-end-radius:6px}
-.msg-link{display:inline-block; margin-block-start:8px; font-weight:650; font-size:13px; color:var(--accent); text-decoration:underline; text-underline-offset:3px; cursor:pointer; background:none; border:0; padding:0; font-family:inherit}
+.msg-link{display:inline-block; margin-block-start:8px; font-weight:650; font-size:13px; color:var(--accent-strong); text-decoration:underline; text-underline-offset:3px; cursor:pointer; background:none; border:0; padding:0; font-family:inherit}
 .msg.typing{display:flex; gap:5px; align-items:center; padding:14px 16px}
 .msg.typing i{width:6px; height:6px; border-radius:50%; background:var(--ink-faint); animation:tp-blink 1.1s infinite}
 .msg.typing i:nth-child(2){animation-delay:.18s}
@@ -812,7 +841,7 @@ footer{background:var(--bg-soft); padding-block:56px 28px}
 .chat-chips{display:flex; gap:8px; padding:10px 14px; overflow-x:auto; scrollbar-width:none; border-block-start:1px solid var(--line); flex:0 0 auto}
 .chat-chips::-webkit-scrollbar{display:none}
 .chat-chip{flex:0 0 auto; border:1px solid var(--line-2); background:transparent; border-radius:var(--radius-pill); padding:7px 14px; font-size:13px; font-weight:600; color:var(--ink-soft); cursor:pointer; font-family:inherit; transition:border-color .15s, color .15s, background .15s}
-.chat-chip:hover{border-color:var(--accent); color:var(--accent); background:var(--accent-tint)}
+.chat-chip:hover{border-color:var(--accent); color:var(--accent-strong); background:var(--accent-tint)}
 .chat-inputbar{display:flex; gap:8px; padding:12px 14px; border-block-start:1px solid var(--line); flex:0 0 auto}
 .chat-inputbar input{flex:1; border:1px solid var(--line-2); border-radius:var(--radius-pill); padding:10px 16px; font-family:inherit; font-size:14px; outline:0; background:var(--bg-soft); color:var(--ink); transition:border-color .15s, background .15s}
 .chat-inputbar input:focus{border-color:var(--accent); background:var(--bg)}
@@ -871,7 +900,7 @@ input,textarea{caret-color:var(--accent)}
 /* product spotlight tiles — Apple-style full-bleed ad tiles */
 
 /* .ad-badge is also used standalone on the GTA "coming soon" highlight card. */
-.ad-badge{display:inline-block; background:var(--accent); color:#fff; font-size:12px; font-weight:700; letter-spacing:.02em; padding:6px 16px; border-radius:var(--radius-pill)}
+.ad-badge{display:inline-block; background:var(--accent-strong); color:#fff; font-size:12px; font-weight:700; letter-spacing:.02em; padding:6px 16px; border-radius:var(--radius-pill)}
 
 /* reels row — real videos the shop posts on Facebook. Each card links out
    (Facebook's iframe embed rejects these /share/r/ reel links — see the
@@ -892,6 +921,8 @@ input,textarea{caret-color:var(--accent)}
 .brand-spot-copy{flex:1; min-width:0}
 .brand-spot-apple .brand-spot-copy p{color:var(--dark-ink-soft)}
 .brand-spot-head .btn-link{flex:0 0 auto}
+/* the Apple spot sits on --dark, where the brighter --accent is the accessible one
+   (6.11:1); --accent-strong is tuned for LIGHT grounds and drops to 3.72:1 here. */
 .brand-spot-apple .btn-link{color:var(--accent)}
 
 /* highlight cards: each links straight to its own PDP (istoreil/iplace pattern) */
@@ -910,6 +941,9 @@ input,textarea{caret-color:var(--accent)}
 .highlight-card:hover .highlight-media img{transform:scale(1.05)}
 .highlight-cta-text{margin-block-start:10px; font-weight:600; font-size:14px; color:var(--dark-ink-soft)}
 .highlight-card-soon{color:var(--dark-ink)}
+/* .highlight-kind's grey sits later in the file and was winning on equal specificity,
+   leaving this badge grey-on-gold at 1.06:1 — effectively unreadable. */
+.highlight-kind.ad-badge{color:#fff}
 .highlight-card-soon .highlight-kind.ad-badge{position:static; margin-block-end:4px}
 @media (max-width:920px){.highlight-grid{grid-template-columns:1fr}}
 @media (max-width:920px){
@@ -944,7 +978,7 @@ input,textarea{caret-color:var(--accent)}
 .ig-text{flex:1; min-width:240px}
 .ig-title{font-size:clamp(24px,2.8vw,34px); font-weight:650; letter-spacing:-.03em; color:var(--ink)}
 .ig-text p{color:var(--ink-soft); margin-block-start:8px; font-size:15px}
-.ig-num{color:var(--accent); font-variant-numeric:tabular-nums}
+.ig-num{color:var(--accent-strong); font-variant-numeric:tabular-nums}
 
 /* promo ribbon message rotation */
 .promo-inner>span{transition:opacity .28s var(--ease), transform .28s var(--ease)}

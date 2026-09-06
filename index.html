@@ -38,7 +38,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700;800&family=Noto+Sans+Hebrew:wght@400;500;600;700;800&family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Satisfy&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20260906i">
+<link rel="stylesheet" href="styles.css?v=20260906n">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -65,6 +65,7 @@
 </script>
 </head>
 <body>
+<a class="skip-link" href="#main" data-t="skip_main"></a>
 
 <div class="page-loader" id="pageLoader">
   <div class="loader-inner">
@@ -99,7 +100,7 @@
     </nav>
     <div class="nav-search">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="text" id="searchInput" data-ph="search_ph" autocomplete="off">
+      <input type="text" id="searchInput" data-ph="search_ph" data-al="form_search_label" autocomplete="off">
       <div class="search-sugg" id="searchSugg"></div>
     </div>
     <div class="nav-tools">
@@ -123,7 +124,7 @@
 
 <div class="mobile-search" id="mobileSearch">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-  <input type="text" id="searchInputMobile" data-ph="search_ph" autocomplete="off">
+  <input type="text" id="searchInputMobile" data-ph="search_ph" data-al="form_search_label" autocomplete="off">
   <div class="search-sugg" id="searchSuggMobile"></div>
 </div>
 
@@ -140,7 +141,7 @@
   </nav>
 </div>
 
-<main>
+<main id="main" tabindex="-1">
 <!-- ==================== FOR YOU ==================== -->
 <section class="page" id="p-foryou">
 
@@ -442,9 +443,23 @@
     <div class="section-tight" data-reveal>
       <div class="section-head"><h2 class="h2" data-t="ab_form_h"></h2></div>
       <div class="form">
-        <input id="f-name" type="text" data-ph="form_name">
-        <input id="f-contact" type="text" data-ph="form_contact">
-        <textarea id="f-msg" data-ph="form_msg"></textarea>
+        <!-- role=alert + tabindex=-1 so a failed submit is announced and focus lands here -->
+        <div class="form-errors" id="formErrors" role="alert" tabindex="-1" hidden></div>
+        <div class="field">
+          <label for="f-name" data-t="form_name"></label>
+          <input id="f-name" type="text" name="name" autocomplete="name" aria-describedby="f-name-err">
+          <span class="field-err" id="f-name-err"></span>
+        </div>
+        <div class="field">
+          <label for="f-contact" data-t="form_contact"></label>
+          <input id="f-contact" type="text" name="contact" autocomplete="email" aria-describedby="f-contact-err">
+          <span class="field-err" id="f-contact-err"></span>
+        </div>
+        <div class="field">
+          <label for="f-msg" data-t="form_msg"></label>
+          <textarea id="f-msg" name="message" aria-describedby="f-msg-err"></textarea>
+          <span class="field-err" id="f-msg-err"></span>
+        </div>
         <button class="btn btn-primary" id="f-send" data-t="form_send" style="justify-self:start"></button>
       </div>
     </div>
@@ -498,7 +513,7 @@
   </div>
 </div>
 
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <div class="cart-backdrop" id="cartBackdrop"></div>
 <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
@@ -529,7 +544,7 @@
   <div class="chat-body" id="chatBody"></div>
   <div class="chat-chips" id="chatChips"></div>
   <div class="chat-inputbar">
-    <input id="chatInput" type="text" data-ph="chat_ph" autocomplete="off">
+    <input id="chatInput" type="text" data-ph="chat_ph" data-al="form_chat_label" autocomplete="off">
     <button class="chat-send" id="chatSend" aria-label="send">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></svg>
     </button>
@@ -540,6 +555,6 @@
   <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.02 3C9.4 3 4 8.4 4 15.02c0 2.23.6 4.32 1.66 6.12L4 29l8.06-1.63a11.94 11.94 0 0 0 3.96.68c6.62 0 12.02-5.4 12.02-12.03C28.04 8.4 22.64 3 16.02 3zm0 21.86c-1.87 0-3.62-.5-5.13-1.4l-.37-.22-4.78.97.98-4.66-.24-.38a9.83 9.83 0 0 1-1.5-5.15c0-5.44 4.42-9.87 9.86-9.87 5.45 0 9.87 4.43 9.87 9.87 0 5.44-4.42 9.84-8.87 9.84h.18zm5.4-7.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.66.15-.2.3-.76.96-.93 1.15-.17.2-.34.22-.64.08-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.48-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.14-.14.3-.34.45-.51.15-.17.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.66-1.6-.9-2.18-.24-.58-.48-.5-.66-.5h-.56c-.2 0-.53.07-.8.38-.28.3-1.05 1.03-1.05 2.5s1.08 2.9 1.23 3.1c.15.2 2.13 3.25 5.16 4.56.72.31 1.28.5 1.72.63.72.23 1.38.2 1.9.12.58-.09 1.75-.71 2-1.4.24-.68.24-1.27.17-1.4-.07-.13-.27-.2-.57-.36z"/></svg>
 </a>
 
-<script src="app.js?v=20260906n"></script>
+<script src="app.js?v=20260906p"></script>
 </body>
 </html>
