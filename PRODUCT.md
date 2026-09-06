@@ -43,6 +43,7 @@ A single neighborhood shop that credibly does three things other local competito
 - Existing embedded base64 logo is confirmed as the shop's real logo (verified against the Instagram profile photo: gold phone + wrench + gears badge, "SKY PHONE — EST 2010" — matches the site's existing "established 2010" copy exactly).
 - Currency: Israeli shekel (₪).
 - Must support Hebrew (RTL), Arabic (RTL), English (LTR) with a working language switcher that re-renders all copy and direction instantly.
+- **Product imagery / rights.** The shop owner supplied official manufacturer product images (from apple.com) on 2026-09-06 and asked for them to replace the Commons photos. That is his call to make as the site's owner, but it is worth him knowing what it is: manufacturer product photography is copyrighted, and using it is normal, tolerated practice for a retailer selling those products — it is not the same as a licence. If Sky Phone is ever challenged on a specific image, the fix is to swap that image, so keep the originals traceable in `official_img/` and keep the fallback chain intact. Nothing here is presented as Sky Phone's own photography.
 
 ## Brand Commitments
 
