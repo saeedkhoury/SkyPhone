@@ -1536,7 +1536,6 @@ function initPageLoader(){
 
 /* init */
 document.querySelectorAll('.brand-logo').forEach(el=>el.src=LOGO);
-const fav=document.getElementById('favicon'); if(fav) fav.href=LOGO;
 document.querySelectorAll('.h1,.h2,.display').forEach(el=>el.setAttribute('data-text-reveal',''));
 setLang('he');
 renderServices(); renderRepairSpot(); renderFaq();
