@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700;800&family=Noto+Sans+Hebrew:wght@400;500;600;700;800&family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Satisfy&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20260906e">
+<link rel="stylesheet" href="styles.css?v=20260906f">
 </head>
 <body>
 
@@ -95,36 +95,62 @@
   <div class="hero spot" id="hero">
     <div class="hero-glow"></div>
 
-    <div class="hero-slide active" data-slide="0">
-      <a class="ad-full-slide" href="https://wa.me/972527223916?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%A9%D7%AA%D7%A2%D7%93%D7%9B%D7%A0%D7%95%20%D7%90%D7%95%D7%AA%D7%99%20%D7%9B%D7%A9%D7%AA%D7%92%D7%99%D7%A2%20%D7%A1%D7%93%D7%A8%D7%AA%20%D7%94-iPhone%2018%20(18%20%2F%2018%20Pro%20%2F%2018%20Pro%20Max)" target="_blank" rel="noopener" aria-label="iPhone 18 series — Sky Phone, coming soon">
-        <span class="ad-badge" data-t="soon_badge"></span>
-        <img src="img/iphone18-series-ad.jpg" alt="iPhone 18 series — Sky Phone">
-        <span class="ad-full-caption" data-t="ad_i18_sub"></span>
-      </a>
-    </div>
-
-    <div class="hero-slide" data-slide="1">
-      <a class="ad-full-slide" data-spot-pid="27" aria-label="PlayStation 5 — Sky Phone">
-        <span class="ad-badge ad-badge-buy" data-t="instock_badge"></span>
-        <img src="img/ps5-ad.jpeg" alt="PlayStation 5 — Sky Phone">
-        <span class="ad-full-caption" data-t="ps5_ad_sub"></span>
-      </a>
-    </div>
-
-    <div class="hero-slide" data-slide="2">
-      <div class="wrap hero-inner">
-        <h1 class="display" data-t="rp_title"></h1>
-        <p class="lede" data-t="rp_sub" style="margin-inline:auto"></p>
-        <div class="hero-cta">
-          <a class="btn btn-primary magnetic" data-route="repairs" data-t="fy_cta2"></a>
-          <a class="btn btn-on-dark magnetic" data-route="products" data-t="fy_cta1"></a>
+    <div class="hero-slide active" data-slide="0" data-ground="light">
+      <div class="hero-ad hero-ad-light">
+        <div class="hero-ad-copy">
+          <span class="hero-ad-badge" data-t="soon_badge"></span>
+          <h2 class="hero-ad-title">iPhone 18 Pro</h2>
+          <p class="hero-ad-tag" data-t="ad_i18_tag"></p>
+          <p class="hero-ad-note" data-t="ad_i18_note"></p>
+          <div class="hero-ad-cta">
+            <a class="btn btn-primary magnetic" id="i18Wa" target="_blank" rel="noopener" data-t="ad_i18_cta"></a>
+            <a class="btn btn-secondary magnetic" data-cat="phones" data-brand="apple" data-t="ad_i18_cta2"></a>
+          </div>
         </div>
-        <div class="hero-stage">
-          <svg width="240" height="240" viewBox="0 0 240 240" fill="none">
-            <circle cx="120" cy="120" r="108" fill="none" stroke="#2a2a2e" stroke-width="1.5"/>
-            <path d="M150 78a24 24 0 0 1-32 32l-42 42a7 7 0 0 1-10-10l42-42a24 24 0 0 1 32-32l-16 16 8 8z" fill="none" stroke="#c9962f" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M76 148l16 16" stroke="#f5f5f7" stroke-width="3.5" stroke-linecap="round"/>
-          </svg>
+        <div class="hero-ad-art cutout fade-bottom">
+          <span class="ad-art-float"><img src="img/iphone18-pro.png" alt="iPhone 18 Pro — coming soon to Sky Phone"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-slide" data-slide="1" data-ground="light">
+      <div class="hero-ad hero-ad-light">
+        <div class="hero-ad-copy">
+          <span class="hero-ad-badge stock" data-t="instock_badge"></span>
+          <h2 class="hero-ad-title">PlayStation 5</h2>
+          <p class="hero-ad-tag" data-t="ps5_tag"></p>
+          <p class="hero-ad-note" id="ps5Note"></p>
+          <div class="hero-ad-cta">
+            <a class="btn btn-primary magnetic" data-spot-pid="27" data-t="ps5_cta1"></a>
+            <a class="btn btn-secondary magnetic" id="ps5Wa" target="_blank" rel="noopener" data-t="ask_wa"></a>
+          </div>
+        </div>
+        <div class="hero-ad-art cutout clickable" data-spot-pid="27" data-hero-pid="27">
+          <span class="ad-art-float"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-slide" data-slide="2" data-ground="dark">
+      <div class="hero-ad hero-ad-dark">
+        <div class="hero-ad-copy">
+          <span class="hero-ad-badge" data-t="sameday_badge"></span>
+          <h2 class="hero-ad-title" data-t="rp_title"></h2>
+          <p class="hero-ad-tag" data-t="rp_hero_tag"></p>
+          <p class="hero-ad-note" id="repairNote"></p>
+          <div class="hero-ad-cta">
+            <a class="btn btn-primary magnetic" data-route="repairs" data-t="fy_cta2"></a>
+            <a class="btn btn-on-dark magnetic" data-route="products" data-t="fy_cta1"></a>
+          </div>
+        </div>
+        <div class="hero-ad-art">
+          <span class="ad-art-float">
+            <svg width="240" height="240" viewBox="0 0 240 240" fill="none">
+              <circle cx="120" cy="120" r="108" fill="none" stroke="#2a2a2e" stroke-width="1.5"/>
+              <path d="M150 78a24 24 0 0 1-32 32l-42 42a7 7 0 0 1-10-10l42-42a24 24 0 0 1 32-32l-16 16 8 8z" fill="none" stroke="#c9962f" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M76 148l16 16" stroke="#f5f5f7" stroke-width="3.5" stroke-linecap="round"/>
+            </svg>
+          </span>
         </div>
       </div>
     </div>
@@ -140,7 +166,6 @@
       <button class="hero-dot" data-slide-go="1" aria-label="slide 2"></button>
       <button class="hero-dot" data-slide-go="2" aria-label="slide 3"></button>
     </div>
-    <div class="hero-fade"></div>
   </div>
 
   <div class="wrap">
@@ -465,6 +490,6 @@
   <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.02 3C9.4 3 4 8.4 4 15.02c0 2.23.6 4.32 1.66 6.12L4 29l8.06-1.63a11.94 11.94 0 0 0 3.96.68c6.62 0 12.02-5.4 12.02-12.03C28.04 8.4 22.64 3 16.02 3zm0 21.86c-1.87 0-3.62-.5-5.13-1.4l-.37-.22-4.78.97.98-4.66-.24-.38a9.83 9.83 0 0 1-1.5-5.15c0-5.44 4.42-9.87 9.86-9.87 5.45 0 9.87 4.43 9.87 9.87 0 5.44-4.42 9.84-8.87 9.84h.18zm5.4-7.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.66.15-.2.3-.76.96-.93 1.15-.17.2-.34.22-.64.08-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.48-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.14-.14.3-.34.45-.51.15-.17.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.66-1.6-.9-2.18-.24-.58-.48-.5-.66-.5h-.56c-.2 0-.53.07-.8.38-.28.3-1.05 1.03-1.05 2.5s1.08 2.9 1.23 3.1c.15.2 2.13 3.25 5.16 4.56.72.31 1.28.5 1.72.63.72.23 1.38.2 1.9.12.58-.09 1.75-.71 2-1.4.24-.68.24-1.27.17-1.4-.07-.13-.27-.2-.57-.36z"/></svg>
 </a>
 
-<script src="app.js?v=20260906e"></script>
+<script src="app.js?v=20260906f"></script>
 </body>
 </html>

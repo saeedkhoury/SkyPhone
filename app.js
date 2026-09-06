@@ -224,7 +224,7 @@ const T={
    fy_rep_head:'מסך שבור? סוללה חלשה?',fy_rep_sub:'המעבדה שלנו מתקנת הכל — לרוב באותו יום, בחלקים מקוריים ועם אחריות מלאה.',fy_rep_cta:'לתיאום תיקון',
    fy_ig_head:'עוקבים באינסטגרם',fy_ig_sub:'מבצעים, הגעות חדשות ומה שחם בחנות — קודם כל שם.',fy_ig_cta:'עקבו אחרינו',
    fy_brands_l:'מותגים שתמצאו אצלנו',
-   soon_badge:'בקרוב',ad_i18_sub:'סדרת iPhone 18 / 18 Pro / 18 Pro Max מגיעה בקרוב ל-Sky Phone.',ad_i18_cta:'עדכנו אותי בוואטסאפ',instock_badge:'במלאי עכשיו',ps5_ad_sub:'PlayStation 5 זמין עכשיו ב-Sky Phone — לחצו לצפייה במוצר.',gta_cta:'עדכנו אותי כשמגיע',fy_gaming_head:'עולם הגיימינג אצלנו',fy_gaming_sub:'קונסולות ומשחקים — כולל מה שמגיע בקרוב.',
+   soon_badge:'בקרוב',ad_i18_tag:'עיצוב חדש, שבב A20 Pro, מצלמות מקצועיות.',ad_i18_note:'הירשמו לעדכון ברגע שהוא מגיע לחנות.',ad_i18_cta:'עדכנו אותי בוואטסאפ',ad_i18_cta2:'לכל דגמי אייפון',wa_i18:'היי, אשמח שתעדכנו אותי כשתגיע סדרת ה-iPhone 18 (18 / 18 Pro / 18 Pro Max)',instock_badge:'במלאי עכשיו',ps5_tag:'משחקים ב-4K וזמני טעינה כמעט מיידיים.',ps5_cta1:'לצפייה במוצר',ask_wa:'שאלה? דברו איתנו',wa_ps5:'היי, יש לי שאלה לגבי ה-PlayStation 5',sameday_badge:'תיקון באותו יום',rp_hero_tag:'מסך שבור, סוללה חלשה או תקלה במחשב? נטפל בזה.',gta_cta:'עדכנו אותי כשמגיע',fy_gaming_head:'עולם הגיימינג אצלנו',fy_gaming_sub:'קונסולות ומשחקים — כולל מה שמגיע בקרוב.',
    reels_head:'עוד מאיתנו ברשתות',reels_sub:'רגעים אמיתיים מהחנות — ישר מהפייסבוק שלנו.',reel_watch:'צפייה בפייסבוק',
    apple_head:'עולם ה-Apple אצלנו',apple_sub:'אייפון, אייפד, מק ואפל ווטש — הכל מקורי ובאחריות מלאה.',
    samsung_head:'עולם ה-Samsung אצלנו',samsung_sub:'גלקסי, טאבים ואוזניות — המבחר המלא של סמסונג.',
@@ -295,7 +295,7 @@ const T={
    fy_rep_head:'شاشة مكسورة؟ بطارية ضعيفة؟',fy_rep_sub:'مختبرنا يصلح كل شيء — غالباً في نفس اليوم، بقطع أصلية وضمان كامل.',fy_rep_cta:'احجز إصلاحاً',
    fy_ig_head:'متابع على إنستغرام',fy_ig_sub:'عروض، وصولات جديدة وكل ما هو حار في المتجر — هناك أولاً.',fy_ig_cta:'تابعونا',
    fy_brands_l:'ماركات تجدونها لدينا',
-   soon_badge:'قريباً',ad_i18_sub:'سلسلة iPhone 18 / 18 Pro / 18 Pro Max قريباً في Sky Phone.',ad_i18_cta:'أعلمني عبر واتساب',instock_badge:'متوفر الآن',ps5_ad_sub:'PlayStation 5 متوفر الآن في Sky Phone — اضغط لعرض المنتج.',gta_cta:'أعلمني عند الوصول',fy_gaming_head:'عالم الألعاب لدينا',fy_gaming_sub:'أجهزة ألعاب وعناوين — بما فيها ما هو قادم قريباً.',
+   soon_badge:'قريباً',ad_i18_tag:'تصميم جديد، شريحة A20 Pro، كاميرات احترافية.',ad_i18_note:'سجّلوا لتصلكم رسالة فور وصوله للمتجر.',ad_i18_cta:'أعلمني عبر واتساب',ad_i18_cta2:'كل طرازات آيفون',wa_i18:'مرحباً، أرغب بمعرفة موعد وصول سلسلة iPhone 18 (18 / 18 Pro / 18 Pro Max)',instock_badge:'متوفر الآن',ps5_tag:'ألعاب بجودة 4K وأوقات تحميل شبه فورية.',ps5_cta1:'عرض المنتج',ask_wa:'لديك سؤال؟ تواصل معنا',wa_ps5:'مرحباً، لدي سؤال حول PlayStation 5',sameday_badge:'إصلاح في نفس اليوم',rp_hero_tag:'شاشة مكسورة، بطارية ضعيفة أو عطل بالحاسوب؟ سنتولى الأمر.',gta_cta:'أعلمني عند الوصول',fy_gaming_head:'عالم الألعاب لدينا',fy_gaming_sub:'أجهزة ألعاب وعناوين — بما فيها ما هو قادم قريباً.',
    reels_head:'المزيد منّا على السوشال ميديا',reels_sub:'لحظات حقيقية من المتجر — مباشرة من فيسبوك.',reel_watch:'مشاهدة على فيسبوك',
    apple_head:'عالم Apple لدينا',apple_sub:'آيفون، آيباد، ماك وآبل ووتش — كله أصلي وبضمان كامل.',
    samsung_head:'عالم Samsung لدينا',samsung_sub:'غالاكسي، أجهزة لوحية وسماعات — التشكيلة الكاملة من سامسونج.',
@@ -366,7 +366,7 @@ const T={
    fy_rep_head:'Cracked screen? Weak battery?',fy_rep_sub:'Our lab fixes it all — usually the same day, with genuine parts and a full warranty.',fy_rep_cta:'Book a repair',
    fy_ig_head:'followers on Instagram',fy_ig_sub:'Deals, new arrivals and what’s hot in the shop — there first.',fy_ig_cta:'Follow us',
    fy_brands_l:'Brands you’ll find here',
-   soon_badge:'Coming soon',ad_i18_sub:'The iPhone 18 / 18 Pro / 18 Pro Max series is coming soon to Sky Phone.',ad_i18_cta:'Notify me on WhatsApp',instock_badge:'In stock now',ps5_ad_sub:'PlayStation 5 is in stock now at Sky Phone — click to view the product.',gta_cta:'Notify me when it arrives',fy_gaming_head:'The gaming world, here',fy_gaming_sub:'Consoles and titles — including what\'s coming soon.',
+   soon_badge:'Coming soon',ad_i18_tag:'A new design, the A20 Pro chip, pro-grade cameras.',ad_i18_note:'Sign up to get notified the moment it lands in store.',ad_i18_cta:'Notify me on WhatsApp',ad_i18_cta2:'Shop all iPhone models',wa_i18:'Hi, I\'d love to be notified when the iPhone 18 series (18 / 18 Pro / 18 Pro Max) arrives',instock_badge:'In stock now',ps5_tag:'4K gaming and near-instant load times.',ps5_cta1:'View the product',ask_wa:'Have a question? Message us',wa_ps5:'Hi, I have a question about the PlayStation 5',sameday_badge:'Same-day repair',rp_hero_tag:'Cracked screen, weak battery, or a laptop acting up? We\'ll take care of it.',gta_cta:'Notify me when it arrives',fy_gaming_head:'The gaming world, here',fy_gaming_sub:'Consoles and titles — including what\'s coming soon.',
    reels_head:'More from us on social',reels_sub:'Real moments from the shop — straight from our Facebook.',reel_watch:'Watch on Facebook',
    apple_head:'The Apple world, here',apple_sub:'iPhone, iPad, Mac and Apple Watch — all genuine, full warranty.',
    samsung_head:'The Samsung world, here',samsung_sub:'Galaxy phones, tablets and earbuds — the full Samsung lineup.',
@@ -522,16 +522,15 @@ function initParticleField(el){
   el.addEventListener('pointerleave',()=>{ active=false; ensureRunning(); });
   frame();
 }
-/* Reveal/rise keyframes use fill-mode 'both', and a filled CSS animation
-   overrides inline styles forever — which silently killed pointer-driven tilt
-   on .pcard and #heroDevice. Swap the animating class for a static end-state
-   class the moment the entrance animation finishes. */
+/* Reveal keyframes use fill-mode 'both', and a filled CSS animation overrides
+   inline styles forever — which silently killed pointer-driven tilt on
+   .pcard. Swap the animating class for a static end-state class the moment
+   the entrance animation finishes. */
 document.addEventListener('animationend',e=>{
   const el=e.target;
   if(e.animationName==='reveal-up' && el.classList.contains('in-view')){
     el.classList.remove('in-view'); el.classList.add('revealed');
   }
-  if(e.animationName==='rise' && el.id==='heroDevice') el.classList.add('risen');
 });
 
 function attachMagnetic(el){
@@ -559,21 +558,30 @@ function attachTilt(el){
 const textRevealObserver = 'IntersectionObserver' in window ? new IntersectionObserver(entries=>{
   entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('tr-in'); textRevealObserver.unobserve(en.target); } });
 },{threshold:.4}) : null;
-/* Hero ad slides: a pointer-tracked tilt on the product photo, on top of a
-   continuous idle float (CSS keyframe), to give the flat photo a "living,
-   almost-video" feel like Samsung's real product pages use actual footage
-   for — we can't legally embed someone else's produced marketing video, so
-   this is the closest honest equivalent built from a still photo. */
+/* Hero ad slides: a pointer-tracked tilt on the product art, on top of a
+   continuous idle float (CSS keyframe on .ad-art-float, a separate element),
+   to give a still photo a "living, almost-video" feel like Samsung's real
+   product pages use actual footage for — we can't legally embed someone
+   else's produced marketing video, so this is the closest honest equivalent.
+   The float and the tilt each own their own element/transform on purpose —
+   a filled/running keyframe on the SAME element permanently outranks an
+   inline style, so stacking them would silently kill the tilt. */
 function attachAdTilt(wrap){
-  const img=wrap.querySelector('img'); if(!img) return;
+  wrap.style.perspective='1200px';
+  /* Query the art fresh on every move rather than caching it at attach-time:
+     the PS5 slide's img is rebuilt via innerHTML on every language switch
+     (renderHeroAds()), so a cached reference would go stale and silently
+     stop moving. */
   wrap.addEventListener('pointermove',e=>{
+    const art=wrap.querySelector('img,svg'); if(!art) return;
     const r=wrap.getBoundingClientRect();
     const px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
-    const rx=(py-.5)*-10, ry=(px-.5)*10;
-    img.style.animationPlayState='paused';
-    img.style.transform=`scale(1.05) rotateX(${rx}deg) rotateY(${ry}deg)`;
+    const rx=(py-.5)*-9, ry=(px-.5)*9;
+    art.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg)`;
   });
-  wrap.addEventListener('pointerleave',()=>{ img.style.transform=''; img.style.animationPlayState=''; });
+  wrap.addEventListener('pointerleave',()=>{
+    const art=wrap.querySelector('img,svg'); if(art) art.style.transform='';
+  });
 }
 function initTextReveal(root){
   (root||document).querySelectorAll('[data-text-reveal]:not(.tr-ready)').forEach(el=>{
@@ -592,19 +600,8 @@ function initMotionFor(root){
     root.querySelectorAll('.spot').forEach(initParticleField);
     root.querySelectorAll('.magnetic').forEach(attachMagnetic);
     root.querySelectorAll('.pcard').forEach(attachTilt);
-    root.querySelectorAll('.ad-full-slide').forEach(attachAdTilt);
+    root.querySelectorAll('.hero-ad-art').forEach(attachAdTilt);
   }
-}
-function initHeroTilt(){
-  if(!canHover) return;
-  const stage=document.getElementById('heroStage'), device=document.getElementById('heroDevice');
-  if(!stage||!device) return;
-  stage.addEventListener('pointermove',e=>{
-    const r=stage.getBoundingClientRect();
-    const px=(e.clientX-r.left)/r.width-.5, py=(e.clientY-r.top)/r.height-.5;
-    device.style.transform=`rotateY(${px*22}deg) rotateX(${py*-16}deg)`;
-  });
-  stage.addEventListener('pointerleave',()=>{ device.style.transform=''; });
 }
 
 /* ---------- hero carousel ---------- */
@@ -614,6 +611,8 @@ function goHeroSlide(n){
   heroSlide=(n+heroSlideCount)%heroSlideCount;
   document.querySelectorAll('.hero-slide').forEach(s=>s.classList.toggle('active',Number(s.dataset.slide)===heroSlide));
   document.querySelectorAll('.hero-dot').forEach((d,i)=>d.classList.toggle('active',i===heroSlide));
+  const active=document.querySelector(`.hero-slide[data-slide="${heroSlide}"]`), heroEl=document.getElementById('hero');
+  if(active&&heroEl) heroEl.classList.toggle('on-light',active.dataset.ground==='light');
 }
 function startHeroAutoplay(){
   if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -631,6 +630,7 @@ function initHeroCarousel(){
   });
   hero.addEventListener('pointerenter',()=>clearInterval(heroTimer));
   hero.addEventListener('pointerleave',startHeroAutoplay);
+  goHeroSlide(heroSlide);
   startHeroAutoplay();
 }
 
@@ -725,6 +725,28 @@ function renderRepairSpot(){
     const from=r.devices?Math.min(...r.devices.map(d=>d.price)):r.price;
     return `<span class="rep-chip" data-repair-row="${r.id}">${T[lang]['rep_'+r.id]} · <b>${T[lang].rp_from} ₪${fmt(from)}</b></span>`;
   }).join('');
+}
+
+/* Hero ad copy that must stay live-data-accurate (prices, WhatsApp text) —
+   typed-in numbers drift from the catalog the first time a price changes,
+   and a hardcoded WhatsApp message never adapts to the visitor's language. */
+function renderHeroAds(){
+  const ps5=PRODUCTS.find(p=>p.id===27), ps5Note=document.getElementById('ps5Note');
+  if(ps5Note&&ps5) ps5Note.textContent=`${T[lang].cat_from} ₪${fmt(ps5.price)}`;
+  const repNote=document.getElementById('repairNote');
+  if(repNote){
+    const min=Math.min(...REPAIRS.map(r=>r.devices?Math.min(...r.devices.map(d=>d.price)):r.price));
+    repNote.textContent=`${T[lang].rp_from} ₪${fmt(min)}`;
+  }
+  document.querySelectorAll('.hero-ad-art[data-hero-pid]').forEach(art=>{
+    const p=PRODUCTS.find(x=>x.id===Number(art.dataset.heroPid)); if(!p) return;
+    const slot=art.querySelector('.ad-art-float'); if(!slot) return;
+    slot.innerHTML=pmediaSrc(p,p.img);
+    const img=slot.querySelector('img'); if(img) img.loading='eager';
+  });
+  const wa=key=>`https://wa.me/972527223916?text=${encodeURIComponent(T[lang][key])}`;
+  const i18=document.getElementById('i18Wa'); if(i18) i18.href=wa('wa_i18');
+  const p5w=document.getElementById('ps5Wa'); if(p5w) p5w.href=wa('wa_ps5');
 }
 
 /* ---------- promo ribbon rotation ----------
@@ -1063,7 +1085,7 @@ function setLang(l){
   document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.l===l));
   closeSuggest();
   promoIdx=0;
-  applyText(); renderServices(); renderRepairSpot(); renderFaq();
+  applyText(); renderServices(); renderRepairSpot(); renderHeroAds(); renderFaq();
   renderHighlights([17,18,19,20,22,21],'appleHighlights'); renderHighlights([24,11,26,8],'samsungHighlights'); renderGamingHighlights(); renderReels();
   if(route==='products'){renderChips();renderProducts();}
   if(route==='repairs'){renderSteps();renderRepairs();}
@@ -1178,7 +1200,7 @@ document.addEventListener('click',e=>{
   const filterToggle=e.target.closest('[data-filter-toggle]'); if(filterToggle){filterToggle.closest('.filter-group').classList.toggle('collapsed');return;}
   if(e.target.closest('#appleSeeAll')){filter='all';brandFilter='apple';colorFilter='all';storageFilter='all';searchQuery='';go('products');return;}
   if(e.target.closest('#samsungSeeAll')){filter='all';brandFilter='samsung';colorFilter='all';storageFilter='all';searchQuery='';go('products');return;}
-  const catBtn=e.target.closest('[data-cat]'); if(catBtn){filter=catBtn.dataset.cat;brandFilter='all';colorFilter='all';storageFilter='all';searchQuery='';go('products');return;}
+  const catBtn=e.target.closest('[data-cat]'); if(catBtn){filter=catBtn.dataset.cat;brandFilter=catBtn.dataset.brand||'all';colorFilter='all';storageFilter='all';searchQuery='';go('products');return;}
   const spotTile=e.target.closest('[data-spot-pid]'); if(spotTile){openProduct(spotTile.dataset.spotPid);return;}
   const faq=e.target.closest('.faq-q'); if(faq){faq.parentElement.classList.toggle('open');return;}
   const pcard=e.target.closest('.pcard[data-pid]'); if(pcard){openProduct(pcard.dataset.pid);return;}
@@ -1489,9 +1511,8 @@ setLang('he');
 renderServices(); renderRepairSpot(); renderFaq();
 renderHighlights([17,18,19,20,22,21],'appleHighlights'); renderHighlights([24,11,26,8],'samsungHighlights'); renderGamingHighlights(); renderReels();
 go('foryou');
-initHeroTilt();
 initHeroCarousel();
-initHeroParallax();
+renderHeroAds();
 initCursor();
 initPageLoader();
 initScrollProgress();
