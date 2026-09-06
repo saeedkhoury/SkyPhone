@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://saeedkhoury.github.io/SkyPhone/sitemap.xml
