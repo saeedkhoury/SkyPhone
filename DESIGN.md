@@ -130,3 +130,53 @@ The embedded badge logo (`LOGO` constant in `app.js`) is the shop's real, in-use
 ## Verified
 
 Browser QA pass (desktop 1440px + simulated 390px mobile, driven via Selenium/Chrome) covered: routing between all four pages, product filtering, add-to-cart/qty/remove, cart drawer, checkout modal, repair booking with device picker, FAQ accordion, contact form submit/clear, mobile hamburger menu, live search suggestions (mouse + keyboard paths), fly-to-bag + badge pop, row arrows, scroll progress, nav indicator, and full language switching (HE/AR/EN, RTL↔LTR) — zero console errors on every flow, no horizontal overflow on any route at 390px.
+
+## Mobile-polish + PDP information pass (2026-09-06)
+
+Six issues raised after real-device (Android Chrome) review. What changed and why:
+
+- **Chrome Android was auto-darkening the site.** The page had no declared colour
+  scheme, so Chrome's Auto Dark Theme inverted surfaces and painted solid boxes
+  behind transparent product PNGs (the "black background" on the PS5 hero art and
+  the white boxes behind catalogue photos). Fixed by declaring the site light-only
+  (`color-scheme: only light` in `:root` plus the matching `<meta>`), which is the
+  documented opt-out. **Do not remove either without shipping a real dark theme** —
+  the design has no dark palette, so auto-dark will re-break it.
+- **Products page opened "zoomed in" on phones.** `.chips` is a `nowrap` flex
+  scroller, so its ~550px min-content set the automatic minimum size of the `1fr`
+  grid track in `.products-layout`, making the document 566px wide inside a 375px
+  viewport. Being RTL, that overflow opened the page scrolled sideways. Fixed with
+  `.products-layout>*{min-width:0}`. The identical trap reappeared in the new
+  `.pdp-tabs` scroller and is fixed the same way (`.pdp-rw>*{min-width:0}`).
+  **Any future grid item containing a nowrap scroller needs `min-width:0`.**
+- **Customer reviews removed entirely.** With no backend there was nothing to show
+  but invented ratings and invented customers, which is a liability for the shop
+  owner rather than a feature. See `PRODUCT.md`.
+- **Replaced with an "Everything you need to know" tabbed panel** (Overview /
+  Description / Features / What's in the box). Composed only from data the
+  catalogue genuinely carries plus the shop's verified service facts — it asserts
+  no chip names, benchmarks or camera specs for SKUs whose spec sheet we do not
+  have. Box contents key off the product's `icon` via `BOX_BY_ICON`, with per-SKU
+  overrides in `PRODUCT_INFO` (Steam Deck, headset, standalone DualSense).
+  Prose needs singular category nouns (`cat1_*`); the plural filter labels read
+  wrong mid-sentence ("a Phones from Apple"), and English picks a/an by first letter.
+- **PDP 3D product stage** (`attachPdpZoom`, which replaced the old hover-zoom).
+  Perspective stage where the product tracks pointer or finger in 3D, lit by a
+  highlight that moves with it (`--gx`/`--gy`) and grounded by a contact shadow
+  that tightens as it lifts (`--gs`/`--go`). One rAF loop eases toward a target so
+  hover, drag and spring-back share a path and never fight the CSS transition —
+  hence `.stage-live` sets `transition:none`. Deliberately a shallow tilt, not a
+  fake rotation: a true Apple-style spin needs a 3D model or a turntable frame
+  sequence, and neither exists for this catalogue.
+- **Gaming banner** now uses a real DualSense cutout (`img/gaming-controller.png`,
+  background flood-filled off the existing `dualsense.png` and feathered) instead
+  of the line-drawing SVG.
+
+### Testing note for the next session
+
+The in-app browser pane runs `document.visibilityState === 'hidden'`, which
+**pauses `requestAnimationFrame` entirely**. Any rAF-driven work (this stage, the
+page loader, `scroll-behavior:smooth`) will look broken/frozen and read as zeroed
+state. It is a harness artifact, not a bug — drive such checks inside a
+`browser_batch` that brackets them with screenshots (which force compositing), and
+use `behavior:'instant'` for scrolling.
