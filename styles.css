@@ -300,7 +300,7 @@ body.ribbon-closed .page{padding-block-start:var(--nav-h)}
    over both. #hero.on-light (set in goHeroSlide) re-tints the dots and arrows
    so the controls stay visible on either ground.
    ========================================================================== */
-.hero{position:relative; overflow:hidden; background:var(--dark); color:var(--dark-ink)}
+.hero{position:relative; overflow:hidden; background:var(--dark); color:var(--dark-ink); touch-action:pan-y}
 .hero-glow{position:absolute; inset:0; z-index:0; pointer-events:none;
   background:radial-gradient(44% 34% at 50% 6%, rgba(184,134,47,.20), transparent 72%)}
 
@@ -526,10 +526,22 @@ body.ribbon-closed .page{padding-block-start:var(--nav-h)}
 .sort-select{appearance:none; -webkit-appearance:none; border:1px solid var(--line-2); border-radius:var(--radius-pill); padding:9px 34px 9px 16px; font-family:inherit; font-size:13px; font-weight:600; color:var(--ink); background:var(--bg) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236e6e73' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M6 9l6 6 6-6'/></svg>") no-repeat left 12px center/11px; cursor:pointer}
 [dir="rtl"] .sort-select{padding:9px 16px 9px 34px; background-position:right 12px center}
 
+.filter-toggle-btn{display:none}
+
 @media (max-width:920px){
-  .products-layout{grid-template-columns:1fr; gap:24px}
-  .filter-sidebar{position:static}
+  .products-layout{grid-template-columns:1fr; gap:16px}
+  .filter-sidebar{position:static; display:none; animation:filter-sheet-in .25s var(--ease) both}
+  .filter-sidebar.mobile-open{display:block}
+  .filter-toggle-btn{display:flex; align-items:center; gap:8px; justify-self:start; width:fit-content;
+    padding:11px 18px; border-radius:var(--radius-pill); border:1px solid var(--line-2);
+    background:var(--bg); color:var(--ink); font-family:inherit; font-weight:650; font-size:14px;
+    cursor:pointer; position:relative}
+  .filter-toggle-btn svg{width:16px;height:16px}
+  .filter-toggle-btn[aria-expanded="true"]{background:var(--ink); color:#fff; border-color:var(--ink)}
+  .filter-toggle-dot{width:8px;height:8px;border-radius:50%; background:var(--accent); margin-inline-start:-2px}
 }
+@keyframes filter-sheet-in{from{opacity:0; transform:translateY(-6px)}to{opacity:1; transform:none}}
+@media (prefers-reduced-motion:reduce){ .filter-sidebar{animation:none} }
 
 /* ---------- repairs: process + price list ---------- */
 .process{display:flex; flex-direction:column; gap:0; margin-block-end:var(--space-9); counter-reset:step}
@@ -625,9 +637,33 @@ body.drawer-open{overflow:hidden}
 .pdp-cta .btn{flex:1}
 .pdp-more{margin-block-start:var(--space-9)}
 
+/* reviews + warranty band */
+.pdp-rw{display:grid; grid-template-columns:1.3fr 1fr; gap:56px; margin-block-start:var(--space-8);
+  padding-block-start:var(--space-8); border-block-start:1px solid var(--line)}
+.pdp-rating-row{display:flex; align-items:center; gap:12px; margin-block-start:14px; flex-wrap:wrap}
+.pdp-rating-num{font-size:22px; font-weight:700; letter-spacing:-.02em}
+.pdp-stars{display:inline-flex; gap:3px; color:var(--accent)}
+.pdp-stars.sm{gap:2px}
+.pdp-star svg{width:18px;height:18px; display:block}
+.pdp-stars.sm .pdp-star svg{width:13px;height:13px}
+.pdp-rating-count{font-size:13px; color:var(--ink-faint)}
+.pdp-review-list{display:flex; flex-direction:column; gap:14px; margin-block-start:22px}
+.review-card{border:1px solid var(--line); border-radius:var(--radius-md); padding:16px 18px}
+.review-top{display:flex; align-items:center; gap:10px}
+.review-avatar{width:30px;height:30px; border-radius:50%; background:var(--bg-soft); color:var(--ink);
+  display:grid; place-items:center; font-size:13px; font-weight:700; flex:0 0 auto}
+.review-name{font-weight:650; font-size:14px; flex:1}
+.review-text{color:var(--ink-soft); font-size:14px; line-height:1.6; margin-block-start:10px}
+.pdp-warranty{background:var(--bg-soft); border-radius:var(--radius-lg); padding:28px; align-self:start}
+.pdp-warranty-body{color:var(--ink-soft); font-size:14px; line-height:1.6; margin-block-start:10px}
+.pdp-warranty-pts{display:flex; flex-direction:column; gap:12px; margin-block:20px}
+.pdp-warranty-pts li{display:flex; align-items:center; gap:10px; font-size:14px; font-weight:550; color:var(--ink); list-style:none}
+.pdp-warranty-pts svg{width:17px;height:17px; color:var(--ok); flex:0 0 auto}
+
 @media (max-width:920px){
   .pdp-grid{grid-template-columns:1fr; gap:28px}
   .pdp-gallery-wrap{position:static; max-width:380px; margin-inline:auto; width:100%}
+  .pdp-rw{grid-template-columns:1fr; gap:32px}
 }
 
 /* ---------- about ---------- */
