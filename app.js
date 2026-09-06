@@ -197,57 +197,45 @@ const REELS=[
   {src:'video/reel4.mp4',poster:'video/reel4-poster.jpg'}
 ];
 
-/* ---------- PDP reviews (demo dataset) ----------
-   No backend/database on this site (see PRODUCT.md), so review content here is
-   sample/demo copy — same treatment as the labeled-placeholder checkout. A pool
-   of short, generic reviews is picked per-product deterministically from the
-   product id, and the aggregate rating is derived the same way, so each PDP
-   reads as populated and stable across renders/reloads without inventing a
-   fake identity or a "verified purchase" claim. Swap for real review data (and
-   wire a submit form) whenever the shop is ready to collect its own. */
-const REVIEW_POOL={
- he:[
-  {name:'נור',text:'קניתי ותוך דקות כבר יצאתי עם המכשיר מהחנות. שירות מהיר ואדיב.'},
-  {name:'עומר',text:'המחיר היה הכי טוב שמצאתי, וגם עזרו לי להעביר את כל הנתונים מהמכשיר הישן.'},
-  {name:'רים',text:'בדיוק כמו שתואר, מצב מעולה. ממליצה בחום.'},
-  {name:'יוסף',text:'שירות אישי אמיתי — הסבירו לי הכל בסבלנות לפני שקניתי.'},
-  {name:'שירה',text:'איכות המכשיר מעולה וקיבלתי גם אחריות בכתב. אין מה להתלבט.'},
-  {name:'אחמד',text:'כבר קונה כאן שנים — תמיד אמינים ומקצועיים.'}
- ],
- ar:[
-  {name:'نور',text:'اشتريت وخرجت من المحل خلال دقائق مع الجهاز. خدمة سريعة ولطيفة.'},
-  {name:'عمر',text:'كان السعر الأفضل الي لقيته، وساعدوني كمان بنقل كل البيانات من الجهاز القديم.'},
-  {name:'ريم',text:'بالضبط متل ما تم وصفه، حالة ممتازة. بنصح فيه بقوة.'},
-  {name:'يوسف',text:'خدمة شخصية حقيقية — شرحولي كل شي بصبر قبل ما أشتري.'},
-  {name:'شيرا',text:'جودة الجهاز ممتازة ووصلتني ضمانة مكتوبة كمان. ما في داعي للتردد.'},
-  {name:'أحمد',text:'بشتري من هون من سنين — دايماً موثوقين ومحترفين.'}
- ],
- en:[
-  {name:'Noor',text:'Walked out with the device a few minutes after paying. Fast, friendly service.'},
-  {name:'Omar',text:'Best price I found anywhere, and they helped transfer everything from my old phone.'},
-  {name:'Reem',text:'Exactly as described, great condition. Highly recommend.'},
-  {name:'Yousef',text:'Real personal service — they explained everything patiently before I bought.'},
-  {name:'Shira',text:'Quality is excellent and it came with a written warranty. Easy decision.'},
-  {name:'Ahmad',text:"I've been buying here for years — always reliable and professional."}
- ]
+/* ---------- PDP product information ----------
+   Composed from what the catalogue genuinely carries — category, icon, and the
+   real colour/storage variants — plus the shop's own verified service facts,
+   instead of hand-authored spec sheets. Nothing here is an invented technical
+   claim: no chip names, benchmarks or camera numbers are asserted for a SKU
+   whose spec sheet we do not actually have.
+   Box contents default per icon; PRODUCT_INFO overrides the SKUs that differ.
+   To deepen a product later, add {features:[...]} (translation keys or literal
+   strings) under its id — the renderer picks it up with no other change. */
+const BOX_BY_ICON={
+  phone:  ['dev','usbc','simtool','docs'],
+  tablet: ['dev','usbc','docs'],
+  laptop: ['dev','psu','docs'],
+  console:['dev','ctrl','hdmi','power','docs'],
+  headset:['dev','audio','docs'],
+  watch:  ['dev','band','wcharge','docs'],
+  buds:   ['dev','budscase','tips','usbc','docs'],
+  charger:['dev','docs']
 };
-function productReviewData(p){
-  const seed=(p.id*2654435761)%1000/1000;
-  const rating=Math.round((4.5+seed*0.45)*10)/10;
-  const count=38+Math.floor(seed*260);
-  const pool=REVIEW_POOL[lang];
-  const start=p.id%pool.length;
-  const items=[pool[start],pool[(start+1)%pool.length],pool[(start+3)%pool.length]];
-  return {rating,count,items};
+const PRODUCT_INFO={
+  5: {box:['dev','psu','case','docs']},   /* Steam Deck: charger + carry case, no TV cables */
+  7: {box:['dev','audio','usbc','docs']}, /* headset */
+  13:{box:['ctrl','usbc','docs']}         /* "PS5 DualSense" is the controller itself */
+};
+function productBox(p){
+  const keys=(PRODUCT_INFO[p.id]&&PRODUCT_INFO[p.id].box)||BOX_BY_ICON[p.icon]||['dev','docs'];
+  return keys.map(k=>k==='dev'?p.name:(k==='ctrl'&&p.icon!=='console'?T[lang].pi_b_ctrl:T[lang]['pi_b_'+k]||k));
 }
-function starsSvg(rating){
-  let out='';
-  const star='M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z';
-  for(let i=1;i<=5;i++){
-    const fill=Math.max(0,Math.min(1,rating-(i-1)));
-    const pct=Math.round(fill*100), gid=`starfill${i}-${Math.round(rating*10)}`;
-    out+=`<span class="pdp-star"><svg viewBox="0 0 20 20"><defs><linearGradient id="${gid}"><stop offset="${pct}%" stop-color="currentColor"/><stop offset="${pct}%" stop-color="transparent"/></linearGradient></defs><path fill="currentColor" opacity=".22" d="${star}"/><path fill="url(#${gid})" d="${star}"/></svg></span>`;
-  }
+function productFeatures(p){
+  const t=T[lang], out=[];
+  if(p.colors&&p.colors.length>1)
+    out.push(t.pi_f_colors.replace('{n}',p.colors.length).replace('{list}',p.colors.map(c=>c.name).join(' · ')));
+  if(p.storage&&p.storage.length>1)
+    out.push(t.pi_f_storage.replace('{list}',p.storage.map(s=>s.label).join(' · ')));
+  const extra=PRODUCT_INFO[p.id]&&PRODUCT_INFO[p.id].features;
+  if(extra) extra.forEach(k=>out.push(t[k]||k));
+  out.push(t.pi_f_warranty);
+  if(p.cat==='phones'||p.cat==='tablets'||p.cat==='computers') out.push(t.pi_f_service);
+  out.push(t.pi_f_langs, t.pi_f_delivery);
   return out;
 }
 
@@ -265,9 +253,23 @@ const T={
   trust_ig_n:'+54.2K',trust_ig_l:'עוקבים באינסטגרם',trust_years_n:'+16',trust_years_l:'שנות ותק בכפר כנא',trust_lang_n:'3',trust_lang_l:'שפות שירות',
   pr_title:'כל המוצרים',pr_sub:'טלפונים, טאבלטים, מחשבים, גיימינג ואביזרים — במחירים הכי טובים.',
   filter_all:'הכל',cat_phones:'טלפונים',cat_tablets:'טאבלטים',cat_computers:'מחשבים',cat_gaming:'גיימינג',cat_accessories:'אביזרים',add:'הוספה',
+  /* singular category nouns — the plural labels above are for filter chips and
+     read wrong mid-sentence ("iPhone 17 Pro — phones from Apple") */
+  cat1_phones:'טלפון',cat1_tablets:'טאבלט',cat1_computers:'מחשב',cat1_gaming:'מוצר גיימינג',cat1_accessories:'אביזר',
   filter_category:'קטגוריה',filter_brand:'מותג',filter_color:'צבע',filter_storage:'נפח אחסון',filter_price:'מחיר',filter_price_none:'ברירת מחדל',filter_price_asc:'מהזול ליקר',filter_price_desc:'מהיקר לזול',filter_results:'{n} מוצרים',filter_btn:'סינון',
   pdp_back:'חזרה למוצרים',pdp_color:'צבע',pdp_storage:'נפח אחסון',pdp_size:'מידה',pdp_qty:'כמות',pdp_add:'הוספה לסל',pdp_more:'עוד ב',
-  pdp_reviews_head:'ביקורות לקוחות',pdp_reviews_count:'מבוסס על {n} ביקורות',pdp_warranty_head:'אחריות ותמיכה',
+  pi_head:'כל מה שצריך לדעת',pi_tab_ov:'סקירה',pi_tab_desc:'תיאור',pi_tab_feat:'מפרט ותכונות',pi_tab_box:'מה בקופסה',
+  pi_ov_lede:'{name} — {cat} מבית {brand}, במלאי אצלנו בסקיי פון בכפר כנא. החל מ־₪{price}, עם אחריות בכתב ותמיכה אישית בשלוש שפות.',
+  pi_ov_lede_nb:'{name} — {cat}, במלאי אצלנו בסקיי פון בכפר כנא. החל מ־₪{price}, עם אחריות בכתב ותמיכה אישית בשלוש שפות.',
+  pi_stat_brand:'מותג',pi_stat_cat:'קטגוריה',pi_stat_options:'תצורות',pi_stat_warranty:'אחריות',pi_stat_warranty_v:'בכתב',pi_stat_generic:'כללי',
+  pi_f_colors:'{n} צבעים לבחירה: {list}',pi_f_storage:'תצורות זמינות: {list}',
+  pi_f_warranty:'אחריות בכתב מלאה על המוצר',pi_f_service:'תיקון באותו יום במעבדה שלנו, עם חלקים מקוריים',
+  pi_f_langs:'ליווי אישי בעברית, ערבית ואנגלית',pi_f_delivery:'איסוף מהחנות בכפר כנא או משלוח עד הבית',
+  pi_b_usbc:'כבל טעינה USB-C',pi_b_simtool:'מחט לפתיחת מגירת ה-SIM',pi_b_docs:'מדריך למשתמש ותעודת אחריות',
+  pi_b_psu:'מטען מקורי',pi_b_ctrl:'בקר DualSense אלחוטי',pi_b_hdmi:'כבל HDMI',pi_b_power:'כבל חשמל',
+  pi_b_audio:'כבל אודיו מתנתק',pi_b_band:'רצועה במידה מתאימה',pi_b_wcharge:'מטען מגנטי לשעון',
+  pi_b_budscase:'כיסוי טעינה',pi_b_tips:'אטמי אוזן בשלושה גדלים',pi_b_case:'נרתיק נשיאה',
+  pdp_warranty_head:'אחריות ותמיכה',
   pdp_warranty_body:'כל מוצר שאנחנו מוכרים מגיע עם אחריות בכתב וחלקים מקוריים — אנחנו מאחורי מה שאנחנו מוכרים.',
   pdp_warranty_pt1:'אחריות בכתב על כל מוצר',pdp_warranty_pt2:'תמיכה אישית בעברית, ערבית ואנגלית',pdp_warranty_pt3:'שירות תיקונים באותה חנות',pdp_warranty_cta:'שאלה על האחריות?',wa_warranty:'היי, יש לי שאלה לגבי האחריות על {p}',
   search_ph:'חיפוש מוצרים...',search_empty_h:'לא נמצאו תוצאות',search_empty_p:'נסו חיפוש אחר או עיינו בכל המוצרים.',
@@ -339,9 +341,21 @@ const T={
   trust_ig_n:'+54.2K',trust_ig_l:'متابع على إنستغرام',trust_years_n:'+16',trust_years_l:'سنة خبرة في كفركنا',trust_lang_n:'3',trust_lang_l:'لغات خدمة',
   pr_title:'كل المنتجات',pr_sub:'هواتف، أجهزة لوحية، حواسيب، ألعاب وملحقات — بأفضل الأسعار.',
   filter_all:'الكل',cat_phones:'هواتف',cat_tablets:'لوحية',cat_computers:'حواسيب',cat_gaming:'ألعاب',cat_accessories:'ملحقات',add:'أضف',
+  cat1_phones:'هاتف',cat1_tablets:'جهاز لوحي',cat1_computers:'حاسوب',cat1_gaming:'جهاز ألعاب',cat1_accessories:'ملحق',
   filter_category:'الفئة',filter_brand:'الماركة',filter_color:'اللون',filter_storage:'سعة التخزين',filter_price:'السعر',filter_price_none:'الافتراضي',filter_price_asc:'من الأرخص للأغلى',filter_price_desc:'من الأغلى للأرخص',filter_results:'{n} منتجات',filter_btn:'تصفية',
   pdp_back:'العودة للمنتجات',pdp_color:'اللون',pdp_storage:'سعة التخزين',pdp_size:'المقاس',pdp_qty:'الكمية',pdp_add:'أضف إلى السلة',pdp_more:'المزيد في',
-  pdp_reviews_head:'آراء الزبائن',pdp_reviews_count:'استنادًا إلى {n} تقييم',pdp_warranty_head:'الضمان والدعم',
+  pi_head:'كل ما يجب معرفته',pi_tab_ov:'نظرة عامة',pi_tab_desc:'الوصف',pi_tab_feat:'المواصفات والمزايا',pi_tab_box:'محتويات العلبة',
+  pi_ov_lede:'{name} — {cat} من {brand}، متوفر لدينا في سكاي فون بكفر كنا. ابتداءً من ₪{price}، مع ضمان مكتوب ودعم شخصي بثلاث لغات.',
+  pi_ov_lede_nb:'{name} — {cat}، متوفر لدينا في سكاي فون بكفر كنا. ابتداءً من ₪{price}، مع ضمان مكتوب ودعم شخصي بثلاث لغات.',
+  pi_stat_brand:'الماركة',pi_stat_cat:'الفئة',pi_stat_options:'الخيارات',pi_stat_warranty:'الضمان',pi_stat_warranty_v:'مكتوب',pi_stat_generic:'عام',
+  pi_f_colors:'{n} ألوان للاختيار: {list}',pi_f_storage:'الخيارات المتوفرة: {list}',
+  pi_f_warranty:'ضمان مكتوب كامل على المنتج',pi_f_service:'إصلاح في نفس اليوم في مختبرنا، بقطع أصلية',
+  pi_f_langs:'مرافقة شخصية بالعربية والعبرية والإنجليزية',pi_f_delivery:'استلام من المحل في كفر كنا أو توصيل للبيت',
+  pi_b_usbc:'كبل شحن USB-C',pi_b_simtool:'إبرة فتح درج الشريحة',pi_b_docs:'دليل المستخدم وبطاقة الضمان',
+  pi_b_psu:'شاحن أصلي',pi_b_ctrl:'يد تحكم DualSense لاسلكية',pi_b_hdmi:'كبل HDMI',pi_b_power:'كبل كهرباء',
+  pi_b_audio:'كبل صوت قابل للفصل',pi_b_band:'سوار بالمقاس المناسب',pi_b_wcharge:'شاحن مغناطيسي للساعة',
+  pi_b_budscase:'علبة شحن',pi_b_tips:'حشوات أذن بثلاثة أحجام',pi_b_case:'حقيبة حمل',
+  pdp_warranty_head:'الضمان والدعم',
   pdp_warranty_body:'كل منتج نبيعه يأتي بضمان مكتوب وقطع أصلية — نحن خلف كل ما نبيعه.',
   pdp_warranty_pt1:'ضمان مكتوب على كل منتج',pdp_warranty_pt2:'دعم شخصي بالعربية والعبرية والإنجليزية',pdp_warranty_pt3:'خدمة إصلاح في نفس المحل',pdp_warranty_cta:'سؤال عن الضمان؟',wa_warranty:'مرحباً، لدي سؤال حول الضمان على {p}',
   search_ph:'ابحث عن منتج...',search_empty_h:'لا توجد نتائج',search_empty_p:'جرّب بحثاً آخر أو تصفّح كل المنتجات.',
@@ -413,9 +427,21 @@ const T={
   trust_ig_n:'+54.2K',trust_ig_l:'Instagram followers',trust_years_n:'+16',trust_years_l:'years serving Kafr Kanna',trust_lang_n:'3',trust_lang_l:'service languages',
   pr_title:'All products',pr_sub:'Phones, tablets, computers, gaming and accessories — at the best prices.',
   filter_all:'All',cat_phones:'Phones',cat_tablets:'Tablets',cat_computers:'Computers',cat_gaming:'Gaming',cat_accessories:'Accessories',add:'Add',
+  cat1_phones:'phone',cat1_tablets:'tablet',cat1_computers:'computer',cat1_gaming:'gaming device',cat1_accessories:'accessory',
   filter_category:'Category',filter_brand:'Brand',filter_color:'Color',filter_storage:'Storage',filter_price:'Price',filter_price_none:'Default',filter_price_asc:'Price: low to high',filter_price_desc:'Price: high to low',filter_results:'{n} products',filter_btn:'Filters',
   pdp_back:'Back to products',pdp_color:'Color',pdp_storage:'Storage',pdp_size:'Size',pdp_qty:'Quantity',pdp_add:'Add to bag',pdp_more:'More in',
-  pdp_reviews_head:'Customer reviews',pdp_reviews_count:'Based on {n} reviews',pdp_warranty_head:'Warranty & support',
+  pi_head:'Everything you need to know',pi_tab_ov:'Overview',pi_tab_desc:'Description',pi_tab_feat:'Features',pi_tab_box:"What's in the box",
+  pi_ov_lede:'{name} — {a} {cat} from {brand}, in stock at Sky Phone in Kafr Kanna. From ₪{price}, with a written warranty and personal support in three languages.',
+  pi_ov_lede_nb:'{name} — {a} {cat}, in stock at Sky Phone in Kafr Kanna. From ₪{price}, with a written warranty and personal support in three languages.',
+  pi_stat_brand:'Brand',pi_stat_cat:'Category',pi_stat_options:'Options',pi_stat_warranty:'Warranty',pi_stat_warranty_v:'Written',pi_stat_generic:'Generic',
+  pi_f_colors:'{n} colours to choose from: {list}',pi_f_storage:'Available configurations: {list}',
+  pi_f_warranty:'Full written warranty on the product',pi_f_service:'Same-day repair in our own lab, with genuine parts',
+  pi_f_langs:'Personal guidance in Hebrew, Arabic and English',pi_f_delivery:'Collect in Kafr Kanna or get it delivered to your door',
+  pi_b_usbc:'USB-C charging cable',pi_b_simtool:'SIM tray tool',pi_b_docs:'User guide and warranty card',
+  pi_b_psu:'Original charger',pi_b_ctrl:'DualSense wireless controller',pi_b_hdmi:'HDMI cable',pi_b_power:'Power cable',
+  pi_b_audio:'Detachable audio cable',pi_b_band:'Band in your chosen size',pi_b_wcharge:'Magnetic watch charger',
+  pi_b_budscase:'Charging case',pi_b_tips:'Ear tips in three sizes',pi_b_case:'Carry case',
+  pdp_warranty_head:'Warranty & support',
   pdp_warranty_body:'Every product we sell comes with a written warranty and genuine parts — we stand behind what we sell.',
   pdp_warranty_pt1:'Written warranty on every product',pdp_warranty_pt2:'Personal support in Hebrew, Arabic & English',pdp_warranty_pt3:'Repairs handled in-house',pdp_warranty_cta:'Ask about warranty',wa_warranty:'Hi, I have a question about the warranty on {p}',
   search_ph:'Search products...',search_empty_h:'No results found',search_empty_p:'Try a different search or browse all products.',
@@ -495,6 +521,9 @@ function pmediaSrc(p,src){
   return `<span class="pfb">${svg}</span><img class="pimg" src="${src}" alt="${p.name||''}" loading="lazy" onerror="var f=this.previousElementSibling; if(f) f.classList.add('show'); this.remove();">`;
 }
 function catName(c){return c==='all'?T[lang].filter_all:T[lang]['cat_'+c];}
+/* singular form, for prose. Falls back to the plural label if a language
+   has not defined one, so a missing key degrades instead of printing undefined. */
+function catOne(c){return (c!=='all'&&T[lang]['cat1_'+c])||catName(c);}
 
 /* ---------- motion system ----------
    canHover gates every pointer-driven effect (mouse-tracking hero tilt, spotlight,
@@ -956,31 +985,54 @@ function renderProductPage(){
   const relatedHtml=related.length?`<div class="pdp-more">
     <div class="section-head" data-reveal><div><h2 class="h2">${T[lang].pdp_more} ${catName(p.cat)}</h2></div></div>
     <div class="row">${related.map(productCard).join('')}</div></div>`:'';
-  const rev=productReviewData(p);
   const warrantyWa=`https://wa.me/972527223916?text=${encodeURIComponent(T[lang].wa_warranty.replace('{p}',p.name))}`;
-  const reviewsWarrantyHtml=`<div class="pdp-rw" data-reveal>
-    <div class="pdp-reviews">
-      <h2 class="h2">${T[lang].pdp_reviews_head}</h2>
-      <div class="pdp-rating-row">
-        <span class="pdp-rating-num">${rev.rating}</span>
-        <span class="pdp-stars">${starsSvg(rev.rating)}</span>
-        <span class="pdp-rating-count">${T[lang].pdp_reviews_count.replace('{n}',rev.count)}</span>
-      </div>
-      <div class="pdp-review-list">${rev.items.map(r=>`<div class="review-card">
-        <div class="review-top"><span class="review-avatar">${r.name[0]}</span><span class="review-name">${r.name}</span><span class="pdp-stars sm">${starsSvg(5)}</span></div>
-        <p class="review-text">${r.text}</p></div>`).join('')}</div>
+  const t=T[lang];
+  const brandLabel=p.brand?(BRAND_LABEL[p.brand]||p.brand):null;
+  const catWord=catOne(p.cat);
+  /* only English carries an indefinite article; he/ar leave {a} unused */
+  const article=/^[aeiou]/i.test(catWord)?'an':'a';
+  const lede=(brandLabel?t.pi_ov_lede.replace('{brand}',brandLabel):t.pi_ov_lede_nb)
+    .replace('{name}',p.name).replace('{a}',article).replace('{cat}',catWord)
+    .replace('{price}',fmt(p.price)).replace(/\s{2,}/g,' ');
+  const optionCount=(p.storage?p.storage.length:0)+(p.colors?p.colors.length:0);
+  const check='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+  const infoHtml=`<div class="pdp-info" data-reveal>
+    <h2 class="h2">${t.pi_head}</h2>
+    <div class="pdp-tabs" role="tablist">
+      ${['ov','desc','feat','box'].map((k,i)=>`<button class="pdp-tab ${i===0?'on':''}" role="tab" aria-selected="${i===0}" data-pdp-tab="${k}">${t['pi_tab_'+k]}</button>`).join('')}
     </div>
-    <div class="pdp-warranty">
-      <h2 class="h2">${T[lang].pdp_warranty_head}</h2>
-      <p class="pdp-warranty-body">${T[lang].pdp_warranty_body}</p>
-      <ul class="pdp-warranty-pts">
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>${T[lang].pdp_warranty_pt1}</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>${T[lang].pdp_warranty_pt2}</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>${T[lang].pdp_warranty_pt3}</li>
-      </ul>
-      <a class="btn btn-secondary magnetic" href="${warrantyWa}" target="_blank" rel="noopener">${T[lang].pdp_warranty_cta}</a>
+    <div class="pdp-panels">
+      <div class="pdp-panel on" data-pdp-panel="ov">
+        <p class="pdp-panel-lede">${lede}</p>
+        <div class="pdp-stats">
+          <div class="pdp-stat"><span>${t.pi_stat_brand}</span><b>${brandLabel||t.pi_stat_generic}</b></div>
+          <div class="pdp-stat"><span>${t.pi_stat_cat}</span><b>${catName(p.cat)}</b></div>
+          <div class="pdp-stat"><span>${t.pi_stat_options}</span><b>${optionCount||'—'}</b></div>
+          <div class="pdp-stat"><span>${t.pi_stat_warranty}</span><b>${t.pi_stat_warranty_v}</b></div>
+        </div>
+      </div>
+      <div class="pdp-panel" data-pdp-panel="desc">
+        <p class="pdp-panel-lede">${p.desc?p.desc[lang]:lede}</p>
+      </div>
+      <div class="pdp-panel" data-pdp-panel="feat">
+        <ul class="pdp-bullets">${productFeatures(p).map(f=>`<li>${check}<span>${f}</span></li>`).join('')}</ul>
+      </div>
+      <div class="pdp-panel" data-pdp-panel="box">
+        <ul class="pdp-bullets box">${productBox(p).map(b=>`<li>${check}<span>${b}</span></li>`).join('')}</ul>
+      </div>
     </div>
   </div>`;
+  const warrantyHtml=`<div class="pdp-warranty" data-reveal>
+      <h2 class="h2">${t.pdp_warranty_head}</h2>
+      <p class="pdp-warranty-body">${t.pdp_warranty_body}</p>
+      <ul class="pdp-warranty-pts">
+        <li>${check}${t.pdp_warranty_pt1}</li>
+        <li>${check}${t.pdp_warranty_pt2}</li>
+        <li>${check}${t.pdp_warranty_pt3}</li>
+      </ul>
+      <a class="btn btn-secondary magnetic" href="${warrantyWa}" target="_blank" rel="noopener">${t.pdp_warranty_cta}</a>
+    </div>`;
+  const reviewsWarrantyHtml=`<div class="pdp-rw">${infoHtml}${warrantyHtml}</div>`;
   const imgs=pdpImages(p);
   if(pdpImgIdx>=imgs.length) pdpImgIdx=0;
   const galleryMain=imgs.length?pmediaSrc(p,imgs[pdpImgIdx]):pmedia(p);
@@ -1355,6 +1407,14 @@ document.addEventListener('click',e=>{
   const faq=e.target.closest('.faq-q'); if(faq){faq.parentElement.classList.toggle('open');return;}
   const pcard=e.target.closest('.pcard[data-pid]'); if(pcard){openProduct(pcard.dataset.pid);return;}
   const imgBtn=e.target.closest('[data-pdp-img-idx]'); if(imgBtn){pdpImgIdx=Number(imgBtn.dataset.pdpImgIdx);renderProductPage();return;}
+  const pdpTab=e.target.closest('[data-pdp-tab]'); if(pdpTab){
+    const key=pdpTab.dataset.pdpTab, box=pdpTab.closest('.pdp-info');
+    box.querySelectorAll('[data-pdp-tab]').forEach(b=>{
+      const on=b===pdpTab; b.classList.toggle('on',on); b.setAttribute('aria-selected',on?'true':'false');
+    });
+    box.querySelectorAll('[data-pdp-panel]').forEach(pn=>pn.classList.toggle('on',pn.dataset.pdpPanel===key));
+    return;
+  }
   const colorBtn=e.target.closest('[data-color-idx]'); if(colorBtn){pdpColorIdx=Number(colorBtn.dataset.colorIdx);renderProductPage();return;}
   const variantBtn=e.target.closest('[data-variant-idx]'); if(variantBtn){pdpVariantIdx=Number(variantBtn.dataset.variantIdx);renderProductPage();return;}
   if(e.target.closest('[data-pdp-inc]')){pdpQty++;renderProductPage();return;}
@@ -1449,16 +1509,82 @@ function initRowArrows(){
 function refreshRowArrows(){ rowArrowRefresh.forEach(f=>f()); }
 
 /* ---------- PDP gallery pointer zoom ---------- */
+/* ---------- PDP 3D product stage ----------
+   The honest approximation of an Apple product page that flat catalogue photos
+   allow: a perspective stage where the product tracks the pointer (or a finger
+   drag) in 3D, lit by a highlight that moves with it and grounded by a contact
+   shadow that tightens as it lifts. Deliberately a shallow, physical tilt — a
+   true rotation would need a 3D model or a turntable frame sequence, neither of
+   which exists for this catalogue, and faking one from a single photo would
+   look worse than not doing it.
+   Motion is driven per-frame by rAF and eased toward a target, so pointer moves
+   and the spring-back on release share one code path and never fight the CSS. */
+let pdpStageRaf=null, pdpStageCleanup=null;
 function attachPdpZoom(){
-  if(!canHover) return;
+  if(pdpStageRaf){ cancelAnimationFrame(pdpStageRaf); pdpStageRaf=null; }
+  if(pdpStageCleanup){ pdpStageCleanup(); pdpStageCleanup=null; }
   const g=document.querySelector('.pdp-gallery'); if(!g) return;
-  const inner=g.querySelector('.pimg')||g.querySelector('svg'); if(!inner) return;
-  g.addEventListener('pointermove',e=>{
+  const art=g.querySelector('.pimg')||g.querySelector('svg'); if(!art) return;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const MAX_Y=17, MAX_X=11;             /* degrees of yaw / pitch */
+  let tYaw=0,tPitch=0,tLift=0;          /* targets */
+  let yaw=0,pitch=0,lift=0;             /* eased current values */
+  let dragging=false, startX=0, startY=0, baseYaw=0, basePitch=0;
+
+  const clamp=(v,m)=>Math.max(-m,Math.min(m,v));
+  function aim(px,py){                   /* px,py are -1..1 across the stage */
+    tYaw=clamp(px*MAX_Y,MAX_Y); tPitch=clamp(-py*MAX_X,MAX_X);
+  }
+  function rest(){ tYaw=0; tPitch=0; tLift=0; }
+
+  function tick(){
+    yaw+=(tYaw-yaw)*0.10; pitch+=(tPitch-pitch)*0.10; lift+=(tLift-lift)*0.12;
+    art.style.transform=
+      `translateZ(${(lift*44).toFixed(1)}px) rotateY(${yaw.toFixed(2)}deg) rotateX(${pitch.toFixed(2)}deg) scale(${(1+lift*0.05).toFixed(3)})`;
+    g.style.setProperty('--gx',(50+yaw*1.7).toFixed(1)+'%');
+    g.style.setProperty('--gy',(44-pitch*1.7).toFixed(1)+'%');
+    g.style.setProperty('--gs',(1-lift*0.16).toFixed(3));
+    g.style.setProperty('--go',(0.55-lift*0.18).toFixed(3));
+    pdpStageRaf=requestAnimationFrame(tick);
+  }
+
+  function onMove(e){
+    if(e.pointerType==='touch'&&!dragging) return;
     const r=g.getBoundingClientRect();
-    inner.style.transformOrigin=`${((e.clientX-r.left)/r.width*100).toFixed(1)}% ${((e.clientY-r.top)/r.height*100).toFixed(1)}%`;
-    inner.style.transform='scale(1.35)';
-  });
-  g.addEventListener('pointerleave',()=>{ inner.style.transform=''; });
+    if(dragging){
+      /* drag: translate travel into rotation, so a flick spins further than a nudge */
+      aim(baseYaw+((e.clientX-startX)/r.width)*2.6, basePitch+((e.clientY-startY)/r.height)*2.0);
+    }else{
+      aim((e.clientX-r.left)/r.width*2-1, (e.clientY-r.top)/r.height*2-1);
+    }
+  }
+  function onDown(e){
+    dragging=true; startX=e.clientX; startY=e.clientY;
+    const r=g.getBoundingClientRect();
+    baseYaw=(e.clientX-r.left)/r.width*2-1; basePitch=(e.clientY-r.top)/r.height*2-1;
+    if(e.pointerType==='touch'){ baseYaw=yaw/MAX_Y; basePitch=-pitch/MAX_X; }
+    tLift=1; g.classList.add('grabbing');
+    try{ g.setPointerCapture(e.pointerId); }catch(_){}
+  }
+  function onUp(){ dragging=false; g.classList.remove('grabbing'); rest(); }
+  function onEnter(e){ if(e.pointerType!=='touch') tLift=1; }
+  function onLeave(){ if(!dragging) rest(); }
+
+  g.addEventListener('pointermove',onMove);
+  g.addEventListener('pointerdown',onDown);
+  g.addEventListener('pointerup',onUp);
+  g.addEventListener('pointercancel',onUp);
+  g.addEventListener('pointerenter',onEnter);
+  g.addEventListener('pointerleave',onLeave);
+  g.classList.add('stage-live');
+  pdpStageCleanup=()=>{
+    g.removeEventListener('pointermove',onMove); g.removeEventListener('pointerdown',onDown);
+    g.removeEventListener('pointerup',onUp); g.removeEventListener('pointercancel',onUp);
+    g.removeEventListener('pointerenter',onEnter); g.removeEventListener('pointerleave',onLeave);
+    g.classList.remove('stage-live','grabbing');
+  };
+  tick();
 }
 
 /* ---------- support chatbot ----------
