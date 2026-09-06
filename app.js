@@ -694,7 +694,7 @@ function renderGamingHighlights(){
       </div>
       <div class="highlight-media">${pmedia(p)}</div>
     </a>`).join('');
-  html+=`<a class="highlight-card highlight-card-soon" href="https://wa.me/972527223916?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%A9%D7%AA%D7%A2%D7%93%D7%9B%D7%A0%D7%95%20%D7%90%D7%95%D7%AA%D7%99%20%D7%9B%D7%A9%D7%94-GTA%20VI%20%D7%9E%D7%92%D7%99%D7%A2" target="_blank" rel="noopener" data-reveal style="background:var(--dark); animation-delay:.16s">
+  html+=`<a class="highlight-card highlight-card-soon" href="https://wa.me/972527223916?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%A9%D7%AA%D7%A2%D7%93%D7%9B%D7%A0%D7%95%20%D7%90%D7%95%D7%AA%D7%99%20%D7%9B%D7%A9%D7%94-GTA%20VI%20%D7%9E%D7%92%D7%99%D7%A2" target="_blank" rel="noopener" data-reveal data-wa-label="gta_teaser" style="background:var(--dark); animation-delay:.16s">
       <div class="highlight-text">
         <span class="highlight-kind ad-badge" style="margin:0">${T[lang].soon_badge}</span>
         <h3 class="highlight-title" style="color:#fff">GTA VI</h3>
@@ -1042,6 +1042,7 @@ function buildOrderMessage(){
 }
 function sendCartToWhatsApp(){
   if(!Object.keys(bag).length) return;
+  if(typeof gtag==='function') gtag('event','whatsapp_click',{event_label:'cart_checkout'});
   window.open('https://wa.me/972527223916?text='+encodeURIComponent(buildOrderMessage()),'_blank');
 }
 
@@ -1195,6 +1196,13 @@ function initSearchSuggest(inputId,suggId){
   inp.addEventListener('blur',()=>setTimeout(close,150));
 }
 function closeSuggest(){ document.querySelectorAll('.search-sugg.open').forEach(b=>{b.classList.remove('open'); b.innerHTML='';}); }
+/* WhatsApp clicks are the money metric on this site — the moment a visitor
+   becomes a lead. Doesn't intercept the click (no preventDefault), just logs
+   which button it was alongside the real navigation. */
+document.addEventListener('click',e=>{
+  const wa=e.target.closest('[data-wa-label]');
+  if(wa && typeof gtag==='function') gtag('event','whatsapp_click',{event_label:wa.dataset.waLabel});
+});
 document.addEventListener('click',e=>{
   const rt=e.target.closest('[data-route]'); if(rt){closeCart();go(rt.dataset.route); return;}
   if(e.target.closest('[data-cart-open]')){openCart();return;}
