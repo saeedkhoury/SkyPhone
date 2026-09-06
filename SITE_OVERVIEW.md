@@ -36,7 +36,9 @@ A comprehensive description of the site, its architecture, design, and features 
 
 ## Data model
 
-- `PRODUCTS`: 27 SKUs across phones/tablets/computers/gaming/accessories (full current Apple and Samsung lineups plus Xiaomi, Dell, Sony items), each with `id, name, cat, price, icon, brand, colors[], storage[], img, imgs[], desc:{he,ar,en}`. Every SKU has at least one real product photo (sourced from Wikimedia Commons, mirrored locally in `img/` so the site works offline with no hotlink risk); most have two for the PDP gallery.
+- `PRODUCTS`: 27 SKUs across phones/tablets/computers/gaming/accessories (full current Apple and Samsung lineups plus Xiaomi, Dell, Sony items), each with `id, name, cat, price, icon, brand, colors[], storage[], img, imgs[], desc:{he,ar,en}`. Every SKU has at least one real product photo, mirrored locally in `img/` so the site works offline with no hotlink risk; most have two for the PDP gallery.
+- **Image provenance is mixed** — check before assuming. Most photos came from Wikimedia Commons. Five Apple SKUs (MacBook Pro 14", iPad Pro, Apple Watch Ultra 2, AirPods Pro 2, AirPods 4) now use official Apple product imagery supplied by the shop owner on 2026-09-06, background-removed to transparent PNGs so they sit on the card grounds without a visible white rectangle. Originals are kept in `official_img/`.
+- The iPhone 17 Pro / Pro Max images (`img/iphone17pro-*`, `img/iphone17promax-*`) are still **synthetic vector mockups with blank screens**, not photographs. Official replacements were supplied but only at 225×225, well under the ~664 physical px the PDP gallery needs; the owner chose to source larger files rather than ship blurry flagships. **These are the next images to replace.**
 - `REPAIRS`: 7 service types, each with a base price and a per-device price table (`PHONE_REPAIR_DEVICES`).
 - Icons and images always have a graceful fallback chain: real photo → authored SVG icon (never a broken-image box).
 
