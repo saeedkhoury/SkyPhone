@@ -704,12 +704,14 @@ input,textarea{caret-color:var(--accent)}
 /* iPhone 18 hero slide: the whole slide IS the shop's real posted creative —
    no separate title/lede/CTA row competing with it, per the user's "make the
    whole slide the picture" feedback on the earlier boxed-card treatment. */
-.ad-full-slide{position:relative; display:flex; align-items:center; justify-content:center; width:100%; height:min(74vh,600px); overflow:hidden; cursor:pointer; background:var(--dark)}
-.ad-full-slide img{max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; transition:transform .4s var(--ease)}
-.ad-full-slide:hover img{transform:scale(1.015)}
+.ad-full-slide{position:relative; display:flex; align-items:center; justify-content:center; width:100%; height:min(74vh,600px); overflow:hidden; cursor:pointer; background:var(--dark); perspective:1200px}
+.ad-full-slide img{max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; transition:transform .35s var(--ease); animation:ad-idle-float 7s ease-in-out infinite; will-change:transform}
 .ad-badge{display:inline-block; background:var(--accent); color:#fff; font-size:12px; font-weight:700; letter-spacing:.02em; padding:6px 16px; border-radius:var(--radius-pill)}
+.ad-badge-buy{background:var(--ok)}
 .ad-full-slide .ad-badge{position:absolute; top:28px; inset-inline:0; margin-inline:auto; width:fit-content; z-index:2}
 .ad-full-caption{position:absolute; inset-inline:0; bottom:0; z-index:2; padding:36px 24px 24px; text-align:center; font-size:15px; color:var(--dark-ink-soft); background:linear-gradient(0deg,rgba(0,0,0,.6),transparent)}
+@keyframes ad-idle-float{0%,100%{transform:translateY(0) rotateY(0deg) scale(1)}50%{transform:translateY(-10px) rotateY(-3deg) scale(1.015)}}
+@media (prefers-reduced-motion:reduce){.ad-full-slide img{animation:none}}
 
 /* reels row — real videos the shop posts on Facebook. Each card links out
    (Facebook's iframe embed rejects these /share/r/ reel links — see the

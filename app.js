@@ -224,7 +224,7 @@ const T={
    fy_rep_head:'מסך שבור? סוללה חלשה?',fy_rep_sub:'המעבדה שלנו מתקנת הכל — לרוב באותו יום, בחלקים מקוריים ועם אחריות מלאה.',fy_rep_cta:'לתיאום תיקון',
    fy_ig_head:'עוקבים באינסטגרם',fy_ig_sub:'מבצעים, הגעות חדשות ומה שחם בחנות — קודם כל שם.',fy_ig_cta:'עקבו אחרינו',
    fy_brands_l:'מותגים שתמצאו אצלנו',
-   soon_badge:'בקרוב',ad_i18_sub:'iPhone 18 Pro / Pro Max / Ultra מגיעים בקרוב ל-Sky Phone.',ad_i18_cta:'עדכנו אותי בוואטסאפ',gta_cta:'עדכנו אותי כשמגיע',fy_gaming_head:'עולם הגיימינג אצלנו',fy_gaming_sub:'קונסולות ומשחקים — כולל מה שמגיע בקרוב.',
+   soon_badge:'בקרוב',ad_i18_sub:'סדרת iPhone 18 / 18 Pro / 18 Pro Max מגיעה בקרוב ל-Sky Phone.',ad_i18_cta:'עדכנו אותי בוואטסאפ',instock_badge:'במלאי עכשיו',ps5_ad_sub:'PlayStation 5 זמין עכשיו ב-Sky Phone — לחצו לצפייה במוצר.',gta_cta:'עדכנו אותי כשמגיע',fy_gaming_head:'עולם הגיימינג אצלנו',fy_gaming_sub:'קונסולות ומשחקים — כולל מה שמגיע בקרוב.',
    reels_head:'עוד מאיתנו ברשתות',reels_sub:'רגעים אמיתיים מהחנות — ישר מהפייסבוק שלנו.',reel_watch:'צפייה בפייסבוק',
    apple_head:'עולם ה-Apple אצלנו',apple_sub:'אייפון, אייפד, מק ואפל ווטש — הכל מקורי ובאחריות מלאה.',
    samsung_head:'עולם ה-Samsung אצלנו',samsung_sub:'גלקסי, טאבים ואוזניות — המבחר המלא של סמסונג.',
@@ -295,7 +295,7 @@ const T={
    fy_rep_head:'شاشة مكسورة؟ بطارية ضعيفة؟',fy_rep_sub:'مختبرنا يصلح كل شيء — غالباً في نفس اليوم، بقطع أصلية وضمان كامل.',fy_rep_cta:'احجز إصلاحاً',
    fy_ig_head:'متابع على إنستغرام',fy_ig_sub:'عروض، وصولات جديدة وكل ما هو حار في المتجر — هناك أولاً.',fy_ig_cta:'تابعونا',
    fy_brands_l:'ماركات تجدونها لدينا',
-   soon_badge:'قريباً',ad_i18_sub:'iPhone 18 Pro / Pro Max / Ultra قريباً في Sky Phone.',ad_i18_cta:'أعلمني عبر واتساب',gta_cta:'أعلمني عند الوصول',fy_gaming_head:'عالم الألعاب لدينا',fy_gaming_sub:'أجهزة ألعاب وعناوين — بما فيها ما هو قادم قريباً.',
+   soon_badge:'قريباً',ad_i18_sub:'سلسلة iPhone 18 / 18 Pro / 18 Pro Max قريباً في Sky Phone.',ad_i18_cta:'أعلمني عبر واتساب',instock_badge:'متوفر الآن',ps5_ad_sub:'PlayStation 5 متوفر الآن في Sky Phone — اضغط لعرض المنتج.',gta_cta:'أعلمني عند الوصول',fy_gaming_head:'عالم الألعاب لدينا',fy_gaming_sub:'أجهزة ألعاب وعناوين — بما فيها ما هو قادم قريباً.',
    reels_head:'المزيد منّا على السوشال ميديا',reels_sub:'لحظات حقيقية من المتجر — مباشرة من فيسبوك.',reel_watch:'مشاهدة على فيسبوك',
    apple_head:'عالم Apple لدينا',apple_sub:'آيفون، آيباد، ماك وآبل ووتش — كله أصلي وبضمان كامل.',
    samsung_head:'عالم Samsung لدينا',samsung_sub:'غالاكسي، أجهزة لوحية وسماعات — التشكيلة الكاملة من سامسونج.',
@@ -366,7 +366,7 @@ const T={
    fy_rep_head:'Cracked screen? Weak battery?',fy_rep_sub:'Our lab fixes it all — usually the same day, with genuine parts and a full warranty.',fy_rep_cta:'Book a repair',
    fy_ig_head:'followers on Instagram',fy_ig_sub:'Deals, new arrivals and what’s hot in the shop — there first.',fy_ig_cta:'Follow us',
    fy_brands_l:'Brands you’ll find here',
-   soon_badge:'Coming soon',ad_i18_sub:'iPhone 18 Pro / Pro Max / Ultra are coming soon to Sky Phone.',ad_i18_cta:'Notify me on WhatsApp',gta_cta:'Notify me when it arrives',fy_gaming_head:'The gaming world, here',fy_gaming_sub:'Consoles and titles — including what\'s coming soon.',
+   soon_badge:'Coming soon',ad_i18_sub:'The iPhone 18 / 18 Pro / 18 Pro Max series is coming soon to Sky Phone.',ad_i18_cta:'Notify me on WhatsApp',instock_badge:'In stock now',ps5_ad_sub:'PlayStation 5 is in stock now at Sky Phone — click to view the product.',gta_cta:'Notify me when it arrives',fy_gaming_head:'The gaming world, here',fy_gaming_sub:'Consoles and titles — including what\'s coming soon.',
    reels_head:'More from us on social',reels_sub:'Real moments from the shop — straight from our Facebook.',reel_watch:'Watch on Facebook',
    apple_head:'The Apple world, here',apple_sub:'iPhone, iPad, Mac and Apple Watch — all genuine, full warranty.',
    samsung_head:'The Samsung world, here',samsung_sub:'Galaxy phones, tablets and earbuds — the full Samsung lineup.',
@@ -559,6 +559,22 @@ function attachTilt(el){
 const textRevealObserver = 'IntersectionObserver' in window ? new IntersectionObserver(entries=>{
   entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('tr-in'); textRevealObserver.unobserve(en.target); } });
 },{threshold:.4}) : null;
+/* Hero ad slides: a pointer-tracked tilt on the product photo, on top of a
+   continuous idle float (CSS keyframe), to give the flat photo a "living,
+   almost-video" feel like Samsung's real product pages use actual footage
+   for — we can't legally embed someone else's produced marketing video, so
+   this is the closest honest equivalent built from a still photo. */
+function attachAdTilt(wrap){
+  const img=wrap.querySelector('img'); if(!img) return;
+  wrap.addEventListener('pointermove',e=>{
+    const r=wrap.getBoundingClientRect();
+    const px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
+    const rx=(py-.5)*-10, ry=(px-.5)*10;
+    img.style.animationPlayState='paused';
+    img.style.transform=`scale(1.05) rotateX(${rx}deg) rotateY(${ry}deg)`;
+  });
+  wrap.addEventListener('pointerleave',()=>{ img.style.transform=''; img.style.animationPlayState=''; });
+}
 function initTextReveal(root){
   (root||document).querySelectorAll('[data-text-reveal]:not(.tr-ready)').forEach(el=>{
     el.classList.add('tr-ready');
@@ -576,6 +592,7 @@ function initMotionFor(root){
     root.querySelectorAll('.spot').forEach(initParticleField);
     root.querySelectorAll('.magnetic').forEach(attachMagnetic);
     root.querySelectorAll('.pcard').forEach(attachTilt);
+    root.querySelectorAll('.ad-full-slide').forEach(attachAdTilt);
   }
 }
 function initHeroTilt(){
