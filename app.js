@@ -238,8 +238,8 @@ const T={
   rp_list_head:'תיקונים ומחירים',rp_list_sub:'מחיר התחלתי — נקבע סופית לאחר בדיקה.',rp_from:'החל מ־',rp_book:'הוספה לסל',rp_note:'המחירים לנוחותכם בלבד; המחיר הסופי נקבע לאחר בדיקת המכשיר.',rp_pick_device:'בחרו מכשיר',
   rep_r1:'החלפת מסך',rep_r2:'החלפת סוללה',rep_r3:'תיקון שקע טעינה',rep_r4:'טיפול בנזקי מים',rep_r5:'שחזור תוכנה',rep_r6:'תיקון מחשב / לפטופ',rep_r7:'תיקון קונסולה',
   bag_title:'הסל שלי',bag_sub:'מוצרים, שירותים ותיקונים שבחרת.',bag_empty_h:'הסל ריק',bag_empty_p:'עדיין לא הוספת כלום. בואו נמצא לך משהו.',bag_empty_cta:'למוצרים',
-  bag_subtotal:'סכום ביניים',bag_ship:'משלוח',bag_ship_v:'חינם',bag_total:'סה״כ',bag_checkout:'למעבר לתשלום',tag_product:'מוצר',tag_repair:'תיקון',bag_remove:'הסרה',bag_gift_label:'עטיפת מתנה',bag_view_full:'לצפייה בסל בעמוד מלא',
-  modal_title:'כמעט שם!',modal_body:'זו גרסת הדגמה — בגרסה החיה כאן מתחבר תשלום מאובטח (אשראי / Bit / PayPal).',modal_close:'הבנתי',
+  bag_subtotal:'סכום ביניים',bag_ship:'משלוח',bag_ship_v:'חינם',bag_total:'סה״כ',bag_checkout:'שליחת הזמנה בוואטסאפ',tag_product:'מוצר',tag_repair:'תיקון',bag_remove:'הסרה',bag_gift_label:'עטיפת מתנה',bag_view_full:'לצפייה בסל בעמוד מלא',wa_order_head:'היי, אני רוצה להזמין:',wa_name_label:'שם: ',wa_address_label:'כתובת: ',
+  modal_title:'ההזמנה נשלחה בוואטסאפ!',modal_body:'החנות תחזור אליכם לאישור מחיר וזמינות. התשלום מתבצע מול החנות — מזומן, אשראי או Bit.',modal_close:'הבנתי',
   ab_title:'עלינו ויצירת קשר',ab_lead:'הכל על Sky Phone — וכל דרך ליצור איתנו קשר.',
   ab_story_h:'הסיפור שלנו',ab_story_p1:'Sky Phone פועלת מאז 2010 — חנות שכונתית שהפכה לכתובת לטלפונים, מחשבים, גיימינג ותיקונים.',ab_story_p2:'אנחנו מאמינים בשירות אישי, חלקים מקוריים ואחריות מלאה — בעברית, בערבית ובאנגלית.',
   ab_stat1:'שנת ייסוד',ab_stat2:'שפות שירות',ab_stat3:'זמן תיקון ממוצע',
@@ -309,8 +309,8 @@ const T={
   rp_list_head:'الإصلاحات والأسعار',rp_list_sub:'سعر ابتدائي — يُحدَّد نهائياً بعد الفحص.',rp_from:'ابتداءً من',rp_book:'أضف إلى السلة',rp_note:'الأسعار للاستدلال فقط؛ يُحدَّد السعر النهائي بعد فحص الجهاز.',rp_pick_device:'اختر الجهاز',
   rep_r1:'استبدال الشاشة',rep_r2:'استبدال البطارية',rep_r3:'إصلاح منفذ الشحن',rep_r4:'معالجة أضرار المياه',rep_r5:'استعادة البرمجيات',rep_r6:'إصلاح حاسوب / لابتوب',rep_r7:'إصلاح كونسول',
   bag_title:'سلّتي',bag_sub:'المنتجات والخدمات والإصلاحات التي اخترتها.',bag_empty_h:'السلّة فارغة',bag_empty_p:'لم تُضِف شيئاً بعد. لنجد لك ما يناسبك.',bag_empty_cta:'إلى المنتجات',
-  bag_subtotal:'المجموع الفرعي',bag_ship:'التوصيل',bag_ship_v:'مجاني',bag_total:'الإجمالي',bag_checkout:'إتمام الشراء',tag_product:'منتج',tag_repair:'إصلاح',bag_remove:'إزالة',bag_gift_label:'تغليف هدية',bag_view_full:'عرض السلة في صفحة كاملة',
-  modal_title:'اقتربت!',modal_body:'هذه نسخة تجريبية — في النسخة الحيّة يتم ربط دفع آمن (بطاقة / Bit / PayPal).',modal_close:'حسناً',
+  bag_subtotal:'المجموع الفرعي',bag_ship:'التوصيل',bag_ship_v:'مجاني',bag_total:'الإجمالي',bag_checkout:'إرسال الطلب عبر واتساب',tag_product:'منتج',tag_repair:'إصلاح',bag_remove:'إزالة',bag_gift_label:'تغليف هدية',bag_view_full:'عرض السلة في صفحة كاملة',wa_order_head:'مرحباً، أرغب بطلب:',wa_name_label:'الاسم: ',wa_address_label:'العنوان: ',
+  modal_title:'تم إرسال الطلب عبر واتساب!',modal_body:'سيتواصل معكم المتجر لتأكيد السعر والتوفر. الدفع يتم مباشرة مع المتجر — نقداً أو بطاقة أو Bit.',modal_close:'حسناً',
   ab_title:'من نحن والتواصل',ab_lead:'كل شيء عن Sky Phone — وكل طرق التواصل معنا.',
   ab_story_h:'قصّتنا',ab_story_p1:'تعمل Sky Phone منذ 2010 — متجر الحي الذي أصبح وجهةً للهواتف والحواسيب والألعاب والإصلاح.',ab_story_p2:'نؤمن بالخدمة الشخصية والقطع الأصلية والضمان الكامل — بالعبرية والعربية والإنجليزية.',
   ab_stat1:'سنة التأسيس',ab_stat2:'لغات الخدمة',ab_stat3:'متوسط وقت الإصلاح',
@@ -380,8 +380,8 @@ const T={
   rp_list_head:'Repairs & prices',rp_list_sub:'Starting price — finalised after inspection.',rp_from:'from',rp_book:'Add to Bag',rp_note:'Prices are indicative; the final price is set after we inspect the device.',rp_pick_device:'Choose a device',
   rep_r1:'Screen replacement',rep_r2:'Battery replacement',rep_r3:'Charging port fix',rep_r4:'Water damage treatment',rep_r5:'Software restore',rep_r6:'Laptop / PC repair',rep_r7:'Console repair',
   bag_title:'My Bag',bag_sub:'Products, services and repairs you’ve chosen.',bag_empty_h:'Your bag is empty',bag_empty_p:'Nothing here yet. Let’s find you something.',bag_empty_cta:'Browse products',
-  bag_subtotal:'Subtotal',bag_ship:'Delivery',bag_ship_v:'Free',bag_total:'Total',bag_checkout:'Checkout',tag_product:'Product',tag_repair:'Repair',bag_remove:'Remove',bag_gift_label:'Gift wrap',bag_view_full:'View full-page cart',
-  modal_title:'Almost there!',modal_body:'This is a demo — the live version connects secure payment here (card / Bit / PayPal).',modal_close:'Got it',
+  bag_subtotal:'Subtotal',bag_ship:'Delivery',bag_ship_v:'Free',bag_total:'Total',bag_checkout:'Send order on WhatsApp',tag_product:'Product',tag_repair:'Repair',bag_remove:'Remove',bag_gift_label:'Gift wrap',bag_view_full:'View full-page cart',wa_order_head:'Hi, I\'d like to order:',wa_name_label:'Name: ',wa_address_label:'Address: ',
+  modal_title:'Order sent on WhatsApp!',modal_body:'The shop will reply to confirm price and availability. Payment happens directly with the shop — cash, card or Bit.',modal_close:'Got it',
   ab_title:'About & Contact',ab_lead:'Everything about Sky Phone — and every way to reach us.',
   ab_story_h:'Our story',ab_story_p1:'Sky Phone has been running since 2010 — a neighbourhood shop that grew into the place for phones, computers, gaming and repairs.',ab_story_p2:'We believe in personal service, genuine parts and a full warranty — in Hebrew, Arabic and English.',
   ab_stat1:'Established',ab_stat2:'Service languages',ab_stat3:'Avg. repair time',
@@ -1022,6 +1022,29 @@ function addItem(type,id,opts){
   if(route==='bag'||document.getElementById('cartDrawer').classList.contains('open'))renderBag();
 }
 
+/* No real payment backend on this static site — checkout builds a plain-text
+   order summary (in the visitor's current language) and hands it to WhatsApp
+   as a prefilled draft the shop replies to. Both products and repairs live in
+   the same `bag`, so one order can include either or both without any extra
+   wiring. */
+function buildOrderMessage(){
+  const items=Object.values(bag);
+  let total=0;
+  const lines=items.map(it=>{
+    const up=unitPrice(it), lineTotal=up*it.qty+(it.gift?GIFT_WRAP_PRICE:0);
+    total+=lineTotal;
+    const kind=it.type==='product'?T[lang].tag_product:T[lang].tag_repair;
+    let line=`${kind}: ${itemName(it)} × ${it.qty} — ₪${fmt(up*it.qty)}`;
+    if(it.gift) line+=` + ${T[lang].bag_gift_label} ₪${fmt(GIFT_WRAP_PRICE)}`;
+    return line;
+  });
+  return [T[lang].wa_order_head,'',...lines,'',`${T[lang].bag_total}: ₪${fmt(total)}`,'',T[lang].wa_name_label,T[lang].wa_address_label].join('\n');
+}
+function sendCartToWhatsApp(){
+  if(!Object.keys(bag).length) return;
+  window.open('https://wa.me/972527223916?text='+encodeURIComponent(buildOrderMessage()),'_blank');
+}
+
 /* ---------- fly-to-bag ----------
    The added item's thumbnail arcs from the button that added it into the nav
    bag icon, then the badge pops — the tactile "it landed in my cart" feedback
@@ -1219,7 +1242,7 @@ document.addEventListener('click',e=>{
     toast(T[lang].added);
     return;
   }
-  if(e.target.id==='checkout'){closeCart();modal.classList.add('open');return;}
+  if(e.target.id==='checkout'){sendCartToWhatsApp();closeCart();modal.classList.add('open');return;}
   if(e.target.id==='f-send'){toast(T[lang].form_sent);['f-name','f-contact','f-msg'].forEach(i=>document.getElementById(i).value='');return;}
 });
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeCart(); closeChat(); document.getElementById('repairModal').classList.remove('open'); } });
