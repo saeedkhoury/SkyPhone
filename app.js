@@ -308,7 +308,7 @@ const T={
   faq2_q:'יש אחריות על התיקונים?',faq2_a:'כן. כל תיקון וכל מוצר מגיעים עם אחריות בכתב.',
   faq3_q:'אפשר להזמין אונליין ולקבל עד הבית?',faq3_a:'בהחלט. אפשר להזמין דרך האתר ולבחור משלוח עד הבית או איסוף מהחנות.',
   faq4_q:'אתם קונים מכשירים ישנים?',faq4_a:'כן, יש לנו טרייד-אין — מביאים מכשיר ישן ומקבלים זיכוי לרכישה החדשה.',
-  ab_form_h:'שלחו לנו הודעה',form_name:'שם מלא',form_contact:'טלפון או אימייל',form_msg:'איך נוכל לעזור?',form_send:'שליחה',form_sent:'תודה! זו גרסת הדגמה — ההודעה לא נשלחה בפועל.',
+  ab_form_h:'שלחו לנו הודעה',form_name:'שם מלא',form_contact:'טלפון או אימייל',form_msg:'איך נוכל לעזור?',form_send:'שליחה',form_sent:'תודה! זו גרסת הדגמה — ההודעה לא נשלחה בפועל.',skip_main:'דילוג לתוכן הראשי',form_err_title:'יש בעיה בטופס',form_err_name:'נא למלא שם מלא',form_err_contact:'נא להשאיר טלפון או אימייל כדי שנוכל לחזור אליכם',form_err_msg:'נא לכתוב במה נוכל לעזור',form_search_label:'חיפוש מוצרים',form_chat_label:'הודעה לצ׳אט',
   foot_tag:'החנות שלך לטכנולוגיה, גיימינג ותיקונים.',foot_help:'עזרה',foot_est:'נוסד 2010',foot_demo:'אתר הדגמה',foot_privacy:'מדיניות פרטיות',
    added:'נוסף לסל',added_rep:'התיקון נוסף לסל',new:'חדש',
    chat_title:'הצ׳אט של Sky Phone',chat_sub:'מענה מיידי · מחוברים עכשיו',chat_ph:'כתבו שאלה...',
@@ -394,7 +394,7 @@ const T={
   faq2_q:'هل هناك ضمان على الإصلاحات؟',faq2_a:'نعم. كل إصلاح وكل منتج يأتي بضمان مكتوب.',
   faq3_q:'هل يمكن الطلب أونلاين والتوصيل للمنزل؟',faq3_a:'بالتأكيد. يمكنك الطلب عبر الموقع واختيار التوصيل أو الاستلام من المتجر.',
   faq4_q:'هل تشترون الأجهزة القديمة؟',faq4_a:'نعم، لدينا خدمة الاستبدال — أحضر جهازك القديم واحصل على خصم على الجديد.',
-  ab_form_h:'أرسل لنا رسالة',form_name:'الاسم الكامل',form_contact:'هاتف أو بريد إلكتروني',form_msg:'كيف يمكننا المساعدة؟',form_send:'إرسال',form_sent:'شكراً! هذه نسخة تجريبية — لم تُرسَل الرسالة فعلياً.',
+  ab_form_h:'أرسل لنا رسالة',form_name:'الاسم الكامل',form_contact:'هاتف أو بريد إلكتروني',form_msg:'كيف يمكننا المساعدة؟',form_send:'إرسال',form_sent:'شكراً! هذه نسخة تجريبية — لم تُرسَل الرسالة فعلياً.',skip_main:'تخطَّ إلى المحتوى الرئيسي',form_err_title:'هناك مشكلة في النموذج',form_err_name:'الرجاء إدخال الاسم الكامل',form_err_contact:'الرجاء ترك هاتف أو بريد إلكتروني لنتمكن من الرد',form_err_msg:'الرجاء كتابة كيف يمكننا المساعدة',form_search_label:'البحث عن منتجات',form_chat_label:'رسالة الدردشة',
   foot_tag:'متجرك للتقنية والألعاب والإصلاح.',foot_help:'مساعدة',foot_est:'تأسّس 2010',foot_demo:'موقع تجريبي',foot_privacy:'سياسة الخصوصية',
    added:'أُضيف إلى السلّة',added_rep:'أُضيف الإصلاح إلى السلّة',new:'جديد',
    chat_title:'محادثة Sky Phone',chat_sub:'رد فوري · متاحون الآن',chat_ph:'اكتب سؤالاً...',
@@ -480,7 +480,7 @@ const T={
   faq2_q:'Is there a warranty on repairs?',faq2_a:'Yes. Every repair and every product comes with a written warranty.',
   faq3_q:'Can I order online and get it delivered?',faq3_a:'Absolutely. Order through the site and choose home delivery or in-store pickup.',
   faq4_q:'Do you buy old devices?',faq4_a:'Yes, we offer trade-in — bring your old device and get credit toward a new purchase.',
-  ab_form_h:'Send us a message',form_name:'Full name',form_contact:'Phone or email',form_msg:'How can we help?',form_send:'Send',form_sent:'Thanks! This is a demo — the message wasn’t actually sent.',
+  ab_form_h:'Send us a message',form_name:'Full name',form_contact:'Phone or email',form_msg:'How can we help?',form_send:'Send',form_sent:'Thanks! This is a demo — the message wasn’t actually sent.',skip_main:'Skip to main content',form_err_title:'There is a problem',form_err_name:'Enter your full name',form_err_contact:'Enter a phone number or email so we can reply',form_err_msg:'Tell us how we can help',form_search_label:'Search products',form_chat_label:'Chat message',
   foot_tag:'Your store for tech, gaming and repairs.',foot_help:'Help',foot_est:'Est. 2010',foot_demo:'Demo site',foot_privacy:'Privacy Policy',
    added:'Added to bag',added_rep:'Repair added to bag',new:'New',
    chat_title:'Sky Phone chat',chat_sub:'Instant replies · Online now',chat_ph:'Type a question...',
@@ -1242,6 +1242,66 @@ function applyText(){
     if(inner) inner.textContent=v; else el.textContent=v;
   });
   document.querySelectorAll('[data-ph]').forEach(el=>{const v=T[lang][el.getAttribute('data-ph')]; if(v!==undefined) el.placeholder=v;});
+  /* inputs whose visible label would duplicate an adjacent icon still need an
+     accessible name — a placeholder is not one (it disappears on focus). */
+  document.querySelectorAll('[data-al]').forEach(el=>{const v=T[lang][el.getAttribute('data-al')]; if(v!==undefined) el.setAttribute('aria-label',v);});
+}
+/* ---------- contact form ----------
+   The send itself stays a labelled demo (no backend, see PRODUCT.md), but the
+   validation around it is real: empty fields used to "send" successfully, which
+   is both a UX lie and an accessibility failure. Errors are rendered next to the
+   field they belong to, announced via the error summary's role="alert", and
+   focus is moved to the summary so keyboard and screen-reader users land on the
+   problem instead of hunting for red borders. */
+const CONTACT_FIELDS=[
+  {id:'f-name',   err:'form_err_name',    check:v=>v.trim().length>=2},
+  {id:'f-contact',err:'form_err_contact', check:v=>v.trim().length>=6},
+  {id:'f-msg',    err:'form_err_msg',     check:v=>v.trim().length>=4}
+];
+function bindContactFieldReset(){
+  CONTACT_FIELDS.forEach(f=>{
+    const el=document.getElementById(f.id); if(!el) return;
+    el.addEventListener('input',()=>{
+      if(!el.classList.contains('invalid')) return;
+      if(!f.check(el.value)) return;
+      el.removeAttribute('aria-invalid'); el.classList.remove('invalid');
+      const msg=document.getElementById(f.id+'-err'); if(msg) msg.textContent='';
+    });
+  });
+}
+function clearContactErrors(){
+  CONTACT_FIELDS.forEach(f=>{
+    const el=document.getElementById(f.id); if(!el) return;
+    el.removeAttribute('aria-invalid'); el.classList.remove('invalid');
+    const msg=document.getElementById(f.id+'-err'); if(msg) msg.textContent='';
+  });
+  const sum=document.getElementById('formErrors'); if(sum){ sum.hidden=true; sum.innerHTML=''; }
+}
+function submitContactForm(){
+  clearContactErrors();
+  const bad=CONTACT_FIELDS.filter(f=>{
+    const el=document.getElementById(f.id);
+    return el && !f.check(el.value);
+  });
+  if(bad.length){
+    bad.forEach(f=>{
+      const el=document.getElementById(f.id);
+      el.setAttribute('aria-invalid','true'); el.classList.add('invalid');
+      const msg=document.getElementById(f.id+'-err'); if(msg) msg.textContent=T[lang][f.err];
+    });
+    const sum=document.getElementById('formErrors');
+    if(sum){
+      sum.innerHTML=`<h3>${T[lang].form_err_title}</h3><ul>${
+        bad.map(f=>`<li><a href="#${f.id}" data-focus-field="${f.id}">${T[lang][f.err]}</a></li>`).join('')}</ul>`;
+      sum.hidden=false;
+      sum.focus();
+    }else{
+      document.getElementById(bad[0].id).focus();
+    }
+    return;
+  }
+  toast(T[lang].form_sent);
+  CONTACT_FIELDS.forEach(f=>{const el=document.getElementById(f.id); if(el) el.value='';});
 }
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),1900);}
 
@@ -1430,7 +1490,11 @@ document.addEventListener('click',e=>{
     return;
   }
   if(e.target.id==='checkout'){sendCartToWhatsApp();closeCart();modal.classList.add('open');return;}
-  if(e.target.id==='f-send'){toast(T[lang].form_sent);['f-name','f-contact','f-msg'].forEach(i=>document.getElementById(i).value='');return;}
+  if(e.target.id==='f-send'){submitContactForm();return;}
+  const errLink=e.target.closest('[data-focus-field]');
+  if(errLink){ e.preventDefault(); const f=document.getElementById(errLink.dataset.focusField); if(f) f.focus(); return; }
+  /* clearing an error as soon as the user fixes it, rather than only on resubmit */
+
 });
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeCart(); closeChat(); document.getElementById('repairModal').classList.remove('open'); } });
 const modal=document.getElementById('modal');
@@ -1787,6 +1851,7 @@ renderServices(); renderRepairSpot(); renderFaq();
 renderHighlights([17,18,19,20,22,21],'appleHighlights'); renderHighlights([24,11,26,8],'samsungHighlights'); renderGamingHighlights(); renderReels();
 go('foryou');
 initHeroCarousel();
+bindContactFieldReset();
 renderHeroAds();
 initCursor();
 initPageLoader();

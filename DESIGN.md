@@ -180,3 +180,39 @@ page loader, `scroll-behavior:smooth`) will look broken/frozen and read as zeroe
 state. It is a harness artifact, not a bug — drive such checks inside a
 `browser_batch` that brackets them with screenshots (which force compositing), and
 use `behavior:'instant'` for scrolling.
+
+## Accessibility & UX audit pass (2026-09-06)
+
+Run against the `ui-ux-pro-max` skill's rule set (Priorities 1, 2, 8 and the
+colour rules), verified in-browser across 3 languages x 5 routes x 4 products.
+
+- **Contrast.** The brand gold `--accent:#b8862f` is 3.24:1 on white — it failed
+  AA everywhere it carried text or sat behind white text (every primary CTA).
+  `--accent` is unchanged and still used for borders, focus rings, `accent-color`
+  and anything on `--dark`, where it is 6.11:1. A second token
+  **`--accent-strong:#896523`** now covers gold *as text* or *behind white text on
+  light grounds* (4.51:1 even on `--bg-soft-2`). `--ink-faint` and `--ink-soft`
+  were darkened for the same reason. **The two golds are not interchangeable:**
+  `--accent-strong` drops to 3.72:1 on `--dark`, which is exactly the regression
+  that hit `.brand-spot-apple .btn-link` mid-pass. Check the ground before picking.
+- **A real bug, not just a ratio:** `.highlight-kind`'s grey sits later in the file
+  than `.ad-badge`'s white at equal specificity, so the "coming soon" badge was
+  rendering grey-on-gold at **1.06:1** — effectively invisible. Fixed with an
+  explicit `.highlight-kind.ad-badge{color:#fff}`.
+- **Contact form.** It previously toasted "sent" on a completely empty form. Now
+  validates, with the error next to its field, an `role="alert"` summary that takes
+  focus and links to each invalid field, `aria-invalid` on the inputs, and errors
+  clearing as the user fixes them. The send itself is still a labelled demo.
+- **Labels.** The form used placeholder-only labelling (they vanish on focus and
+  are not reliably announced); it now has real `<label>`s. Search and chat inputs,
+  where a visible label would duplicate an adjacent icon, get `aria-label` through
+  a new `data-al` hook that follows the language switcher like `data-ph` does.
+- **Skip link** (first focusable, targets `#main`) and **`scroll-padding-block-start`**
+  so the fixed nav does not cover a focused target — WCAG 2.2 "Focus Not Obscured".
+- **Touch targets.** `.promo-close` 22px -> 24px. `.hero-dot` keeps its 8px look but
+  gets a 24px hit area via a `::before` overlay rather than growing the dot.
+- `--err` / `--err-bg` added as real tokens rather than raw hex in the form rules.
+
+Not changed: `--accent` itself, and the overall visual direction — both are the
+user's locked decisions (see `PRODUCT.md`). The audit only moved values that
+failed a measurable accessibility threshold, and kept the same hue when it did.
