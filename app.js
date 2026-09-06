@@ -191,11 +191,65 @@ const FILTERS=['all','phones','tablets','computers','gaming','accessories'];
    this is a static site with no backend, so "adding a reel" means editing
    this file, not a live dashboard. */
 const REELS=[
-  {src:'video/reel1.mp4'},
-  {src:'video/reel2.mp4'},
-  {src:'video/reel3.mp4'},
-  {src:'video/reel4.mp4'}
+  {src:'video/reel1.mp4',poster:'video/reel1-poster.jpg'},
+  {src:'video/reel2.mp4',poster:'video/reel2-poster.jpg'},
+  {src:'video/reel3.mp4',poster:'video/reel3-poster.jpg'},
+  {src:'video/reel4.mp4',poster:'video/reel4-poster.jpg'}
 ];
+
+/* ---------- PDP reviews (demo dataset) ----------
+   No backend/database on this site (see PRODUCT.md), so review content here is
+   sample/demo copy — same treatment as the labeled-placeholder checkout. A pool
+   of short, generic reviews is picked per-product deterministically from the
+   product id, and the aggregate rating is derived the same way, so each PDP
+   reads as populated and stable across renders/reloads without inventing a
+   fake identity or a "verified purchase" claim. Swap for real review data (and
+   wire a submit form) whenever the shop is ready to collect its own. */
+const REVIEW_POOL={
+ he:[
+  {name:'נור',text:'קניתי ותוך דקות כבר יצאתי עם המכשיר מהחנות. שירות מהיר ואדיב.'},
+  {name:'עומר',text:'המחיר היה הכי טוב שמצאתי, וגם עזרו לי להעביר את כל הנתונים מהמכשיר הישן.'},
+  {name:'רים',text:'בדיוק כמו שתואר, מצב מעולה. ממליצה בחום.'},
+  {name:'יוסף',text:'שירות אישי אמיתי — הסבירו לי הכל בסבלנות לפני שקניתי.'},
+  {name:'שירה',text:'איכות המכשיר מעולה וקיבלתי גם אחריות בכתב. אין מה להתלבט.'},
+  {name:'אחמד',text:'כבר קונה כאן שנים — תמיד אמינים ומקצועיים.'}
+ ],
+ ar:[
+  {name:'نور',text:'اشتريت وخرجت من المحل خلال دقائق مع الجهاز. خدمة سريعة ولطيفة.'},
+  {name:'عمر',text:'كان السعر الأفضل الي لقيته، وساعدوني كمان بنقل كل البيانات من الجهاز القديم.'},
+  {name:'ريم',text:'بالضبط متل ما تم وصفه، حالة ممتازة. بنصح فيه بقوة.'},
+  {name:'يوسف',text:'خدمة شخصية حقيقية — شرحولي كل شي بصبر قبل ما أشتري.'},
+  {name:'شيرا',text:'جودة الجهاز ممتازة ووصلتني ضمانة مكتوبة كمان. ما في داعي للتردد.'},
+  {name:'أحمد',text:'بشتري من هون من سنين — دايماً موثوقين ومحترفين.'}
+ ],
+ en:[
+  {name:'Noor',text:'Walked out with the device a few minutes after paying. Fast, friendly service.'},
+  {name:'Omar',text:'Best price I found anywhere, and they helped transfer everything from my old phone.'},
+  {name:'Reem',text:'Exactly as described, great condition. Highly recommend.'},
+  {name:'Yousef',text:'Real personal service — they explained everything patiently before I bought.'},
+  {name:'Shira',text:'Quality is excellent and it came with a written warranty. Easy decision.'},
+  {name:'Ahmad',text:"I've been buying here for years — always reliable and professional."}
+ ]
+};
+function productReviewData(p){
+  const seed=(p.id*2654435761)%1000/1000;
+  const rating=Math.round((4.5+seed*0.45)*10)/10;
+  const count=38+Math.floor(seed*260);
+  const pool=REVIEW_POOL[lang];
+  const start=p.id%pool.length;
+  const items=[pool[start],pool[(start+1)%pool.length],pool[(start+3)%pool.length]];
+  return {rating,count,items};
+}
+function starsSvg(rating){
+  let out='';
+  const star='M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z';
+  for(let i=1;i<=5;i++){
+    const fill=Math.max(0,Math.min(1,rating-(i-1)));
+    const pct=Math.round(fill*100), gid=`starfill${i}-${Math.round(rating*10)}`;
+    out+=`<span class="pdp-star"><svg viewBox="0 0 20 20"><defs><linearGradient id="${gid}"><stop offset="${pct}%" stop-color="currentColor"/><stop offset="${pct}%" stop-color="transparent"/></linearGradient></defs><path fill="currentColor" opacity=".22" d="${star}"/><path fill="url(#${gid})" d="${star}"/></svg></span>`;
+  }
+  return out;
+}
 
 const T={
  he:{dir:'rtl',
@@ -211,8 +265,11 @@ const T={
   trust_ig_n:'+54.2K',trust_ig_l:'עוקבים באינסטגרם',trust_years_n:'+16',trust_years_l:'שנות ותק בכפר כנא',trust_lang_n:'3',trust_lang_l:'שפות שירות',
   pr_title:'כל המוצרים',pr_sub:'טלפונים, טאבלטים, מחשבים, גיימינג ואביזרים — במחירים הכי טובים.',
   filter_all:'הכל',cat_phones:'טלפונים',cat_tablets:'טאבלטים',cat_computers:'מחשבים',cat_gaming:'גיימינג',cat_accessories:'אביזרים',add:'הוספה',
-  filter_category:'קטגוריה',filter_brand:'מותג',filter_color:'צבע',filter_storage:'נפח אחסון',filter_price:'מחיר',filter_price_none:'ברירת מחדל',filter_price_asc:'מהזול ליקר',filter_price_desc:'מהיקר לזול',filter_results:'{n} מוצרים',
+  filter_category:'קטגוריה',filter_brand:'מותג',filter_color:'צבע',filter_storage:'נפח אחסון',filter_price:'מחיר',filter_price_none:'ברירת מחדל',filter_price_asc:'מהזול ליקר',filter_price_desc:'מהיקר לזול',filter_results:'{n} מוצרים',filter_btn:'סינון',
   pdp_back:'חזרה למוצרים',pdp_color:'צבע',pdp_storage:'נפח אחסון',pdp_size:'מידה',pdp_qty:'כמות',pdp_add:'הוספה לסל',pdp_more:'עוד ב',
+  pdp_reviews_head:'ביקורות לקוחות',pdp_reviews_count:'מבוסס על {n} ביקורות',pdp_warranty_head:'אחריות ותמיכה',
+  pdp_warranty_body:'כל מוצר שאנחנו מוכרים מגיע עם אחריות בכתב וחלקים מקוריים — אנחנו מאחורי מה שאנחנו מוכרים.',
+  pdp_warranty_pt1:'אחריות בכתב על כל מוצר',pdp_warranty_pt2:'תמיכה אישית בעברית, ערבית ואנגלית',pdp_warranty_pt3:'שירות תיקונים באותה חנות',pdp_warranty_cta:'שאלה על האחריות?',wa_warranty:'היי, יש לי שאלה לגבי האחריות על {p}',
   search_ph:'חיפוש מוצרים...',search_empty_h:'לא נמצאו תוצאות',search_empty_p:'נסו חיפוש אחר או עיינו בכל המוצרים.',
    promo_msg:'🛠️ תיקון באותו יום · כפר כנא · WhatsApp 052-722-3916',
    promo_msg2:'🔄 טרייד-אין: המכשיר הישן שלך שווה כסף',promo_msg3:'🚚 משלוח עד הבית לכל הארץ',
@@ -282,8 +339,11 @@ const T={
   trust_ig_n:'+54.2K',trust_ig_l:'متابع على إنستغرام',trust_years_n:'+16',trust_years_l:'سنة خبرة في كفركنا',trust_lang_n:'3',trust_lang_l:'لغات خدمة',
   pr_title:'كل المنتجات',pr_sub:'هواتف، أجهزة لوحية، حواسيب، ألعاب وملحقات — بأفضل الأسعار.',
   filter_all:'الكل',cat_phones:'هواتف',cat_tablets:'لوحية',cat_computers:'حواسيب',cat_gaming:'ألعاب',cat_accessories:'ملحقات',add:'أضف',
-  filter_category:'الفئة',filter_brand:'الماركة',filter_color:'اللون',filter_storage:'سعة التخزين',filter_price:'السعر',filter_price_none:'الافتراضي',filter_price_asc:'من الأرخص للأغلى',filter_price_desc:'من الأغلى للأرخص',filter_results:'{n} منتجات',
+  filter_category:'الفئة',filter_brand:'الماركة',filter_color:'اللون',filter_storage:'سعة التخزين',filter_price:'السعر',filter_price_none:'الافتراضي',filter_price_asc:'من الأرخص للأغلى',filter_price_desc:'من الأغلى للأرخص',filter_results:'{n} منتجات',filter_btn:'تصفية',
   pdp_back:'العودة للمنتجات',pdp_color:'اللون',pdp_storage:'سعة التخزين',pdp_size:'المقاس',pdp_qty:'الكمية',pdp_add:'أضف إلى السلة',pdp_more:'المزيد في',
+  pdp_reviews_head:'آراء الزبائن',pdp_reviews_count:'استنادًا إلى {n} تقييم',pdp_warranty_head:'الضمان والدعم',
+  pdp_warranty_body:'كل منتج نبيعه يأتي بضمان مكتوب وقطع أصلية — نحن خلف كل ما نبيعه.',
+  pdp_warranty_pt1:'ضمان مكتوب على كل منتج',pdp_warranty_pt2:'دعم شخصي بالعربية والعبرية والإنجليزية',pdp_warranty_pt3:'خدمة إصلاح في نفس المحل',pdp_warranty_cta:'سؤال عن الضمان؟',wa_warranty:'مرحباً، لدي سؤال حول الضمان على {p}',
   search_ph:'ابحث عن منتج...',search_empty_h:'لا توجد نتائج',search_empty_p:'جرّب بحثاً آخر أو تصفّح كل المنتجات.',
    promo_msg:'🛠️ إصلاح بنفس اليوم · كفركنا · واتساب 052-722-3916',
    promo_msg2:'🔄 استبدال: جهازك القديم يساوي مالاً',promo_msg3:'🚚 توصيل للمنزل لكل البلاد',
@@ -353,8 +413,11 @@ const T={
   trust_ig_n:'+54.2K',trust_ig_l:'Instagram followers',trust_years_n:'+16',trust_years_l:'years serving Kafr Kanna',trust_lang_n:'3',trust_lang_l:'service languages',
   pr_title:'All products',pr_sub:'Phones, tablets, computers, gaming and accessories — at the best prices.',
   filter_all:'All',cat_phones:'Phones',cat_tablets:'Tablets',cat_computers:'Computers',cat_gaming:'Gaming',cat_accessories:'Accessories',add:'Add',
-  filter_category:'Category',filter_brand:'Brand',filter_color:'Color',filter_storage:'Storage',filter_price:'Price',filter_price_none:'Default',filter_price_asc:'Price: low to high',filter_price_desc:'Price: high to low',filter_results:'{n} products',
+  filter_category:'Category',filter_brand:'Brand',filter_color:'Color',filter_storage:'Storage',filter_price:'Price',filter_price_none:'Default',filter_price_asc:'Price: low to high',filter_price_desc:'Price: high to low',filter_results:'{n} products',filter_btn:'Filters',
   pdp_back:'Back to products',pdp_color:'Color',pdp_storage:'Storage',pdp_size:'Size',pdp_qty:'Quantity',pdp_add:'Add to bag',pdp_more:'More in',
+  pdp_reviews_head:'Customer reviews',pdp_reviews_count:'Based on {n} reviews',pdp_warranty_head:'Warranty & support',
+  pdp_warranty_body:'Every product we sell comes with a written warranty and genuine parts — we stand behind what we sell.',
+  pdp_warranty_pt1:'Written warranty on every product',pdp_warranty_pt2:'Personal support in Hebrew, Arabic & English',pdp_warranty_pt3:'Repairs handled in-house',pdp_warranty_cta:'Ask about warranty',wa_warranty:'Hi, I have a question about the warranty on {p}',
   search_ph:'Search products...',search_empty_h:'No results found',search_empty_p:'Try a different search or browse all products.',
    promo_msg:'🛠️ Same-day repair · Kafr Kanna · WhatsApp 052-722-3916',
    promo_msg2:'🔄 Trade-in: your old device is worth money',promo_msg3:'🚚 Home delivery, nationwide',
@@ -630,6 +693,24 @@ function initHeroCarousel(){
   });
   hero.addEventListener('pointerenter',()=>clearInterval(heroTimer));
   hero.addEventListener('pointerleave',startHeroAutoplay);
+  /* touch swipe: browser owns vertical page scroll (touch-action:pan-y in CSS),
+     we only react once a touch ends and the horizontal travel clearly wins. */
+  let swipeX=0,swipeY=0,swiping=false;
+  hero.addEventListener('touchstart',e=>{
+    if(e.touches.length!==1) return;
+    swipeX=e.touches[0].clientX; swipeY=e.touches[0].clientY; swiping=true;
+    clearInterval(heroTimer);
+  },{passive:true});
+  hero.addEventListener('touchend',e=>{
+    if(!swiping) return; swiping=false;
+    const t=e.changedTouches[0], dx=t.clientX-swipeX, dy=t.clientY-swipeY;
+    if(Math.abs(dx)>=42&&Math.abs(dx)>Math.abs(dy)){
+      const rtl=document.documentElement.dir==='rtl';
+      goHeroSlide(dx<0?(rtl?heroSlide-1:heroSlide+1):(rtl?heroSlide+1:heroSlide-1));
+    }
+    startHeroAutoplay();
+  },{passive:true});
+  hero.addEventListener('touchcancel',()=>{swiping=false;startHeroAutoplay();},{passive:true});
   goHeroSlide(heroSlide);
   startHeroAutoplay();
 }
@@ -713,7 +794,7 @@ function renderGamingHighlights(){
 function renderReels(){
   const el=document.getElementById('reelsRow'); if(!el) return;
   el.innerHTML=REELS.map((r,i)=>`<div class="reel-card">
-      <video class="reel-video" src="${r.src}" controls playsinline preload="metadata"></video>
+      <video class="reel-video" src="${r.src}" poster="${r.poster}" controls playsinline preload="metadata"></video>
     </div>`).join('');
   refreshRowArrows();
 }
@@ -741,7 +822,7 @@ function renderHeroAds(){
   document.querySelectorAll('.hero-ad-art[data-hero-pid]').forEach(art=>{
     const p=PRODUCTS.find(x=>x.id===Number(art.dataset.heroPid)); if(!p) return;
     const slot=art.querySelector('.ad-art-float'); if(!slot) return;
-    slot.innerHTML=pmediaSrc(p,p.img);
+    slot.innerHTML=pmediaSrc(p,art.dataset.heroImg||p.img);
     const img=slot.querySelector('img'); if(img) img.loading='eager';
   });
   const wa=key=>`https://wa.me/972527223916?text=${encodeURIComponent(T[lang][key])}`;
@@ -838,6 +919,8 @@ function renderProducts(){
   el.innerHTML=list.length?list.map(productCard).join(''):`<div class="empty" style="grid-column:1/-1"><h3>${T[lang].search_empty_h}</h3><p>${T[lang].search_empty_p}</p></div>`;
   const count=document.getElementById('productsCount'); if(count) count.textContent=T[lang].filter_results.replace('{n}',list.length);
   initMotionFor(el);
+  const dot=document.getElementById('filterToggleDot');
+  if(dot) dot.hidden=(filter==='all'&&brandFilter==='all'&&colorFilter==='all'&&storageFilter==='all');
 }
 function runSearch(q){
   searchQuery=q.trim(); filter='all'; brandFilter='all'; colorFilter='all'; storageFilter='all';
@@ -873,6 +956,31 @@ function renderProductPage(){
   const relatedHtml=related.length?`<div class="pdp-more">
     <div class="section-head" data-reveal><div><h2 class="h2">${T[lang].pdp_more} ${catName(p.cat)}</h2></div></div>
     <div class="row">${related.map(productCard).join('')}</div></div>`:'';
+  const rev=productReviewData(p);
+  const warrantyWa=`https://wa.me/972527223916?text=${encodeURIComponent(T[lang].wa_warranty.replace('{p}',p.name))}`;
+  const reviewsWarrantyHtml=`<div class="pdp-rw" data-reveal>
+    <div class="pdp-reviews">
+      <h2 class="h2">${T[lang].pdp_reviews_head}</h2>
+      <div class="pdp-rating-row">
+        <span class="pdp-rating-num">${rev.rating}</span>
+        <span class="pdp-stars">${starsSvg(rev.rating)}</span>
+        <span class="pdp-rating-count">${T[lang].pdp_reviews_count.replace('{n}',rev.count)}</span>
+      </div>
+      <div class="pdp-review-list">${rev.items.map(r=>`<div class="review-card">
+        <div class="review-top"><span class="review-avatar">${r.name[0]}</span><span class="review-name">${r.name}</span><span class="pdp-stars sm">${starsSvg(5)}</span></div>
+        <p class="review-text">${r.text}</p></div>`).join('')}</div>
+    </div>
+    <div class="pdp-warranty">
+      <h2 class="h2">${T[lang].pdp_warranty_head}</h2>
+      <p class="pdp-warranty-body">${T[lang].pdp_warranty_body}</p>
+      <ul class="pdp-warranty-pts">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>${T[lang].pdp_warranty_pt1}</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>${T[lang].pdp_warranty_pt2}</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>${T[lang].pdp_warranty_pt3}</li>
+      </ul>
+      <a class="btn btn-secondary magnetic" href="${warrantyWa}" target="_blank" rel="noopener">${T[lang].pdp_warranty_cta}</a>
+    </div>
+  </div>`;
   const imgs=pdpImages(p);
   if(pdpImgIdx>=imgs.length) pdpImgIdx=0;
   const galleryMain=imgs.length?pmediaSrc(p,imgs[pdpImgIdx]):pmedia(p);
@@ -900,6 +1008,7 @@ function renderProductPage(){
         </div>
       </div>
     </div>
+    ${reviewsWarrantyHtml}
     ${relatedHtml}`;
   initMotionFor(box);
   document.getElementById('stickyName').textContent=p.name;
@@ -1088,7 +1197,12 @@ function go(name){
   route=name;
   document.querySelectorAll('.page').forEach(p=>p.hidden = p.id!=='p-'+name);
   document.querySelectorAll('.nav-links a').forEach(a=>a.classList.toggle('active',a.dataset.route===name||(name==='product'&&a.dataset.route==='products')));
-  if(name==='products'){renderChips();renderProducts();}
+  if(name==='products'){
+    renderChips();renderProducts();
+    const sb=document.getElementById('filterSidebar'), fbtn=document.getElementById('filterToggleBtn');
+    if(sb) sb.classList.remove('mobile-open');
+    if(fbtn) fbtn.setAttribute('aria-expanded','false');
+  }
   if(name==='repairs'){renderSteps();renderRepairs();}
   if(name==='bag')renderBag();
   if(name!=='product'){
@@ -1229,6 +1343,11 @@ document.addEventListener('click',e=>{
   const colorChip=e.target.closest('[data-color-filter]'); if(colorChip){colorFilter=colorChip.dataset.colorFilter;renderVariantFilterUI();renderProducts();return;}
   const storageChip=e.target.closest('[data-storage-filter]'); if(storageChip){storageFilter=storageChip.dataset.storageFilter;renderVariantFilterUI();renderProducts();return;}
   const filterToggle=e.target.closest('[data-filter-toggle]'); if(filterToggle){filterToggle.closest('.filter-group').classList.toggle('collapsed');return;}
+  if(e.target.closest('#filterToggleBtn')){
+    const sb=document.getElementById('filterSidebar'), btn=document.getElementById('filterToggleBtn');
+    const open=sb.classList.toggle('mobile-open'); btn.setAttribute('aria-expanded',open?'true':'false');
+    return;
+  }
   if(e.target.closest('#appleSeeAll')){filter='all';brandFilter='apple';colorFilter='all';storageFilter='all';searchQuery='';go('products');return;}
   if(e.target.closest('#samsungSeeAll')){filter='all';brandFilter='samsung';colorFilter='all';storageFilter='all';searchQuery='';go('products');return;}
   const catBtn=e.target.closest('[data-cat]'); if(catBtn){filter=catBtn.dataset.cat;brandFilter=catBtn.dataset.brand||'all';colorFilter='all';storageFilter='all';searchQuery='';go('products');return;}

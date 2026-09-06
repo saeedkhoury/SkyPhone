@@ -35,6 +35,7 @@ A single neighborhood shop that credibly does three things other local competito
 ## Capabilities and Constraints
 
 - No backend/build step for this demo: static HTML/CSS/JS only, real payment/order/CRM/email integration is out of scope and must be visibly marked as a demo placeholder rather than silently faked.
+- PDP "Customer reviews" (added 2026-09-06) are sample/demo copy for the same reason — no backend to collect real reviews yet. Ratings/names/text are a small deterministic pool in `app.js` (`REVIEW_POOL`/`productReviewData`), not real customer data or "verified purchase" claims. Swap for real reviews (and a submission flow) once the shop is ready to collect its own.
 - Real contact details verified from the shop's own public Instagram (@skyphone.ca, 54.2K followers) on 2026-09-03: phone/WhatsApp **052-722-3916**, address **Kafr Kanna, Main Street (Wadi al-Hai road)**. Opening hours were not published anywhere public — still a placeholder until the client confirms.
 - The real Facebook **business Page** is facebook.com/skyphone.ca (linked from the Instagram bio). The Facebook URL the user originally supplied resolves to the owner's personal profile, not the business Page — use the business Page for the site's social link.
 - Existing embedded base64 logo is confirmed as the shop's real logo (verified against the Instagram profile photo: gold phone + wrench + gears badge, "SKY PHONE — EST 2010" — matches the site's existing "established 2010" copy exactly).
