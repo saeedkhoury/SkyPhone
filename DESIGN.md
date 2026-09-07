@@ -347,3 +347,49 @@ on the search fields, and taller fields with a bigger textarea.
 The "Phone or email" field uses `inputmode="email"` deliberately: it surfaces `@`
 directly while leaving digits one tap away, which serves both inputs better than forcing
 `type="tel"` would.
+
+## Product images were being cropped + tap-to-enlarge (2026-09-07)
+
+**The crop.** Reported as "the iPhone 17 Pro Max shows as half a picture". Measured on
+that exact product: the gallery box was 351x351 while the image's **element box** was
+219x370 — overflowing 83px above and 102px below, and `overflow:hidden` cut it off.
+
+`object-fit:contain` was already set and could not help: contain fits the picture inside
+its *element box*, and the element box itself was overflowing the container.
+
+The cause was `width:X%; height:X%` on `.pimg` inside a `display:grid` container. An
+auto grid row sizes to its item's **intrinsic** height, so the row grew to the tall
+phone's natural height and the percentage height then resolved against *that*, not
+against the fixed-height container. Bounding the track with `minmax(0,1fr)` was not
+enough either — `picture{display:contents}` (from the WebP pass) promotes both `<source>`
+and `<img>` to grid items, so the image landed in a second, *implicit* auto row that the
+single explicit track never constrained. The computed value gave it away:
+`grid-template-rows: 0px 608.969px`.
+
+Fixed by moving the five media containers (`.pcard-media`, `.pdp-gallery`, `.sugg-thumb`,
+`.bi-media`, `.fly-dot`) from grid to **flex**, with
+`max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain` on the
+image. `max-*` resolves against the container's definite size and cannot overflow
+regardless of how many children the markup generates. Card/gallery padding was trimmed
+(16%→10%, 12%→8%) so the now fully-visible product still reads large.
+
+**Tap to enlarge.** The gallery had no way to see a photo bigger. Added a lightbox:
+tap/click opens, arrows + swipe + arrow keys page through the product's photos, Escape /
+backdrop tap / close button dismiss, focus moves to the close button and returns on
+close, body scroll locks. Pinch-zoom is left to the browser — the viewport meta never
+disabled user scaling.
+
+Two real bugs found while verifying it, both worth remembering:
+
+- **`.lightbox{display:grid}` outranks the UA `[hidden]{display:none}` rule**, so the
+  `hidden` attribute alone never actually hid the overlay. It needs an explicit
+  `.lightbox[hidden]{display:none}`.
+- **A transitioned `visibility` left the close button computing as `visibility:hidden`
+  at open time, which makes it unfocusable.** Hiding is now driven by `[hidden]` +
+  opacity, with no `visibility` involved.
+- The open class is set after a forced reflow rather than inside `requestAnimationFrame`:
+  in a throttled or background tab rAF can stall, which would leave the overlay
+  un-hidden but fully transparent — invisible yet still swallowing taps.
+
+The lightbox loads the WebP (falling back to the original on error); a full-screen view
+of the 1200px WebP is indistinguishable from the original and far lighter on mobile data.

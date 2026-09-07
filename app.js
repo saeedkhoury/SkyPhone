@@ -273,6 +273,7 @@ const T={
   cat1_phones:'טלפון',cat1_tablets:'טאבלט',cat1_computers:'מחשב',cat1_gaming:'מוצר גיימינג',cat1_accessories:'אביזר',
   filter_category:'קטגוריה',filter_brand:'מותג',filter_color:'צבע',filter_storage:'נפח אחסון',filter_price:'מחיר',filter_price_none:'ברירת מחדל',filter_price_asc:'מהזול ליקר',filter_price_desc:'מהיקר לזול',filter_results:'{n} מוצרים',filter_btn:'סינון',
   pdp_back:'חזרה למוצרים',pdp_color:'צבע',pdp_storage:'נפח אחסון',pdp_size:'מידה',pdp_qty:'כמות',pdp_add:'הוספה לסל',pdp_more:'עוד ב',
+  lb_title:'תצוגת תמונה',lb_close:'סגירה',lb_prev:'הקודם',lb_next:'הבא',lb_count:'{i} מתוך {n}',lb_hint:'הקישו להגדלה',
   pi_head:'כל מה שצריך לדעת',pi_tab_ov:'סקירה',pi_tab_desc:'תיאור',pi_tab_feat:'מפרט ותכונות',pi_tab_box:'מה בקופסה',
   pi_ov_lede:'{name} — {cat} מבית {brand}, במלאי אצלנו בסקיי פון בכפר כנא. החל מ־₪{price}, עם אחריות בכתב ותמיכה אישית בשלוש שפות.',
   pi_ov_lede_nb:'{name} — {cat}, במלאי אצלנו בסקיי פון בכפר כנא. החל מ־₪{price}, עם אחריות בכתב ותמיכה אישית בשלוש שפות.',
@@ -359,6 +360,7 @@ const T={
   cat1_phones:'هاتف',cat1_tablets:'جهاز لوحي',cat1_computers:'حاسوب',cat1_gaming:'جهاز ألعاب',cat1_accessories:'ملحق',
   filter_category:'الفئة',filter_brand:'الماركة',filter_color:'اللون',filter_storage:'سعة التخزين',filter_price:'السعر',filter_price_none:'الافتراضي',filter_price_asc:'من الأرخص للأغلى',filter_price_desc:'من الأغلى للأرخص',filter_results:'{n} منتجات',filter_btn:'تصفية',
   pdp_back:'العودة للمنتجات',pdp_color:'اللون',pdp_storage:'سعة التخزين',pdp_size:'المقاس',pdp_qty:'الكمية',pdp_add:'أضف إلى السلة',pdp_more:'المزيد في',
+  lb_title:'عارض الصور',lb_close:'إغلاق',lb_prev:'السابق',lb_next:'التالي',lb_count:'{i} من {n}',lb_hint:'اضغط للتكبير',
   pi_head:'كل ما يجب معرفته',pi_tab_ov:'نظرة عامة',pi_tab_desc:'الوصف',pi_tab_feat:'المواصفات والمزايا',pi_tab_box:'محتويات العلبة',
   pi_ov_lede:'{name} — {cat} من {brand}، متوفر لدينا في سكاي فون بكفر كنا. ابتداءً من ₪{price}، مع ضمان مكتوب ودعم شخصي بثلاث لغات.',
   pi_ov_lede_nb:'{name} — {cat}، متوفر لدينا في سكاي فون بكفر كنا. ابتداءً من ₪{price}، مع ضمان مكتوب ودعم شخصي بثلاث لغات.',
@@ -445,6 +447,7 @@ const T={
   cat1_phones:'phone',cat1_tablets:'tablet',cat1_computers:'computer',cat1_gaming:'gaming device',cat1_accessories:'accessory',
   filter_category:'Category',filter_brand:'Brand',filter_color:'Color',filter_storage:'Storage',filter_price:'Price',filter_price_none:'Default',filter_price_asc:'Price: low to high',filter_price_desc:'Price: high to low',filter_results:'{n} products',filter_btn:'Filters',
   pdp_back:'Back to products',pdp_color:'Color',pdp_storage:'Storage',pdp_size:'Size',pdp_qty:'Quantity',pdp_add:'Add to bag',pdp_more:'More in',
+  lb_title:'Image viewer',lb_close:'Close',lb_prev:'Previous',lb_next:'Next',lb_count:'{i} of {n}',lb_hint:'Tap to enlarge',
   pi_head:'Everything you need to know',pi_tab_ov:'Overview',pi_tab_desc:'Description',pi_tab_feat:'Features',pi_tab_box:"What's in the box",
   pi_ov_lede:'{name} — {a} {cat} from {brand}, in stock at Sky Phone in Kafr Kanna. From ₪{price}, with a written warranty and personal support in three languages.',
   pi_ov_lede_nb:'{name} — {a} {cat}, in stock at Sky Phone in Kafr Kanna. From ₪{price}, with a written warranty and personal support in three languages.',
@@ -1095,6 +1098,7 @@ function renderProductPage(){
   initStickyBarObserver();
   attachPdpZoom();
   initPdpSwipe();
+  initPdpTapToZoom();
 }
 let stickyObserver=null;
 function initStickyBarObserver(){
@@ -1411,6 +1415,87 @@ function initCartSwipe(){
     const anchoredRight=(r.left+r.width/2)>window.innerWidth/2;
     if((anchoredRight && dx>0) || (!anchoredRight && dx<0)) closeCart();
   });
+}
+
+/* ---------- product lightbox ----------
+   Opens on a genuine tap only: the same gallery also carries the 3D tilt drag (mouse)
+   and the paging swipe (touch), and both of those still emit a click afterwards, so a
+   pointer that travelled more than a few px is not treated as a tap. */
+let lbIdx=0, lbImgs=[], lbLastFocus=null;
+function lbEls(){
+  return {box:document.getElementById('lightbox'), img:document.getElementById('lightboxImg'),
+          count:document.getElementById('lightboxCount'),
+          prev:document.getElementById('lightboxPrev'), next:document.getElementById('lightboxNext')};
+}
+function lbRender(){
+  const {img,count,prev,next}=lbEls();
+  const p=PRODUCTS.find(x=>x.id===pdpId);
+  const src=lbImgs[lbIdx]; if(!src) return;
+  /* serve the WebP here too — a full-screen view of a 1200px webp is indistinguishable
+     from the original and an order of magnitude lighter on mobile data */
+  img.onerror=function(){ this.onerror=null; this.src=src; };
+  img.src=webpOf(src); img.alt=p?p.name:'';
+  const many=lbImgs.length>1;
+  prev.hidden=!many; next.hidden=!many;
+  count.textContent=many?T[lang].lb_count.replace('{i}',lbIdx+1).replace('{n}',lbImgs.length):'';
+}
+function openLightbox(idx){
+  const p=PRODUCTS.find(x=>x.id===pdpId); if(!p) return;
+  lbImgs=pdpImages(p); if(!lbImgs.length) return;
+  lbIdx=Math.max(0,Math.min(idx||0,lbImgs.length-1));
+  const {box}=lbEls();
+  lbLastFocus=document.activeElement;
+  box.hidden=false; lbRender();
+  /* deliberately NOT requestAnimationFrame: in a throttled or background tab rAF can
+     stall, which would leave the overlay un-hidden but fully transparent — invisible
+     yet still swallowing taps. A forced reflow starts the transition deterministically. */
+  void box.offsetWidth;
+  box.classList.add('open');
+  document.body.classList.add('lightbox-open');
+  /* visibility is transitioned, and an element still computing as visibility:hidden
+     cannot take focus — so retry once on the next task if the first attempt is dropped */
+  const closeBtn=document.getElementById('lightboxClose');
+  closeBtn.focus({preventScroll:true});
+  if(document.activeElement!==closeBtn) setTimeout(()=>closeBtn.focus({preventScroll:true}),0);
+}
+function closeLightbox(){
+  const {box}=lbEls();
+  box.classList.remove('open');
+  document.body.classList.remove('lightbox-open');
+  setTimeout(()=>{ box.hidden=true; },300);
+  if(lbLastFocus&&lbLastFocus.focus) lbLastFocus.focus();
+}
+function lbStep(dir){
+  if(lbImgs.length<2) return;
+  lbIdx=(lbIdx+dir+lbImgs.length)%lbImgs.length;
+  lbRender();
+}
+function initLightbox(){
+  const {box,img,prev,next}=lbEls(); if(!box) return;
+  document.getElementById('lightboxClose').addEventListener('click',closeLightbox);
+  box.addEventListener('click',e=>{ if(e.target===box||e.target===img) closeLightbox(); });
+  prev.addEventListener('click',e=>{e.stopPropagation(); lbStep(document.documentElement.dir==='rtl'?1:-1);});
+  next.addEventListener('click',e=>{e.stopPropagation(); lbStep(document.documentElement.dir==='rtl'?-1:1);});
+  addEventListener('keydown',e=>{
+    if(box.hidden) return;
+    if(e.key==='Escape') closeLightbox();
+    else if(e.key==='ArrowRight') lbStep(document.documentElement.dir==='rtl'?-1:1);
+    else if(e.key==='ArrowLeft') lbStep(document.documentElement.dir==='rtl'?1:-1);
+  });
+  swipeX(box,dir=>lbStep(document.documentElement.dir==='rtl'?-dir:dir));
+}
+/* bound per PDP render, since the gallery element is recreated each time */
+function initPdpTapToZoom(){
+  const g=document.querySelector('.pdp-gallery'); if(!g||g.dataset.zoomBound) return;
+  g.dataset.zoomBound='1';
+  let dx=0,dy=0,down=false;
+  g.addEventListener('pointerdown',e=>{ down=true; dx=e.clientX; dy=e.clientY; },{passive:true});
+  g.addEventListener('pointerup',e=>{
+    if(!down) return; down=false;
+    if(Math.hypot(e.clientX-dx,e.clientY-dy)>8) return;  /* that was a drag/swipe, not a tap */
+    openLightbox(pdpImgIdx);
+  },{passive:true});
+  g.addEventListener('pointercancel',()=>{down=false},{passive:true});
 }
 
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),1900);}
@@ -1992,6 +2077,7 @@ go('foryou');
 initHeroCarousel();
 initBrandMarquee();
 initCartSwipe();
+initLightbox();
 bindContactFieldReset();
 renderHeroAds();
 initCursor();
