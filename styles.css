@@ -116,6 +116,9 @@ html{scroll-padding-block-start:calc(var(--nav-h) + var(--ribbon-h) + 12px)}
   transform:translateY(-160%); transition:transform .18s var(--ease)}
 .skip-link:focus{transform:translateY(0)}
 img{max-width:100%; display:block}
+/* <picture> must not become a layout box, or it would sit between existing
+   flex/grid parents and their :first-child/img rules */
+picture{display:contents}
 
 .wrap{width:min(1120px,90vw); margin-inline:auto}
 .wrap-wide{width:min(1400px,94vw); margin-inline:auto}
@@ -248,7 +251,7 @@ header.nav.ribbon-closed{inset-block-start:0}
 .nav-search{display:flex; align-items:center; gap:8px; background:var(--bg-soft); border-radius:var(--radius-pill); padding:8px 14px; flex:1 1 auto; max-width:340px; margin-inline-start:auto; color:var(--ink-faint); transition:box-shadow .2s; position:relative}
 .nav-search:focus-within{box-shadow:0 0 0 2px var(--accent-tint), 0 0 0 1px var(--accent)}
 .nav-search svg{width:16px;height:16px; flex:0 0 auto}
-.nav-search input{border:0; background:none; outline:0; font-family:inherit; font-size:14px; color:var(--ink); width:100%}
+.nav-search input{border:0; background:none; outline:0; font-family:inherit; font-size:16px; color:var(--ink); width:100%}
 .nav-search input::placeholder{color:var(--ink-faint)}
 
 /* live search suggestions */
@@ -292,9 +295,29 @@ body.ribbon-closed .mobile-search{inset-block-start:var(--nav-h)}
 .scroll-progress{position:absolute; inset-block-end:-1px; inset-inline:0; height:2px; pointer-events:none}
 .scroll-progress-fill{height:100%; width:100%; background:var(--accent); opacity:.85; transform:scaleX(0); transform-origin:left; transition:transform .08s linear}
 [dir="rtl"] .scroll-progress-fill{transform-origin:right}
-.mobile-menu{display:none; position:fixed; inset-block-start:calc(var(--nav-h) + var(--ribbon-h)); inset-inline:0; z-index:65; background:rgba(255,255,255,.98); backdrop-filter:blur(20px); border-block-end:1px solid var(--line); padding:8px 6vw 20px; transform:translateY(-10px); opacity:0; visibility:hidden; transition:opacity .28s var(--ease), transform .28s var(--ease), visibility .28s, top .35s var(--ease)}
+/* Slides down from behind the nav: the panel sits at z-index 65 while the nav is 70
+   and the ribbon 71, so translateY(-100%) parks it fully hidden behind them and the
+   reveal is a true slide rather than the old 10px nudge-and-fade.
+   Easing is the iOS sheet curve — fast out of the gate, long settle. */
+.mobile-menu{display:none; position:fixed; inset-block-start:calc(var(--nav-h) + var(--ribbon-h)); inset-inline:0; z-index:65;
+  background:rgba(255,255,255,.98); backdrop-filter:blur(20px); border-block-end:1px solid var(--line);
+  padding:8px 6vw 20px; transform:translateY(-100%); visibility:hidden;
+  transition:transform .42s cubic-bezier(.32,.72,0,1), visibility .42s, top .35s var(--ease);
+  max-height:calc(100dvh - var(--nav-h) - var(--ribbon-h)); overflow-y:auto; overscroll-behavior:contain;
+  touch-action:pan-y}
+/* scrim under the panel, above the page */
+.mm-scrim{position:fixed; inset:0; z-index:64; background:rgba(0,0,0,.34); opacity:0; visibility:hidden;
+  transition:opacity .34s var(--ease), visibility .34s; cursor:pointer}
+.mm-scrim.open{opacity:1; visibility:visible}
+body.menu-open{overflow:hidden}
+/* hamburger morphs into a close X */
+.menu-toggle svg line{transform-box:fill-box; transform-origin:center;
+  transition:transform .32s cubic-bezier(.32,.72,0,1), opacity .18s linear}
+body.menu-open .menu-toggle svg line:nth-child(1){transform:translateY(5px) rotate(45deg)}
+body.menu-open .menu-toggle svg line:nth-child(2){opacity:0}
+body.menu-open .menu-toggle svg line:nth-child(3){transform:translateY(-5px) rotate(-45deg)}
 body.ribbon-closed .mobile-menu{inset-block-start:var(--nav-h)}
-.mobile-menu.open{transform:none; opacity:1; visibility:visible}
+.mobile-menu.open{transform:translateY(0); visibility:visible}
 .mobile-menu.open .mm-links a{animation:mm-in .4s var(--ease) both}
 .mobile-menu.open .mm-links a:nth-child(1){animation-delay:.03s}
 .mobile-menu.open .mm-links a:nth-child(2){animation-delay:.07s}
@@ -448,6 +471,22 @@ body.ribbon-closed .page{padding-block-start:var(--nav-h)}
 #hero.on-light .hero-dot.active{background:var(--ink)}
 
 @media (max-width:920px){
+  /* ---- touch comfort (mobile) ----
+     Text-styled controls measured 18-21px tall, under the 24px WCAG 2.2 minimum and
+     well under the 44px iOS HIG comfort target. Padding is used rather than height so
+     the text stays put and only the tappable area grows. */
+  .btn-link{min-height:44px; align-items:center}
+  .foot-grid a{min-height:44px; display:flex; align-items:center; margin-block-end:2px}
+  .foot-bottom a{min-height:44px; display:inline-flex; align-items:center}
+  .filter-row{min-height:44px; display:flex; align-items:center}
+  .prow .add{min-width:44px; min-height:44px}
+  .pdp-tab{min-height:44px}
+  .lang button,.mm-lang button{min-height:44px}
+  /* comfortable, thumb-friendly form fields */
+  .form input,.form textarea{padding:16px; font-size:17px}
+  .form textarea{min-height:140px}
+  .field label{font-size:15px}
+
   /* touch swipes the carousel; the arrows would sit on top of the CTAs */
   .hero-arrow{display:none}
   .hero-ad{min-height:auto; padding-block:var(--space-7) 0}
@@ -786,7 +825,7 @@ body.drawer-open{overflow:hidden}
 .form-errors ul{margin:0; padding-inline-start:18px; display:grid; gap:6px}
 .form-errors li{font-size:14px}
 .form-errors a{color:var(--err); text-decoration:underline}
-.form input,.form textarea{background:var(--bg-soft); border:1px solid transparent; border-radius:var(--radius-sm); padding:15px 16px; color:var(--ink); font-family:inherit; font-size:15px; transition:border-color .15s, background .15s}
+.form input,.form textarea{background:var(--bg-soft); border:1px solid transparent; border-radius:var(--radius-sm); padding:15px 16px; color:var(--ink); font-family:inherit; font-size:17px; transition:border-color .15s, background .15s}
 .form textarea{min-height:120px; resize:vertical}
 .form input:focus,.form textarea:focus{outline:0; border-color:var(--accent); background:var(--bg)}
 .form input::placeholder,.form textarea::placeholder{color:var(--ink-faint)}
@@ -858,7 +897,7 @@ footer{background:var(--bg-soft); padding-block:56px 28px}
 .chat-chip{flex:0 0 auto; border:1px solid var(--line-2); background:transparent; border-radius:var(--radius-pill); padding:7px 14px; font-size:13px; font-weight:600; color:var(--ink-soft); cursor:pointer; font-family:inherit; transition:border-color .15s, color .15s, background .15s}
 .chat-chip:hover{border-color:var(--accent); color:var(--accent-strong); background:var(--accent-tint)}
 .chat-inputbar{display:flex; gap:8px; padding:12px 14px; border-block-start:1px solid var(--line); flex:0 0 auto}
-.chat-inputbar input{flex:1; border:1px solid var(--line-2); border-radius:var(--radius-pill); padding:10px 16px; font-family:inherit; font-size:14px; outline:0; background:var(--bg-soft); color:var(--ink); transition:border-color .15s, background .15s}
+.chat-inputbar input{flex:1; border:1px solid var(--line-2); border-radius:var(--radius-pill); padding:10px 16px; font-family:inherit; font-size:16px; outline:0; background:var(--bg-soft); color:var(--ink); transition:border-color .15s, background .15s}
 .chat-inputbar input:focus{border-color:var(--accent); background:var(--bg)}
 .chat-send{width:42px; height:42px; border-radius:50%; border:0; background:var(--accent); color:#fff; display:grid; place-items:center; cursor:pointer; flex:0 0 auto; transition:background .15s, transform .15s}
 .chat-send:hover{background:var(--accent-hover)}
@@ -899,6 +938,8 @@ footer{background:var(--bg-soft); padding-block:56px 28px}
 ::-webkit-scrollbar-thumb:hover{background:rgba(0,0,0,.38); border:2px solid var(--bg); background-clip:padding-box}
 html{scrollbar-width:thin; scrollbar-color:rgba(0,0,0,.28) transparent}
 input,textarea{caret-color:var(--accent)}
+input[type="search"]{-webkit-appearance:none; appearance:none}
+input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}
 
 /* PDP gallery pointer zoom */
 .pdp-gallery .pimg,.pdp-gallery svg{transition:transform .35s var(--ease)}
