@@ -968,10 +968,23 @@ input,textarea{caret-color:var(--accent)}
 }
 
 /* brand marquee — quiet divider strip, infinite scroll */
-.brand-marquee{overflow:hidden; padding-block:30px; margin-block:var(--space-7) var(--space-8); border-block:1px solid var(--line)}
-.marquee-track{display:flex; align-items:center; gap:88px; width:max-content; animation:marquee 30s linear infinite}
-.marquee-track span{font-size:21px; font-weight:650; letter-spacing:-.02em; color:var(--ink-faint); white-space:nowrap}
-@keyframes marquee{to{transform:translateX(-50%)}}
+/* direction:ltr must be on the CONTAINER, not just the track: in an RTL page a
+   max-content track anchors to the right edge and overflows left, so a left-
+   travelling animation immediately runs off its own content and leaves a gap on
+   the right — which is the bug this strip had. Anchoring left fixes it, and the
+   marks are Latin so LTR is correct for them anyway. */
+.brand-marquee{overflow:hidden; padding-block:30px; margin-block:var(--space-7) var(--space-8); border-block:1px solid var(--line); direction:ltr}
+/* Forced LTR: the marks are Latin and the travel direction must not flip with the
+   page, which is what made the strip drift away from its content in RTL. */
+.marquee-track{display:flex; align-items:center; gap:0; width:max-content; direction:ltr;
+  animation:marquee var(--marquee-duration,26s) linear infinite; will-change:transform}
+/* the trailing gap lives INSIDE the group, so one group width is the exact seamless
+   shift distance — a gap on the track itself would leave a seam every cycle */
+.marquee-group{display:flex; align-items:center; gap:var(--marquee-gap,88px);
+  padding-inline-end:var(--marquee-gap,88px); flex:0 0 auto}
+.marquee-logo{display:inline-flex; align-items:center; color:var(--ink-faint); flex:0 0 auto}
+.marquee-logo svg{display:block; width:auto; height:var(--h,22px)}
+@keyframes marquee{from{transform:translateX(0)} to{transform:translateX(calc(var(--marquee-shift,50%) * -1))}}
 .brand-marquee:hover .marquee-track{animation-play-state:paused}
 
 /* repair spotlight — dark ad band driving the repair business */
@@ -1028,8 +1041,8 @@ input,textarea{caret-color:var(--accent)}
   .chips{flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; padding-block-end:4px; margin-inline:-4vw; padding-inline:4vw}
   .chips::-webkit-scrollbar{display:none}
   .chip{flex:0 0 auto}
-  .marquee-track{gap:52px; animation-duration:22s}
-  .marquee-track span{font-size:17px}
+  .marquee-track{--marquee-gap:52px}
+  .marquee-logo svg{height:calc(var(--h,22px) * .8)}
   .brand-marquee{margin-block:var(--space-6)}
   .rep-spot{padding:38px 26px}
   .rep-spot-art{opacity:.35; inset-inline-end:-40px}

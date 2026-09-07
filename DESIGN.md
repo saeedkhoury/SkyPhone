@@ -266,3 +266,38 @@ reference's own stated substitute for SF Pro. The gap was shape, depth and track
 
 **Verified after the pass:** contrast still 0 failures across 3 languages x 5 routes x
 PDPs, no horizontal overflow at 375px, no console errors.
+
+## Brand strip rebuilt as real logos + a genuinely endless loop (2026-09-07)
+
+The strip was two hardcoded copies of eight brand *names* shifted by
+`translateX(-50%)`. Two independent faults made it stop short of the edge:
+
+1. **The `-50%` trick only loops while one copy is at least as wide as the
+   viewport.** Measured at 1900px: the whole track was 2352px, so each copy was
+   1176px — 724px narrower than the screen, which is the empty space that showed.
+2. **The track inherited `direction:rtl`.** A `width:max-content` track in an RTL
+   container anchors to the *right* edge and overflows left, so a left-travelling
+   animation immediately runs off the end of its own content.
+
+Now built by `renderBrandMarquee()` from `BRAND_MARQUEE`: it clones the group until
+the track is at least the container width plus two spare groups, then shifts by
+**exactly one group width in px** (`--marquee-shift`), so the seam always lands on
+identical content. Verified anchored-left with >1000px of spare content at 420,
+600, 1000, 1440, 1900, 2560 and 3200px. Re-runs debounced on resize.
+
+Things that will re-break it if changed carelessly:
+
+- **`direction:ltr` belongs on `.brand-marquee`, not just `.marquee-track`.** On the
+  track alone it fixes the glyph order but not the anchoring, and the gap comes back.
+- **The inter-group gap lives inside `.marquee-group` as `padding-inline-end`,** not
+  as a `gap` on the track. A gap on the track is not included in one group's measured
+  width, so the shift would be short by exactly one gap and seam every cycle.
+- **Speed is px/sec, not a fixed duration** (`--marquee-duration` = groupW / 52),
+  otherwise a wider group scrolls faster on bigger screens.
+- Measure the track with the animation disabled. `getBoundingClientRect()` includes
+  the live transform, which made an early check here report the wrong anchor.
+
+Logos are the official marks (Simple Icons, CC0). Each `viewBox` is tightened to the
+mark's real `getBBox()` and carries its own `--h`: the source fits every mark inside a
+24x24 square, so at a uniform square size the wide wordmarks (SAMSUNG, SONY) render
+unreadably small. Mobile scales `--h` by 0.8 so each keeps its relative weight.
