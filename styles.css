@@ -1,9 +1,10 @@
 /* ==========================================================================
    Sky Phone — design tokens
-   Direction: premium e-commerce (structure referenced from iDigital.co.il
-   at the client's request), rebranded in Sky Phone's own real identity —
-   the accent gold is drawn from the shop's actual verified logo (gold
-   wordmark on black), not a copy of any reference site's brand color.
+   Direction: premium electronics retail. Layout follows the conventions
+   customers already know from large tech stores (promo ribbon, header
+   search, category row, hero carousel, sticky buy bar). The identity is
+   Sky Phone's own: the accent gold is drawn from the shop's real logo
+   (gold wordmark on black).
    ========================================================================== */
 :root{
   /* Light-only by design. Without this, Chrome on Android's auto dark theme
@@ -390,9 +391,9 @@ body.ribbon-closed .page{padding-block-start:var(--nav-h)}
    .hero-ad-art  = entrance (keyframe, fill-mode both)
    .ad-art-float = idle float (keyframe, infinite)
    img/svg       = pointer tilt (inline style, set by attachAdTilt)
-   Stacking them on one element is the fill-mode trap already documented in
-   DESIGN.md — a filled/running keyframe permanently outranks inline style, so
-   the tilt silently never applies. */
+   Stacking them on one element is the fill-mode trap: a filled/running keyframe
+   permanently outranks inline style, so the tilt silently never applies. Keep
+   the entrance and the tilt on separate elements. */
 .hero-ad-art{position:relative; z-index:2; flex:1; min-height:0; width:min(1120px,92vw);
   margin-block-start:var(--space-6); padding-block-end:60px;
   display:flex; align-items:flex-end; justify-content:center}

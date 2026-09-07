@@ -47,7 +47,7 @@ const NAVICON={
 };
 
 /* Product imagery: real product photos/renders from Wikimedia Commons,
-   mirrored locally in /img so the demo never depends on the network or
+   mirrored locally in /img so the site never depends on the network or
    hotlink rate limits. Sources (Commons file names):
    iphone15pro.png = IPhone 15 Pro Vector.svg        iphone14.png = IPhone 14 vector.svg
    s24ultra.png    = Samsung S24 Ultra Phone.png     xiaomi14.jpg = Xiaomi 14 (July 10, 2026).jpg
@@ -129,8 +129,8 @@ const PRODUCTS=[
     desc:{he:'Galaxy Buds3 עם ביטול רעשים אקטיבי וסאונד עשיר.',ar:'Galaxy Buds3 بإلغاء ضوضاء نشط وصوت غني.',en:'Galaxy Buds3 with active noise cancellation and rich sound.'}},
   {id:14,name:'Fast Charger 65W',cat:'accessories',price:120,icon:'charger',img:IMG.charger,imgs:[IMG.charger,IMG2.charger],
     desc:{he:'מטען מהיר 65W תואם לרוב הטלפונים והמחשבים הניידים.',ar:'شاحن سريع 65 واط متوافق مع معظم الهواتف وأجهزة الحاسوب المحمولة.',en:'65W fast charger, compatible with most phones and laptops.'}},
-  /* Current Apple and Samsung lineups (2026-09-06 addition, at the client's
-     request to carry every current model, not just a curated few). Photos
+  /* Current Apple and Samsung lineups — the range carries every current model
+     rather than a curated few, so the catalog matches the shop floor. Photos
      sourced from Wikimedia Commons and mirrored in img/ (2026-09-06). A few
      have only one accurate photo (no genuine second angle found on Commons):
      iPad, Galaxy S25, Galaxy Watch7. */
@@ -324,8 +324,8 @@ const T={
   faq2_q:'יש אחריות על התיקונים?',faq2_a:'כן. כל תיקון וכל מוצר מגיעים עם אחריות בכתב.',
   faq3_q:'אפשר להזמין אונליין ולקבל עד הבית?',faq3_a:'בהחלט. אפשר להזמין דרך האתר ולבחור משלוח עד הבית או איסוף מהחנות.',
   faq4_q:'אתם קונים מכשירים ישנים?',faq4_a:'כן, יש לנו טרייד-אין — מביאים מכשיר ישן ומקבלים זיכוי לרכישה החדשה.',
-  ab_form_h:'שלחו לנו הודעה',form_name:'שם מלא',form_contact:'טלפון או אימייל',form_msg:'איך נוכל לעזור?',form_send:'שליחה',form_sent:'תודה! זו גרסת הדגמה — ההודעה לא נשלחה בפועל.',skip_main:'דילוג לתוכן הראשי',form_err_title:'יש בעיה בטופס',form_err_name:'נא למלא שם מלא',form_err_contact:'נא להשאיר טלפון או אימייל כדי שנוכל לחזור אליכם',form_err_msg:'נא לכתוב במה נוכל לעזור',form_search_label:'חיפוש מוצרים',form_chat_label:'הודעה לצ׳אט',
-  foot_tag:'החנות שלך לטכנולוגיה, גיימינג ותיקונים.',foot_help:'עזרה',foot_est:'נוסד 2010',foot_demo:'אתר הדגמה',foot_privacy:'מדיניות פרטיות',
+  ab_form_h:'שלחו לנו הודעה',form_name:'שם מלא',form_contact:'טלפון או אימייל',form_msg:'איך נוכל לעזור?',form_send:'שליחה',form_sent:'תודה! ההודעה מוכנה בוואטסאפ — נשאר רק ללחוץ שליחה.',wa_contact_head:'היי, פנייה מהאתר:',skip_main:'דילוג לתוכן הראשי',form_err_title:'יש בעיה בטופס',form_err_name:'נא למלא שם מלא',form_err_contact:'נא להשאיר טלפון או אימייל כדי שנוכל לחזור אליכם',form_err_msg:'נא לכתוב במה נוכל לעזור',form_search_label:'חיפוש מוצרים',form_chat_label:'הודעה לצ׳אט',
+  foot_tag:'החנות שלך לטכנולוגיה, גיימינג ותיקונים.',foot_help:'עזרה',foot_est:'נוסד 2010',foot_credit:'עיצוב ופיתוח: Saeed Khoury',foot_privacy:'מדיניות פרטיות',
    added:'נוסף לסל',added_rep:'התיקון נוסף לסל',new:'חדש',
    chat_title:'הצ׳אט של Sky Phone',chat_sub:'מענה מיידי · מחוברים עכשיו',chat_ph:'כתבו שאלה...',
    chat_greet:'היי! 👋 אני העוזר הווירטואלי של Sky Phone.\nאפשר לשאול אותי על מחירים, תיקונים, שעות פתיחה, משלוחים ועוד.',
@@ -337,7 +337,7 @@ const T={
    chat_a_delivery:'כן! מזמינים אונליין ובוחרים משלוח עד הבית לכל הארץ או איסוף מהחנות. המשלוח חינם.',
    chat_a_tradein:'בהחלט — מביאים את המכשיר הישן ומקבלים זיכוי לרכישה החדשה. ההערכה נעשית בחנות תוך דקות.',
    chat_a_warranty:'כן — כל תיקון וכל מוצר מגיעים עם אחריות בכתב. אנחנו מאחורי מה שאנחנו מוכרים.',
-   chat_a_payment:'באתר ההדגמה התשלום הוא להמחשה בלבד. בחנות אפשר לשלם במזומן, בכרטיס אשראי וב-Bit.',
+   chat_a_payment:'ההזמנה נסגרת מול החנות בוואטסאפ, והתשלום מתבצע בחנות — מזומן, כרטיס אשראי או Bit.',
    chat_a_repair_time:'רוב התיקונים מוכנים תוך 24 שעות — ולרוב באותו יום. תלוי בסוג התקלה ובזמינות החלקים.',
    chat_a_human:'בשמחה! אפשר לדבר עם נציג בוואטסאפ או בטלפון: 052-722-3916.',
    chat_a_fallback:'לא בטוח שהבנתי 🙂 נסו לשאול על מחיר של מוצר, תיקון, שעות פתיחה, משלוח או טרייד-אין — או כתבו לנו בוואטסאפ: 052-722-3916.',
@@ -411,8 +411,8 @@ const T={
   faq2_q:'هل هناك ضمان على الإصلاحات؟',faq2_a:'نعم. كل إصلاح وكل منتج يأتي بضمان مكتوب.',
   faq3_q:'هل يمكن الطلب أونلاين والتوصيل للمنزل؟',faq3_a:'بالتأكيد. يمكنك الطلب عبر الموقع واختيار التوصيل أو الاستلام من المتجر.',
   faq4_q:'هل تشترون الأجهزة القديمة؟',faq4_a:'نعم، لدينا خدمة الاستبدال — أحضر جهازك القديم واحصل على خصم على الجديد.',
-  ab_form_h:'أرسل لنا رسالة',form_name:'الاسم الكامل',form_contact:'هاتف أو بريد إلكتروني',form_msg:'كيف يمكننا المساعدة؟',form_send:'إرسال',form_sent:'شكراً! هذه نسخة تجريبية — لم تُرسَل الرسالة فعلياً.',skip_main:'تخطَّ إلى المحتوى الرئيسي',form_err_title:'هناك مشكلة في النموذج',form_err_name:'الرجاء إدخال الاسم الكامل',form_err_contact:'الرجاء ترك هاتف أو بريد إلكتروني لنتمكن من الرد',form_err_msg:'الرجاء كتابة كيف يمكننا المساعدة',form_search_label:'البحث عن منتجات',form_chat_label:'رسالة الدردشة',
-  foot_tag:'متجرك للتقنية والألعاب والإصلاح.',foot_help:'مساعدة',foot_est:'تأسّس 2010',foot_demo:'موقع تجريبي',foot_privacy:'سياسة الخصوصية',
+  ab_form_h:'أرسل لنا رسالة',form_name:'الاسم الكامل',form_contact:'هاتف أو بريد إلكتروني',form_msg:'كيف يمكننا المساعدة؟',form_send:'إرسال',form_sent:'شكراً! رسالتك جاهزة في واتساب — لم يتبقَّ سوى الضغط على إرسال.',wa_contact_head:'مرحباً، استفسار من الموقع:',skip_main:'تخطَّ إلى المحتوى الرئيسي',form_err_title:'هناك مشكلة في النموذج',form_err_name:'الرجاء إدخال الاسم الكامل',form_err_contact:'الرجاء ترك هاتف أو بريد إلكتروني لنتمكن من الرد',form_err_msg:'الرجاء كتابة كيف يمكننا المساعدة',form_search_label:'البحث عن منتجات',form_chat_label:'رسالة الدردشة',
+  foot_tag:'متجرك للتقنية والألعاب والإصلاح.',foot_help:'مساعدة',foot_est:'تأسّس 2010',foot_credit:'تصميم وتطوير: Saeed Khoury',foot_privacy:'سياسة الخصوصية',
    added:'أُضيف إلى السلّة',added_rep:'أُضيف الإصلاح إلى السلّة',new:'جديد',
    chat_title:'محادثة Sky Phone',chat_sub:'رد فوري · متاحون الآن',chat_ph:'اكتب سؤالاً...',
    chat_greet:'أهلاً! 👋 أنا المساعد الافتراضي لـ Sky Phone.\nاسألني عن الأسعار، الإصلاحات، ساعات العمل، التوصيل والمزيد.',
@@ -424,7 +424,7 @@ const T={
    chat_a_delivery:'نعم! اطلب أونلاين واختر التوصيل للمنزل لكل البلاد أو الاستلام من المتجر. التوصيل مجاني.',
    chat_a_tradein:'بالتأكيد — أحضر جهازك القديم واحصل على خصم على الجديد. التقييم يتم في المتجر خلال دقائق.',
    chat_a_warranty:'نعم — كل إصلاح وكل منتج يأتي بضمان مكتوب. نحن خلف ما نبيع.',
-   chat_a_payment:'في الموقع التجريبي الدفع للعرض فقط. في المتجر يمكنك الدفع نقداً، ببطاقة الائتمان وبـ Bit.',
+   chat_a_payment:'يتم تأكيد الطلب مع المتجر عبر واتساب، والدفع يتم في المتجر — نقداً، ببطاقة الائتمان أو عبر Bit.',
    chat_a_repair_time:'معظم الإصلاحات جاهزة خلال 24 ساعة — وغالباً في نفس اليوم. حسب نوع العطل وتوفّر القطع.',
    chat_a_human:'بكل سرور! تحدث مع مندوب عبر واتساب أو هاتفياً: 052-722-3916.',
    chat_a_fallback:'لست متأكداً أنني فهمت 🙂 جرّب السؤال عن سعر منتج، إصلاح، ساعات العمل، التوصيل أو الاستبدال — أو راسلنا واتساب: 052-722-3916.',
@@ -498,8 +498,8 @@ const T={
   faq2_q:'Is there a warranty on repairs?',faq2_a:'Yes. Every repair and every product comes with a written warranty.',
   faq3_q:'Can I order online and get it delivered?',faq3_a:'Absolutely. Order through the site and choose home delivery or in-store pickup.',
   faq4_q:'Do you buy old devices?',faq4_a:'Yes, we offer trade-in — bring your old device and get credit toward a new purchase.',
-  ab_form_h:'Send us a message',form_name:'Full name',form_contact:'Phone or email',form_msg:'How can we help?',form_send:'Send',form_sent:'Thanks! This is a demo — the message wasn’t actually sent.',skip_main:'Skip to main content',form_err_title:'There is a problem',form_err_name:'Enter your full name',form_err_contact:'Enter a phone number or email so we can reply',form_err_msg:'Tell us how we can help',form_search_label:'Search products',form_chat_label:'Chat message',
-  foot_tag:'Your store for tech, gaming and repairs.',foot_help:'Help',foot_est:'Est. 2010',foot_demo:'Demo site',foot_privacy:'Privacy Policy',
+  ab_form_h:'Send us a message',form_name:'Full name',form_contact:'Phone or email',form_msg:'How can we help?',form_send:'Send',form_sent:'Thanks! Your message is ready in WhatsApp — just press send.',wa_contact_head:'Hi, an enquiry from the website:',skip_main:'Skip to main content',form_err_title:'There is a problem',form_err_name:'Enter your full name',form_err_contact:'Enter a phone number or email so we can reply',form_err_msg:'Tell us how we can help',form_search_label:'Search products',form_chat_label:'Chat message',
+  foot_tag:'Your store for tech, gaming and repairs.',foot_help:'Help',foot_est:'Est. 2010',foot_credit:'Design & development: Saeed Khoury',foot_privacy:'Privacy Policy',
    added:'Added to bag',added_rep:'Repair added to bag',new:'New',
    chat_title:'Sky Phone chat',chat_sub:'Instant replies · Online now',chat_ph:'Type a question...',
    chat_greet:'Hi! 👋 I’m the Sky Phone virtual assistant.\nAsk me about prices, repairs, opening hours, delivery and more.',
@@ -511,7 +511,7 @@ const T={
    chat_a_delivery:'Yes! Order online and choose home delivery nationwide or in-store pickup. Delivery is free.',
    chat_a_tradein:'Absolutely — bring your old device and get credit toward the new one. Valuation takes minutes in store.',
    chat_a_warranty:'Yes — every repair and every product comes with a written warranty. We stand behind what we sell.',
-   chat_a_payment:'On this demo site checkout is illustrative. In store you can pay by cash, credit card or Bit.',
+   chat_a_payment:'Orders are confirmed with the shop over WhatsApp, and payment is made in store — cash, credit card or Bit.',
    chat_a_repair_time:'Most repairs are ready within 24 hours — often the same day. Depends on the fault and parts availability.',
    chat_a_human:'Happy to help! Talk to a human on WhatsApp or by phone: 052-722-3916.',
    chat_a_fallback:'Not sure I got that 🙂 Try asking about a product price, a repair, opening hours, delivery or trade-in — or message us on WhatsApp: 052-722-3916.',
@@ -522,7 +522,35 @@ const T={
 
 let lang='he', route='foryou', filter='all', searchQuery='', brandFilter='all', priceSort='', colorFilter='all', storageFilter='all';
 const BRAND_LABEL={apple:'Apple',samsung:'Samsung',xiaomi:'Xiaomi',dell:'Dell',sony:'Sony'};
-const bag={};
+/* The shop's WhatsApp number, in one place. Every order, enquiry and click-to-chat
+   link on the site is built from this constant — change the number here and the
+   whole site follows. */
+const SHOP_WA='https://wa.me/972527223916';
+
+/* ---------- cart persistence ----------
+   The bag survives a reload, a language switch and a shared link. Without this a
+   customer who refreshes mid-shop loses everything they picked, which is the
+   fastest way to lose a sale. Storage is wrapped because Safari's private mode
+   throws on write, and a full cart is never worth a crashed page. */
+const BAG_KEY='skyphone.bag.v1';
+function loadBag(){
+  try{
+    const raw=localStorage.getItem(BAG_KEY);
+    if(!raw) return {};
+    const saved=JSON.parse(raw);
+    // Drop anything whose product or repair no longer exists in the catalog,
+    // otherwise a stale cart renders blank rows after the shop edits its range.
+    Object.keys(saved).forEach(k=>{
+      const it=saved[k], list=it.type==='product'?PRODUCTS:REPAIRS;
+      if(!it || typeof it.qty!=='number' || it.qty<=0 || !list.some(x=>x.id===it.id)) delete saved[k];
+    });
+    return saved;
+  }catch(e){ return {}; }
+}
+function saveBag(){
+  try{ localStorage.setItem(BAG_KEY, JSON.stringify(bag)); }catch(e){}
+}
+const bag=loadBag();
 const fmt=n=>n.toLocaleString('en-US');
 /* WebP cut the catalogue from 12.3MB to 2.0MB (84%) — the PNG cutouts were the bulk
    of it. Served through <picture> so the original still loads on anything without WebP
@@ -890,8 +918,8 @@ function renderHeroAds(){
 }
 
 /* ---------- promo ribbon rotation ----------
-   Cycles the shop's real messages (same-day repair / trade-in / delivery),
-   iDigital-style. Skipped under prefers-reduced-motion. */
+   Cycles the shop's real messages (same-day repair / trade-in / delivery).
+   Skipped under prefers-reduced-motion. */
 const PROMO_KEYS=['promo_msg','promo_msg2','promo_msg3'];
 let promoIdx=0;
 function initPromoRotation(){
@@ -989,12 +1017,12 @@ function runSearch(q){
 
 /* ---------- product detail page ---------- */
 let pdpId=null, pdpColorIdx=0, pdpVariantIdx=0, pdpQty=1, pdpImgIdx=0;
-function openProduct(id){
+function openProduct(id,silent){
   pdpId=Number(id);
   const p=PRODUCTS.find(x=>x.id===pdpId);
   if(!p) return;
   pdpColorIdx=0; pdpVariantIdx=0; pdpQty=1; pdpImgIdx=0;
-  go('product');
+  go('product',silent);
   renderProductPage();
 }
 function pdpPrice(p){
@@ -1181,6 +1209,7 @@ function updateBagBadges(){
 }
 const GIFT_WRAP_PRICE=15;
 function renderBag(){
+  saveBag();
   ['bag-body','bag-page-body'].forEach(id=>{
     const box=document.getElementById(id);
     if(box) renderBagInto(box);
@@ -1211,6 +1240,7 @@ function addItem(type,id,opts){
   const k=type+':'+id+vKey;
   bag[k]=bag[k]||{type,id,qty:0,key:k,color:opts.color||null,variant:opts.variant||null,delta:opts.delta||0};
   bag[k].qty+=opts.qty||1;
+  saveBag();
   updateBagBadges();
   if(route==='bag'||document.getElementById('cartDrawer').classList.contains('open'))renderBag();
 }
@@ -1279,8 +1309,8 @@ function applyText(){
   document.querySelectorAll('[data-al]').forEach(el=>{const v=T[lang][el.getAttribute('data-al')]; if(v!==undefined) el.setAttribute('aria-label',v);});
 }
 /* ---------- contact form ----------
-   The send itself stays a labelled demo (no backend, see PRODUCT.md), but the
-   validation around it is real: empty fields used to "send" successfully, which
+   The enquiry is handed to the shop's WhatsApp (see sendContactToWhatsApp), and
+   the validation around it is real: empty fields used to "send" successfully, which
    is both a UX lie and an accessibility failure. Errors are rendered next to the
    field they belong to, announced via the error summary's role="alert", and
    focus is moved to the summary so keyboard and screen-reader users land on the
@@ -1332,8 +1362,25 @@ function submitContactForm(){
     }
     return;
   }
+  sendContactToWhatsApp();
   toast(T[lang].form_sent);
   CONTACT_FIELDS.forEach(f=>{const el=document.getElementById(f.id); if(el) el.value='';});
+}
+
+/* The form has no server behind it, so instead of pretending to post somewhere it
+   hands the enquiry to the shop's WhatsApp as a prefilled draft — the same route
+   the cart uses. The customer sees their own message before sending, and the shop
+   gets it on the number it already watches all day. */
+function sendContactToWhatsApp(){
+  const val=id=>{const el=document.getElementById(id); return el?el.value.trim():'';};
+  const msg=[
+    T[lang].wa_contact_head,'',
+    `${T[lang].form_name}: ${val('f-name')}`,
+    `${T[lang].form_contact}: ${val('f-contact')}`,'',
+    val('f-msg')
+  ].join('\n');
+  if(typeof gtag==='function') gtag('event','whatsapp_click',{event_label:'contact_form'});
+  window.open(SHOP_WA+'?text='+encodeURIComponent(msg),'_blank','noopener');
 }
 /* ---------- brand strip ----------
    The old strip was two hardcoded copies shifted by translateX(-50%). That only
@@ -1500,7 +1547,53 @@ function initPdpTapToZoom(){
 
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),1900);}
 
-function go(name){
+/* ---------- shareable addresses ----------
+   The site paints its pages by toggling sections rather than loading documents, so
+   without this every link a customer sends lands on the homepage. Hash addresses
+   (#/product/12) give every page its own URL that can be pasted into WhatsApp,
+   bookmarked or reopened, and they work on any host with no server rewrite rules —
+   which matters because this site is handed over as plain files.
+
+   `silent` is set when the change came FROM the address bar, so we don't push a
+   duplicate entry back onto the history stack and trap the Back button. */
+function routeHash(){
+  if(route==='product'&&pdpId!=null) return '#/product/'+pdpId;
+  return route==='foryou'?'#/':'#/'+route;
+}
+function syncAddress(){
+  const h=routeHash();
+  if(location.hash!==h) history.pushState({route,pdpId},'',h);
+  syncTitle();
+}
+/* The tab title and the shared-link description follow the page. A bookmark or a
+   pasted link reads "iPhone 17 Pro — Sky Phone", not "Sky Phone" nine times. */
+function syncTitle(){
+  const shop='Sky Phone';
+  let t=shop;
+  if(route==='product'&&pdpId!=null){
+    const p=PRODUCTS.find(x=>x.id===pdpId);
+    if(p) t=p.name+' — '+shop;
+  }else if(route!=='foryou'&&T[lang]['nav_'+route]){
+    t=T[lang]['nav_'+route]+' — '+shop;
+  }else{
+    t=shop+' — '+T[lang].nav_foryou;
+  }
+  document.title=t;
+}
+/* Reads the address on first load and on Back/Forward. Anything unrecognised
+   falls back to the homepage rather than showing a blank shell. */
+function applyAddress(){
+  const m=/^#\/product\/(\d+)$/.exec(location.hash);
+  if(m){
+    const id=Number(m[1]);
+    if(PRODUCTS.some(p=>p.id===id)){ openProduct(id,true); return; }
+  }
+  const name=(location.hash.replace(/^#\//,'')||'foryou');
+  go(['products','repairs','bag','about','foryou'].includes(name)?name:'foryou',true);
+}
+window.addEventListener('popstate',applyAddress);
+
+function go(name,silent){
   route=name;
   document.querySelectorAll('.page').forEach(p=>p.hidden = p.id!=='p-'+name);
   document.querySelectorAll('.nav-links a').forEach(a=>a.classList.toggle('active',a.dataset.route===name||(name==='product'&&a.dataset.route==='products')));
@@ -1523,6 +1616,7 @@ function go(name){
   positionNavInk();
   document.getElementById('nav').classList.toggle('scrolled',scrollY>10);
   window.scrollTo({top:0,behavior:'instant'});
+  if(silent) syncTitle(); else syncAddress();
 }
 
 function setLang(l){
@@ -1539,6 +1633,7 @@ function setLang(l){
   if(route==='product')renderProductPage();
   renderChatChips();
   updateBagBadges();
+  syncTitle();     /* the tab title is translated too, not stuck in one language */
   positionNavInk();
 }
 function openCart(){
@@ -2073,7 +2168,8 @@ document.querySelectorAll('.h1,.h2,.display').forEach(el=>el.setAttribute('data-
 setLang('he');
 renderServices(); renderRepairSpot(); renderFaq();
 renderHighlights([17,18,19,20,22,21],'appleHighlights'); renderHighlights([24,11,26,8],'samsungHighlights'); renderGamingHighlights(); renderReels();
-go('foryou');
+applyAddress();          /* open whatever page the incoming link asked for */
+updateBagBadges();       /* a bag restored from a previous visit shows its count */
 initHeroCarousel();
 initBrandMarquee();
 initCartSwipe();
