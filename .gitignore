@@ -7,3 +7,4 @@ node_modules/
 .idea/
 *.swp
 _internal/
+incoming_img/
