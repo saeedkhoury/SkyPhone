@@ -301,3 +301,49 @@ Logos are the official marks (Simple Icons, CC0). Each `viewBox` is tightened to
 mark's real `getBBox()` and carries its own `--h`: the source fits every mark inside a
 24x24 square, so at a uniform square size the wide wordmarks (SAMSUNG, SONY) render
 unreadably small. Mobile scales `--h` by 0.8 so each keeps its relative weight.
+
+## Mobile optimisation pass (2026-09-07)
+
+Audited at 320, 360, 375, 390, 414, 480, 600 and 768px across all three languages.
+
+**Responsive:** already clean — **zero horizontal overflow at every width down to
+320px**, which the `min-width:0` grid fixes from the earlier passes had already bought.
+No layout changes were needed, so none were invented.
+
+**Images — the one big win.** The catalogue was **12.3MB**; photographic cutouts stored
+as PNG-with-alpha were nearly all of it. Re-encoding PNG barely helped (xps13-2 only
+1182KB → 1068KB), so every image now has a WebP twin capped at 1200px, served through
+`<picture>` with the original as fallback: **12.3MB → 2.0MB, 84% less**. Quality was
+verified on *visible* pixels only (RMSE 1.3–3.7, imperceptible) — a naive whole-image
+RMSE reads 11–14 here and looks alarming, but that is only the arbitrary RGB noise in
+fully transparent regions, not anything a user sees. `picture{display:contents}` keeps
+the `<img>` the effective layout child so no flex/grid rule had to change. Hero art is
+`loading="eager"` + `fetchpriority="high"`; everything else stays lazy.
+
+**Hamburger menu.** Was a 10px nudge-and-fade. Now a real slide: the panel sits at
+z-index 65 under the nav (70) and ribbon (71), so `translateY(-100%)` parks it fully
+hidden behind them and it slides down on the iOS sheet curve
+(`cubic-bezier(.32,.72,0,1)`, 420ms). Added a scrim, body scroll lock, a
+hamburger→X icon morph, Escape-to-close and swipe-up-to-close. All of it goes through a
+single `setMenu()` so the panel, scrim, lock, icon and `aria-expanded` cannot drift apart.
+
+**Touch targets.** `.btn-link` (18px), footer links (19–21px), filter rows, PDP tabs and
+the language pills were all under the 44px iOS comfort target; they now reach 44px via
+padding, so the text does not move — only the tappable area grows. The hero dots look
+like an 8px failure in any automated sweep but are **fine**: they carry a 24px `::before`
+hit area, confirmed by hit-testing 11px off-centre. Don't "fix" them.
+
+**Swipe gestures.** PDP gallery now pages through the product photos, and the cart
+drawer dismisses when swiped toward whichever edge it is anchored to (read from the live
+rect, since it flips with direction). Both share one `swipeX()` helper so thresholds and
+the "ignore it if the finger travelled further vertically" rule stay consistent. On
+touch, the PDP 3D tilt-drag is disabled in favour of paging — swiping a gallery is what
+a phone user expects; the tilt stays for mouse.
+
+**Forms.** All inputs were **under 16px, which makes iOS Safari zoom the whole page on
+focus** — the single worst mobile form bug on the site. Now 17px, matching the body
+scale. Added `inputmode`/`enterkeyhint`/`autocapitalize`/`autocorrect`, `type="search"`
+on the search fields, and taller fields with a bigger textarea.
+The "Phone or email" field uses `inputmode="email"` deliberately: it surfaces `@`
+directly while leaving digits one tap away, which serves both inputs better than forcing
+`type="tel"` would.

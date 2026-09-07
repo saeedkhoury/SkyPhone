@@ -521,10 +521,21 @@ let lang='he', route='foryou', filter='all', searchQuery='', brandFilter='all', 
 const BRAND_LABEL={apple:'Apple',samsung:'Samsung',xiaomi:'Xiaomi',dell:'Dell',sony:'Sony'};
 const bag={};
 const fmt=n=>n.toLocaleString('en-US');
+/* WebP cut the catalogue from 12.3MB to 2.0MB (84%) — the PNG cutouts were the bulk
+   of it. Served through <picture> so the original still loads on anything without WebP
+   support; `picture{display:contents}` keeps the <img> the effective layout child, so
+   no existing flex/grid rule had to change. */
+function webpOf(src){ return src.replace(/\.(png|jpe?g)$/i,'.webp'); }
+function picture(src,alt,eager){
+  const load=eager?'loading="eager" fetchpriority="high"':'loading="lazy"';
+  return `<picture><source srcset="${webpOf(src)}" type="image/webp">`+
+         `<img class="pimg" src="${src}" alt="${alt}" ${load} decoding="async" `+
+         `onerror="var f=this.closest('picture').previousElementSibling; if(f) f.classList.add('show'); this.closest('picture').remove();"></picture>`;
+}
 function pmedia(p){
   const svg=ICON[p.icon]||REPICON[p.icon]||REPICON.tools;
   if(!p.img) return svg;
-  return `<span class="pfb">${svg}</span><img class="pimg" src="${p.img}" alt="${p.name||''}" loading="lazy" onerror="var f=this.previousElementSibling; if(f) f.classList.add('show'); this.remove();">`;
+  return `<span class="pfb">${svg}</span>`+picture(p.img,p.name||'');
 }
 /* PDP gallery: supports multiple real photos per product via an optional
    `imgs` array (falls back to the single `img` field, then the icon) —
@@ -533,7 +544,7 @@ function pdpImages(p){ return (p.imgs&&p.imgs.length)?p.imgs:(p.img?[p.img]:[]);
 function pmediaSrc(p,src){
   const svg=ICON[p.icon]||REPICON[p.icon]||REPICON.tools;
   if(!src) return svg;
-  return `<span class="pfb">${svg}</span><img class="pimg" src="${src}" alt="${p.name||''}" loading="lazy" onerror="var f=this.previousElementSibling; if(f) f.classList.add('show'); this.remove();">`;
+  return `<span class="pfb">${svg}</span>`+picture(src,p.name||'');
 }
 function catName(c){return c==='all'?T[lang].filter_all:T[lang]['cat_'+c];}
 /* singular form, for prose. Falls back to the plural label if a language
@@ -867,7 +878,8 @@ function renderHeroAds(){
     const p=PRODUCTS.find(x=>x.id===Number(art.dataset.heroPid)); if(!p) return;
     const slot=art.querySelector('.ad-art-float'); if(!slot) return;
     slot.innerHTML=pmediaSrc(p,art.dataset.heroImg||p.img);
-    const img=slot.querySelector('img'); if(img) img.loading='eager';
+    const img=slot.querySelector('img');
+    if(img){ img.loading='eager'; img.setAttribute('fetchpriority','high'); }
   });
   const wa=key=>`https://wa.me/972527223916?text=${encodeURIComponent(T[lang][key])}`;
   const i18=document.getElementById('i18Wa'); if(i18) i18.href=wa('wa_i18');
@@ -1082,6 +1094,7 @@ function renderProductPage(){
   document.getElementById('stickyPrice').textContent='₪'+fmt(price);
   initStickyBarObserver();
   attachPdpZoom();
+  initPdpSwipe();
 }
 let stickyObserver=null;
 function initStickyBarObserver(){
@@ -1355,6 +1368,51 @@ function initBrandMarquee(){
   });
 }
 
+/* ---------- touch gestures ----------
+   swipeX: one horizontal-swipe detector, shared so the thresholds and the
+   "ignore it if the finger moved further vertically" rule stay consistent. */
+function swipeX(el,onSwipe,{threshold=44}={}){
+  let x0=0,y0=0,live=false;
+  el.addEventListener('touchstart',e=>{
+    if(e.touches.length!==1){ live=false; return; }
+    x0=e.touches[0].clientX; y0=e.touches[0].clientY; live=true;
+  },{passive:true});
+  el.addEventListener('touchend',e=>{
+    if(!live) return; live=false;
+    const t=e.changedTouches[0], dx=t.clientX-x0, dy=t.clientY-y0;
+    if(Math.abs(dx)>=threshold && Math.abs(dx)>Math.abs(dy)) onSwipe(dx<0?1:-1, dx);
+  },{passive:true});
+  el.addEventListener('touchcancel',()=>{live=false},{passive:true});
+}
+
+/* PDP gallery: swipe pages through the product's photos. Direction follows the same
+   RTL convention as the hero — physical drag stays consistent, the logical step flips. */
+function initPdpSwipe(){
+  const g=document.querySelector('.pdp-gallery'); if(!g||g.dataset.swipeBound) return;
+  g.dataset.swipeBound='1';
+  swipeX(g,dir=>{
+    const p=PRODUCTS.find(x=>x.id===pdpId); if(!p) return;
+    const imgs=pdpImages(p); if(imgs.length<2) return;
+    const rtl=document.documentElement.dir==='rtl';
+    const step=rtl?-dir:dir;
+    pdpImgIdx=(pdpImgIdx+step+imgs.length)%imgs.length;
+    renderProductPage();
+  });
+}
+
+/* Cart drawer: swipe toward the edge it is anchored to dismisses it. The side is read
+   from the live rect rather than hardcoded, because the drawer flips with direction. */
+function initCartSwipe(){
+  const d=document.getElementById('cartDrawer'); if(!d||d.dataset.swipeBound) return;
+  d.dataset.swipeBound='1';
+  swipeX(d,(dir,dx)=>{
+    if(!d.classList.contains('open')) return;
+    const r=d.getBoundingClientRect();
+    const anchoredRight=(r.left+r.width/2)>window.innerWidth/2;
+    if((anchoredRight && dx>0) || (!anchoredRight && dx<0)) closeCart();
+  });
+}
+
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),1900);}
 
 function go(name){
@@ -1374,7 +1432,7 @@ function go(name){
     document.querySelector('.whatsapp-fab').classList.remove('raised');
     document.getElementById('chatFab').classList.remove('raised');
   }
-  mobileMenu.classList.remove('open');
+  closeMenu();
   mobileSearch.classList.remove('open');
   closeSuggest();
   positionNavInk();
@@ -1403,7 +1461,7 @@ function openCart(){
   document.getElementById('cartBackdrop').classList.add('open');
   document.getElementById('cartDrawer').setAttribute('aria-hidden','false');
   document.body.classList.add('drawer-open');
-  mobileMenu.classList.remove('open');
+  closeMenu();
   mobileSearch.classList.remove('open');
   closeChat();
   renderBag();
@@ -1418,7 +1476,35 @@ function closeCart(){
 /* events */
 document.querySelectorAll('.lang').forEach(g=>g.addEventListener('click',e=>{const b=e.target.closest('[data-l]');if(b)setLang(b.dataset.l);}));
 const menuToggle=document.getElementById('menuToggle'),mobileMenu=document.getElementById('mobileMenu');
-menuToggle.addEventListener('click',()=>{const o=mobileMenu.classList.toggle('open');document.getElementById('nav').classList.toggle('scrolled',o||scrollY>10);});
+const mmScrim=document.getElementById('mmScrim');
+/* ---------- mobile menu ----------
+   One place that owns the open/closed state, so the panel, the scrim, the body
+   scroll lock, the hamburger-to-X icon and aria-expanded can never drift apart. */
+function setMenu(open){
+  mobileMenu.classList.toggle('open',open);
+  if(mmScrim){ mmScrim.hidden=false; mmScrim.classList.toggle('open',open); }
+  document.body.classList.toggle('menu-open',open);
+  menuToggle.setAttribute('aria-expanded',open?'true':'false');
+  document.getElementById('nav').classList.toggle('scrolled',open||scrollY>10);
+}
+function closeMenu(){ setMenu(false); }
+menuToggle.addEventListener('click',()=>setMenu(!mobileMenu.classList.contains('open')));
+if(mmScrim) mmScrim.addEventListener('click',closeMenu);
+addEventListener('keydown',e=>{ if(e.key==='Escape'&&mobileMenu.classList.contains('open')) closeMenu(); });
+/* swipe up on the panel closes it — the panel scrolls vertically, so only treat it as
+   a dismiss when the drag starts at the top and clearly beats any horizontal travel */
+(function(){
+  let sy=0,sx=0,atTop=false;
+  mobileMenu.addEventListener('touchstart',e=>{
+    if(e.touches.length!==1) return;
+    sy=e.touches[0].clientY; sx=e.touches[0].clientX; atTop=mobileMenu.scrollTop<=0;
+  },{passive:true});
+  mobileMenu.addEventListener('touchend',e=>{
+    if(!atTop) return;
+    const t=e.changedTouches[0], dy=t.clientY-sy, dx=t.clientX-sx;
+    if(dy<-46 && Math.abs(dy)>Math.abs(dx)) closeMenu();
+  },{passive:true});
+})();
 const promoRibbon=document.getElementById('promoRibbon');
 document.getElementById('promoClose').addEventListener('click',()=>{
   promoRibbon.classList.add('closed');
@@ -1676,6 +1762,7 @@ function attachPdpZoom(){
     }
   }
   function onDown(e){
+    if(e.pointerType==='touch') return;   /* touch pages the gallery instead — see initPdpSwipe */
     dragging=true; startX=e.clientX; startY=e.clientY;
     const r=g.getBoundingClientRect();
     baseYaw=(e.clientX-r.left)/r.width*2-1; basePitch=(e.clientY-r.top)/r.height*2-1;
@@ -1904,6 +1991,7 @@ renderHighlights([17,18,19,20,22,21],'appleHighlights'); renderHighlights([24,11
 go('foryou');
 initHeroCarousel();
 initBrandMarquee();
+initCartSwipe();
 bindContactFieldReset();
 renderHeroAds();
 initCursor();
