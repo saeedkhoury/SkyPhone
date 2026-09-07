@@ -216,3 +216,53 @@ colour rules), verified in-browser across 3 languages x 5 routes x 4 products.
 Not changed: `--accent` itself, and the overall visual direction — both are the
 user's locked decisions (see `PRODUCT.md`). The audit only moved values that
 failed a measurable accessibility threshold, and kept the same hue when it did.
+
+## apple.com alignment pass (2026-09-07)
+
+Measured against an external analysis of apple.com captured in
+`APPLE_STYLE_REFERENCE.md` — which is the craft bar `PRODUCT.md` already named for
+this project, now written down instead of held in someone's head.
+
+Four tokens already matched the reference exactly before this pass: `--ink:#1d1d1f`
+(Carbon), `--bg-soft:#f5f5f7` (Frost), `--radius-pill:980px`, and Inter — which is the
+reference's own stated substitute for SF Pro. The gap was shape, depth and tracking.
+
+**Adopted**
+
+- **Two radii only.** `--radius-sm/md/lg` all collapse to **8px**; `--radius-pill`
+  stays 980px. The reference permits exactly these two values ("never use radius below
+  980px for buttons or above 8px for cards/images"). The three token names were kept so
+  the ~25 call sites did not all have to change.
+- **Elevation removed.** Eight `box-shadow` elevations on cards, buttons, dropdowns,
+  drawers and modals were replaced with 1px hairlines and surface shifts, per "the
+  system uses hairline borders and surface shifts, not elevation".
+- **Body type is now the reference spec exactly:** 17px / 1.47 / **−0.016em**
+  (computes to −0.272px, matching `--tracking-body`).
+- `.lede` at weight **300** — the editorial "whisper voice". Inter 300 was added to the
+  font request, which previously started at 400.
+- `--surface-wash:#f4f8fb` (Ice) added as the elevated section wash.
+
+**Rejected, deliberately — each of these would have been a regression**
+
+- **Apple Blue as the accent.** Owner confirmed the gold stays. It comes from the
+  shop's own logo (see the token note above); blue CTAs would fight the gold logo mark
+  on every page.
+- **Pebble `#e2e2e5` as a surface.** Measured before adopting: on Pebble,
+  `--ink-faint`, `--ink-soft` and `--accent-strong` all drop to ~4.11:1 and fail AA.
+  `--bg-soft-2` stays `#ececee`, where the same three pass at 4.50:1. **Do not "fix"
+  this toward the reference** — the whole 2026-09-06 contrast pass is tuned against it.
+- **The reference's heading letter-spacing table** (+0.196px at 28px, +0.44px at 40px,
+  +0.616px at 56px). It contradicts the reference's own prose and real apple.com display
+  type, and reads as extraction noise. Existing negative heading tracking is kept.
+- **Negative tracking on Arabic.** Arabic is cursive and connected — tracking pulls the
+  joined letterforms apart and breaks words visually. `[lang="ar"]` is explicitly reset
+  to `letter-spacing:normal`. Hebrew keeps the tracking (its letterforms are separate).
+- **Weight 300 for Hebrew/Arabic subheads.** Noto renders too faint at these sizes;
+  he/ar keep 400.
+- **Shadows on the floating WhatsApp/chat buttons.** Apple's system has no floating
+  action buttons for the rule to cover, and these sit over arbitrary scrolling content
+  where the shadow is what keeps them legible. Kept as a stated exception, along with
+  the grounding shadow on `.ab-badge-logo` (the reference allows shadows on images).
+
+**Verified after the pass:** contrast still 0 failures across 3 languages x 5 routes x
+PDPs, no horizontal overflow at 375px, no console errors.
