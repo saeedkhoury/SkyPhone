@@ -78,16 +78,16 @@ const IMG2={
   dualsense:'img/dualsense-2.png', watch9:'img/watch9-2.jpg', charger:'img/charger-2.jpg'
 };
 const PRODUCTS=[
-  {id:1,name:'iPhone 15 Pro',cat:'phones',price:4290,icon:'phone',badge:'new',img:IMG.iphone15pro,imgs:[IMG.iphone15pro,IMG2.iphone15pro],brand:'apple',
-    colors:[{name:'Natural Titanium',hex:'#8a8479'},{name:'Blue Titanium',hex:'#3f4a56'},{name:'White Titanium',hex:'#f2efe9'},{name:'Black Titanium',hex:'#2b2a28'}],
+  {id:1,name:'iPhone 15 Pro',cat:'phones',price:4290,icon:'phone',badge:'new',img:'img/iphone15pro-naturaltitanium-1.png',imgs:[IMG.iphone15pro,IMG2.iphone15pro],brand:'apple',
+    colors:[{name:'Natural Titanium',hex:'#8a8479',imgs:['img/iphone15pro-naturaltitanium-1.png']},{name:'Blue Titanium',hex:'#3f4a56',imgs:['img/iphone15pro-bluetitanium-1.png']},{name:'White Titanium',hex:'#f2efe9',imgs:['img/iphone15pro-whitetitanium-1.png']},{name:'Black Titanium',hex:'#2b2a28',imgs:['img/iphone15pro-blacktitanium-1.png']}],
     storage:[{label:'128GB',delta:0},{label:'256GB',delta:400},{label:'512GB',delta:900}],
     desc:{he:'iPhone 15 Pro עם שבב A17 Pro, מסך Super Retina XDR ומצלמה מקצועית — הדגם המבוקש ביותר אצלנו.',ar:'iPhone 15 Pro بشريحة A17 Pro وشاشة Super Retina XDR وكاميرا احترافية — الطراز الأكثر طلباً لدينا.',en:'iPhone 15 Pro with the A17 Pro chip, Super Retina XDR display and a pro camera system — our most requested model.'}},
   {id:2,name:'Galaxy S24 Ultra',cat:'phones',price:4590,icon:'phone',img:IMG.s24ultra,imgs:[IMG.s24ultra,IMG2.s24ultra],brand:'samsung',
     colors:[{name:'Titanium Black',hex:'#2b2b2e'},{name:'Titanium Gray',hex:'#8a8a8d'},{name:'Titanium Violet',hex:'#8a7ea3'},{name:'Titanium Yellow',hex:'#d8c98a'}],
     storage:[{label:'256GB',delta:0},{label:'512GB',delta:450},{label:'1TB',delta:950}],
     desc:{he:'Galaxy S24 Ultra עם מסך AMOLED ענק, עט S Pen מובנה ומצלמה בזום גבוה.',ar:'Galaxy S24 Ultra بشاشة AMOLED كبيرة، قلم S Pen مدمج وكاميرا بتقريب عالٍ.',en:'Galaxy S24 Ultra with a large AMOLED display, built-in S Pen and high-zoom camera.'}},
-  {id:9,name:'iPhone 14',cat:'phones',price:2990,icon:'phone',img:IMG.iphone14,imgs:[IMG.iphone14,IMG2.iphone14],brand:'apple',
-    colors:[{name:'Midnight',hex:'#1d1d1f'},{name:'Starlight',hex:'#f0e6d8'},{name:'Blue',hex:'#5f7a99'},{name:'(PRODUCT)RED',hex:'#a72032'}],
+  {id:9,name:'iPhone 14',cat:'phones',price:2990,icon:'phone',img:'img/iphone14-midnight-1.png',imgs:[IMG.iphone14,IMG2.iphone14],brand:'apple',
+    colors:[{name:'Midnight',hex:'#1d1d1f',imgs:['img/iphone14-midnight-1.png']},{name:'Starlight',hex:'#f0e6d8',imgs:['img/iphone14-starlight-1.png']},{name:'Blue',hex:'#5f7a99',imgs:['img/iphone14-blue-1.png']},{name:'(PRODUCT)RED',hex:'#a72032',imgs:['img/iphone14-productred-1.png']}],
     storage:[{label:'128GB',delta:0},{label:'256GB',delta:350},{label:'512GB',delta:800}],
     desc:{he:'iPhone 14 — האמינות והביצועים של אפל במחיר נגיש יותר.',ar:'iPhone 14 — موثوقية وأداء آبل بسعر أكثر سهولة.',en:'iPhone 14 — Apple\'s reliability and performance at a more accessible price.'}},
   {id:10,name:'Xiaomi 14',cat:'phones',price:2490,icon:'phone',img:IMG.xiaomi14,imgs:[IMG.xiaomi14,IMG2.xiaomi14],brand:'xiaomi',
@@ -113,14 +113,14 @@ const PRODUCTS=[
   {id:5,name:'Steam Deck',cat:'gaming',price:2490,icon:'console',badge:'hot',img:IMG.steamdeck,imgs:[IMG.steamdeck,IMG2.steamdeck],
     storage:[{label:'256GB',delta:0},{label:'512GB',delta:450},{label:'1TB OLED',delta:1100}],
     desc:{he:'Steam Deck — קונסולת גיימינג ניידת שמריצה את כל ספריית המשחקים שלך מכל מקום.',ar:'Steam Deck — جهاز ألعاب محمول يشغّل مكتبة ألعابك بالكامل من أي مكان.',en:'Steam Deck — a handheld gaming console that runs your whole library, anywhere.'}},
-  {id:13,name:'PS5 DualSense',cat:'gaming',price:290,icon:'console',img:IMG.dualsense,imgs:[IMG.dualsense,IMG2.dualsense],brand:'sony',
-    colors:[{name:'White',hex:'#eceae6'},{name:'Midnight Black',hex:'#1c1c1e'},{name:'Cosmic Red',hex:'#9c2b2b'},{name:'Starlight Blue',hex:'#5f7a99'}],
+  {id:13,name:'PS5 DualSense',cat:'gaming',price:290,icon:'console',img:'img/dualsense-white-1.png',imgs:[IMG.dualsense,IMG2.dualsense],brand:'sony',
+    colors:[{name:'White',hex:'#eceae6',imgs:['img/dualsense-white-1.png']},{name:'Midnight Black',hex:'#1c1c1e',imgs:['img/dualsense-midnightblack-1.png']},{name:'Cosmic Red',hex:'#9c2b2b',imgs:['img/dualsense-cosmicred-1.png']},{name:'Starlight Blue',hex:'#5f7a99',imgs:['img/dualsense-starlightblue-1.png']}],
     desc:{he:'בקר DualSense ל-PS5 עם משוב הפטי ומקשי טריגר אדפטיביים.',ar:'يد تحكم DualSense لجهاز PS5 مع استجابة لمسية ومفاتيح تحفيز تكيفية.',en:'DualSense controller for PS5 with haptic feedback and adaptive triggers.'}},
   {id:7,name:'Gaming Headset Pro',cat:'gaming',price:490,icon:'headset',badge:'hot',img:IMG.headset,
     colors:[{name:'Black',hex:'#1c1c1e'},{name:'White',hex:'#eceae6'}],
     desc:{he:'אוזניות גיימינג עם סאונד סראונד ומיקרופון לביטול רעשים.',ar:'سماعة ألعاب بصوت محيطي ومايكروفون لإلغاء الضوضاء.',en:'Gaming headset with surround sound and a noise-cancelling microphone.'}},
-  {id:6,name:'Apple Watch S9',cat:'accessories',price:1890,icon:'watch',img:IMG.watch9,imgs:[IMG.watch9,IMG2.watch9],brand:'apple',
-    colors:[{name:'Midnight',hex:'#1d1d1f'},{name:'Starlight',hex:'#f0e6d8'},{name:'Silver',hex:'#e5e5e5'},{name:'(PRODUCT)RED',hex:'#a72032'}],
+  {id:6,name:'Apple Watch S9',cat:'accessories',price:1890,icon:'watch',img:'img/watchs9-midnight-1.png',imgs:[IMG.watch9,IMG2.watch9],brand:'apple',
+    colors:[{name:'Midnight',hex:'#1d1d1f',imgs:['img/watchs9-midnight-1.png']},{name:'Starlight',hex:'#f0e6d8',imgs:['img/watchs9-starlight-1.png']},{name:'Silver',hex:'#e5e5e5',imgs:['img/watchs9-silver-1.png']},{name:'(PRODUCT)RED',hex:'#a72032',imgs:['img/watchs9-red-1.png']}],
     storage:[{label:'41mm',delta:0},{label:'45mm',delta:150}],
     variant2Label:'size',
     desc:{he:'Apple Watch Series 9 עם שבב S9, מסך בהיר יותר ומעקב בריאות מתקדם.',ar:'Apple Watch Series 9 بشريحة S9، شاشة أكثر سطوعاً وتتبع صحي متقدم.',en:'Apple Watch Series 9 with the S9 chip, a brighter display and advanced health tracking.'}},
@@ -139,11 +139,11 @@ const PRODUCTS=[
     storage:[{label:'256GB',delta:0},{label:'512GB',delta:450}],
     desc:{he:'iPhone 17 עם שבב A19, מסך ProMotion 120Hz וגוף אלומיניום קל.',ar:'iPhone 17 بشريحة A19 وشاشة ProMotion 120Hz وهيكل ألومنيوم خفيف.',en:'iPhone 17 with the A19 chip, a 120Hz ProMotion display and a light aluminum body.'}},
   {id:16,name:'iPhone 17 Pro',cat:'phones',price:4990,icon:'phone',badge:'new',img:'img/iphone17pro-deepblue-1.png',imgs:['img/iphone17pro-1.png','img/iphone17pro-2.jpg'],brand:'apple',
-    colors:[{name:'Deep Blue',hex:'#22334a',imgs:['img/iphone17pro-deepblue-1.png','img/iphone17pro-deepblue-2.png']},{name:'Silver',hex:'#e5e5e5',imgs:['img/iphone17pro-silver-1.png','img/iphone17pro-silver-2.png']},{name:'Cosmic Orange',hex:'#a3552b',imgs:['img/iphone17pro-cosmicorange-1.png','img/iphone17pro-cosmicorange-2.png']}],
+    colors:[{name:'Deep Blue',hex:'#22334a',imgs:['img/iphone17pro-deepblue-1.png']},{name:'Silver',hex:'#e5e5e5',imgs:['img/iphone17pro-silver-1.png']},{name:'Cosmic Orange',hex:'#a3552b',imgs:['img/iphone17pro-cosmicorange-1.png']}],
     storage:[{label:'256GB',delta:0},{label:'512GB',delta:450},{label:'1TB',delta:950}],
     desc:{he:'iPhone 17 Pro עם שבב A19 Pro, מצלמת Pro Fusion 48MP ועיצוב יוניבודי.',ar:'iPhone 17 Pro بشريحة A19 Pro وكاميرا Pro Fusion 48MP وتصميم Unibody.',en:'iPhone 17 Pro with the A19 Pro chip, a 48MP Pro Fusion camera and a unibody design.'}},
   {id:17,name:'iPhone 17 Pro Max',cat:'phones',price:5490,icon:'phone',badge:'new',img:'img/iphone17promax-deepblue-1.png',imgs:['img/iphone17promax-1.png','img/iphone17promax-2.jpg'],brand:'apple',
-    colors:[{name:'Deep Blue',hex:'#22334a',imgs:['img/iphone17promax-deepblue-1.png','img/iphone17promax-deepblue-2.png']},{name:'Silver',hex:'#e5e5e5',imgs:['img/iphone17promax-silver-1.png','img/iphone17promax-silver-2.png']},{name:'Cosmic Orange',hex:'#a3552b',imgs:['img/iphone17promax-cosmicorange-1.png','img/iphone17promax-cosmicorange-2.png']}],
+    colors:[{name:'Deep Blue',hex:'#22334a',imgs:['img/iphone17promax-deepblue-1.png']},{name:'Silver',hex:'#e5e5e5',imgs:['img/iphone17promax-silver-1.png']},{name:'Cosmic Orange',hex:'#a3552b',imgs:['img/iphone17promax-cosmicorange-1.png']}],
     storage:[{label:'256GB',delta:0},{label:'512GB',delta:450},{label:'1TB',delta:950},{label:'2TB',delta:1900}],
     desc:{he:'iPhone 17 Pro Max — המסך הכי גדול, הסוללה הכי חזקה, אותו שבב A19 Pro.',ar:'iPhone 17 Pro Max — أكبر شاشة وأقوى بطارية، بنفس شريحة A19 Pro.',en:'iPhone 17 Pro Max — the biggest screen and battery, the same A19 Pro chip.'}},
   {id:18,name:'MacBook Pro 14"',cat:'computers',price:8990,icon:'laptop',img:'img/macbookpro-spaceblack-1.png',imgs:['img/macbookpro-1.png','img/macbookpro-2.png'],brand:'apple',
@@ -180,7 +180,7 @@ const PRODUCTS=[
     variant2Label:'size',
     desc:{he:'Galaxy Watch7 עם מעקב בריאות מתקדם וסוללה שמחזיקה ימים.',ar:'Galaxy Watch7 بتتبع صحي متقدم وبطارية تدوم أياماً.',en:'Galaxy Watch7 with advanced health tracking and multi-day battery life.'}},
   {id:27,name:'PlayStation 5',cat:'gaming',price:2190,icon:'console',badge:'new',img:'img/ps5-1.png',imgs:['img/ps5-1.png','img/ps5-2.png'],brand:'sony',
-    colors:[{name:'White',hex:'#eceae6'}],
+    colors:[{name:'White',hex:'#eceae6',imgs:['img/ps5-white-1.png']}],
     storage:[{label:'Digital Edition',delta:0},{label:'Disc Edition',delta:300}],
     desc:{he:'PlayStation 5 עם משחקים ב-4K וזמני טעינה כמעט מיידיים.',ar:'PlayStation 5 بألعاب 4K وأوقات تحميل شبه فورية.',en:'PlayStation 5 with 4K gaming and near-instant load times.'}}
 ];
@@ -557,12 +557,31 @@ const fmt=n=>n.toLocaleString('en-US');
    support; `picture{display:contents}` keeps the <img> the effective layout child, so
    no existing flex/grid rule had to change. */
 function webpOf(src){ return src.replace(/\.(png|jpe?g)$/i,'.webp'); }
-function picture(src,alt,eager){
-  const load=eager?'loading="eager" fetchpriority="high"':'loading="lazy"';
-  return `<picture><source srcset="${webpOf(src)}" type="image/webp">`+
-         `<img class="pimg" src="${src}" alt="${alt}" ${load} decoding="async" `+
+/* Product cards paint at roughly 160px on a phone and 280px on a desktop, but the
+   source art is 1100px. Handing every card the full-size file was the single
+   biggest cause of the catalog feeling slow on mobile data - it downloaded around
+   forty times the pixels it could display. Two widths plus a `sizes` hint let the
+   browser pick, so a phone pulls the 520px file and only the zoom view pays for
+   the large one. */
+/* Some image files were replaced in place (same filename, new artwork - a baked-in
+   grey background removed, a bad crop swapped out). A browser that cached the old
+   copy would keep showing it for as long as its cache lasted, which is how a fixed
+   picture can still look broken on a phone days later. Stamping a version on the
+   URL retires those copies once; bump it whenever an existing file is overwritten
+   rather than renamed. */
+const IMG_V='3';
+function iv(u){ return u.indexOf('?')<0 ? u+'?v='+IMG_V : u; }
+const SZ_CARD='(max-width:768px) 45vw, 280px';
+const SZ_PDP ='(max-width:900px) 88vw, 520px';
+function smallOf(webp){ return webp.replace(/\.webp$/i,'-sm.webp'); }
+function picture(src,alt,eager,sizes){
+  const load=eager?'loading="eager" fetchpriority="high"':'loading="lazy" fetchpriority="low"';
+  const w=webpOf(src);
+  return `<picture><source type="image/webp" srcset="${iv(smallOf(w))} 520w, ${iv(w)} 1100w" sizes="${sizes||SZ_CARD}">`+
+         `<img class="pimg" src="${iv(src)}" alt="${alt}" ${load} decoding="async" `+
          `onerror="var f=this.closest('picture').previousElementSibling; if(f) f.classList.add('show'); this.closest('picture').remove();"></picture>`;
 }
+
 function pmedia(p){
   const svg=ICON[p.icon]||REPICON[p.icon]||REPICON.tools;
   if(!p.img) return svg;
@@ -586,7 +605,8 @@ function hasColorImages(p){ return !!(p.colors&&p.colors.some(c=>c.imgs&&c.imgs.
 function pmediaSrc(p,src){
   const svg=ICON[p.icon]||REPICON[p.icon]||REPICON.tools;
   if(!src) return svg;
-  return `<span class="pfb">${svg}</span>`+picture(src,p.name||'');
+  /* eager + high priority: this is the page's largest paint, not something to lazy-load */
+  return `<span class="pfb">${svg}</span>`+picture(src,p.name||'',true,SZ_PDP);
 }
 function catName(c){return c==='all'?T[lang].filter_all:T[lang]['cat_'+c];}
 /* singular form, for prose. Falls back to the plural label if a language
@@ -1033,7 +1053,11 @@ function openProduct(id,silent){
   const p=PRODUCTS.find(x=>x.id===pdpId);
   if(!p) return;
   pdpColorIdx=0; pdpVariantIdx=0; pdpQty=1; pdpImgIdx=0;
+  const fromList = route==='products';
   go('product',silent);
+  /* go() captured the scroll offset on the way out; tag it with the card that was
+     opened so the return lands on that product rather than a stale pixel offset */
+  if(fromList&&listReturn) listReturn.id=pdpId;
   renderProductPage();
 }
 function pdpPrice(p){
@@ -1105,7 +1129,7 @@ function renderProductPage(){
   const imgs=pdpImages(p);
   if(pdpImgIdx>=imgs.length) pdpImgIdx=0;
   const galleryMain=imgs.length?pmediaSrc(p,imgs[pdpImgIdx]):pmedia(p);
-  const thumbsHtml=imgs.length>1?`<div class="pdp-thumbs">${imgs.map((src,i)=>`<button class="pdp-thumb ${i===pdpImgIdx?'on':''}" data-pdp-img-idx="${i}"><img src="${src}" alt=""></button>`).join('')}</div>`:'';
+  const thumbsHtml=imgs.length>1?`<div class="pdp-thumbs">${imgs.map((src,i)=>`<button class="pdp-thumb ${i===pdpImgIdx?'on':''}" data-pdp-img-idx="${i}"><img src="${iv(smallOf(webpOf(src)))}" alt="" loading="lazy" decoding="async"></button>`).join('')}</div>`:'';
   box.innerHTML=`
     <button class="pdp-back" data-route="products"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>${T[lang].pdp_back}</button>
     <div class="pdp-grid">
@@ -1491,8 +1515,8 @@ function lbRender(){
   const src=lbImgs[lbIdx]; if(!src) return;
   /* serve the WebP here too — a full-screen view of a 1200px webp is indistinguishable
      from the original and an order of magnitude lighter on mobile data */
-  img.onerror=function(){ this.onerror=null; this.src=src; };
-  img.src=webpOf(src); img.alt=p?p.name:'';
+  img.onerror=function(){ this.onerror=null; this.src=iv(src); };
+  img.src=iv(webpOf(src)); img.alt=p?p.name:'';
   const many=lbImgs.length>1;
   prev.hidden=!many; next.hidden=!many;
   count.textContent=many?T[lang].lb_count.replace('{i}',lbIdx+1).replace('{n}',lbImgs.length):'';
@@ -1604,7 +1628,37 @@ function applyAddress(){
 }
 window.addEventListener('popstate',applyAddress);
 
+/* ---------- returning to where you were ----------
+   Opening a product and coming back used to dump the customer at the top of the
+   catalog, so anyone browsing past the first few items had to scroll down again
+   every single time. We remember which card they opened and put that card back
+   under their eyes on return.
+
+   The card id is remembered rather than a pixel offset because the grid's height
+   changes as lazy images load and as filters are applied - a saved scrollY would
+   land in the wrong place. The offset is kept only as a fallback for when the
+   card is no longer in the list (e.g. the filter changed while they were away). */
+let listReturn=null;   /* {id, y} captured when leaving the catalog for a product */
+
+function restoreListPosition(){
+  if(!listReturn) return;
+  const {id,y}=listReturn; listReturn=null;
+  const settle=()=>{
+    const card=id!=null?document.querySelector(`.pcard[data-pid="${id}"]`):null;
+    if(card) card.scrollIntoView({block:'center',behavior:'instant'});
+    else if(y) window.scrollTo({top:y,behavior:'instant'});
+  };
+  settle();
+  /* run again once lazy images have given the grid its real height, otherwise
+     the first attempt scrolls against a page that is still too short */
+  requestAnimationFrame(settle);
+  setTimeout(settle,120);
+}
+
 function go(name,silent){
+  /* capture the catalog position on the way out, before route is reassigned */
+  if(route==='products'&&name==='product') listReturn={id:null,y:window.scrollY};
+  else if(name!=='products') listReturn=null;
   route=name;
   document.querySelectorAll('.page').forEach(p=>p.hidden = p.id!=='p-'+name);
   document.querySelectorAll('.nav-links a').forEach(a=>a.classList.toggle('active',a.dataset.route===name||(name==='product'&&a.dataset.route==='products')));
@@ -1626,7 +1680,9 @@ function go(name,silent){
   closeSuggest();
   positionNavInk();
   document.getElementById('nav').classList.toggle('scrolled',scrollY>10);
-  window.scrollTo({top:0,behavior:'instant'});
+  if(name==='products'&&listReturn) restoreListPosition();
+  else window.scrollTo({top:0,behavior:'instant'});
+  document.getElementById('nav').classList.toggle('scrolled',scrollY>10);
   if(silent) syncTitle(); else syncAddress();
 }
 
