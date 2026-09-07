@@ -94,16 +94,16 @@ const PRODUCTS=[
     colors:[{name:'Black',hex:'#1c1c1e'},{name:'White',hex:'#eceae6'},{name:'Jade Green',hex:'#6f8a72'}],
     storage:[{label:'256GB',delta:0},{label:'512GB',delta:300}],
     desc:{he:'Xiaomi 14 — טלפון אנדרואיד רב עוצמה עם מצלמת Leica ותמורה מעולה למחיר.',ar:'Xiaomi 14 — هاتف أندرويد قوي بكاميرا Leica وقيمة ممتازة مقابل السعر.',en:'Xiaomi 14 — a powerful Android phone with a Leica camera and excellent value.'}},
-  {id:3,name:'iPad Air',cat:'tablets',price:2790,icon:'tablet',img:IMG.ipadair,imgs:[IMG.ipadair,IMG2.ipadair],brand:'apple',
-    colors:[{name:'Space Gray',hex:'#5b5c5f'},{name:'Starlight',hex:'#f0e6d8'},{name:'Blue',hex:'#7fa7c9'},{name:'Purple',hex:'#a99bc7'}],
+  {id:3,name:'iPad Air',cat:'tablets',price:2790,icon:'tablet',img:'img/ipadair-spacegray-1.png',imgs:[IMG.ipadair,IMG2.ipadair],brand:'apple',
+    colors:[{name:'Space Gray',hex:'#5b5c5f',imgs:['img/ipadair-spacegray-1.png']},{name:'Starlight',hex:'#f0e6d8',imgs:['img/ipadair-starlight-1.png']},{name:'Blue',hex:'#7fa7c9',imgs:['img/ipadair-blue-1.png']},{name:'Purple',hex:'#a99bc7',imgs:['img/ipadair-purple-1.png']}],
     storage:[{label:'128GB',delta:0},{label:'256GB',delta:350}],
     desc:{he:'iPad Air עם שבב M1 — קליל, חזק ומושלם לעבודה, לימודים ובידור.',ar:'iPad Air بشريحة M1 — خفيف وقوي ومثالي للعمل والدراسة والترفيه.',en:'iPad Air with the M1 chip — light, powerful, and perfect for work, study and play.'}},
   {id:11,name:'Galaxy Tab S9',cat:'tablets',price:2690,icon:'tablet',img:IMG.tabs9,imgs:[IMG.tabs9,IMG2.tabs9],brand:'samsung',
     colors:[{name:'Graphite',hex:'#3a3b3e'},{name:'Beige',hex:'#d9cdb8'}],
     storage:[{label:'128GB',delta:0},{label:'256GB',delta:300}],
     desc:{he:'Galaxy Tab S9 — מסך AMOLED, עמידות למים ועט S Pen כלול בקופסה.',ar:'Galaxy Tab S9 — شاشة AMOLED، مقاومة للماء وقلم S Pen ضمن العلبة.',en:'Galaxy Tab S9 — AMOLED display, water resistance, and an S Pen included in the box.'}},
-  {id:4,name:'MacBook Air',cat:'computers',price:5490,icon:'laptop',badge:'new',img:IMG.macbook,imgs:[IMG.macbook,IMG2.macbook],brand:'apple',
-    colors:[{name:'Midnight',hex:'#33363d'},{name:'Starlight',hex:'#f0e6d8'},{name:'Space Gray',hex:'#5b5c5f'},{name:'Silver',hex:'#e5e5e5'}],
+  {id:4,name:'MacBook Air',cat:'computers',price:5490,icon:'laptop',badge:'new',img:'img/macbookair-midnight-1.png',imgs:[IMG.macbook,IMG2.macbook],brand:'apple',
+    colors:[{name:'Midnight',hex:'#33363d',imgs:['img/macbookair-midnight-1.png']},{name:'Starlight',hex:'#f0e6d8',imgs:['img/macbookair-starlight-1.png']},{name:'Sky Blue',hex:'#a8c3d6',imgs:['img/macbookair-skyblue-1.png']},{name:'Silver',hex:'#e5e5e5',imgs:['img/macbookair-silver-1.png']}],
     storage:[{label:'256GB SSD',delta:0},{label:'512GB SSD',delta:600}],
     desc:{he:'MacBook Air עם שבב M2 — דק, שקט לחלוטין וסוללה שמחזיקה יום שלם.',ar:'MacBook Air بشريحة M2 — رفيع، صامت تماماً وبطارية تدوم يوماً كاملاً.',en:'MacBook Air with the M2 chip — thin, completely silent, and battery that lasts all day.'}},
   {id:12,name:'Dell XPS 13',cat:'computers',price:4990,icon:'laptop',img:IMG.xps13,imgs:[IMG.xps13,IMG2.xps13],brand:'dell',
@@ -134,40 +134,40 @@ const PRODUCTS=[
      sourced from Wikimedia Commons and mirrored in img/ (2026-09-06). A few
      have only one accurate photo (no genuine second angle found on Commons):
      iPad, Galaxy S25, Galaxy Watch7. */
-  {id:15,name:'iPhone 17',cat:'phones',price:3690,icon:'phone',badge:'new',img:'img/iphone17-1.png',imgs:['img/iphone17-1.png','img/iphone17-2.jpg'],brand:'apple',
-    colors:[{name:'Black',hex:'#1c1c1e'},{name:'White',hex:'#f0e6d8'},{name:'Lavender',hex:'#c9c2d9'},{name:'Sage',hex:'#a9b79a'},{name:'Mist Blue',hex:'#a9c0cf'}],
+  {id:15,name:'iPhone 17',cat:'phones',price:3690,icon:'phone',badge:'new',img:'img/iphone17-black-1.png',imgs:['img/iphone17-1.png','img/iphone17-2.jpg'],brand:'apple',
+    colors:[{name:'Black',hex:'#1c1c1e',imgs:['img/iphone17-black-1.png']},{name:'White',hex:'#f0e6d8',imgs:['img/iphone17-white-1.png']},{name:'Lavender',hex:'#c9c2d9',imgs:['img/iphone17-lavender-1.png']},{name:'Sage',hex:'#a9b79a',imgs:['img/iphone17-sage-1.png']},{name:'Mist Blue',hex:'#a9c0cf',imgs:['img/iphone17-mistblue-1.png']}],
     storage:[{label:'256GB',delta:0},{label:'512GB',delta:450}],
     desc:{he:'iPhone 17 עם שבב A19, מסך ProMotion 120Hz וגוף אלומיניום קל.',ar:'iPhone 17 بشريحة A19 وشاشة ProMotion 120Hz وهيكل ألومنيوم خفيف.',en:'iPhone 17 with the A19 chip, a 120Hz ProMotion display and a light aluminum body.'}},
-  {id:16,name:'iPhone 17 Pro',cat:'phones',price:4990,icon:'phone',badge:'new',img:'img/iphone17pro-1.png',imgs:['img/iphone17pro-1.png','img/iphone17pro-2.jpg'],brand:'apple',
-    colors:[{name:'Deep Blue',hex:'#22334a'},{name:'Silver',hex:'#e5e5e5'},{name:'Cosmic Orange',hex:'#a3552b'}],
+  {id:16,name:'iPhone 17 Pro',cat:'phones',price:4990,icon:'phone',badge:'new',img:'img/iphone17pro-deepblue-1.png',imgs:['img/iphone17pro-1.png','img/iphone17pro-2.jpg'],brand:'apple',
+    colors:[{name:'Deep Blue',hex:'#22334a',imgs:['img/iphone17pro-deepblue-1.png','img/iphone17pro-deepblue-2.png']},{name:'Silver',hex:'#e5e5e5',imgs:['img/iphone17pro-silver-1.png','img/iphone17pro-silver-2.png']},{name:'Cosmic Orange',hex:'#a3552b',imgs:['img/iphone17pro-cosmicorange-1.png','img/iphone17pro-cosmicorange-2.png']}],
     storage:[{label:'256GB',delta:0},{label:'512GB',delta:450},{label:'1TB',delta:950}],
     desc:{he:'iPhone 17 Pro עם שבב A19 Pro, מצלמת Pro Fusion 48MP ועיצוב יוניבודי.',ar:'iPhone 17 Pro بشريحة A19 Pro وكاميرا Pro Fusion 48MP وتصميم Unibody.',en:'iPhone 17 Pro with the A19 Pro chip, a 48MP Pro Fusion camera and a unibody design.'}},
-  {id:17,name:'iPhone 17 Pro Max',cat:'phones',price:5490,icon:'phone',badge:'new',img:'img/iphone17promax-1.png',imgs:['img/iphone17promax-1.png','img/iphone17promax-2.jpg'],brand:'apple',
-    colors:[{name:'Deep Blue',hex:'#22334a'},{name:'Silver',hex:'#e5e5e5'},{name:'Cosmic Orange',hex:'#a3552b'}],
+  {id:17,name:'iPhone 17 Pro Max',cat:'phones',price:5490,icon:'phone',badge:'new',img:'img/iphone17promax-deepblue-1.png',imgs:['img/iphone17promax-1.png','img/iphone17promax-2.jpg'],brand:'apple',
+    colors:[{name:'Deep Blue',hex:'#22334a',imgs:['img/iphone17promax-deepblue-1.png','img/iphone17promax-deepblue-2.png']},{name:'Silver',hex:'#e5e5e5',imgs:['img/iphone17promax-silver-1.png','img/iphone17promax-silver-2.png']},{name:'Cosmic Orange',hex:'#a3552b',imgs:['img/iphone17promax-cosmicorange-1.png','img/iphone17promax-cosmicorange-2.png']}],
     storage:[{label:'256GB',delta:0},{label:'512GB',delta:450},{label:'1TB',delta:950},{label:'2TB',delta:1900}],
     desc:{he:'iPhone 17 Pro Max — המסך הכי גדול, הסוללה הכי חזקה, אותו שבב A19 Pro.',ar:'iPhone 17 Pro Max — أكبر شاشة وأقوى بطارية، بنفس شريحة A19 Pro.',en:'iPhone 17 Pro Max — the biggest screen and battery, the same A19 Pro chip.'}},
-  {id:18,name:'MacBook Pro 14"',cat:'computers',price:8990,icon:'laptop',img:'img/macbookpro-1.png',imgs:['img/macbookpro-1.png','img/macbookpro-2.png'],brand:'apple',
-    colors:[{name:'Space Black',hex:'#2b2b2b'},{name:'Silver',hex:'#e5e5e5'}],
+  {id:18,name:'MacBook Pro 14"',cat:'computers',price:8990,icon:'laptop',img:'img/macbookpro-spaceblack-1.png',imgs:['img/macbookpro-1.png','img/macbookpro-2.png'],brand:'apple',
+    colors:[{name:'Space Black',hex:'#2b2b2b',imgs:['img/macbookpro-spaceblack-1.png','img/macbookpro-spaceblack-2.png']},{name:'Silver',hex:'#e5e5e5',imgs:['img/macbookpro-silver-1.png','img/macbookpro-silver-2.png']}],
     storage:[{label:'512GB SSD',delta:0},{label:'1TB SSD',delta:700}],
     desc:{he:'MacBook Pro 14 אינץ׳ עם שבב M4 ומסך Liquid Retina XDR — לעבודה מקצועית.',ar:'MacBook Pro 14 إنش بشريحة M4 وشاشة Liquid Retina XDR — للعمل الاحترافي.',en:'14" MacBook Pro with the M4 chip and a Liquid Retina XDR display — for pro workflows.'}},
-  {id:19,name:'iPad Pro',cat:'tablets',price:4290,icon:'tablet',img:'img/ipadpro-1.png',imgs:['img/ipadpro-1.png','img/ipadpro-2.png'],brand:'apple',
-    colors:[{name:'Space Black',hex:'#2b2b2b'},{name:'Silver',hex:'#e5e5e5'}],
+  {id:19,name:'iPad Pro',cat:'tablets',price:4290,icon:'tablet',img:'img/ipadpro-spaceblack-1.png',imgs:['img/ipadpro-1.png','img/ipadpro-2.png'],brand:'apple',
+    colors:[{name:'Space Black',hex:'#2b2b2b',imgs:['img/ipadpro-spaceblack-1.png']},{name:'Silver',hex:'#e5e5e5',imgs:['img/ipadpro-silver-1.png']}],
     storage:[{label:'256GB',delta:0},{label:'512GB',delta:500},{label:'1TB',delta:1200}],
     desc:{he:'iPad Pro עם שבב M4 ומסך Ultra Retina XDR — הטאבלט הכי חזק של אפל.',ar:'iPad Pro بشريحة M4 وشاشة Ultra Retina XDR — أقوى جهاز لوحي من آبل.',en:'iPad Pro with the M4 chip and an Ultra Retina XDR display — Apple\'s most powerful tablet.'}},
-  {id:20,name:'iPad',cat:'tablets',price:1690,icon:'tablet',img:'img/ipadbase-1.png',brand:'apple',
-    colors:[{name:'Blue',hex:'#7fa7c9'},{name:'Pink',hex:'#e3b8c4'},{name:'Silver',hex:'#e5e5e5'},{name:'Yellow',hex:'#e8d27a'}],
+  {id:20,name:'iPad',cat:'tablets',price:1690,icon:'tablet',img:'img/ipadbase-blue-1.png',brand:'apple',
+    colors:[{name:'Blue',hex:'#7fa7c9',imgs:['img/ipadbase-blue-1.png']},{name:'Pink',hex:'#e3b8c4',imgs:['img/ipadbase-pink-1.png']},{name:'Silver',hex:'#e5e5e5',imgs:['img/ipadbase-silver-1.png']},{name:'Yellow',hex:'#e8d27a',imgs:['img/ipadbase-yellow-1.png']}],
     storage:[{label:'128GB',delta:0},{label:'256GB',delta:300}],
     desc:{he:'iPad — הכי משתלם, מושלם לגלישה, לימודים ובידור יומיומי.',ar:'iPad — الأكثر قيمة مقابل السعر، مثالي للتصفح والدراسة والترفيه اليومي.',en:'iPad — the best value, perfect for everyday browsing, study and play.'}},
-  {id:21,name:'Apple Watch Ultra 2',cat:'accessories',price:3390,icon:'watch',img:'img/watchultra2-1.png',imgs:['img/watchultra2-1.png','img/watchultra2-2.png'],brand:'apple',
-    colors:[{name:'Natural Titanium',hex:'#8a8479'},{name:'Black Titanium',hex:'#2b2a28'}],
+  {id:21,name:'Apple Watch Ultra 2',cat:'accessories',price:3390,icon:'watch',img:'img/watchultra2-naturaltitanium-1.png',imgs:['img/watchultra2-1.png','img/watchultra2-2.png'],brand:'apple',
+    colors:[{name:'Natural Titanium',hex:'#8a8479',imgs:['img/watchultra2-naturaltitanium-1.png']},{name:'Black Titanium',hex:'#2b2a28',imgs:['img/watchultra2-blacktitanium-1.png']}],
     storage:[{label:'49mm',delta:0}],
     desc:{he:'Apple Watch Ultra 2 — עמיד, עם GPS מדויק וסוללה שמחזיקה ימים.',ar:'Apple Watch Ultra 2 — متين، مع GPS دقيق وبطارية تدوم أياماً.',en:'Apple Watch Ultra 2 — rugged, with precise GPS and multi-day battery life.'}},
-  {id:22,name:'AirPods Pro 2',cat:'accessories',price:990,icon:'buds',img:'img/airpodspro2-1.png',imgs:['img/airpodspro2-1.png','img/airpodspro2-2.png'],brand:'apple',
+  {id:22,name:'AirPods Pro 2',cat:'accessories',price:990,icon:'buds',img:'img/airpodspro-default-1.png',imgs:['img/airpodspro-default-1.png'],brand:'apple',
     desc:{he:'AirPods Pro 2 עם ביטול רעשים אקטיבי ואודיו מרחבי מותאם אישית.',ar:'AirPods Pro 2 بإلغاء ضوضاء نشط وصوت مكاني مخصص.',en:'AirPods Pro 2 with active noise cancellation and personalized spatial audio.'}},
-  {id:23,name:'AirPods 4',cat:'accessories',price:590,icon:'buds',img:'img/airpods4-1.png',imgs:['img/airpods4-1.png','img/airpods4-2.png'],brand:'apple',
+  {id:23,name:'AirPods 4',cat:'accessories',price:590,icon:'buds',img:'img/airpods4-default-1.png',imgs:['img/airpods4-default-1.png','img/airpods4-default-2.png'],brand:'apple',
     desc:{he:'AirPods 4 — עיצוב חדש, סאונד עשיר יותר וסוללה משופרת.',ar:'AirPods 4 — تصميم جديد، صوت أغنى وبطارية محسّنة.',en:'AirPods 4 — a new design, richer sound and improved battery life.'}},
-  {id:24,name:'Galaxy S25 Ultra',cat:'phones',price:5190,icon:'phone',badge:'new',img:'img/s25ultra-1.jpg',imgs:['img/s25ultra-1.jpg','img/s25ultra-2.jpg'],brand:'samsung',
-    colors:[{name:'Titanium Black',hex:'#2b2b2e'},{name:'Titanium Gray',hex:'#8a8a8d'},{name:'Titanium Blue',hex:'#4a5a72'}],
+  {id:24,name:'Galaxy S25 Ultra',cat:'phones',price:5190,icon:'phone',badge:'new',img:'img/s25ultra-titaniumgray-1.png',imgs:['img/s25ultra-1.jpg','img/s25ultra-2.jpg'],brand:'samsung',
+    colors:[{name:'Titanium Gray',hex:'#b3ab9e',imgs:['img/s25ultra-titaniumgray-1.png']},{name:'Titanium Black',hex:'#4a4a4d',imgs:['img/s25ultra-titaniumblack-1.png']},{name:'Titanium Silverblue',hex:'#8e9fbc',imgs:['img/s25ultra-titaniumsilverblue-1.png']},{name:'Titanium Whitesilver',hex:'#d9d9d6',imgs:['img/s25ultra-titaniumwhitesilver-1.png']}],
     storage:[{label:'256GB',delta:0},{label:'512GB',delta:450},{label:'1TB',delta:950}],
     desc:{he:'Galaxy S25 Ultra עם בינה מלאכותית מתקדמת, עט S Pen ומצלמה בזום גבוה.',ar:'Galaxy S25 Ultra بذكاء اصطناعي متقدم وقلم S Pen وكاميرا بتقريب عالٍ.',en:'Galaxy S25 Ultra with advanced on-device AI, the built-in S Pen and a high-zoom camera.'}},
   {id:25,name:'Galaxy S25',cat:'phones',price:3590,icon:'phone',badge:'new',img:'img/s25-1.png',brand:'samsung',
@@ -571,7 +571,18 @@ function pmedia(p){
 /* PDP gallery: supports multiple real photos per product via an optional
    `imgs` array (falls back to the single `img` field, then the icon) —
    built so real photos can be dropped in later without any code change. */
-function pdpImages(p){ return (p.imgs&&p.imgs.length)?p.imgs:(p.img?[p.img]:[]); }
+/* The gallery follows the chosen finish. Apple ships a separate shot per colour,
+   so picking "Silver" shows the silver phone rather than recolouring a swatch and
+   leaving the photo wrong. Products without per-colour photography fall back to
+   the shared set, so a half-populated catalog still renders. */
+function pdpImages(p){
+  const c=p.colors&&p.colors[pdpColorIdx];
+  if(c&&c.imgs&&c.imgs.length) return c.imgs;
+  return (p.imgs&&p.imgs.length)?p.imgs:(p.img?[p.img]:[]);
+}
+/* True when this product carries its own photo for every finish - used to decide
+   whether switching colour should keep the current angle or reset to the first. */
+function hasColorImages(p){ return !!(p.colors&&p.colors.some(c=>c.imgs&&c.imgs.length)); }
 function pmediaSrc(p,src){
   const svg=ICON[p.icon]||REPICON[p.icon]||REPICON.tools;
   if(!src) return svg;
