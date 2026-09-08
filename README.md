@@ -49,6 +49,18 @@ This is deliberate for a shop of this size: no card fees, no PCI obligations, no
 checkout to maintain, and orders arrive where staff already are. Adding a real
 gateway later does not require rebuilding the site.
 
+## Chat assistant
+
+The bubble in the corner answers from the site's own data — a price it quotes is
+the price on the product page, because it reads the same `PRODUCTS` and `REPAIRS`
+arrays. There is no API behind it and nothing to pay for per message.
+
+It replies in the language the customer typed in, remembers the device under
+discussion so follow-ups like "and the battery?" work, and ends every answer it
+cannot close itself with a WhatsApp button carrying the customer's own question.
+Its keywords and canned answers live in `CHAT_INTENTS`, `CHAT_REP_KW` and the
+`chat_*` keys in `T`.
+
 ## Addresses
 
 Pages have their own URLs (`#/products`, `#/product/17`, `#/repairs`, `#/bag`,

@@ -324,7 +324,7 @@ const T={
   faq2_q:'יש אחריות על התיקונים?',faq2_a:'כן. כל תיקון וכל מוצר מגיעים עם אחריות בכתב.',
   faq3_q:'אפשר להזמין אונליין ולקבל עד הבית?',faq3_a:'בהחלט. אפשר להזמין דרך האתר ולבחור משלוח עד הבית או איסוף מהחנות.',
   faq4_q:'אתם קונים מכשירים ישנים?',faq4_a:'כן, יש לנו טרייד-אין — מביאים מכשיר ישן ומקבלים זיכוי לרכישה החדשה.',
-  ab_form_h:'שלחו לנו הודעה',form_name:'שם מלא',form_contact:'טלפון או אימייל',form_msg:'איך נוכל לעזור?',form_send:'שליחה',form_sent:'תודה! ההודעה מוכנה בוואטסאפ — נשאר רק ללחוץ שליחה.',wa_contact_head:'היי, פנייה מהאתר:',skip_main:'דילוג לתוכן הראשי',form_err_title:'יש בעיה בטופס',form_err_name:'נא למלא שם מלא',form_err_contact:'נא להשאיר טלפון או אימייל כדי שנוכל לחזור אליכם',form_err_msg:'נא לכתוב במה נוכל לעזור',form_search_label:'חיפוש מוצרים',form_chat_label:'הודעה לצ׳אט',
+  ab_form_h:'שלחו לנו הודעה',form_name:'שם מלא',form_contact:'טלפון או אימייל',form_msg:'איך נוכל לעזור?',form_send:'שליחה',form_sent:'תודה! ההודעה מוכנה בוואטסאפ — נשאר רק ללחוץ שליחה.',wa_contact_head:'היי, פנייה מהאתר:',wa_chat_head:'היי, שאלתי את זה בצ׳אט באתר:',skip_main:'דילוג לתוכן הראשי',form_err_title:'יש בעיה בטופס',form_err_name:'נא למלא שם מלא',form_err_contact:'נא להשאיר טלפון או אימייל כדי שנוכל לחזור אליכם',form_err_msg:'נא לכתוב במה נוכל לעזור',form_search_label:'חיפוש מוצרים',form_chat_label:'הודעה לצ׳אט',
   foot_tag:'החנות שלך לטכנולוגיה, גיימינג ותיקונים.',foot_help:'עזרה',foot_est:'נוסד 2010',foot_credit:'עיצוב ופיתוח: Saeed Khoury',foot_privacy:'מדיניות פרטיות',
    added:'נוסף לסל',added_rep:'התיקון נוסף לסל',new:'חדש',
    chat_title:'הצ׳אט של Sky Phone',chat_sub:'מענה מיידי · מחוברים עכשיו',chat_ph:'כתבו שאלה...',
@@ -339,10 +339,11 @@ const T={
    chat_a_warranty:'כן — כל תיקון וכל מוצר מגיעים עם אחריות בכתב. אנחנו מאחורי מה שאנחנו מוכרים.',
    chat_a_payment:'ההזמנה נסגרת מול החנות בוואטסאפ, והתשלום מתבצע בחנות — מזומן, כרטיס אשראי או Bit.',
    chat_a_repair_time:'רוב התיקונים מוכנים תוך 24 שעות — ולרוב באותו יום. תלוי בסוג התקלה ובזמינות החלקים.',
-   chat_a_human:'בשמחה! אפשר לדבר עם נציג בוואטסאפ או בטלפון: 052-722-3916.',
-   chat_a_fallback:'לא בטוח שהבנתי 🙂 נסו לשאול על מחיר של מוצר, תיקון, שעות פתיחה, משלוח או טרייד-אין — או כתבו לנו בוואטסאפ: 052-722-3916.',
+   chat_a_human:'בשמחה — מעבירים אתכם לנציג אנושי.',
+   chat_a_fallback:'לא בטוח שהבנתי 🙂 אפשר לשאול על מחיר של מוצר, תיקון, שעות פתיחה, משלוח או טרייד-אין — או להמשיך עם נציג אנושי:',
    chat_a_price_q:'איזה מוצר מעניין אתכם? כתבו את שם הדגם — למשל iPhone 15 Pro, Steam Deck או Galaxy Buds3.',
    chat_a_found:'הנה מה שמצאתי:',chat_view:'צפה במוצר',
+   chat_act_wa:'המשך בוואטסאפ',chat_act_call:'התקשרו לחנות',chat_act_map:'פתחו במפות',
    chat_a_repair_q:'איזה תיקון צריך? למשל: מסך, סוללה, שקע טעינה, נזקי מים, מחשב או קונסולה — ואפשר גם לציין את המכשיר.'},
  ar:{dir:'rtl',
   nav_foryou:'لك',nav_products:'المنتجات',nav_repairs:'الإصلاح',nav_bag:'السلة',nav_about:'من نحن والتواصل',
@@ -411,7 +412,7 @@ const T={
   faq2_q:'هل هناك ضمان على الإصلاحات؟',faq2_a:'نعم. كل إصلاح وكل منتج يأتي بضمان مكتوب.',
   faq3_q:'هل يمكن الطلب أونلاين والتوصيل للمنزل؟',faq3_a:'بالتأكيد. يمكنك الطلب عبر الموقع واختيار التوصيل أو الاستلام من المتجر.',
   faq4_q:'هل تشترون الأجهزة القديمة؟',faq4_a:'نعم، لدينا خدمة الاستبدال — أحضر جهازك القديم واحصل على خصم على الجديد.',
-  ab_form_h:'أرسل لنا رسالة',form_name:'الاسم الكامل',form_contact:'هاتف أو بريد إلكتروني',form_msg:'كيف يمكننا المساعدة؟',form_send:'إرسال',form_sent:'شكراً! رسالتك جاهزة في واتساب — لم يتبقَّ سوى الضغط على إرسال.',wa_contact_head:'مرحباً، استفسار من الموقع:',skip_main:'تخطَّ إلى المحتوى الرئيسي',form_err_title:'هناك مشكلة في النموذج',form_err_name:'الرجاء إدخال الاسم الكامل',form_err_contact:'الرجاء ترك هاتف أو بريد إلكتروني لنتمكن من الرد',form_err_msg:'الرجاء كتابة كيف يمكننا المساعدة',form_search_label:'البحث عن منتجات',form_chat_label:'رسالة الدردشة',
+  ab_form_h:'أرسل لنا رسالة',form_name:'الاسم الكامل',form_contact:'هاتف أو بريد إلكتروني',form_msg:'كيف يمكننا المساعدة؟',form_send:'إرسال',form_sent:'شكراً! رسالتك جاهزة في واتساب — لم يتبقَّ سوى الضغط على إرسال.',wa_contact_head:'مرحباً، استفسار من الموقع:',wa_chat_head:'مرحباً، سألت هذا في محادثة الموقع:',skip_main:'تخطَّ إلى المحتوى الرئيسي',form_err_title:'هناك مشكلة في النموذج',form_err_name:'الرجاء إدخال الاسم الكامل',form_err_contact:'الرجاء ترك هاتف أو بريد إلكتروني لنتمكن من الرد',form_err_msg:'الرجاء كتابة كيف يمكننا المساعدة',form_search_label:'البحث عن منتجات',form_chat_label:'رسالة الدردشة',
   foot_tag:'متجرك للتقنية والألعاب والإصلاح.',foot_help:'مساعدة',foot_est:'تأسّس 2010',foot_credit:'تصميم وتطوير: Saeed Khoury',foot_privacy:'سياسة الخصوصية',
    added:'أُضيف إلى السلّة',added_rep:'أُضيف الإصلاح إلى السلّة',new:'جديد',
    chat_title:'محادثة Sky Phone',chat_sub:'رد فوري · متاحون الآن',chat_ph:'اكتب سؤالاً...',
@@ -426,10 +427,11 @@ const T={
    chat_a_warranty:'نعم — كل إصلاح وكل منتج يأتي بضمان مكتوب. نحن خلف ما نبيع.',
    chat_a_payment:'يتم تأكيد الطلب مع المتجر عبر واتساب، والدفع يتم في المتجر — نقداً، ببطاقة الائتمان أو عبر Bit.',
    chat_a_repair_time:'معظم الإصلاحات جاهزة خلال 24 ساعة — وغالباً في نفس اليوم. حسب نوع العطل وتوفّر القطع.',
-   chat_a_human:'بكل سرور! تحدث مع مندوب عبر واتساب أو هاتفياً: 052-722-3916.',
-   chat_a_fallback:'لست متأكداً أنني فهمت 🙂 جرّب السؤال عن سعر منتج، إصلاح، ساعات العمل، التوصيل أو الاستبدال — أو راسلنا واتساب: 052-722-3916.',
+   chat_a_human:'بكل سرور — سنحوّلك إلى موظف من فريقنا.',
+   chat_a_fallback:'لست متأكداً أنني فهمت 🙂 يمكنك السؤال عن سعر منتج، إصلاح، ساعات العمل، التوصيل أو الاستبدال — أو المتابعة مع موظف من فريقنا:',
    chat_a_price_q:'أي منتج يهمّك؟ اكتب اسم الطراز — مثلاً iPhone 15 Pro أو Steam Deck أو Galaxy Buds3.',
    chat_a_found:'إليك ما وجدت:',chat_view:'عرض المنتج',
+   chat_act_wa:'تابع في واتساب',chat_act_call:'اتصل بالمتجر',chat_act_map:'افتح في الخرائط',
    chat_a_repair_q:'أي إصلاح تحتاج؟ مثلاً: شاشة، بطارية، منفذ شحن، أضرار مياه، حاسوب أو كونسول — ويمكنك ذكر الجهاز أيضاً.'},
  en:{dir:'ltr',
   nav_foryou:'For You',nav_products:'Products',nav_repairs:'Repairs',nav_bag:'Bag',nav_about:'About & Contact',
@@ -498,7 +500,7 @@ const T={
   faq2_q:'Is there a warranty on repairs?',faq2_a:'Yes. Every repair and every product comes with a written warranty.',
   faq3_q:'Can I order online and get it delivered?',faq3_a:'Absolutely. Order through the site and choose home delivery or in-store pickup.',
   faq4_q:'Do you buy old devices?',faq4_a:'Yes, we offer trade-in — bring your old device and get credit toward a new purchase.',
-  ab_form_h:'Send us a message',form_name:'Full name',form_contact:'Phone or email',form_msg:'How can we help?',form_send:'Send',form_sent:'Thanks! Your message is ready in WhatsApp — just press send.',wa_contact_head:'Hi, an enquiry from the website:',skip_main:'Skip to main content',form_err_title:'There is a problem',form_err_name:'Enter your full name',form_err_contact:'Enter a phone number or email so we can reply',form_err_msg:'Tell us how we can help',form_search_label:'Search products',form_chat_label:'Chat message',
+  ab_form_h:'Send us a message',form_name:'Full name',form_contact:'Phone or email',form_msg:'How can we help?',form_send:'Send',form_sent:'Thanks! Your message is ready in WhatsApp — just press send.',wa_contact_head:'Hi, an enquiry from the website:',wa_chat_head:'Hi, I asked this in the website chat:',skip_main:'Skip to main content',form_err_title:'There is a problem',form_err_name:'Enter your full name',form_err_contact:'Enter a phone number or email so we can reply',form_err_msg:'Tell us how we can help',form_search_label:'Search products',form_chat_label:'Chat message',
   foot_tag:'Your store for tech, gaming and repairs.',foot_help:'Help',foot_est:'Est. 2010',foot_credit:'Design & development: Saeed Khoury',foot_privacy:'Privacy Policy',
    added:'Added to bag',added_rep:'Repair added to bag',new:'New',
    chat_title:'Sky Phone chat',chat_sub:'Instant replies · Online now',chat_ph:'Type a question...',
@@ -513,10 +515,11 @@ const T={
    chat_a_warranty:'Yes — every repair and every product comes with a written warranty. We stand behind what we sell.',
    chat_a_payment:'Orders are confirmed with the shop over WhatsApp, and payment is made in store — cash, credit card or Bit.',
    chat_a_repair_time:'Most repairs are ready within 24 hours — often the same day. Depends on the fault and parts availability.',
-   chat_a_human:'Happy to help! Talk to a human on WhatsApp or by phone: 052-722-3916.',
-   chat_a_fallback:'Not sure I got that 🙂 Try asking about a product price, a repair, opening hours, delivery or trade-in — or message us on WhatsApp: 052-722-3916.',
+   chat_a_human:'Happy to help — I’ll put you through to a human.',
+   chat_a_fallback:'Not sure I got that 🙂 Ask me about a product price, a repair, opening hours, delivery or trade-in — or carry on with a human:',
    chat_a_price_q:'Which product interests you? Type the model name — e.g. iPhone 15 Pro, Steam Deck or Galaxy Buds3.',
    chat_a_found:'Here’s what I found:',chat_view:'View product',
+   chat_act_wa:'Continue on WhatsApp',chat_act_call:'Call the shop',chat_act_map:'Open in Maps',
    chat_a_repair_q:'Which repair do you need? For example: screen, battery, charging port, water damage, computer or console — you can name the device too.'}
 };
 
@@ -2040,9 +2043,58 @@ function attachPdpZoom(){
 /* ---------- support chatbot ----------
    Rule-based assistant that answers from the site's real data (PRODUCTS,
    REPAIRS, PHONE_REPAIR_DEVICES, verified shop details) — nothing is faked:
-   a price answer always reflects the same catalog the store page shows. */
+   a price answer always reflects the same catalog the store page shows.
+   Two rules govern the design: the bot never invents an answer, and every
+   answer it cannot close itself hands the customer to a human with their own
+   question already written into the draft. */
+
+/* The shop, reachable. Both are built from the same number as SHOP_WA, and the
+   map is a search rather than a dropped pin so it lands on the shop's own
+   listing and stays correct if that listing ever moves. */
+const SHOP_TEL='tel:+972527223916';
+const SHOP_MAP='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent('Sky Phone Kafr Kanna');
+
+/* Reply in the language the customer wrote in, not the language the site
+   happens to be showing — someone who switches to Arabic mid-conversation
+   should not keep getting Hebrew back. Script decides it: Hebrew and Arabic
+   own their Unicode blocks. Latin only counts as English once the model names
+   are stripped out, because "iPhone 15" is spelt the same in all three. */
+const CHAT_NEUTRAL=/\b(?:iphone|ipad|macbook|imac|mac|apple|airpods|watch|samsung|galaxy|tab|buds|ultra|xiaomi|redmi|dell|xps|sony|playstation|ps5|dualsense|xbox|steam|deck|nvidia|pro|max|plus|air|mini|gb|tb|bit|sim|usb|wifi|ok)\b|\d+/gi;
+function chatLang(s){
+  if(/[\u0590-\u05FF]/.test(s)) return 'he';   /* Hebrew block */
+  if(/[\u0600-\u06FF]/.test(s)) return 'ar';   /* Arabic block */
+  return /[A-Za-z]{2,}/.test(s.replace(CHAT_NEUTRAL,' ')) ? 'en' : lang;
+}
+
+/* What the customer has already told us. A phone-shop conversation is almost
+   all follow-ups — "how much is an iPhone 14" then "and the battery?" — and a
+   bot that forgets the device in between makes them type it again, which is
+   the point most people give up. */
+const chatMem={device:null,repairId:null};
+
+/* Handing over to a human. The customer's own question travels with them, so
+   nobody has to repeat themselves to the shop. */
+function chatWaHref(q,L){
+  const head=T[L].wa_chat_head;
+  return SHOP_WA+'?text='+encodeURIComponent(q?head+'\n\n'+q:head);
+}
+function actWa(L,q,primary){return {label:T[L].chat_act_wa,href:chatWaHref(q,L),primary:!!primary,ev:'chat_handoff'};}
+function actCall(L,primary){return {label:T[L].chat_act_call,href:SHOP_TEL,primary:!!primary,ev:'chat_call'};}
+function actMap(L,primary){return {label:T[L].chat_act_map,href:SHOP_MAP,primary:!!primary,ev:'chat_map'};}
+/* Quick-add matches the catalog card exactly: the default configuration goes
+   in, and "View product" is there for anyone who wants to pick a colour or a
+   storage tier first. */
+function actsProduct(p,L){
+  return [{label:T[L].pdp_add,primary:true,add:p.id},
+          {label:T[L].chat_view,onClick:()=>{closeChat();openProduct(p.id);}}];
+}
+
 const CHAT_INTENTS=[
-  {id:'hours',   kw:['שעות','פתוח','פתיחה','סגור','מתי אתם','סהעות','סגורים','ساعات','مفتوح','مفتوحين','دوام','متى','تفتحون','تغلقون','hours','open','close','when are you']},
+  /* Day names carry the question as often as the word "hours" does: nobody
+     asks "what are your opening hours", they ask "are you open on Friday". */
+  {id:'hours',   kw:['שעות','פתוח','פתיחה','סגור','מתי אתם','סהעות','סגורים','עובדים','ראשון','שלישי','רביעי','חמישי','שישי','שבת',
+                     'ساعات','مفتوح','مفتوحين','دوام','متى','تفتحون','تغلقون','تشتغلون','بتشتغلوا','الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت',
+                     'hours','open','close','when are you','working','sunday','monday','tuesday','wednesday','thursday','friday','saturday','weekend']},
   {id:'where',   kw:['כתובת','נמצא','איפה','מיקום','להגיע','عنوان','وين','أين','مكان','الموقع','تواجد','where','address','location','located']},
   {id:'phone',   kw:['טלפון','להתקשר','נייד','مספר','هاتف','اتصال','رقم','اتصل','phone','call','number','contact']},
   {id:'delivery',kw:['משלוח','מביאים','שילוח','توصيل','توصيل','delivery','shipping','deliver','ship']},
@@ -2053,6 +2105,15 @@ const CHAT_INTENTS=[
   {id:'human',   kw:['נציג','אדם','בן אדם','موظف','بني ادم','حدد','انسان','شخص','human','agent','person','someone']},
   {id:'greet',   kw:['שלום','היי','הי ','בוקר טוב','ערב טוב','מה נשמע','مرحبا','اهلا','أهلا','هاي','صباح','مساء','hello','hi ','hey','good morning','good evening']},
 ];
+/* Which intents can actually be closed by a tap, and with what. The rest are
+   plain answers — a button under "yes, everything is under warranty" would be
+   noise, not help. */
+const CHAT_INTENT_ACTS={
+  hours:  (L,q)=>[actCall(L,true),actWa(L,q)],
+  where:  (L,q)=>[actMap(L,true),actCall(L)],
+  phone:  (L,q)=>[actCall(L,true),actWa(L,q)],
+  human:  (L,q)=>[actWa(L,q,true),actCall(L)]
+};
 const CHAT_REP_KW={
   r1:['מסך','שבור','מקולקל','screen','display','شاشة','مكسورة'],
   r2:['סוללה','battery','بطارية','بطاريه'],
@@ -2066,27 +2127,53 @@ const CHAT_DEV_ALIAS={'iphone 15':'iPhone 15 Pro','אייפון 15':'iPhone 15 P
   'iphone 14':'iPhone 14','אייפון 14':'iPhone 14','ايفون 14':'iPhone 14',
   's24':'Galaxy S24 Ultra','גלקסי s24':'Galaxy S24 Ultra','جالكسي s24':'Galaxy S24 Ultra','سامسونج s24':'Galaxy S24 Ultra',
   'xiaomi':'Xiaomi 14','שיאומי':'Xiaomi 14','شاومي':'Xiaomi 14'};
-function chatAnswer(msg){
+/* Only devices the repair bench actually prices can be carried between turns. */
+function chatRemember(name){ if(PHONE_REPAIR_DEVICES.some(d=>d.name===name)) chatMem.device=name; }
+
+function chatAnswer(msg,L){
   const m=' '+msg.toLowerCase().trim()+' ';
   const has=arr=>arr.some(k=>m.includes(k.toLowerCase()));
-  /* 1) repairs first — "כמה עולה מסך לאייפון 14" is a repair question, not a product one */
+  const words=msg.replace(/[^\p{L}\p{N}\s]/gu,' ').trim().split(/\s+/).filter(Boolean);
+
+  /* Any device named in this message replaces the one we were holding. */
+  let devName=null;
+  for(const alias in CHAT_DEV_ALIAS){ if(m.includes(alias)){ devName=CHAT_DEV_ALIAS[alias]; break; } }
+  if(devName) chatMem.device=devName;
+
+  /* 1) repairs first — "כמה עולה מסך לאייפון 14" is a repair question, not a
+        product one. A repair named with no device falls back to the device
+        already under discussion, which is exactly what "and the battery?"
+        means when it arrives on its own. */
   let repId=null;
   for(const id in CHAT_REP_KW){ if(has(CHAT_REP_KW[id])){ repId=id; break; } }
+
+  /* 2) a bare device name straight after a repair answer continues that
+        repair — "a screen for an iPhone 14" ... "and for the S24?". The same
+        three words can also mean "show me that phone", so when the repair is
+        carried rather than asked for, the product is offered alongside it. */
+  let carried=false;
+  if(!repId && devName && chatMem.repairId && words.length<=4){ repId=chatMem.repairId; carried=true; }
+
   if(repId){
+    chatMem.repairId=repId;
     const r=REPAIRS.find(x=>x.id===repId);
-    let devName=null;
-    for(const alias in CHAT_DEV_ALIAS){ if(m.includes(alias)){ devName=CHAT_DEV_ALIAS[alias]; break; } }
-    if(r.devices && devName){
-      const d=r.devices.find(x=>x.name===devName);
-      if(d) return {text:`${T[lang]['rep_'+r.id]} · ${d.name}: ₪${fmt(d.price)}`, repairId:r.id};
+    const dev=devName||chatMem.device;
+    const acts=[{label:T[L].rp_book,primary:true,onClick:()=>{closeChat();openRepairPicker(r.id);}}];
+    if(carried){
+      const p=PRODUCTS.find(x=>x.name===dev);
+      if(p) acts.push({label:T[L].chat_view,onClick:()=>{closeChat();openProduct(p.id);}});
+    }
+    if(r.devices && dev){
+      const d=r.devices.find(x=>x.name===dev);
+      if(d) return {text:`${T[L]['rep_'+r.id]} · ${d.name}: ₪${fmt(d.price)}`,actions:acts};
     }
     const from=r.devices?Math.min(...r.devices.map(d=>d.price)):r.price;
-    return {text:`${T[lang]['rep_'+r.id]} — ${T[lang].rp_from} ₪${fmt(from)}. ${T[lang].rp_note}`, repairId:r.id};
+    return {text:`${T[L]['rep_'+r.id]} — ${T[L].rp_from} ₪${fmt(from)}. ${T[L].rp_note}`,actions:acts};
   }
-  /* 2) exact catalog name */
+  /* 3) exact catalog name */
   const prod=PRODUCTS.find(p=>m.includes(p.name.toLowerCase()));
-  if(prod) return {product:prod};
-  /* 3) brand/keyword clusters — latin tokens only, so Hebrew/Arabic aliases
+  if(prod){ chatRemember(prod.name); chatMem.repairId=null; return {product:prod}; }
+  /* 4) brand/keyword clusters — latin tokens only, so Hebrew/Arabic aliases
         can never collapse into an always-true empty-string match */
   const clusters=[['iphone','אייפון','אפל','ايفون','ابل'],['samsung','galaxy','סמסונג','גלקסי','سامسونج','جالكسي','s24'],['xiaomi','שיאומי','شاومي'],
     ['ipad','אייפד','טאבלט','ايباد','تابلت','tablet'],['macbook','מקבוק','mac'],['dell','xps','דל'],
@@ -2099,36 +2186,72 @@ function chatAnswer(msg){
       const n=p.name.toLowerCase();
       return latinKeys.some(k=>n.includes(k) || k.split(/\s+/).some(w=>w.length>2 && n.includes(w)));
     });
-    if(hits.length) return {products:hits.slice(0,4)};
-    return {text:T[lang].chat_a_price_q};
+    if(hits.length){ chatMem.repairId=null; if(hits.length===1) chatRemember(hits[0].name); return {products:hits.slice(0,4)}; }
+    return {text:T[L].chat_a_price_q};
   }
-  /* 4) generic price / repair questions */
-  if(has(['תיקון','תיקונים','מעבדה','لإصلاح','إصلاح','تصليح','اصلاح','repair','fix','broken','fix my'])) return {text:T[lang].chat_a_repair_q};
-  if(has(['מחיר','עולה','כמה','כמה עולה','בכמה','سعر','بكم','كم سعر','اسعار','أسعار','price','cost','how much'])) return {text:T[lang].chat_a_price_q};
-  /* 5) shop-info intents */
-  for(const it of CHAT_INTENTS){ if(has(it.kw)) return {text:T[lang]['chat_a_'+it.id]}; }
-  return {text:T[lang].chat_a_fallback};
+  /* 5) generic price / repair questions */
+  if(has(['תיקון','תיקונים','מעבדה','لإصلاح','إصلاح','تصليح','اصلاح','repair','fix','broken','fix my'])) return {text:T[L].chat_a_repair_q};
+  if(has(['מחיר','עולה','כמה','כמה עולה','בכמה','سعر','بكم','كم سعر','اسعار','أسعار','price','cost','how much'])) return {text:T[L].chat_a_price_q};
+  /* 6) shop-info intents */
+  for(const it of CHAT_INTENTS){
+    if(!has(it.kw)) continue;
+    const build=CHAT_INTENT_ACTS[it.id];
+    return {text:T[L]['chat_a_'+it.id], actions:build?build(L,msg):null};
+  }
+  /* 7) nothing matched. This is the moment the customer is closest to giving
+        up, so it is the one answer that always offers a human. */
+  return {text:T[L].chat_a_fallback, actions:[actWa(L,msg,true)]};
 }
 
 /* ---------- chat UI ---------- */
 let chatBooted=false;
 function chatEl(id){return document.getElementById(id);}
 function chatScroll(){const b=chatEl('chatBody'); b.scrollTop=b.scrollHeight;}
-function addMsg(text,who,link){
+/* Direction belongs to the message, not the page: an English answer inside a
+   Hebrew site still has to read left to right. The bubble keeps the page's
+   direction so it stays on the side the conversation flows from. */
+function chatDir(L){ return L==='en'?'ltr':'rtl'; }
+
+/* Real buttons, not underlined words. These are the two or three things the
+   customer can do next, and on a phone a link inside a bubble is not a target. */
+function msgActions(acts,L){
+  const row=document.createElement('div');
+  row.className='msg-actions';
+  row.dir=chatDir(L);
+  acts.forEach(a=>{
+    const el=document.createElement(a.href?'a':'button');
+    el.className='msg-act'+(a.primary?' primary':'');
+    el.textContent=a.label;
+    if(a.href){ el.href=a.href; if(a.href.indexOf('tel:')!==0){ el.target='_blank'; el.rel='noopener'; } }
+    else el.type='button';
+    el.addEventListener('click',()=>{
+      if(a.ev && typeof gtag==='function') gtag('event',a.ev,{event_label:'chat'});
+      if(a.add!=null){
+        const p=PRODUCTS.find(x=>x.id===a.add);
+        flyToBag(el,p?pmedia(p):'');
+        addItem('product',a.add);
+        toast(T[L].added);
+        return;
+      }
+      if(a.onClick) a.onClick();
+    });
+    row.appendChild(el);
+  });
+  return row;
+}
+function addMsg(text,who,acts,L){
+  L=L||lang;
   const b=chatEl('chatBody');
   const div=document.createElement('div');
-  div.className='msg '+who;
-  div.textContent=text;
-  if(link){
-    const a=document.createElement('button');
-    a.className='msg-link'; a.textContent=link.label;
-    a.addEventListener('click',link.onClick);
-    div.appendChild(document.createElement('br'));
-    div.appendChild(a);
-  }
+  div.className='msg '+who+(acts&&acts.length?' has-acts':'');
+  const t=document.createElement('span');
+  t.className='msg-text'; t.dir=chatDir(L); t.textContent=text;
+  div.appendChild(t);
+  if(acts&&acts.length) div.appendChild(msgActions(acts,L));
   b.appendChild(div); chatScroll();
 }
-function botSay(ans){
+function botSay(ans,L){
+  L=L||lang;
   const b=chatEl('chatBody');
   const tp=document.createElement('div');
   tp.className='msg bot typing'; tp.innerHTML='<i></i><i></i><i></i>';
@@ -2136,34 +2259,29 @@ function botSay(ans){
   setTimeout(()=>{
     tp.remove();
     if(ans.products){
-      addMsg(T[lang].chat_a_found,'bot');
+      addMsg(T[L].chat_a_found,'bot',null,L);
       ans.products.forEach(p=>{
         const hasV=p.storage&&p.storage.length>1;
-        addMsg(`${p.name} — ${hasV?T[lang].cat_from+' ':''}₪${fmt(p.price)}`,'bot',
-          {label:T[lang].chat_view, onClick:()=>{ closeChat(); openProduct(p.id); }});
+        addMsg(`${p.name} — ${hasV?T[L].cat_from+' ':''}₪${fmt(p.price)}`,'bot',actsProduct(p,L),L);
       });
       return;
     }
     if(ans.product){
       const p=ans.product, hasV=p.storage&&p.storage.length>1;
-      addMsg(`${p.name} — ${hasV?T[lang].cat_from+' ':''}₪${fmt(p.price)}.`,'bot',
-        {label:T[lang].chat_view, onClick:()=>{ closeChat(); openProduct(p.id); }});
+      addMsg(`${p.name} — ${hasV?T[L].cat_from+' ':''}₪${fmt(p.price)}.`,'bot',actsProduct(p,L),L);
       return;
     }
-    if(ans.repairId){
-      addMsg(ans.text,'bot',{label:T[lang].rp_book, onClick:()=>{ closeChat(); openRepairPicker(ans.repairId); }});
-      return;
-    }
-    addMsg(ans.text,'bot');
+    addMsg(ans.text,'bot',ans.actions,L);
   },550+Math.random()*450);
 }
 function sendChat(text){
   const inp=chatEl('chatInput');
   const q=(text!==undefined?text:inp.value).trim();
   if(!q) return;
-  addMsg(q,'user');
+  const L=chatLang(q);
+  addMsg(q,'user',null,L);
   inp.value='';
-  botSay(chatAnswer(q));
+  botSay(chatAnswer(q,L),L);
 }
 function renderChatChips(){
   const box=chatEl('chatChips');
@@ -2174,7 +2292,7 @@ function openChat(){
   chatEl('chatPanel').classList.add('open');
   chatEl('chatPanel').setAttribute('aria-hidden','false');
   chatEl('chatDot').classList.add('off');
-  if(!chatBooted){ chatBooted=true; setTimeout(()=>botSay({text:T[lang].chat_greet}),350); }
+  if(!chatBooted){ chatBooted=true; setTimeout(()=>botSay({text:T[lang].chat_greet},lang),350); }
   setTimeout(()=>chatEl('chatInput').focus(),320);
 }
 function closeChat(){
