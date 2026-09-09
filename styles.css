@@ -146,6 +146,34 @@ picture{display:contents}
 
 .magnetic{transition:transform .25s var(--ease), background .2s var(--ease), box-shadow .2s var(--ease)}
 
+/* The header arrives with the hero rather than being there already, so the
+   load reads as one sequence instead of a page that was waiting behind a screen. */
+body.loaded .nav-inner{animation:reveal-up .5s var(--ease) both}
+body.loaded .promo-bar{animation:reveal-up .45s var(--ease) both}
+
+/* ---------- sibling stagger ----------
+   For content that genuinely arrives as a list. The delay is capped at the
+   eighth child: past that every remaining sibling shares one delay, so a long
+   grid never makes the visitor wait on row nine. */
+[data-stagger]>*{opacity:0}
+[data-stagger].in-view>*{animation:reveal-up .55s var(--ease) both}
+[data-stagger].in-view>*:nth-child(2){animation-delay:55ms}
+[data-stagger].in-view>*:nth-child(3){animation-delay:110ms}
+[data-stagger].in-view>*:nth-child(4){animation-delay:165ms}
+[data-stagger].in-view>*:nth-child(5){animation-delay:220ms}
+[data-stagger].in-view>*:nth-child(6){animation-delay:275ms}
+[data-stagger].in-view>*:nth-child(7){animation-delay:330ms}
+[data-stagger].in-view>*:nth-child(n+8){animation-delay:385ms}
+/* Same reason as [data-reveal] below: a filled animation outranks the inline
+   transform the card tilt writes, so the finished state is swapped to plain CSS. */
+[data-stagger].revealed>*{opacity:1; animation:none}
+/* Fade-only variant, for the catalog grid. A translated card would move its
+   layout box, and returning from a product scrolls the card you opened back
+   under your eyes by measuring exactly that box — so the grid earns its
+   entrance with opacity alone and the restore lands where it should. */
+[data-stagger="fade"].in-view>*{animation-name:fade-in}
+@keyframes fade-in{from{opacity:0}to{opacity:1}}
+
 [data-reveal]{opacity:0; transform:translateY(22px)}
 [data-reveal].in-view{animation:reveal-up .7s var(--ease) both}
 [data-reveal].revealed{opacity:1; transform:none}
@@ -429,17 +457,27 @@ body.ribbon-closed .page{padding-block-start:var(--nav-h)}
   mask-image:radial-gradient(64% 74% at 50% 44%,#000 34%,rgba(0,0,0,.72) 58%,transparent 84%)}
 
 /* copy rises in each time a slide becomes active */
-.hero-slide.active .hero-ad-badge,
-.hero-slide.active .hero-ad-title,
-.hero-slide.active .hero-ad-tag,
-.hero-slide.active .hero-ad-note,
-.hero-slide.active .hero-ad-cta,
-.hero-slide.active .hero-ad-art{animation:hero-ad-in .75s var(--ease) both}
-.hero-slide.active .hero-ad-art{animation-delay:.08s}
-.hero-slide.active .hero-ad-title{animation-delay:.06s}
-.hero-slide.active .hero-ad-tag{animation-delay:.12s}
-.hero-slide.active .hero-ad-note{animation-delay:.17s}
-.hero-slide.active .hero-ad-cta{animation-delay:.22s}
+/* Gated on body.loaded. Without the gate this entrance ran from 0s and was
+   over at 0.81s, while the loader curtain stayed fully opaque until 0.85s —
+   the whole sequence played behind a black screen and no visitor ever saw it.
+   It now begins as the curtain lifts, so the two read as one movement. */
+body.loaded .hero-slide.active .hero-ad-badge,
+body.loaded .hero-slide.active .hero-ad-title,
+body.loaded .hero-slide.active .hero-ad-tag,
+body.loaded .hero-slide.active .hero-ad-note,
+body.loaded .hero-slide.active .hero-ad-cta,
+body.loaded .hero-slide.active .hero-ad-art{animation:hero-ad-in .75s var(--ease) both}
+body:not(.loaded) .hero-ad-badge,
+body:not(.loaded) .hero-ad-title,
+body:not(.loaded) .hero-ad-tag,
+body:not(.loaded) .hero-ad-note,
+body:not(.loaded) .hero-ad-cta,
+body:not(.loaded) .hero-ad-art{opacity:0}
+body.loaded .hero-slide.active .hero-ad-art{animation-delay:.08s}
+body.loaded .hero-slide.active .hero-ad-title{animation-delay:.06s}
+body.loaded .hero-slide.active .hero-ad-tag{animation-delay:.12s}
+body.loaded .hero-slide.active .hero-ad-note{animation-delay:.17s}
+body.loaded .hero-slide.active .hero-ad-cta{animation-delay:.22s}
 @keyframes hero-ad-in{from{opacity:0; transform:translateY(18px)}to{opacity:1; transform:none}}
 @keyframes ad-idle-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
 
@@ -1113,6 +1151,9 @@ input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important; transition-duration:.001s!important}
   [data-reveal]{opacity:1!important; transform:none!important}
+  [data-stagger]>*{opacity:1!important; transform:none!important}
+  .hero-ad-badge,.hero-ad-title,.hero-ad-tag,.hero-ad-note,.hero-ad-cta,.hero-ad-art{opacity:1!important}
+  [data-parallax]{transform:none!important}
   .tr-inner{transform:none!important}
   .noise-overlay{display:none}
 }
