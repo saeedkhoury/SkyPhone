@@ -299,7 +299,8 @@ const T={
    fy_rep_head:'מסך שבור? סוללה חלשה?',fy_rep_sub:'המעבדה שלנו מתקנת הכל — לרוב באותו יום, בחלקים מקוריים ועם אחריות מלאה.',fy_rep_cta:'לתיאום תיקון',
    fy_ig_head:'עוקבים באינסטגרם',fy_ig_sub:'מבצעים, הגעות חדשות ומה שחם בחנות — קודם כל שם.',fy_ig_cta:'עקבו אחרינו',
    fy_brands_l:'מותגים שתמצאו אצלנו',
-   soon_badge:'בקרוב',ad_i18_tag:'עיצוב חדש, שבב A20 Pro, מצלמות מקצועיות.',ad_i18_note:'הירשמו לעדכון ברגע שהוא מגיע לחנות.',ad_i18_cta:'עדכנו אותי בוואטסאפ',ad_i18_cta2:'לכל דגמי אייפון',wa_i18:'היי, אשמח שתעדכנו אותי כשתגיע סדרת ה-iPhone 18 (18 / 18 Pro / 18 Pro Max)',instock_badge:'במלאי עכשיו',ps5_tag:'משחקים ב-4K וזמני טעינה כמעט מיידיים.',ps5_cta1:'לצפייה במוצר',ask_wa:'שאלה? דברו איתנו',wa_ps5:'היי, יש לי שאלה לגבי ה-PlayStation 5',sameday_badge:'תיקון באותו יום',rp_hero_tag:'מסך שבור, סוללה חלשה או תקלה במחשב? נטפל בזה.',gta_cta:'עדכנו אותי כשמגיע',fy_gaming_head:'עולם הגיימינג אצלנו',fy_gaming_sub:'קונסולות ומשחקים — כולל מה שמגיע בקרוב.',
+   soon_badge:'בקרוב',ad_i18_tag:'עיצוב חדש, שבב A20 Pro, מצלמות מקצועיות.',ad_i18_note:'הירשמו לעדכון ברגע שהוא מגיע לחנות.',ad_i18_cta:'עדכנו אותי בוואטסאפ',ad_i18_cta2:'לכל דגמי אייפון',
+   ad_duo_tag:'מסך גדול שמתקפל לתוך הכיס. האייפון המתקפל הראשון.',ad_duo_note:'עוד לא יצא רשמית — נעדכן אתכם ברגע שיהיה מה לעדכן.',ad_duo_cta:'עדכנו אותי בוואטסאפ',wa_duo:'היי, אשמח שתעדכנו אותי כשהאייפון המתקפל (iPhone Duo) יגיע',wa_i18:'היי, אשמח שתעדכנו אותי כשתגיע סדרת ה-iPhone 18 (18 / 18 Pro / 18 Pro Max)',instock_badge:'במלאי עכשיו',ps5_tag:'משחקים ב-4K וזמני טעינה כמעט מיידיים.',ps5_cta1:'לצפייה במוצר',ask_wa:'שאלה? דברו איתנו',wa_ps5:'היי, יש לי שאלה לגבי ה-PlayStation 5',sameday_badge:'תיקון באותו יום',rp_hero_tag:'מסך שבור, סוללה חלשה או תקלה במחשב? נטפל בזה.',gta_cta:'עדכנו אותי כשמגיע',fy_gaming_head:'עולם הגיימינג אצלנו',fy_gaming_sub:'קונסולות ומשחקים — כולל מה שמגיע בקרוב.',
    reels_head:'עוד מאיתנו ברשתות',reels_sub:'רגעים אמיתיים מהחנות — ישר מהפייסבוק שלנו.',reel_watch:'צפייה בפייסבוק',
    apple_head:'עולם ה-Apple אצלנו',apple_sub:'אייפון, אייפד, מק ואפל ווטש — הכל מקורי ובאחריות מלאה.',
    samsung_head:'עולם ה-Samsung אצלנו',samsung_sub:'גלקסי, טאבים ואוזניות — המבחר המלא של סמסונג.',
@@ -387,7 +388,8 @@ const T={
    fy_rep_head:'شاشة مكسورة؟ بطارية ضعيفة؟',fy_rep_sub:'مختبرنا يصلح كل شيء — غالباً في نفس اليوم، بقطع أصلية وضمان كامل.',fy_rep_cta:'احجز إصلاحاً',
    fy_ig_head:'متابع على إنستغرام',fy_ig_sub:'عروض، وصولات جديدة وكل ما هو حار في المتجر — هناك أولاً.',fy_ig_cta:'تابعونا',
    fy_brands_l:'ماركات تجدونها لدينا',
-   soon_badge:'قريباً',ad_i18_tag:'تصميم جديد، شريحة A20 Pro، كاميرات احترافية.',ad_i18_note:'سجّلوا لتصلكم رسالة فور وصوله للمتجر.',ad_i18_cta:'أعلمني عبر واتساب',ad_i18_cta2:'كل طرازات آيفون',wa_i18:'مرحباً، أرغب بمعرفة موعد وصول سلسلة iPhone 18 (18 / 18 Pro / 18 Pro Max)',instock_badge:'متوفر الآن',ps5_tag:'ألعاب بجودة 4K وأوقات تحميل شبه فورية.',ps5_cta1:'عرض المنتج',ask_wa:'لديك سؤال؟ تواصل معنا',wa_ps5:'مرحباً، لدي سؤال حول PlayStation 5',sameday_badge:'إصلاح في نفس اليوم',rp_hero_tag:'شاشة مكسورة، بطارية ضعيفة أو عطل بالحاسوب؟ سنتولى الأمر.',gta_cta:'أعلمني عند الوصول',fy_gaming_head:'عالم الألعاب لدينا',fy_gaming_sub:'أجهزة ألعاب وعناوين — بما فيها ما هو قادم قريباً.',
+   soon_badge:'قريباً',ad_i18_tag:'تصميم جديد، شريحة A20 Pro، كاميرات احترافية.',ad_i18_note:'سجّلوا لتصلكم رسالة فور وصوله للمتجر.',ad_i18_cta:'أعلمني عبر واتساب',ad_i18_cta2:'كل طرازات آيفون',
+   ad_duo_tag:'شاشة كبيرة تنطوي داخل جيبك. أول آيفون قابل للطي.',ad_duo_note:'لم يصدر رسمياً بعد — سنعلمكم فور توفّر أي جديد.',ad_duo_cta:'أعلمني عبر واتساب',wa_duo:'مرحباً، أرجو إعلامي عند وصول الآيفون القابل للطي (iPhone Duo)',wa_i18:'مرحباً، أرغب بمعرفة موعد وصول سلسلة iPhone 18 (18 / 18 Pro / 18 Pro Max)',instock_badge:'متوفر الآن',ps5_tag:'ألعاب بجودة 4K وأوقات تحميل شبه فورية.',ps5_cta1:'عرض المنتج',ask_wa:'لديك سؤال؟ تواصل معنا',wa_ps5:'مرحباً، لدي سؤال حول PlayStation 5',sameday_badge:'إصلاح في نفس اليوم',rp_hero_tag:'شاشة مكسورة، بطارية ضعيفة أو عطل بالحاسوب؟ سنتولى الأمر.',gta_cta:'أعلمني عند الوصول',fy_gaming_head:'عالم الألعاب لدينا',fy_gaming_sub:'أجهزة ألعاب وعناوين — بما فيها ما هو قادم قريباً.',
    reels_head:'المزيد منّا على السوشال ميديا',reels_sub:'لحظات حقيقية من المتجر — مباشرة من فيسبوك.',reel_watch:'مشاهدة على فيسبوك',
    apple_head:'عالم Apple لدينا',apple_sub:'آيفون، آيباد، ماك وآبل ووتش — كله أصلي وبضمان كامل.',
    samsung_head:'عالم Samsung لدينا',samsung_sub:'غالاكسي، أجهزة لوحية وسماعات — التشكيلة الكاملة من سامسونج.',
@@ -475,7 +477,8 @@ const T={
    fy_rep_head:'Cracked screen? Weak battery?',fy_rep_sub:'Our lab fixes it all — usually the same day, with genuine parts and a full warranty.',fy_rep_cta:'Book a repair',
    fy_ig_head:'followers on Instagram',fy_ig_sub:'Deals, new arrivals and what’s hot in the shop — there first.',fy_ig_cta:'Follow us',
    fy_brands_l:'Brands you’ll find here',
-   soon_badge:'Coming soon',ad_i18_tag:'A new design, the A20 Pro chip, pro-grade cameras.',ad_i18_note:'Sign up to get notified the moment it lands in store.',ad_i18_cta:'Notify me on WhatsApp',ad_i18_cta2:'Shop all iPhone models',wa_i18:'Hi, I\'d love to be notified when the iPhone 18 series (18 / 18 Pro / 18 Pro Max) arrives',instock_badge:'In stock now',ps5_tag:'4K gaming and near-instant load times.',ps5_cta1:'View the product',ask_wa:'Have a question? Message us',wa_ps5:'Hi, I have a question about the PlayStation 5',sameday_badge:'Same-day repair',rp_hero_tag:'Cracked screen, weak battery, or a laptop acting up? We\'ll take care of it.',gta_cta:'Notify me when it arrives',fy_gaming_head:'The gaming world, here',fy_gaming_sub:'Consoles and titles — including what\'s coming soon.',
+   soon_badge:'Coming soon',ad_i18_tag:'A new design, the A20 Pro chip, pro-grade cameras.',ad_i18_note:'Sign up to get notified the moment it lands in store.',ad_i18_cta:'Notify me on WhatsApp',ad_i18_cta2:'Shop all iPhone models',
+   ad_duo_tag:'A large screen that folds into your pocket. The first foldable iPhone.',ad_duo_note:'Not released yet — we’ll tell you the moment there is anything to tell.',ad_duo_cta:'Notify me on WhatsApp',wa_duo:'Hi, please let me know when the foldable iPhone (iPhone Duo) arrives',wa_i18:'Hi, I\'d love to be notified when the iPhone 18 series (18 / 18 Pro / 18 Pro Max) arrives',instock_badge:'In stock now',ps5_tag:'4K gaming and near-instant load times.',ps5_cta1:'View the product',ask_wa:'Have a question? Message us',wa_ps5:'Hi, I have a question about the PlayStation 5',sameday_badge:'Same-day repair',rp_hero_tag:'Cracked screen, weak battery, or a laptop acting up? We\'ll take care of it.',gta_cta:'Notify me when it arrives',fy_gaming_head:'The gaming world, here',fy_gaming_sub:'Consoles and titles — including what\'s coming soon.',
    reels_head:'More from us on social',reels_sub:'Real moments from the shop — straight from our Facebook.',reel_watch:'Watch on Facebook',
    apple_head:'The Apple world, here',apple_sub:'iPhone, iPad, Mac and Apple Watch — all genuine, full warranty.',
    samsung_head:'The Samsung world, here',samsung_sub:'Galaxy phones, tablets and earbuds — the full Samsung lineup.',
@@ -576,6 +579,7 @@ const IMG_V='3';
 function iv(u){ return u.indexOf('?')<0 ? u+'?v='+IMG_V : u; }
 const SZ_CARD='(max-width:768px) 45vw, 280px';
 const SZ_PDP ='(max-width:900px) 88vw, 520px';
+const SZ_HERO='(max-width:900px) 82vw, 620px';
 function smallOf(webp){ return webp.replace(/\.webp$/i,'-sm.webp'); }
 function picture(src,alt,eager,sizes){
   const load=eager?'loading="eager" fetchpriority="high"':'loading="lazy" fetchpriority="low"';
@@ -862,9 +866,112 @@ function initMotionFor(root){
   }
 }
 
+/* ---------- hero slides ----------
+   The carousel is built from this array, in this order. Adding a slide is one
+   entry here and nothing else: the builder emits the exact markup the rest of
+   the site already keys off, so the pointer tilt, the idle float, the load
+   stagger, the dots, the slide count, the WhatsApp link and the analytics hook
+   all follow from the entry. docs/hero-images.md covers preparing the picture.
+
+   ground   'light' | 'dark' — panel treatment, and which ink the nav switches to
+   badge    a T key; badgeMod adds a modifier class (e.g. 'stock')
+   title    a T key, or {text:'…'} for a product name that is not translated
+   tag      a T key
+   note     a T key — or noteId instead, to leave the line for renderHeroAds()
+            to fill with a live catalog price
+   art      {img}  a transparent PNG in img/, served with its webp variants
+            {pid}  take the picture from that catalog product instead
+            {svg}  raw markup, for a slide with no photograph
+            fade:true adds the bottom fade; clickable follows from pid
+   cta      [{style:'primary'|'secondary'|'on-dark', label, and one of:
+              wa:<T key> + ev:<analytics label> | route | cat+brand | pid}]
+
+   Every T key named here must exist in he, ar and en or the slide ships blank. */
+const HERO_SLIDES=[
+  {ground:'light', badge:'soon_badge',
+   title:{text:'iPhone Duo'}, tag:'ad_duo_tag', note:'ad_duo_note',
+   art:{img:'img/iphone-duo.png', fade:true, alt:'iPhone Duo — the foldable iPhone, coming soon to Sky Phone'},
+   cta:[{style:'primary',   label:'ad_duo_cta',  wa:'wa_duo', ev:'hero_duo_notify'},
+        {style:'secondary', label:'ad_i18_cta2', cat:'phones', brand:'apple'}]},
+
+  {ground:'light', badge:'soon_badge',
+   title:{text:'iPhone 18 Pro'}, tag:'ad_i18_tag', note:'ad_i18_note',
+   art:{img:'img/iphone18-pro.png', fade:true, alt:'iPhone 18 Pro — coming soon to Sky Phone'},
+   cta:[{style:'primary',   label:'ad_i18_cta',  wa:'wa_i18', ev:'hero_iphone18_notify', id:'i18Wa'},
+        {style:'secondary', label:'ad_i18_cta2', cat:'phones', brand:'apple'}]},
+
+  {ground:'light', badge:'instock_badge', badgeMod:'stock',
+   title:{text:'PlayStation 5'}, tag:'ps5_tag', noteId:'ps5Note',
+   art:{pid:27, img:'img/ps5-2.png'},
+   cta:[{style:'primary',   label:'ps5_cta1', pid:27},
+        {style:'secondary', label:'ask_wa',   wa:'wa_ps5', ev:'hero_ps5_question', id:'ps5Wa'}]},
+
+  {ground:'dark', badge:'sameday_badge',
+   title:'rp_title', tag:'rp_hero_tag', noteId:'repairNote',
+   art:{svg:`<svg width="240" height="240" viewBox="0 0 240 240" fill="none">
+              <circle cx="120" cy="120" r="108" fill="none" stroke="#2a2a2e" stroke-width="1.5"/>
+              <path d="M150 78a24 24 0 0 1-32 32l-42 42a7 7 0 0 1-10-10l42-42a24 24 0 0 1 32-32l-16 16 8 8z" fill="none" stroke="#c9962f" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M76 148l16 16" stroke="#f5f5f7" stroke-width="3.5" stroke-linecap="round"/>
+            </svg>`},
+   cta:[{style:'primary', label:'fy_cta2', route:'repairs'},
+        {style:'on-dark', label:'fy_cta1', route:'products'}]}
+];
+
+const HERO_BTN={primary:'btn-primary', secondary:'btn-secondary', 'on-dark':'btn-on-dark'};
+function heroCtaHtml(c){
+  const cls=`btn ${HERO_BTN[c.style]||'btn-secondary'} magnetic`;
+  const bits=[`class="${cls}"`, `data-t="${c.label}"`];
+  if(c.id) bits.push(`id="${c.id}"`);
+  /* href is filled by renderHeroAds so the message follows the language. */
+  if(c.wa){ bits.push(`data-wa-key="${c.wa}"`, `target="_blank"`, `rel="noopener"`); if(c.ev) bits.push(`data-wa-label="${c.ev}"`); }
+  if(c.route) bits.push(`data-route="${c.route}"`);
+  if(c.cat) bits.push(`data-cat="${c.cat}"`);
+  if(c.brand) bits.push(`data-brand="${c.brand}"`);
+  if(c.pid) bits.push(`data-spot-pid="${c.pid}"`);
+  return `<a ${bits.join(' ')}></a>`;
+}
+function heroArtHtml(a){
+  const cls=['hero-ad-art'];
+  /* A photograph is cut out of its background; drawn artwork is not. */
+  if(!a.svg) cls.push('cutout');
+  if(a.fade) cls.push('fade-bottom');
+  if(a.pid) cls.push('clickable');
+  const data=a.pid?` data-spot-pid="${a.pid}" data-hero-pid="${a.pid}"${a.img?` data-hero-img="${a.img}"`:''}`:'';
+  /* A pid slide is filled by renderHeroAds; everything else is emitted here.
+     The eager, sized <picture> is what keeps the hero off the 240KB raw PNG. */
+  const inner=a.pid?'':(a.svg||picture(a.img,a.alt||'',true,SZ_HERO));
+  return `<div class="${cls.join(' ')}"${data}><span class="ad-art-float">${inner}</span></div>`;
+}
+function heroSlideHtml(s,i){
+  const t=s.title&&s.title.text!==undefined
+    ? `<h2 class="hero-ad-title">${s.title.text}</h2>`
+    : `<h2 class="hero-ad-title" data-t="${s.title}"></h2>`;
+  const note=s.noteId?`<p class="hero-ad-note" id="${s.noteId}"></p>`
+                     :`<p class="hero-ad-note" data-t="${s.note}"></p>`;
+  return `<div class="hero-slide${i===0?' active':''}" data-slide="${i}" data-ground="${s.ground}">
+      <div class="hero-ad hero-ad-${s.ground}">
+        <div class="hero-ad-copy">
+          <span class="hero-ad-badge${s.badgeMod?' '+s.badgeMod:''}" data-t="${s.badge}"></span>
+          ${t}
+          <p class="hero-ad-tag" data-t="${s.tag}"></p>
+          ${note}
+          <div class="hero-ad-cta">${s.cta.map(heroCtaHtml).join('')}</div>
+        </div>
+        ${heroArtHtml(s.art)}
+      </div>
+    </div>`;
+}
+function renderHeroSlides(){
+  const stage=document.getElementById('heroStage'), dots=document.getElementById('heroDots');
+  if(!stage) return;
+  stage.innerHTML=HERO_SLIDES.map(heroSlideHtml).join('');
+  if(dots) dots.innerHTML=HERO_SLIDES.map((s,i)=>
+    `<button class="hero-dot${i===0?' active':''}" data-slide-go="${i}" aria-label="slide ${i+1}"></button>`).join('');
+}
+
 /* ---------- hero carousel ---------- */
 let heroSlide=0, heroTimer=null;
-const heroSlideCount=3;
+const heroSlideCount=HERO_SLIDES.length;
 function goHeroSlide(n){
   heroSlide=(n+heroSlideCount)%heroSlideCount;
   document.querySelectorAll('.hero-slide').forEach(s=>s.classList.toggle('active',Number(s.dataset.slide)===heroSlide));
@@ -1021,9 +1128,12 @@ function renderHeroAds(){
     const img=slot.querySelector('img');
     if(img){ img.loading='eager'; img.setAttribute('fetchpriority','high'); }
   });
-  const wa=key=>`https://wa.me/972527223916?text=${encodeURIComponent(T[lang][key])}`;
-  const i18=document.getElementById('i18Wa'); if(i18) i18.href=wa('wa_i18');
-  const p5w=document.getElementById('ps5Wa'); if(p5w) p5w.href=wa('wa_ps5');
+  /* One loop for every hero WhatsApp button: the key travels on the element, so
+     adding a slide with a prefilled message needs no line here. */
+  document.querySelectorAll('.hero-ad-cta [data-wa-key]').forEach(a=>{
+    const msg=T[lang][a.dataset.waKey];
+    if(msg) a.href=SHOP_WA+'?text='+encodeURIComponent(msg);
+  });
 }
 
 /* ---------- promo ribbon rotation ----------
@@ -2437,6 +2547,9 @@ function initPageLoader(){
 /* init */
 document.querySelectorAll('.brand-logo').forEach(el=>el.src=LOGO);
 document.querySelectorAll('.h1,.h2,.display').forEach(el=>el.setAttribute('data-text-reveal',''));
+/* Build the hero before the first text pass: applyText() fills every data-t in
+   the document, and slides that do not exist yet get none of it. */
+renderHeroSlides();
 setLang('he');
 renderServices(); renderRepairSpot(); renderFaq();
 renderHighlights([17,18,19,20,22,21],'appleHighlights'); renderHighlights([24,11,26,8],'samsungHighlights'); renderGamingHighlights(); renderReels();

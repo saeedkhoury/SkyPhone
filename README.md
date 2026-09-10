@@ -73,6 +73,22 @@ right page, with a matching tab title. Back and Forward behave normally.
 no third-party request is made. Put a GA4 Measurement ID there to switch reporting
 on. Visits, WhatsApp clicks and cart checkouts are already instrumented.
 
+## The hero carousel
+
+Slides are built from `HERO_SLIDES` in `app.js`, in array order. Adding one is a
+picture plus a single entry — the dots, the slide count, the pointer tilt, the
+idle float, the WhatsApp link and the analytics hook all follow from it.
+
+```bash
+python3 tools/hero-image.py ~/Downloads/whatever.jpg iphone-duo
+```
+
+That prepares the three image variants the hero asks for, and strips any
+marketing text baked into the supplied picture — the hero has its own title and
+tagline layers that translate, so burnt-in text both duplicates them and shows
+the wrong language to most visitors. Full walkthrough in
+[docs/hero-images.md](docs/hero-images.md).
+
 ## Assets
 
 - `img/` — every product image ships as both an original and a WebP twin; the browser
