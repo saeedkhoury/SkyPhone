@@ -31,10 +31,41 @@ blank band between the caption and the photograph and keeps only the picture.
 areas *inside* the product — a screen, a white chassis — survive. A plain colour
 threshold punches holes in exactly those places.
 
+**It strips solid black bars.** A screenshot or a re-encoded video frame often
+carries a few rows of pure black on one edge. The key reads those as artwork and
+they survive as a hard line straight across the finished image.
+
 **It warns you when it could not help.** If the line says almost nothing was
 removed, the picture has a photographic background and needs cutting out by
 hand. Do not ship it as-is: the hero paints a gradient behind the art and a
 rectangular photo will read as a grey box sitting on top of it.
+
+### Designed graphics: `--soft`
+
+```bash
+python3 tools/hero-image.py ~/Downloads/graphic.jpg repair-collage --soft
+```
+
+Use this when the picture is a *composition* rather than a product render — a
+collage whose own panels and cards are the same light grey as its background. A
+plain flood fill has no good answer there: seal it lightly and the fill leaks
+into the panels, seal it hard and every panel fuses into one grey blob.
+
+`--soft` removes the true outside outright, then fades every light neutral pixel
+wherever it sits. What replaces those fills is the hero's own light panel, which
+is the same tone — so the graphic merges instead of sitting in a box.
+
+Two conditions, both of which matter:
+
+- **The slide must be `ground:'light'`.** Those fills are semi-transparent by
+  design. On a dark panel they would show through as dark patches.
+- **Pair it with `shadow:false`.** `drop-shadow` is applied per pixel through the
+  alpha channel, so on soft alpha it smears a grey wash across the middle of the
+  artwork rather than sitting behind it.
+
+```js
+art:{img:'img/repair-collage.png', shadow:false, alt:'…'}
+```
 
 ## 2. Add the entry
 
@@ -60,6 +91,7 @@ In `app.js`, add to the top of `HERO_SLIDES` — array order is screen order:
 | `art.pid` | instead of `img` — take the picture from that catalog product, and make the art clickable through to it |
 | `art.svg` | raw markup, for a slide with no photograph |
 | `art.fade` | fades the bottom of the picture into the panel |
+| `art.shadow` | `false` drops the cut-out drop-shadow — required for `--soft` artwork |
 | `cta[].style` | `primary`, `secondary`, or `on-dark` for a dark slide |
 | `cta[].wa` | a `T` key holding the prefilled WhatsApp message; pair with `ev` for the analytics label |
 | `cta[].route` / `cat`+`brand` / `pid` | go to a page / a filtered catalog / a product |

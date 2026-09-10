@@ -879,10 +879,16 @@ function initMotionFor(root){
    tag      a T key
    note     a T key — or noteId instead, to leave the line for renderHeroAds()
             to fill with a live catalog price
-   art      {img}  a transparent PNG in img/, served with its webp variants
-            {pid}  take the picture from that catalog product instead
-            {svg}  raw markup, for a slide with no photograph
+   art      {img}   a transparent PNG in img/, served with its webp variants
+            {photo} a rectangular photograph — rendered as a rounded, shadowed
+                    card rather than a cut-out, because a photo with a real
+                    background cannot be keyed and faking it looks worse than
+                    owning it
+            {pid}   take the picture from that catalog product instead
+            {svg}   raw markup, for a slide with no photograph
             fade:true adds the bottom fade; clickable follows from pid
+            shadow:false drops the cut-out drop-shadow, for artwork whose alpha
+                    is soft rather than a hard silhouette
    cta      [{style:'primary'|'secondary'|'on-dark', label, and one of:
               wa:<T key> + ev:<analytics label> | route | cat+brand | pid}]
 
@@ -906,15 +912,16 @@ const HERO_SLIDES=[
    cta:[{style:'primary',   label:'ps5_cta1', pid:27},
         {style:'secondary', label:'ask_wa',   wa:'wa_ps5', ev:'hero_ps5_question', id:'ps5Wa'}]},
 
-  {ground:'dark', badge:'sameday_badge',
+  {ground:'light', badge:'sameday_badge',
    title:'rp_title', tag:'rp_hero_tag', noteId:'repairNote',
-   art:{svg:`<svg width="240" height="240" viewBox="0 0 240 240" fill="none">
-              <circle cx="120" cy="120" r="108" fill="none" stroke="#2a2a2e" stroke-width="1.5"/>
-              <path d="M150 78a24 24 0 0 1-32 32l-42 42a7 7 0 0 1-10-10l42-42a24 24 0 0 1 32-32l-16 16 8 8z" fill="none" stroke="#c9962f" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M76 148l16 16" stroke="#f5f5f7" stroke-width="3.5" stroke-linecap="round"/>
-            </svg>`},
-   cta:[{style:'primary', label:'fy_cta2', route:'repairs'},
-        {style:'on-dark', label:'fy_cta1', route:'products'}]}
+   /* shadow:false because this one is a designed graphic, not a product render.
+      Its card fills are deliberately semi-transparent so the panel behind shows
+      through them, and drop-shadow follows the alpha channel — with a shadow on,
+      that offset smear would wash grey straight across the middle of the art. */
+   art:{img:'img/repair-collage.png', shadow:false,
+        alt:'Phone repairs at Sky Phone — screen, battery, charging port, camera and board work'},
+   cta:[{style:'primary',   label:'fy_cta2', route:'repairs'},
+        {style:'secondary', label:'fy_cta1', route:'products'}]}
 ];
 
 const HERO_BTN={primary:'btn-primary', secondary:'btn-secondary', 'on-dark':'btn-on-dark'};
@@ -932,14 +939,17 @@ function heroCtaHtml(c){
 }
 function heroArtHtml(a){
   const cls=['hero-ad-art'];
-  /* A photograph is cut out of its background; drawn artwork is not. */
-  if(!a.svg) cls.push('cutout');
+  /* A product render is cut out of its background; a photograph keeps its own
+     and is framed as a card; drawn artwork gets neither. */
+  if(a.photo) cls.push('photo');
+  else if(!a.svg) cls.push('cutout');
   if(a.fade) cls.push('fade-bottom');
   if(a.pid) cls.push('clickable');
+  if(a.shadow===false) cls.push('no-shadow');
   const data=a.pid?` data-spot-pid="${a.pid}" data-hero-pid="${a.pid}"${a.img?` data-hero-img="${a.img}"`:''}`:'';
   /* A pid slide is filled by renderHeroAds; everything else is emitted here.
      The eager, sized <picture> is what keeps the hero off the 240KB raw PNG. */
-  const inner=a.pid?'':(a.svg||picture(a.img,a.alt||'',true,SZ_HERO));
+  const inner=a.pid?'':(a.svg||picture(a.photo||a.img,a.alt||'',true,SZ_HERO));
   return `<div class="${cls.join(' ')}"${data}><span class="ad-art-float">${inner}</span></div>`;
 }
 function heroSlideHtml(s,i){

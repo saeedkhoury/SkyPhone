@@ -151,6 +151,41 @@ picture{display:contents}
 body.loaded .nav-inner{animation:reveal-up .5s var(--ease) both}
 body.loaded .promo-bar{animation:reveal-up .45s var(--ease) both}
 
+/* ---------- brand bar ----------
+   The two makes the shop actually stocks, directly under the nav rule. Forced
+   LTR so the pair always reads Samsung | Apple, in that order, in all three
+   languages — brand marks are not translated and should not reorder with the
+   page. Each one filters the catalog rather than just sitting there. */
+.brandbar{display:flex; align-items:center; justify-content:center; gap:22px;
+  padding-block:11px; background:transparent;
+  direction:ltr; unicode-bidi:isolate;
+  /* The ribbon and the nav are both fixed, so nothing in normal flow clears
+     them on its own — every .page carries that offset itself. The bar takes the
+     same offset, then gives it straight back with a negative end margin so the
+     page below still lands exactly where its own padding puts it. Fixing the
+     bar instead would have cost 57px of every screen forever, on top of the
+     88px the ribbon and nav already take. position:relative keeps it above the
+     page background that now starts behind it. */
+  position:relative; z-index:1;
+  margin-block-start:calc(var(--nav-h) + var(--ribbon-h));
+  margin-block-end:calc(-1 * (var(--nav-h) + var(--ribbon-h)))}
+.brandbar-item{display:inline-flex; align-items:center; justify-content:center;
+  min-height:34px; padding-inline:14px; border:0; background:none; cursor:pointer;
+  color:var(--ink); font-family:inherit; border-radius:var(--radius-pill);
+  transition:color .18s var(--ease), transform .18s var(--ease), opacity .18s var(--ease)}
+/* The marks sit at full ink, so hover cannot get darker — it goes to the brand
+   gold instead, which is the same signal every other control on the site uses. */
+.brandbar-item:hover{color:var(--accent-strong); transform:translateY(-1px)}
+.brandbar-item:active{transform:translateY(0) scale(.97)}
+.brandbar-samsung{font-size:15px; font-weight:800; letter-spacing:.055em}
+.brandbar-apple svg{width:19px; height:19px; display:block}
+.brandbar-sep{width:1px; height:17px; background:rgba(0,0,0,.18); flex:0 0 auto}
+@media (max-width:520px){
+  .brandbar{gap:14px; padding-block:9px}
+  .brandbar-samsung{font-size:13px}
+  .brandbar-apple svg{width:17px; height:17px}
+}
+
 /* ---------- sibling stagger ----------
    For content that genuinely arrives as a list. The delay is capped at the
    eighth child: past that every remaining sibling shares one delay, so a long
@@ -450,6 +485,13 @@ body.ribbon-closed .page{padding-block-start:var(--nav-h)}
   mask-image:linear-gradient(180deg,#000 76%,rgba(0,0,0,.35) 92%,transparent 100%)}
 /* catalog-fed art: pmediaSrc removes the <img> on error and shows .pfb, so the
    two never overlap — no absolute stacking needed (unlike .highlight-media). */
+/* A photograph keeps its own background, so it is framed rather than floated:
+   rounded, shadowed, and slightly narrower than a cut-out render would be. It
+   still inherits the pointer tilt, which is applied to the img by script. */
+.hero-ad-art.photo img{border-radius:var(--radius-lg); box-shadow:var(--shadow-lg);
+  max-height:min(44vh,360px); width:auto; max-width:min(100%,300px); object-fit:cover}
+.hero-ad-art.photo{filter:none}
+
 .hero-ad-art .pfb{display:none}
 .hero-ad-art .pfb.show{display:grid; place-items:center}
 .hero-ad-art .pfb svg{width:min(28vh,230px); height:auto; opacity:.5}
@@ -462,6 +504,11 @@ body.ribbon-closed .page{padding-block-start:var(--nav-h)}
 /* cutout art: a transparent-background render standing on the ground */
 .hero-ad-art.cutout img{filter:drop-shadow(0 34px 44px rgba(0,0,0,.28))}
 .hero-ad-dark .hero-ad-art.cutout img{filter:drop-shadow(0 36px 56px rgba(0,0,0,.62))}
+/* Artwork with soft alpha rather than a hard silhouette: drop-shadow is applied
+   per-pixel through the alpha channel, so on a graphic whose fills are
+   deliberately semi-transparent it smears a grey wash across the middle
+   instead of sitting behind the shape. */
+.hero-ad-art.no-shadow img{filter:none}
 
 /* blend art: a supplied creative that carries its own background. Cropped to fill
    (so it can never letterbox) and masked so its edges dissolve into the ground. */
