@@ -269,7 +269,22 @@ header.nav.ribbon-closed{inset-block-start:0}
    viewport edges (this was the real "logo too close to the corner" bug). */
 .brand{display:flex; align-items:center; gap:8px; font-weight:650; font-size:16px; color:var(--ink); cursor:pointer; letter-spacing:-.01em; flex:0 0 auto; padding-inline:2px}
 /* brand wordmark in the shop's script style (like its Instagram branding) */
-.brand-word{font-family:'Satisfy',cursive; font-size:27px; font-weight:400; letter-spacing:0; line-height:1; padding-block-start:2px}
+/* The wordmark: a wide-tracked all-caps serif, matching the lettering the shop
+   uses on its own promo graphics. Georgia is the closest match to that
+   lettering of the faces tested, and it is a system font, so the wordmark
+   costs no download at all — dropping the script face it replaces actually
+   removed one family from every page's font request.
+
+   Two details that are easy to miss. letter-spacing adds its space *after* the
+   last letter too, so the negative margin pulls that phantom gap back off the
+   end and keeps the logo optically flush. And the mark is Latin on a page that
+   is Hebrew or Arabic by default, so it is isolated as LTR — without that, the
+   trailing tracking lands on the wrong side in RTL. The size is clamped rather
+   than fixed because at 375px a 16px mark plus its tracking runs 4px past the
+   nav's right edge — narrow screens get 14px and it always clears. */
+.brand-word{font-family:Georgia,'Times New Roman',serif; font-size:clamp(14px,3.7vw,16px); font-weight:400;
+  text-transform:uppercase; letter-spacing:.34em; margin-inline-end:-.34em;
+  line-height:1; white-space:nowrap; direction:ltr; unicode-bidi:isolate}
 .brand-logo{width:22px;height:22px;flex:0 0 auto;border-radius:6px}
 .nav-links{display:flex; gap:0; font-weight:500; font-size:13px; color:var(--ink-soft); flex:0 0 auto; position:relative}
 .nav-links a{cursor:pointer; transition:color .15s; padding:0 16px; position:relative}
@@ -1000,7 +1015,9 @@ input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}
 .pdp-gallery{transform-origin:center}
 
 /* loader wordmark */
-.loader-brand{font-family:'Satisfy',cursive; font-weight:400; letter-spacing:.01em; color:var(--dark-ink); margin-block-end:22px; font-size:26px}
+.loader-brand{font-family:Georgia,'Times New Roman',serif; font-weight:400; text-transform:uppercase;
+  letter-spacing:.34em; margin-inline-end:-.34em; color:var(--dark-ink); margin-block-end:22px; font-size:19px;
+  direction:ltr; unicode-bidi:isolate}
 
 /* balanced display headings */
 .display,.h1,.h2{text-wrap:balance}
