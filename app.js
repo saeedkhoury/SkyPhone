@@ -628,6 +628,8 @@ const revealObserver = 'IntersectionObserver' in window ? new IntersectionObserv
 function fmtCount(n,format,dec){ if(format==='k') return (n/1000).toFixed(1)+'K'; if(dec) return n.toFixed(dec); return Math.round(n).toLocaleString('en-US'); }
 function animateCount(el){
   const target=parseFloat(el.dataset.countup), suffix=el.dataset.suffix||'', format=el.dataset.format||'', dec=el.dataset.decimals||'';
+  /* Reduced motion still gets the number, just not the run-up to it. */
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches){ el.textContent=fmtCount(target,format,dec)+suffix; return; }
   const start=performance.now(), dur=1200;
   function frame(t){
     const p=Math.min(1,(t-start)/dur), eased=1-Math.pow(1-p,3);
@@ -639,6 +641,69 @@ function animateCount(el){
 const counterObserver = 'IntersectionObserver' in window ? new IntersectionObserver((entries)=>{
   entries.forEach(en=>{ if(en.isIntersecting){ animateCount(en.target); counterObserver.unobserve(en.target); } });
 },{threshold:.6}) : null;
+/* ---------- parallax ----------
+   Depth for images that sit inside a frame able to clip them: the logo in its
+   glowing panel, product photography in its card. Three rules keep it cheap.
+   One rAF loop drives every layer on the page rather than one loop each; each
+   frame reads all positions before writing any transform, so the browser is
+   never forced to re-layout mid-pass; and the loop stops outright when the tab
+   is hidden or no layer is on screen.
+
+   Elements that already own a transform are deliberately not targets. The hero
+   art carries a pointer tilt and the cards carry their own; a second writer on
+   the same element would fight the first, which is the failure the ad-tilt
+   comment further down was written about. */
+const parallaxLayers=[];
+let parallaxFrame=0;
+const parallaxObserver='IntersectionObserver' in window ? new IntersectionObserver(entries=>{
+  entries.forEach(en=>{
+    const l=parallaxLayers.find(x=>x.el===en.target);
+    if(!l) return;
+    l.on=en.isIntersecting;
+    if(!l.on && l.y){ l.el.style.transform=''; l.y=0; }
+  });
+  pumpParallax();
+},{rootMargin:'15% 0px'}) : null;
+function pumpParallax(){
+  if(parallaxFrame || document.hidden) return;
+  if(!parallaxLayers.some(l=>l.on)) return;
+  parallaxFrame=requestAnimationFrame(stepParallax);
+}
+function stepParallax(){
+  parallaxFrame=0;
+  if(document.hidden) return;
+  const live=parallaxLayers.filter(l=>l.on);
+  if(!live.length) return;
+  const mid=innerHeight/2;
+  /* Read pass. r.top already includes the offset we wrote last frame, so it is
+     subtracted back out - otherwise each frame feeds on the previous one and
+     the layer drifts away. */
+  const next=live.map(l=>{
+    const r=l.el.getBoundingClientRect();
+    const centre=r.top - l.y + r.height/2;
+    return Math.max(-1,Math.min(1,(centre-mid)/mid))*l.depth;
+  });
+  /* Write pass. */
+  live.forEach((l,i)=>{
+    if(Math.abs(next[i]-l.y)<.05) return;
+    l.y=next[i];
+    l.el.style.transform='translate3d(0,'+l.y.toFixed(2)+'px,0)';
+  });
+  parallaxFrame=requestAnimationFrame(stepParallax);
+}
+function initParallax(root){
+  if(!parallaxObserver || matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  (root||document).querySelectorAll('[data-parallax]:not(.px-on)').forEach(el=>{
+    el.classList.add('px-on');
+    parallaxLayers.push({el, depth:parseFloat(el.dataset.parallax)||14, on:false, y:0});
+    parallaxObserver.observe(el);
+  });
+  pumpParallax();
+}
+addEventListener('scroll',pumpParallax,{passive:true});
+addEventListener('resize',pumpParallax);
+document.addEventListener('visibilitychange',()=>{ if(!document.hidden) pumpParallax(); });
+
 /* Particle field: a canvas of small dash particles that ignite in the brand
    gold as the cursor approaches, replacing the old static radial spotlight —
    the "alive" reference is antigravity.google / gemini.google's cursor-lit
@@ -711,8 +776,15 @@ function initParticleField(el){
    the entrance animation finishes. */
 document.addEventListener('animationend',e=>{
   const el=e.target;
-  if(e.animationName==='reveal-up' && el.classList.contains('in-view')){
-    el.classList.remove('in-view'); el.classList.add('revealed');
+  if(e.animationName!=='reveal-up' && e.animationName!=='fade-in') return;
+  if(el.classList.contains('in-view')){
+    el.classList.remove('in-view'); el.classList.add('revealed'); return;
+  }
+  /* A stagger container animates its children, not itself, so it is only
+     finished once the last child - the one carrying the longest delay - is. */
+  const box=el.parentElement;
+  if(box && box.hasAttribute('data-stagger') && box.classList.contains('in-view') && el===box.lastElementChild){
+    box.classList.remove('in-view'); box.classList.add('revealed');
   }
 });
 
@@ -776,9 +848,12 @@ function initTextReveal(root){
 }
 function initMotionFor(root){
   if(!root) return;
-  if(revealObserver) root.querySelectorAll('[data-reveal]').forEach(el=>revealObserver.observe(el));
+  /* Stagger containers ride the same observer - it only adds .in-view, and the
+     stagger rules key off that exactly as the plain reveal rules do. */
+  if(revealObserver) root.querySelectorAll('[data-reveal],[data-stagger]').forEach(el=>revealObserver.observe(el));
   if(counterObserver) root.querySelectorAll('[data-countup]').forEach(el=>counterObserver.observe(el));
   initTextReveal(root);
+  initParallax(root);
   if(canHover){
     root.querySelectorAll('.spot').forEach(initParticleField);
     root.querySelectorAll('.magnetic').forEach(attachMagnetic);
@@ -2336,13 +2411,25 @@ function initCursor(){
 /* ---------- page loader ---------- */
 function initPageLoader(){
   const loader=document.getElementById('pageLoader'), fill=document.getElementById('loaderFill'), num=document.getElementById('loaderNum');
-  if(!loader) return;
-  if(matchMedia('(prefers-reduced-motion:reduce)').matches){ loader.classList.add('done'); return; }
+  /* body.loaded starts the header and hero entrance. It is set as the curtain
+     begins to lift, not after it has gone, so the two overlap into one movement
+     rather than reading as two separate events. */
+  const lift=()=>{ if(loader) loader.classList.add('done'); document.body.classList.add('loaded'); };
+  /* Nothing may leave the visitor behind a black screen. The progress bar runs
+     on requestAnimationFrame, which the browser freezes in a background tab —
+     so a page opened with cmd-click, or restored into a background tab, would
+     sit on the curtain until it was looked at. Both the load event and the tab
+     becoming visible now force the curtain up, and a page with no loader at all
+     (privacy, 404) resolves to shown immediately. */
+  addEventListener('load',()=>setTimeout(lift,1600));
+  document.addEventListener('visibilitychange',()=>{ if(!document.hidden) setTimeout(lift,900); });
+  if(!loader){ lift(); return; }
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches){ lift(); return; }
   const start=performance.now(), dur=850;
   function frame(t){
     const p=Math.min(1,(t-start)/dur), eased=1-Math.pow(1-p,3);
     fill.style.width=(eased*100)+'%'; num.textContent=Math.round(eased*100)+'%';
-    if(p<1) requestAnimationFrame(frame); else loader.classList.add('done');
+    if(p<1) requestAnimationFrame(frame); else lift();
   }
   requestAnimationFrame(frame);
 }
