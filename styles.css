@@ -942,6 +942,11 @@ footer{background:var(--bg-soft); padding-block:56px 28px}
 .foot-grid a,.foot-grid p{color:var(--ink-soft); font-size:14px; display:block; margin-block-end:10px; cursor:pointer}
 .foot-grid a:hover{color:var(--ink)}
 .foot-bottom{border-block-start:1px solid var(--line-2); margin-block-start:40px; padding-block-start:20px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; color:var(--ink-faint); font-size:13px}
+.skova-credit{margin:6px 0 0; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint)}
+.skova-credit a{color:inherit; text-decoration:underline; text-underline-offset:3px; min-height:44px; display:inline-flex; align-items:center}
+.skova-credit a:hover,.skova-credit a:focus-visible{color:var(--ink)}
+/* the floating chat and WhatsApp buttons sit over the bottom corners: room under the footer's last line on phones */
+@media (max-width:920px){footer{padding-block-end:96px}}
 
 /* ---------- modal + toast ---------- */
 .modal{position:fixed; inset:0; display:grid; place-items:center; z-index:120; opacity:0; visibility:hidden; transition:opacity .25s var(--ease), visibility .25s; padding:20px; background:rgba(0,0,0,.4)}
